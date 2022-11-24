@@ -1,0 +1,54 @@
+---
+title: "Publications"
+---
+
+See also:
+
+-   [Publons Profile](https://publons.com/researcher/3450394/luke-pembleton/)
+-   [Google Scholar Profile](https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en)
+
+## Publications by date
+
+📄 Yongjun Li, Sukhjiwan Kaur, **Luke W. Pembleton**, Hossein Valipour-Kahrood, Garry M. Rosewarne, Hans D. Daetwyler (2022). [Strategies of preserving genetic diversity while maximizing genetic response from implementing genomic selection in pulse breeding programs.](https://doi.org/10.1007/s00122-022-04071-6) Theoretical and Applied Genetics, 1-16.
+
+Erez Naim-Feil, Luke W. Pembleton, Laura E. Spooner, Alix L. Malthouse, Amy Miner, Melinda Quinn, Renata M. Polotnianka, Rebecca C. Baillie, German C. Spangenberg, Noel O. I. Cogan (2021). The characterization of key physiological traits of medicinal cannabis (Cannabis sativa L.) as a tool for precision breeding. BMC Plant Biology, 21(1).
+
+Lydia M. Cranston, Keith G. Pembleton, Lucy L. Burkitt, Andrew Curtis, Daniel J. Donaghy, Cameron J. P. Gourley, Kerry C. Harrington, James L. Hills, Luke W. Pembleton, Richard P. Rawnsley (2020). The role of forage management in addressing challenges facing Australasian dairy farming. Anim. Prod. Sci., 60(1).
+
+Abdulqader Jighly, Zibei Lin, Luke W. Pembleton, Noel O. I. Cogan, German C. Spangenberg, Ben J. Hayes, Hans D. Daetwyler (2019). Boosting Genetic Gain in Allogamous Crops via Speed Breeding and Genomic Selection. Frontiers in Plant Science, 10.
+
+Junping Wang, Pieter Badenhorst, Andrew Phelan, Luke Pembleton, Fan Shi, Noel Cogan, German Spangenberg, Kevin Smith (2019). Using Sensors and Unmanned Aircraft Systems for High-Throughput Phenotyping of Biomass in Perennial Ryegrass Breeding Trials. Frontiers in Plant Science, 10.
+
+B. M. Caruana, L. W. Pembleton, F. Constable, B. Rodoni, A. T. Slater, N. O. I. Cogan (2019). Validation of Genotyping by Sequencing Using Transcriptomics for Diversity and Application of Genomic Selection in Tetraploid Potato. Frontiers in Plant Science, 10.
+
+Luke W. Pembleton, Courtney Inch, Rebecca C. Baillie, Michelle C. Drayton, Preeti Thakur, Yvonne O. Ogaji, German C. Spangenberg, John W. Forster, Hans D. Daetwyler, Noel O. I. Cogan (2018). Exploitation of data from breeding programs supports rapid implementation of genomic selection for key agronomic traits in perennial ryegrass. Theoretical and Applied Genetics, 131(9).
+
+M. Michelle Malmberg, Luke W. Pembleton, Rebecca C. Baillie, Michelle C. Drayton, Shimna Sudheesh, Sukhjiwan Kaur, Hiroshi Shinozuka, Preeti Verma, German C. Spangenberg, Hans D. Daetwyler, John W. Forster, Noel O.I. Cogan (2018). Genotyping-by-sequencing through transcriptomics: implementation in a range of crop species with varying reproductive habits and ploidy levels. Plant Biotechnology Journal, 16(4).
+
+Rebecca C. Baillie, Michelle C. Drayton, Luke W. Pembleton, Sukhjiwan Kaur, Richard A. Culvenor, Kevin F. Smith, German C. Spangenberg, John W. Forster, Noel O. I. Cogan (2017). Generation and Characterisation of a Reference Transcriptome for Phalaris (Phalaris aquatica L.). Agronomy, 7(1).
+
+Zibei Lin, Junping Wang, Noel O.I. Cogan, Luke W. Pembleton, Pieter Badenhorst, John W. Forster, German C. Spangenberg, Ben J. Hayes, Hans D. Daetwyler (2017). Optimizing Resource Allocation in a Genomic Breeding Program for Perennial Ryegrass to Balance Genetic Gain, Cost, and Inbreeding. Crop Science, 57(1).
+
+Luke W. Pembleton, Michelle C. Drayton, Melissa Bain, Rebecca C. Baillie, Courtney Inch, German C. Spangenberg, Junping Wang, John W. Forster, Noel O. I. Cogan (2016). Targeted genotyping-by-sequencing permits cost-effective identification and discrimination of pasture grass species and cultivars. Theoretical and Applied Genetics, 129(5).
+
+Junping Wang, Luke W. Pembleton, Noel O. I. Cogan, John W. Forster (2016). Evidence for Heterosis in Italian Ryegrass (Lolium multiflorum Lam.) Based on Inbreeding Depression in F2 Generation Offspring from Biparental Crosses. Agronomy, 6(4).
+
+L. W. Pembleton, J. Wang, G. C. Spangenberg, J. W. Forster, N. O. I. Cogan (2016). Low-cost automated biochemical phenotyping for optimised nutrient quality components in ryegrass breeding. Crop Pasture Sci., 67(8).
+
+Zibei Lin, Noel O. I. Cogan, Luke W. Pembleton, German C. Spangenberg, John W. Forster, Ben J. Hayes, Hans D. Daetwyler (2016). Genetic Gain and Inbreeding from Genomic Selection in a Simulated Commercial Breeding Program for Perennial Ryegrass. The Plant Genome, 9(1).
+
+Luke Pembleton, Hiroshi Shinozuka, Junping Wang, German Spangenberg, John Forster, Noel Cogan (2015). Design of an F1 hybrid breeding strategy for ryegrasses based on selection of self-incompatibility locus-specific alleles. Frontiers in Plant Science, 6.
+
+J. Wang, N. O. I. Cogan, L. W. Pembleton, J. W. Forster (2015). Variance, inter-trait correlation, heritability and trait-marker association of herbage yield, nutritive values, and morphological characteristics in Italian ryegrass (<i>Lolium multiflorum</i> Lam.). Crop Pasture Sci., 66(9).
+
+Junping Wang, Luke W. Pembleton, Rebecca C. Baillie, Michelle C. Drayton, Melanie L. Hand, Melissa Bain, Timothy I. Sawbridge, German C. Spangenberg, John W. Forster, Noel O. I. Cogan (2014). Development and implementation of a multiplexed single nucleotide polymorphism genotyping tool for differentiation of ryegrass species and cultivars. Molecular Breeding, 33(2).
+
+L. W. Pembleton, J. Wang, N. O. I. Cogan, J. E. Pryce, G. Ye, C. K. Bandaranayake, M. L. Hand, R. C. Baillie, M. C. Drayton, K. Lawless, S. Erb, M. P. Dobrowolski, T. I. Sawbridge, G. C. Spangenberg, K. F. Smith, J. W. Forster (2013). Candidate gene-based association genetics analysis of herbage quality traits in perennial ryegrass (<i>Lolium perenne</i> L.). Crop Pasture Sci., 64(3).
+
+Benjamin J. Hayes, Noel O. I. Cogan, Luke W. Pembleton, Michael E. Goddard, Junping Wang, German C. Spangenberg, John W. Forster (2013). Prospects for genomic selection in forage plant species. Plant Breeding, 132(2).
+
+Luke W. Pembleton, Noel O. I. Cogan, John W. Forster (2013). StAMPP: an R package for calculation of genetic differentiation and structure of mixed-ploidy level populations. Molecular Ecology Resources, 13(5).
+
+Sukhjiwan Kaur, Luke W. Pembleton, Noel O. I. Cogan, Keith W. Savin, Tony Leonforte, Jeffrey Paull, Michael Materne, John W. Forster (2012). Transcriptome sequencing of field pea and faba bean for discovery and validation of SSR genetic markers. BMC Genomics, 13(1).
+
+Sukhjiwan Kaur, Noel O. I. Cogan, Luke W. Pembleton, Maiko Shinozuka, Keith W. Savin, Michael Materne, John W. Forster (2011). Transcriptome sequencing of lentil based on second-generation technology permits large-scale unigene assembly and SSR marker discovery. BMC Genomics, 12(1).
