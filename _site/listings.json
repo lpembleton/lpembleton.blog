@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/aws-batch-ebs-autoscale/index.html",
       "/posts/nextflow-on-aws-batch/index.html"
     ]
   }
