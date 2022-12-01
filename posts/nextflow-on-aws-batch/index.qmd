@@ -3,6 +3,7 @@ title: "Nextflow on AWS Batch"
 description: "An introductory guide to setting up Nextflow with AWS Batch"
 author: "LW Pembleton"
 date: "25/11/2022"
+draft: true
 ---
 
 # Nextflow on AWS Batch
@@ -238,3 +239,7 @@ Then run `AWS configure` and enter the relevant Key ID, Access Key, and Region w
 -   The Nextflow slack channel is a great place to raise any questions if you are still experiencing issues after following this setup guide, or want to experiment with some more advanced configurations and setups. <https://www.nextflow.io/slack-invite.html>
 
 -   link to nextflow tips and tricks page
+
+### Common errors
+
+Task failed to start - CannotPullContainerError: context canceled

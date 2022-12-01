@@ -2,25 +2,27 @@ project:
   type: website
 
 website:
-  title: "Luke W Pembleton"
+  title: "Luke Pembleton"
   navbar:
     right:
       - text: About
-        href: about.qmd
-      - text: Blog
         href: index.qmd
+      - text: Blog
+        href: blog.qmd
       - text: Publications
         href: publications/publications.qmd
       - icon: github
         href: https://github.com/lpembleton
       - icon: twitter
         href: https://twitter.com/lwpembleton
-      - text: Scholar
+      - text: "{{< ai google-scholar >}}"
         href: https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en
-      - text: Publons
+      - text: "{{< ai publons >}}"
         href: https://publons.com/researcher/3450394/luke-pembleton/
       - icon: linkedin
         href: https://linkedin.com/in/lpembleton
+      - text: "{{< fa solid box-open >}}"
+        href: https://lpembleton.github.io/StAMPP/
 format:
   html:
     theme: 

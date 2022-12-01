@@ -156,14 +156,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </i> 
  </a>
   </li>  
-  <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en">Scholar</a>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en"><i class="bi bi-mortarboard-fill" role="img">
+</i> 
+ </a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/">Publons</a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://linkedin.com/in/lpembleton"><i class="bi bi-linkedin" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/"><i class="bi bi-postage-fill" role="img">
 </i> 
  </a>
   </li>  
@@ -223,6 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>that can plague a pipeline. Yes you can adjust your EBS allocation with specific AMI images or launch configurations and tailor them to specific tasks, but the dynamic nature of bio<del>informatics</del>logy means this will likely be ongoing cat 🐈 and mouse 🐁 game.</p>
 <p>Yes Nextflow has the fantastic resume feature if your pipeline has already completed a large proportion of tasks, unfortunately though the config file is not reanalysed upon resume, so you cannot point to a new AMI with an increased EBS volume.</p>
 <p>The solution? automatic scaling of your EBS volumes in real time. Essentially there is a script that resides within your AMI that contentiously monitors disk usage and just before you reach 100% it provisions a new EBS volumes mounting it directly to your running EC2 instance. You also get the added benefit of better EBS cost optimisation 💰 as you no longer need to ‘over provision’ your batch EC2 instances.</p>
+<p><img src="images/ebs-autoscale-diagram.png" class="img-fluid"></p>
 <p>The setup can be split into two components, installing the auto-scaling scripts in your AMI and updating your Batch compute environments with appropriate permissions.</p>
 <section id="setup-an-appropriate-iam-role" class="level3">
 <h3 class="anchored" data-anchor-id="setup-an-appropriate-iam-role">Setup an appropriate IAM Role</h3>
@@ -289,9 +297,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--instance-type</span> t2.micro <span class="dt">\</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--iam-instance-profile</span> Name=amazon-ebs-autoscale-role</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="6" type="1">
-<li><p>Running this from your command line will launch a EC2 instance which you can then save as a new AMI with an appropriate name. (see my Nextflow on AWS Batch blog post for details on how to save AMIs)</p></li>
-<li></li>
+<li>Running this from your command line will launch a EC2 instance which you can then save as a new AMI with an appropriate name. (see my Nextflow on AWS Batch blog post for details on how to save AMIs and use them in later Batch compute environments)</li>
 </ol>
+<p>The final step is to reconfigure your Batch compute environment to utilise the EBS autoscaling AMI</p>
+<ol type="1">
+<li><p>Click <strong>Computer environments</strong> in the AWS Batch console and click <strong>Create</strong></p></li>
+<li><p>Select <strong>Amazon Elastic Compute Cloud (Amazong EC2)</strong> as the configuration and <strong>Managed</strong> as the orchestration type and enter a appropriate name.</p></li>
+<li><p>Ensure <strong>AWSServiceRoleForBatch</strong> is selected as the service role and <strong>ecsInstanceRole</strong> as the instance role and click <strong>Next page</strong></p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The updated <strong>ecsInstanceRole</strong> now contains the permissions required for the autoscaling.</p>
+</div>
+</div></li>
+<li><p>Leave Minimum and Desired vCPUs as 0. Maximum vCPUs controls the number of parallel vCPU tasks running in your compute environment. Increase or decrease this to an appropriate number based on your requirements.</p></li>
+<li><p>With EBS autoscaling implemented you can now generally use <strong>optimal</strong> as the allowed instance type without many of the previous risks of errors and failed pipelines.</p></li>
+<li><p>Under ‘Additional configuration’ you can define the allocation strategy</p>
+<p><code>BEST_FIT</code> (default) AWS Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren’t available, AWS Batch waits for the additional instances to be available. If there aren’t enough instances available, or if the user is reaching the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service quotas</a>, then additional jobs don’t run until currently running jobs are complete. This allocation strategy keeps costs lower but can limit scaling. If you’re using Spot Fleets with <code>BEST_FIT</code>, the Spot Fleet IAM Role must be specified. <code>BEST_FIT</code> isn’t supported when updating compute environments. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a>.</p>
+<p><code>BEST_FIT_PROGRESSIVE</code>AWS Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Instance types with a lower cost for each unit vCPU are preferred. If additional instances of the previously selected instance types aren’t available, AWS Batch selects new instance types.</p>
+<p><code>SPOT_CAPACITY_OPTIMIZED</code>AWS Batch selects one or more instance types that are large enough to meet the requirements of the jobs in the queue. Instance types that are less likely to be interrupted are preferred. This allocation strategy is only available for Spot Instance compute resources.</p></li>
+<li><p>Under ‘EC2 configuration’ click <strong>Add EC2 configuration</strong> and select <strong>Amazon Linux 2</strong> as the image type and paste the AMI ID that you created earlier in the ‘Image ID override’ box.</p>
+<p><img src="images/instance-config.png" class="img-fluid"></p></li>
+<li><p>Click <strong>Next page</strong> and enter the appropriate network configuration for your VPC</p></li>
+<li><p>Click <strong>Next page,</strong> check your settings and then click <strong>Create compute environment</strong></p></li>
+</ol>
+<p>Still within the Batch AWS console and click on <strong>Job queues</strong>.</p>
+<ol type="1">
+<li>Click <strong>Create</strong> and select ‘Amazon Elastic Compute Cloud (Amazon EC2)’ as the compute environment.</li>
+<li>Enter a suitable name for your new job queue (📝 <em>take note of this name you will need it later</em>)</li>
+<li>Under ‘Connected compute environments’ select the compute environment that you just created</li>
+<li>Click <strong>Create job queue</strong></li>
+</ol>
+<p>You now need to update the config files of your Nextflow pipelines to point to the new Batch job queue.</p>
 
 
 </section>
