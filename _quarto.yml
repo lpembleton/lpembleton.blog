@@ -3,6 +3,9 @@ project:
 
 website:
   title: "Luke Pembleton"
+  open-graph: true
+  twitter-card: 
+    site: "@lwpembleton"
   navbar:
     right:
       - text: About
@@ -30,4 +33,3 @@ format:
     - theme.scss
 
 editor: visual
-
