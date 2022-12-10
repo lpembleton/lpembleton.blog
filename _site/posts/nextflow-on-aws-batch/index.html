@@ -186,17 +186,17 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Photo by <a href="https://unsplash.com/@jenessaa?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jenessaa Lu</a> on Unsplash</figcaption><p></p>
+<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@jenessaa?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Jenessaa&nbsp;Lu</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
 </figure>
 </div>
-<p>The following is a general guide on how to set up Nextflow with AWS batch as the compute environment. I would highly recommended that you use your local environment or at least a smaller test dataset for pipeline development, transferring to AWS batch when in a working production state.</p>
-<p>Although it seems like Gandalf trims his beard more often than Amazon updates their AWS user interface, I cannot guarantee the included menu screenshots will look the same on your system. However, hopefully they will still provide sufficient information to determine the appropriate settings and options. Reach out if you feel I need to update this guide.</p>
+<p>The following is a general guide on how to set up Nextflow with AWS batch as the compute environment. I would highly recommend that you use your local environment or at least a smaller test dataset for pipeline development, transferring to AWS batch when in a working production state.</p>
+<p>Although it seems like Gandalf 🧙 trims his beard more often than Amazon updates their AWS user interface, I cannot guarantee the included menu screenshots will look the same on your system. However, hopefully they will still provide sufficient information to determine the appropriate settings and options. Reach out if you feel I need to update this guide.</p>
 <p>Firstly you need to create a new <a href="https://aws.amazon.com/iam/getting-started/?nc=sn&amp;loc=3">IAM</a> with more appropriate permissions tailored to the requirements listed in <a href="https://www.nextflow.io/docs/latest/awscloud.html">Nextflow documentation</a>. It is strongly recommended that do not use your root account to run Nextflow pipelines.</p>
 <ol type="1">
 <li><p>Open the IAM management console on AWS and add a new user</p></li>
 <li><p>Enter an appropriate user name for example ‘Nextflow-access’. Under access type, select <em>programmatic access</em></p>
 <p><img src="images/aws-iam-add-user.png" class="img-fluid"></p></li>
-<li><p>Next you need to create a user group for the new user to sit within. Generally on AWS you will apply permissions to a user group rather than a specific user. Additionally, this allows you to set up multiple separate people within the ‘Nextflow group’. Again enter an appropriate name and click <strong>Create group</strong></p></li>
+<li><p>Next you need to create a user group for the new user to sit within. Generally, on AWS you will apply permissions to a user group rather than a specific user. Additionally, this allows you to set up multiple separate people within the ‘Nextflow group’. Again, enter an appropriate name and click <strong>Create group</strong></p></li>
 <li><p>Add any metadata tags if appropriate</p></li>
 <li><p>Click <strong>Create user</strong>. You should be greeted with a new page that includes a Access Key ID and SCA (📝 <em>take note of these keys as you will need them towards the end of this guide</em>)</p></li>
 </ol>
@@ -253,13 +253,13 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Search for <strong>AmazonEC2SpotFleetTaggingRole</strong> select it and click <strong>Next</strong></p></li>
 <li><p>Add a role name, e.g.&nbsp;<em>AmazonEC2SpotFleetRole</em> and click <strong>Create role</strong></p></li>
 </ol>
-<p>AWS batch uses Amazon Machine Images (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">AMIs</a>) to initiate EC2 compute instances that will subsequently run your Nextflow processes. Nextflow tasks submitted to AWS Batch will run under the Amazon Elastic Container Service (<a href="https://aws.amazon.com/ecs/">ECS</a>). ECS (<em>not be be confused with EC2</em>) uses a base Amazon ECS-optimised AMI (with docker pre-installed). Although Nextflow &amp; Batch will control the CPU and memory resource request and allocation you need to ensure you base ECS AMI has sufficient <a href="https://aws.amazon.com/ebs/">EBS</a> storage to hold any relevant input and working data files, such as sequence reads, indexes etc. You will also need to install the AWS CLI in the base ECS AMI to allow data movement to and from S3 buckets. To set all this up follow these steps:</p>
+<p>AWS batch uses Amazon Machine Images (<a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html">AMIs</a>) to initiate EC2 compute instances that will subsequently run your Nextflow processes. Nextflow tasks submitted to AWS Batch will run under the Amazon Elastic Container Service (<a href="https://aws.amazon.com/ecs/">ECS</a>). ECS (<em>not to be confused with EC2</em>) uses a base Amazon ECS-optimised AMI (with docker pre-installed). Although Nextflow &amp; Batch will control the CPU and memory resource request and allocation you need to ensure you base ECS AMI has sufficient <a href="https://aws.amazon.com/ebs/">EBS</a> storage to hold any relevant input and working data files, such as sequence reads, indexes etc. You will also need to install the AWS CLI in the base ECS AMI to allow data movement to and from S3 buckets. To set all this up follow these steps:</p>
 <ol type="1">
 <li><p>Navigate to the EC2 console menu</p></li>
 <li><p>Click <strong>Instances</strong> and then <strong>Launch Instances</strong></p></li>
 <li><p>Under ‘quick start’ click <strong>Browse more AMIs</strong></p></li>
 <li><p>Click <strong>AWS Marketplace AMIs</strong> and search for <strong>ECS</strong></p></li>
-<li><p>At the time of writing <strong>amzn2-ami-ecs-hvm-2.0.20221025-x86_64-ebs</strong> was the most up to date ECS AMI. Select it</p>
+<li><p>At the time of writing <strong>amzn2-ami-ecs-hvm-2.0.20221025-x86_64-ebs</strong> was the most up-to-date ECS AMI. Select it</p>
 <p><img src="images/amsn2-ecs-marketplace.png" class="img-fluid"></p></li>
 <li><p>Select the t2.micro instance type</p></li>
 <li><p>Select and relevant key pairs and network settings based on your setup (I would recommend at a minimum a private VPC and IP-restricted connections via a bastion instance)</p></li>
@@ -313,7 +313,7 @@ Note
 <li><p>Select <strong>Managed</strong> as the orchestration type and enter a suitable name for your new compute environment.</p></li>
 <li><p>If this is your first time setting up a Batch environment AWS will create the relevant service role and instance role. Just ensure ‘<em>Create new role</em>’ is selected. Alternatively, under ‘<em>Service role</em>’ select <strong>AWSServiceRoleForBatch</strong> and under ‘<em>Instance Role</em>’ select <strong>ecsInstanceRole</strong>. Click <strong>Next Page</strong></p></li>
 <li><p>Leave Minimum and Desired vCPUs as 0. Maximum vCPUs controls the number of parallel vCPU tasks running in your compute environment. Increase or decrease this to an appropriate number based on your requirements.</p></li>
-<li><p>‘Allowed instance type’ allows you to control the type instances that AWS is allowed to try and run your jobs on. Your CPU and memory requirements defined in your Nextflow config will apply a second tier of filtering (i.e.&nbsp;if you memory request is higher than an allowed instance type, obviously that instance type won’t be used). You can leave this as ‘optimal’ and AWS will attempt to find the best instance type match to your CPU and memory request.</p>
+<li><p>‘Allowed instance type’ allows you to control the type of instances that AWS is allowed to try and run your jobs on. Your CPU and memory requirements defined in your Nextflow config will apply a second tier of filtering (i.e.&nbsp;if your memory request is higher than an allowed instance type, obviously that instance type won’t be used). You can leave this as ‘optimal’ and AWS will attempt to find the best instance type match to your CPU and memory request.</p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -324,11 +324,11 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>AWS is generally group multiple jobs onto the one large instance, however this can result in errors, particularly in I/O and/or network intensive tasks.</p>
+<p>AWS will generally group multiple jobs onto the one large instance, however, this can result in errors, particularly in I/O and/or network intensive tasks.</p>
 <p>If you want to prevent AWS from grouping multiple jobs onto the one larger instance, then you need to specifically define smaller instances types, e.g.&nbsp;r6i.xlarge, r6i.2xlarge, to prevent AWS using super instances such as r6i.24xlarge r6i.32xlarge.</p>
 </div>
 </div></li>
-<li><p>To use spot instance toggle the <strong>Use EC2 Spot instance</strong> button at the top and define your maximum cut off for on-demand price under ‘Maximum % on-demand price’. Under ‘spot fleet role’ you will also need to select the <strong>AmazonEC2SpotFleetRole</strong> role that you created earlier.</p></li>
+<li><p>To use spot instance toggle the <strong>Use EC2 Spot instance</strong> button at the top and define your maximum cut-off for on-demand price under ‘Maximum % on-demand price’. Under ‘spot fleet role’ you will also need to select the <strong>AmazonEC2SpotFleetRole</strong> role that you created earlier.</p></li>
 <li><p>Under ‘Additional configuration’ you can define the allocation strategy</p>
 <p><code>BEST_FIT</code> (default) AWS Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren’t available, AWS Batch waits for the additional instances to be available. If there aren’t enough instances available, or if the user is reaching the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service quotas</a>, then additional jobs don’t run until currently running jobs are complete. This allocation strategy keeps costs lower but can limit scaling. If you’re using Spot Fleets with <code>BEST_FIT</code>, the Spot Fleet IAM Role must be specified. <code>BEST_FIT</code> isn’t supported when updating compute environments. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a>.</p>
 <p><code>BEST_FIT_PROGRESSIVE</code>AWS Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Instance types with a lower cost for each unit vCPU are preferred. If additional instances of the previously selected instance types aren’t available, AWS Batch selects new instance types.</p>
@@ -345,7 +345,7 @@ Note
 <li>Under ‘Connected compute environments’ select the compute environment that you just created</li>
 <li>Click <strong>Create job queue</strong></li>
 </ol>
-<p>You will want Nextflow to use an S3 bucket to store all the working files and results rather than an local connection.</p>
+<p>You will want Nextflow to use an S3 bucket to store all the working files and results rather than a local connection.</p>
 <ol type="1">
 <li>Navigate to the S3 service under the AWS management console and create a new private bucket in your relevant region.</li>
 <li>Create a new folder within the bucket to serve as the Nextflow working directory (📝 take note of the S3 URI address as you will need this next)</li>
@@ -380,7 +380,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>DO NOT</strong> store your credentials in your Nextflow configuration file like some tutorials suggest.</p>
+<p><strong>DO NOT</strong> store your credentials in your Nextflow configuration file as some tutorials suggest.</p>
 </div>
 </div>
 <p>🗒️Additional Notes:</p>
