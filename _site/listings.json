@@ -4,5 +4,9 @@
     "items": [
       "/posts/nextflow-on-aws-batch/index.html"
     ]
+  },
+  {
+    "listing": "/posts/index.html",
+    "items": []
   }
 ]

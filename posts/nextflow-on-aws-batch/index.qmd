@@ -3,18 +3,18 @@ title: "Nextflow on AWS Batch"
 description: "An introductory guide to setting up Nextflow with AWS Batch"
 author: "LW Pembleton"
 date: "25/11/2022"
-draft: true
+categories: [Nextflow, AWS, Batch]
+image: images/jenessaa-lu-gTKFunYTVds-unsplash.jpg
+draft: false
 ---
 
-# Nextflow on AWS Batch
-
-![~Photo\ by\ [Jenessaa\ Lu](https://unsplash.com/@jenessaa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)\ on\ Unsplash~](images/jenessaa-lu-gTKFunYTVds-unsplash.jpg)
+![~Photo by [Jenessaa Lu](https://unsplash.com/@jenessaa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) on Unsplash~](images/jenessaa-lu-gTKFunYTVds-unsplash.jpg)
 
 The following is a general guide on how to set up Nextflow with AWS batch as the compute environment. I would highly recommend that you use your local environment or at least a smaller test dataset for pipeline development, transferring to AWS batch when in a working production state.
 
-Although it seems like Gandalf 🧙 trims his beard more often than Amazon updates their AWS user interface, I cannot guarantee the included menu screenshots will look the same on your system. However, hopefully they will still provide sufficient information to determine the appropriate settings and options. Reach out if you feel I need to update this guide.
+Although Gandalf 🧙 trims his beard more often than Amazon updates their AWS user interface, I cannot guarantee the included menu screenshots will look the same on your system. However, hopefully they will still provide sufficient information to determine the appropriate settings and options. Reach out if you feel I need to update this guide.
 
-### IAM Setup
+## IAM Setup
 
 Firstly you need to create a new [IAM](https://aws.amazon.com/iam/getting-started/?nc=sn&loc=3) with more appropriate permissions tailored to the requirements listed in [Nextflow documentation](https://www.nextflow.io/docs/latest/awscloud.html). It is strongly recommended that do not use your root account to run Nextflow pipelines.
 
@@ -100,7 +100,7 @@ To be able to use [spot instances](https://aws.amazon.com/ec2/spot/) you will ne
 
 4.  Add a role name, e.g. *AmazonEC2SpotFleetRole* and click **Create role**
 
-### Custom Nextflow AMI
+## Custom Nextflow AMI
 
 AWS batch uses Amazon Machine Images ([AMIs](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIs.html)) to initiate EC2 compute instances that will subsequently run your Nextflow processes. Nextflow tasks submitted to AWS Batch will run under the Amazon Elastic Container Service ([ECS](https://aws.amazon.com/ecs/)). ECS (*not to be confused with EC2*) uses a base Amazon ECS-optimised AMI (with docker pre-installed). Although Nextflow & Batch will control the CPU and memory resource request and allocation you need to ensure you base ECS AMI has sufficient [EBS](https://aws.amazon.com/ebs/) storage to hold any relevant input and working data files, such as sequence reads, indexes etc. You will also need to install the AWS CLI in the base ECS AMI to allow data movement to and from S3 buckets. To set all this up follow these steps:
 
@@ -154,7 +154,7 @@ AWS batch uses Amazon Machine Images ([AMIs](https://docs.aws.amazon.com/AWSEC2/
 Contrary to what is commonly written in other documentation you no longer need to expand your docker 🐋storage volume to match your allocated EBS storage size. The docker storage automatically expands on the Amazon 2 AMIs which are now default (unlike previous Amazon 1 AMIs).
 :::
 
-### Batch Environment
+## Batch Environment
 
 Now it is time to create your Batch environment which entails at least one compute environment and one job queue that Nextflow will submit processes to.
 
@@ -206,7 +206,7 @@ You will want Nextflow to use an S3 bucket to store all the working files and re
 1.  Navigate to the S3 service under the AWS management console and create a new private bucket in your relevant region.
 2.  Create a new folder within the bucket to serve as the Nextflow working directory (📝 take note of the S3 URI address as you will need this next)
 
-### Nextflow Config
+## Nextflow Config
 
 Now all you now need to do is set up your Nextflow config with the relevant details of your AWS setup. An example of initial config file is:
 
@@ -233,7 +233,7 @@ Then [run](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quicks
 **DO NOT** store your credentials in your Nextflow configuration file as some tutorials suggest.
 :::
 
-### 🗒️Additional Notes:
+## 🗒️Additional Notes:
 
 -   AWS batch jobs can take a few minutes to spin up, be patient before assuming you have set something up wrong
 
@@ -243,7 +243,7 @@ Then [run](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quicks
 
 -   The [Nextflow slack channel](https://www.nextflow.io/slack-invite.html) is a great place to raise any questions if you are still experiencing issues after following this setup guide, or want to experiment with some more advanced configurations and setups.
 
-### Common errors
+## Common errors
 
 Below are a list of common errors. Although the proposed solution has been demonstrated to work it may not always work in your specific scenario.
 

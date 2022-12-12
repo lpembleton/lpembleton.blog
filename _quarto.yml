@@ -2,6 +2,7 @@ project:
   type: website
 
 website:
+  page-navigation: true
   title: "Luke Pembleton"
   open-graph: true
   twitter-card: 
