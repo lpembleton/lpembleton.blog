@@ -4,5 +4,10 @@
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
 freeze: true
 
+## General
+toc: true
+toc-title: On this page
+toc-location: left
+
 # Enable banner style title blocks
 title-block-banner: true
