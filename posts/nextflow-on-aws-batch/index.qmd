@@ -82,11 +82,15 @@ Now that you have your new user and Nextflow group you will need to apply the re
             "ecr:ListTagsForResource"
             "ecr:DescribeImageScanFindings"
 
-4.  Add any metadata tags if appropriate
+4.  You also need to [add permissions for S3](https://www.nextflow.io/docs/latest/awscloud.html#s3-policies) so that nextlflow can pull input data and publish results. Still using the visual editor select **S3** as the service and then select the **All S3 actions (s3:\*)** check box under actions. You may get notifications of other 'dependency' type permissions that are required, follow the instructions to add these as well.
 
-5.  Give your new policy a name and click **Create policy**
+    ![](images/s3-policy.png)
 
-6.  Select your newly created permission policy to add to the user group and click **Add permissions.** *Hint: you can find your new policy by* 🔍*searching in the filter box*
+5.  Add any metadata tags if appropriate
+
+6.  Give your new policy a name and click **Create policy**
+
+7.  Select your newly created permission policy to add to the user group and click **Add permissions.** *Hint: you can find your new policy by* 🔍*searching in the filter box*
 
 To be able to use [spot instances](https://aws.amazon.com/ec2/spot/) you will need to create an additional role.
 

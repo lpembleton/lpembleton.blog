@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lpembleton.rbind.io/blog.html</loc>
+    <lastmod>2022-12-21T16:44:35.120Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/index.html</loc>
+    <lastmod>2022-12-21T16:44:36.766Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/index.html</loc>
+    <lastmod>2022-12-21T16:44:40.778Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/publications/publications.html</loc>
+    <lastmod>2022-12-21T16:44:42.471Z</lastmod>
+  </url>
+</urlset>

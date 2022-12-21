@@ -69,11 +69,11 @@ ul.task-list li input[type="checkbox"] {
 
 <meta property="og:title" content="Luke Pembleton - Nextflow on AWS Batch">
 <meta property="og:description" content="An introductory guide to setting up Nextflow with AWS Batch">
-<meta property="og:image" content="images/jenessaa-lu-gTKFunYTVds-unsplash.jpg">
+<meta property="og:image" content="https://lpembleton.rbind.io/posts\nextflow-on-aws-batch\images\jenessaa-lu-gTKFunYTVds-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Nextflow on AWS Batch">
 <meta name="twitter:description" content="An introductory guide to setting up Nextflow with AWS Batch">
-<meta name="twitter:image" content="images/jenessaa-lu-gTKFunYTVds-unsplash.jpg">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/posts\nextflow-on-aws-batch\images\jenessaa-lu-gTKFunYTVds-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -263,6 +263,8 @@ ul.task-list li input[type="checkbox"] {
 "ecr:ListTagsForResource"
 "ecr:DescribeImageScanFindings"</code></pre></li>
 </ul></li>
+<li><p>You also need to <a href="https://www.nextflow.io/docs/latest/awscloud.html#s3-policies">add permissions for S3</a> so that nextlflow can pull input data and publish results. Still using the visual editor select <strong>S3</strong> as the service and then select the <strong>All S3 actions (s3:*)</strong> check box under actions. You may get notifications of other ‘dependency’ type permissions that are required, follow the instructions to add these as well.</p>
+<p><img src="images/s3-policy.png" class="img-fluid"></p></li>
 <li><p>Add any metadata tags if appropriate</p></li>
 <li><p>Give your new policy a name and click <strong>Create policy</strong></p></li>
 <li><p>Select your newly created permission policy to add to the user group and click <strong>Add permissions.</strong> <em>Hint: you can find your new policy by</em> 🔍<em>searching in the filter box</em></p></li>
