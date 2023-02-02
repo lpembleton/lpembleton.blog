@@ -1,0 +1,15 @@
+---
+title: "Setting up a bioinformatics dev environment with Visual Studio Code"
+description: "An introductory guide to setting up an bioinformatics development environment with visual studio code as the IDE backbone"
+author: "LW Pembleton"
+date: "03/02/2023"
+draft: true
+---
+
+Firstly setup up WSL2
+
+Then install visual studio code (https://code.visualstudio.com/)
+
+install WSL VS code extension (https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+
+install VS code R extensions (https://code.visualstudio.com/docs/languages/r)

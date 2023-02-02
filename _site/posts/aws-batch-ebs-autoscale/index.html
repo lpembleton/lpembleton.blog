@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2024-05-11">
+<meta name="dcterms.date" content="2023-03-02">
 <meta name="description" content="An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow">
 
 <title>Luke Pembleton - EBS Auto-scaling on AWS Batch</title>
@@ -226,7 +226,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 11, 2024</p>
+        <p class="date">March 2, 2023</p>
       </div>
     </div>
     
@@ -259,16 +259,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>![Photo by [Simon Goetz](https://unsplash.com/@slgoetz) on Unsplash](images/simon-goetz-feeredToXK4-unsplash.jpg)</p>
 <p>Anyone who has tried running bioinformatic pipelines on AWS batch with a workflow manager such as Nextflow will be well aware of the common error</p>
 <p><code>error: No space left on device</code></p>
-<p>that can plague a pipeline. Yes you can adjust your EBS allocation with specific AMI images or launch configurations and tailor them to specific tasks, but the dynamic nature of bio<del>informatics</del>logy means this will likely be ongoing cat 🐈 and mouse 🐁 game.</p>
-<p>Yes Nextflow has the fantastic resume feature if your pipeline has already completed a large proportion of tasks, unfortunately though the config file is not reanalysed upon resume, so you cannot point to a new AMI with an increased EBS volume.</p>
-<p>The solution? automatic scaling of your EBS volumes in real time. Essentially there is a script that resides within your AMI that contentiously monitors disk usage and just before you reach 100% it provisions a new EBS volumes mounting it directly to your running EC2 instance. You also get the added benefit of better EBS cost optimisation 💰 as you no longer need to ‘over provision’ your batch EC2 instances.</p>
+<p>that can plague a pipeline. Yes, you can adjust your EBS allocation with specific AMI images or launch configurations and tailor them to specific tasks, but the dynamic nature of bio<del>informatics</del>logy means this will likely be an ongoing cat 🐈 and mouse 🐁 game.</p>
+<p>Yes, Nextflow has the fantastic resume feature if your pipeline has already completed a large proportion of tasks, unfortunately though the config file is not reanalysed upon resume, so you cannot point to a new AMI with an increased EBS volume.</p>
+<p>The solution? Automatic scaling of your EBS volumes in real-time. Essentially there is a script that resides within your AMI that continously monitors disk usage, and just before you reach 100%, it provisions a new EBS volume mounting it directly to your running EC2 instance. You also get the added benefit of better EBS cost optimisation 💰 as you no longer need to ‘over provision’ your batch EC2 instances.</p>
 <p><img src="images/ebs-autoscale-diagram.png" class="img-fluid"></p>
 <p>The setup can be split into two components, installing the auto-scaling scripts in your AMI and updating your Batch compute environments with appropriate permissions.</p>
 <section id="setup-an-appropriate-iam-role" class="level3">
 <h3 class="anchored" data-anchor-id="setup-an-appropriate-iam-role">Setup an appropriate IAM Role</h3>
 <ol type="1">
 <li><p>Click <strong>Create role</strong> under the IAM AWS console and select <strong>AWS service</strong> as the trusted entity type and <strong>EC2</strong> as the use case, then click <strong>Next</strong>.</p></li>
-<li><p>Ciick <strong>Create policy</strong> and select the <strong>JSON</strong> tab.</p></li>
+<li><p>Click <strong>Create policy</strong> and select the <strong>JSON</strong> tab.</p></li>
 <li><p>Paste the following JSON code and click <strong>Next</strong>.</p></li>
 </ol>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
@@ -294,10 +294,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol start="4" type="1">
 <li><p>Add any tags if applicable and click <strong>Next</strong></p></li>
 <li><p>Give your policy a name e.g.&nbsp;<em>amazon-ebs-autoscale-policy</em> and click <strong>Create policy</strong></p></li>
-<li><p>Now under the Add permission menu of your new IAM Role select your newly created policy, i.e.&nbsp;<em>amazon-ebs-autoscale-policy</em> and click <strong>Next</strong></p></li>
+<li><p>Now under the Add permission menu of your new IAM Role, select your newly created policy, i.e.&nbsp;<em>amazon-ebs-autoscale-policy</em> and click <strong>Next</strong></p></li>
 <li><p>Give your Role and name, e.g.&nbsp;<em>amazon-ebs-autoscale-role</em> and click <strong>Create role</strong></p>
 <p>You also need to add the <em>amazon-ebs-autoscale-policy policy</em> role to the <em>ecsInstanceRole</em>role you use in your AWS Batch compute environments.</p></li>
-<li><p>Under <strong>Roles</strong> in the AWS IAM console find and click the <em>ecsInstanceRole role.</em></p></li>
+<li><p>Under <strong>Roles</strong> in the AWS IAM console, find and click the <em>ecsInstanceRole role.</em></p></li>
 <li><p>Click <strong>Add permission</strong> and select <strong>Attach policies</strong>. Find/search for your new <em>amazon-ebs-autoscale-policy</em>, select it and click <strong>Attach policies.</strong></p></li>
 </ol>
 </section>
@@ -305,10 +305,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="install-the-auto-scale-scripts">Install the auto-scale scripts</h3>
 <ol type="1">
 <li><p>Fetch or clone the amazon-ebs-autoscale repository to your local computer.</p></li>
-<li><p>Edit the EBS mount location to the volume that docker utilises by added the <code>-m /var/lib/docker</code> parameter to the <code>install.sh</code> command in the <code>amazon-ebs-autoscale/templates/cloud-init-userdata.yaml</code>file</p></li>
-<li><p>Specify the initial drive to use for the mountpoint to be <code>/dev/xvdba</code> with the <code>-d</code> parameter</p></li>
-<li><p>By default the 100GiB volume will be initially provision at startup to change this add the -s parameter again to the the <code>install.sh</code> command in the <code>amazon-ebs-autoscale/templates/cloud-init-userdata.yaml</code>file. For example to reduce it to the 30GB use <code>-s 30</code></p></li>
-<li><p>the <code>runcmd:</code> section should now look something like:</p></li>
+<li><p>Edit the EBS mount location to the volume that docker utilises by adding the <code>-m /var/lib/docker</code> parameter to the <code>install.sh</code> command in the <code>amazon-ebs-autoscale/templates/cloud-init-userdata.yaml</code> file</p></li>
+<li><p>Specify the initial drive to use for the mount point to be <code>/dev/xvdba</code> with the <code>-d</code> parameter</p></li>
+<li><p>By default, the 100GiB volume will be initially provisioned at startup to change this add the -s parameter again to the <code>install.sh</code> command in the <code>amazon-ebs-autoscale/templates/cloud-init-userdata.yaml</code> file. For example, to reduce it to 30GB use <code>-s 30</code></p></li>
+<li><p>the <code>runcmd:</code> section should now look something like this:</p></li>
 </ol>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">runcmd:</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> curl <span class="at">-s</span> <span class="st">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="at">-o</span> <span class="st">"/tmp/awscliv2.zip"</span></span>
@@ -318,7 +318,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> cd /opt/amazon-ebs-autoscale <span class="kw">&amp;&amp;</span> <span class="fu">git</span> checkout <span class="va">$EBS_AUTOSCALE_VERSION</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="ex">-</span> sh /opt/amazon-ebs-autoscale/install.sh <span class="at">-m</span> /var/lib/docker <span class="at">-d</span> /dev/xvdba <span class="at">-s</span> 30 <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="op">&gt;</span> /var/log/ebs-autoscale-install.log</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="5" type="1">
-<li>Install the amazon-ebs-autoscale scripts with your defined paramaters into your chosen AMI you can use the <code>aws ec2 run-instance</code> command from the aws-cli. An example of launching your chosen AMI and installing the amazon-ebs-autoscale scripts is</li>
+<li>To install the amazon-ebs-autoscale scripts with your defined parameters into your chosen AMI you can use the <code>aws ec2 run-instance</code> command from the aws-cli. An example of launching your chosen AMI and installing the amazon-ebs-autoscale scripts is</li>
 </ol>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ec2 run-instances <span class="at">--image-id</span> YOUR-AMI-ID <span class="dt">\</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">--key-name</span> YOUR-KEY-PAIR-NAME <span class="dt">\</span></span>
@@ -329,12 +329,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">--instance-type</span> t2.micro <span class="dt">\</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">--iam-instance-profile</span> Name=amazon-ebs-autoscale-role</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ol start="6" type="1">
-<li>Running this from your command line will launch a EC2 instance which you can then save as a new AMI with an appropriate name. (see my Nextflow on AWS Batch blog post for details on how to save AMIs and use them in later Batch compute environments)</li>
+<li>Running this from your command line will launch an EC2 instance which you can then save as a new AMI with an appropriate name. (see my <a href="https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/">Nextflow on AWS Batch</a> blog post for details on how to save AMIs and use them in later Batch compute environments)</li>
 </ol>
 <p>The final step is to reconfigure your Batch compute environment to utilise the EBS autoscaling AMI</p>
 <ol type="1">
 <li><p>Click <strong>Computer environments</strong> in the AWS Batch console and click <strong>Create</strong></p></li>
-<li><p>Select <strong>Amazon Elastic Compute Cloud (Amazong EC2)</strong> as the configuration and <strong>Managed</strong> as the orchestration type and enter a appropriate name.</p></li>
+<li><p>Select <strong>Amazon Elastic Compute Cloud (Amazon EC2)</strong> as the configuration and <strong>Managed</strong> as the orchestration type and enter an appropriate name.</p></li>
 <li><p>Ensure <strong>AWSServiceRoleForBatch</strong> is selected as the service role and <strong>ecsInstanceRole</strong> as the instance role and click <strong>Next page</strong></p>
 <div class="callout-note callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
@@ -346,11 +346,11 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The updated <strong>ecsInstanceRole</strong> now contains the permissions required for the autoscaling.</p>
+<p>The updated <strong>ecsInstanceRole</strong> now contains the permissions required for autoscaling.</p>
 </div>
 </div></li>
 <li><p>Leave Minimum and Desired vCPUs as 0. Maximum vCPUs controls the number of parallel vCPU tasks running in your compute environment. Increase or decrease this to an appropriate number based on your requirements.</p></li>
-<li><p>With EBS autoscaling implemented you can now generally use <strong>optimal</strong> as the allowed instance type without many of the previous risks of errors and failed pipelines.</p></li>
+<li><p>With EBS autoscaling implemented, you can now generally use <strong>optimal</strong> as the allowed instance type without many of the previous risks of errors and failed pipelines.</p></li>
 <li><p>Under ‘Additional configuration’ you can define the allocation strategy</p>
 <p><code>BEST_FIT</code> (default) AWS Batch selects an instance type that best fits the needs of the jobs with a preference for the lowest-cost instance type. If additional instances of the selected instance type aren’t available, AWS Batch waits for the additional instances to be available. If there aren’t enough instances available, or if the user is reaching the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html">Amazon EC2 service quotas</a>, then additional jobs don’t run until currently running jobs are complete. This allocation strategy keeps costs lower but can limit scaling. If you’re using Spot Fleets with <code>BEST_FIT</code>, the Spot Fleet IAM Role must be specified. <code>BEST_FIT</code> isn’t supported when updating compute environments. For more information, see <a href="https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html">Updating compute environments</a>.</p>
 <p><code>BEST_FIT_PROGRESSIVE</code>AWS Batch selects additional instance types that are large enough to meet the requirements of the jobs in the queue. Instance types with a lower cost for each unit vCPU are preferred. If additional instances of the previously selected instance types aren’t available, AWS Batch selects new instance types.</p>
@@ -368,6 +368,7 @@ Note
 <li>Click <strong>Create job queue</strong></li>
 </ol>
 <p>You now need to update the config files of your Nextflow pipelines to point to the new Batch job queue.</p>
+<p>Now enjoy your Nextflow pipelines with <del>no</del> reduced errors.</p>
 
 
 </section>
