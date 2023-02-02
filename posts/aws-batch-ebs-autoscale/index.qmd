@@ -3,7 +3,7 @@ title: "EBS Auto-scaling on AWS Batch"
 description: "An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow"
 author: "LW Pembleton"
 date: "03/02/2023"
-draft: true
+draft: false
 ---
 
 \# EBS Auto-scaling on AWS Batch
