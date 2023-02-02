@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lpembleton.rbind.io/blog.html</loc>
+    <lastmod>2023-02-02T15:55:35.867Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/index.html</loc>
+    <lastmod>2023-02-02T15:55:36.336Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/index.html</loc>
+    <lastmod>2023-02-02T15:55:36.884Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/index.html</loc>
+    <lastmod>2023-02-02T15:55:37.452Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/publications/publications.html</loc>
+    <lastmod>2023-02-02T15:55:38.383Z</lastmod>
+  </url>
+</urlset>

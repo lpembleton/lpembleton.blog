@@ -2,7 +2,7 @@
 title: "Nextflow on AWS Batch"
 description: "An introductory guide to setting up Nextflow with AWS Batch"
 author: "LW Pembleton"
-date: "25/11/2022"
+date: 25 11 2022
 categories: [Nextflow, AWS, Batch]
 image: images/jenessaa-lu-gTKFunYTVds-unsplash.jpg
 draft: false

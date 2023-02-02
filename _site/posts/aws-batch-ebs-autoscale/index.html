@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-03-02">
+<meta name="dcterms.date" content="2023-02-03">
 <meta name="description" content="An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow">
 
 <title>Luke Pembleton - EBS Auto-scaling on AWS Batch</title>
@@ -132,11 +132,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <meta property="og:title" content="Luke Pembleton - EBS Auto-scaling on AWS Batch">
 <meta property="og:description" content="An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow">
+<meta property="og:image" content="https://lpembleton.rbind.io/posts\aws-batch-ebs-autoscale\images\simon-goetz-feeredToXK4-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - EBS Auto-scaling on AWS Batch">
 <meta name="twitter:description" content="An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/posts\aws-batch-ebs-autoscale\images\simon-goetz-feeredToXK4-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="floating nav-fixed">
@@ -210,7 +212,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow
         </div>
       </div>
-                </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Nextflow</div>
+                <div class="quarto-category">AWS</div>
+                <div class="quarto-category">Batch</div>
+                <div class="quarto-category">EBS</div>
+              </div>
+                  </div>
   </div>
     
   
@@ -226,7 +234,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">March 2, 2023</p>
+        <p class="date">February 3, 2023</p>
       </div>
     </div>
     
@@ -255,8 +263,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
-<p># EBS Auto-scaling on AWS Batch</p>
-<p>![Photo by [Simon Goetz](https://unsplash.com/@slgoetz) on Unsplash](images/simon-goetz-feeredToXK4-unsplash.jpg)</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/simon-goetz-feeredToXK4-unsplash.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@slgoetz">Simon&nbsp;Goetz</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
+</figure>
+</div>
 <p>Anyone who has tried running bioinformatic pipelines on AWS batch with a workflow manager such as Nextflow will be well aware of the common error</p>
 <p><code>error: No space left on device</code></p>
 <p>that can plague a pipeline. Yes, you can adjust your EBS allocation with specific AMI images or launch configurations and tailor them to specific tasks, but the dynamic nature of bio<del>informatics</del>logy means this will likely be an ongoing cat 🐈 and mouse 🐁 game.</p>
