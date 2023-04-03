@@ -9,6 +9,10 @@ See also:
 
 ## Publications by date
 
+📄 M. M. Malmberg, C. Smith, P. Thakur, M. C. Drayton, J. Wilson, M. Shinozuka, W. Clayton, C. Inch, G. C. Spangenberg, K. F. Smith, N. O. I. Cogan, **L. W. Pembleton** (2023). [Developing an integrated genomic selection approach beyond biomass for varietal protection and nutritive traits in perennial ryegrass (*Lolium perenne L.*)](https://doi.org/10.1007/s00122-023-04263-8) Theoretical and Applied Genetics 136, 44.
+
+📄 Erez Naim-Feil, Edmond J. Breen, **Luke W. Pembleton**, Laura E. Spooner, German C. Spangenberg, Noel O. I. Cogan  (2022). [Empirical Evaluation of Inflorescences’ Morphological Attributes for Yield Optimization of Medicinal Cannabis Cultivars.](https://doi.org/10.3389/fpls.2022.858519) Frontiers in Plant Science, 13.
+
 📄 Yongjun Li, Sukhjiwan Kaur, **Luke W. Pembleton**, Hossein Valipour-Kahrood, Garry M. Rosewarne, Hans D. Daetwyler (2022). [Strategies of preserving genetic diversity while maximizing genetic response from implementing genomic selection in pulse breeding programs.](https://doi.org/10.1007/s00122-022-04071-6) Theoretical and Applied Genetics, 1-16.
 
 📄 Erez Naim-Feil, **Luke W. Pembleton**, Laura E. Spooner, Alix L. Malthouse, Amy Miner, Melinda Quinn, Renata M. Polotnianka, Rebecca C. Baillie, German C. Spangenberg, Noel O. I. Cogan (2021). [The characterization of key physiological traits of medicinal cannabis (Cannabis sativa L.) as a tool for precision breeding.](https://doi.org/10.1186/s12870-021-03079-2) BMC Plant Biology, 21(1).
@@ -21,7 +25,7 @@ See also:
 
 📄 B. M. Caruana, **L. W. Pembleton**, F. Constable, B. Rodoni, A. T. Slater, N. O. I. Cogan (2019). [Validation of Genotyping by Sequencing Using Transcriptomics for Diversity and Application of Genomic Selection in Tetraploid Potato.](https://doi.org/10.3389/fpls.2019.00670) Frontiers in Plant Science, 10.
 
-📄 **Luke W. Pembleton**, Courtney Inch, Rebecca C. Baillie, Michelle C. Drayton, Preeti Thakur, Yvonne O. Ogaji, German C. Spangenberg, John W. Forster, Hans D. Daetwyler, Noel O. I. Cogan (2018). [Exploitation of data from breeding programs supports rapid implementation of genomic selection for key agronomic traits in perennial ryegrass.](https://doi.org/10.1007/s00122-018-3121-7)Theoretical and Applied Genetics, 131(9).
+📄 **Luke W. Pembleton**, Courtney Inch, Rebecca C. Baillie, Michelle C. Drayton, Preeti Thakur, Yvonne O. Ogaji, German C. Spangenberg, John W. Forster, Hans D. Daetwyler, Noel O. I. Cogan (2018). [Exploitation of data from breeding programs supports rapid implementation of genomic selection for key agronomic traits in perennial ryegrass.](https://doi.org/10.1007/s00122-018-3121-7) Theoretical and Applied Genetics, 131(9).
 
 📄 M. Michelle Malmberg, **Luke W. Pembleton**, Rebecca C. Baillie, Michelle C. Drayton, Shimna Sudheesh, Sukhjiwan Kaur, Hiroshi Shinozuka, Preeti Verma, German C. Spangenberg, Hans D. Daetwyler, John W. Forster, Noel O.I. Cogan (2018). [Genotyping-by-sequencing through transcriptomics: implementation in a range of crop species with varying reproductive habits and ploidy levels.](https://doi.org/10.1111/pbi.12835) Plant Biotechnology Journal, 16(4).
 
