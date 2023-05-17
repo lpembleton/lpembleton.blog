@@ -4,7 +4,7 @@ description: "A guide to setting up endpoints for your AWS VPC"
 author: "LW Pembleton"
 date: 18 05 2023
 categories: [AWS, Endpoints, Gateway, Batch]
-image: images/simon-goetz-feeredToXK4-unsplash.jpg
+image: images/varun-yadav-QhYTCG3CTeI-unsplash.jpg
 draft: false
 ---
 

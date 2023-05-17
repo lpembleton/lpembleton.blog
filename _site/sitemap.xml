@@ -2,22 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lpembleton.rbind.io/blog.html</loc>
-    <lastmod>2023-05-17T16:23:27.225Z</lastmod>
+    <lastmod>2023-05-17T16:25:09.870Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/index.html</loc>
-    <lastmod>2023-05-17T16:23:28.386Z</lastmod>
+    <lastmod>2023-05-17T16:25:10.719Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/index.html</loc>
-    <lastmod>2023-05-17T16:23:29.776Z</lastmod>
+    <lastmod>2023-05-17T16:25:12.176Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lpembleton.rbind.io/posts/aws-endpoints/index.html</loc>
+    <lastmod>2023-05-17T16:25:13.230Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/index.html</loc>
-    <lastmod>2023-05-17T16:23:32.506Z</lastmod>
+    <lastmod>2023-05-17T16:25:14.739Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/publications/publications.html</loc>
-    <lastmod>2023-05-17T16:23:34.707Z</lastmod>
+    <lastmod>2023-05-17T16:25:17.635Z</lastmod>
   </url>
 </urlset>
