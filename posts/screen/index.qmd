@@ -8,7 +8,7 @@ image: images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg
 draft: false
 ---
 
-![Photo by Leif Christoph Gottwald on Unsplash](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
+![~Photo by [Leif Christoph Gottwald](https://unsplash.com/@project2204) on Unsplash~](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
 
 If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.
 
