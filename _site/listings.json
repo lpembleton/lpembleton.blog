@@ -2,7 +2,6 @@
   {
     "listing": "/blog.html",
     "items": [
-      "/posts/screen/index.html",
       "/posts/aws-endpoints/index.html",
       "/posts/aws-batch-ebs-autoscale/index.html",
       "/posts/nextflow-on-aws-batch/index.html"

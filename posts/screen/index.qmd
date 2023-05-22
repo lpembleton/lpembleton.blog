@@ -1,0 +1,51 @@
+---
+title: "Screen Utility and Terminal Multiplexing"
+description: "A guide to using the screen command in remote sessions"
+author: "LW Pembleton"
+date: 23 05 2023
+categories: [Screen, AWS, Terminal]
+image: images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg
+draft: false
+---
+
+![~Photo by [Leif Christoph Gottwald](https://unsplash.com/@project2204) on Unsplash~](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
+
+If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.
+
+Even when running production pipelines that harness AWS batch with workflow managers such as Nextflow it is still valuable to maintain access to console output and messages over the lifetime of the pipelines, which can be days.
+
+Thankfully there is a very simple Linux command that solves all these problems, 🌟 screen 🌟
+
+![](images/screen.png)
+
+Screen is a linux utility, known as a terminal multiplier, which in very simple terms, allows you to detach and reattach to different terminal sessions. Importantly this also allows remote processes to continue even after you (purposely or unexpectedly) disconnect.
+
+It is likely that this utility is already installed on your remote instance. Screen comes pre-installed in both the Amazon Linux 2023 and Ubuntu Server 22.04 LTS AMIs.
+
+To get you started I have compiled a few simple commands that should keep your covered.
+
+First, you will want to initiate and label a screen session.
+
+![](images/screen-s.png)
+
+The -S flag and name are optional, but if you are going to have more than one session, you should probably label it, save your brain 🧠 for more meaningful tasks.
+
+Now you can start running your interactive scripts or initiate a pipeline with a workflow manager such as [Nextflow](https://www.nextflow.io/).
+
+Want to step away from this session to disconnect or run a different script or pipeline❓
+
+![](images/shortcut-green.png){width="500"}
+
+To see a list of available screen sessions
+
+![](images/screen-ls.png)
+
+To return to an active screen session.
+
+![](images/screen-r.png)
+
+Or to terminate a session.
+
+![](images/screen-xs-quit.png)
+
+This is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post...

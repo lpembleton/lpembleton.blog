@@ -2,30 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lpembleton.rbind.io/blog.html</loc>
-    <lastmod>2023-05-22T17:11:28.809Z</lastmod>
+    <lastmod>2023-05-22T17:31:18.440Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/index.html</loc>
-    <lastmod>2023-05-22T17:11:29.435Z</lastmod>
+    <lastmod>2023-05-22T17:31:19.041Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/index.html</loc>
-    <lastmod>2023-05-22T17:11:30.336Z</lastmod>
+    <lastmod>2023-05-22T17:31:19.992Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/posts/aws-endpoints/index.html</loc>
-    <lastmod>2023-05-22T17:11:31.080Z</lastmod>
+    <lastmod>2023-05-22T17:31:20.842Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/index.html</loc>
-    <lastmod>2023-05-22T17:11:32.122Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lpembleton.rbind.io/posts/screen/index.html</loc>
-    <lastmod>2023-05-22T17:11:32.894Z</lastmod>
+    <lastmod>2023-05-22T17:31:22.026Z</lastmod>
   </url>
   <url>
     <loc>https://lpembleton.rbind.io/publications/publications.html</loc>
-    <lastmod>2023-05-22T17:11:34.493Z</lastmod>
+    <lastmod>2023-05-22T17:31:23.772Z</lastmod>
   </url>
 </urlset>

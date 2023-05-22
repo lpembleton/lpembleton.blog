@@ -4,7 +4,7 @@
     "href": "blog.html",
     "title": "lpembleton.site",
     "section": "",
-    "text": "Screen Utility and Terminal Multiplexing\n\n\n\n\n\n\n\nScreen\n\n\nAWS\n\n\nTerminal\n\n\n\n\nA guide to using the screen command in remote sessions\n\n\n\n\n\n\nMay 23, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nEndpoints for AWS VPC\n\n\n\n\n\n\n\nAWS\n\n\nEndpoints\n\n\nGateway\n\n\nBatch\n\n\n\n\nA guide to setting up endpoints for your AWS VPC\n\n\n\n\n\n\nMay 18, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nEBS Auto-scaling on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\nEBS\n\n\n\n\nAn introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow\n\n\n\n\n\n\nFeb 3, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nNextflow on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\n\n\nAn introductory guide to setting up Nextflow with AWS Batch\n\n\n\n\n\n\nNov 25, 2022\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
+    "text": "Endpoints for AWS VPC\n\n\n\n\n\n\n\nAWS\n\n\nEndpoints\n\n\nGateway\n\n\nBatch\n\n\n\n\nA guide to setting up endpoints for your AWS VPC\n\n\n\n\n\n\nMay 18, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nEBS Auto-scaling on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\nEBS\n\n\n\n\nAn introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow\n\n\n\n\n\n\nFeb 3, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nNextflow on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\n\n\nAn introductory guide to setting up Nextflow with AWS Batch\n\n\n\n\n\n\nNov 25, 2022\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -75,13 +75,6 @@
     "title": "Nextflow on AWS Batch",
     "section": "Common errors",
     "text": "Common errors\nBelow are a list of common errors. Although the proposed solution has been demonstrated to work it may not always work in your specific scenario.\nTask failed to start - CannotPullContainerError: context canceled\nProposed solution: Increase your AMI EBS storage."
-  },
-  {
-    "objectID": "posts/screen/index.html",
-    "href": "posts/screen/index.html",
-    "title": "Screen Utility and Terminal Multiplexing",
-    "section": "",
-    "text": "Photo by Leif Christoph Gottwald on Unsplash\n\n\nIf you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.\nEven when running production pipelines that harness AWS batch with workflow managers such as Nextflow it is still valuable to maintain access to console output and messages over the lifetime of the pipelines, which can be days.\nThankfully there is a very simple Linux command that solves all these problems, 🌟 screen 🌟\n\nScreen is a linux utility, known as a terminal multiplier, which in very simple terms, allows you to detach and reattach to different terminal sessions. Importantly this also allows remote processes to continue even after you (purposely or unexpectedly) disconnect.\nIt is likely that this utility is already installed on your remote instance. Screen comes pre-installed in both the Amazon Linux 2023 and Ubuntu Server 22.04 LTS AMIs.\nTo get you started I have compiled a few simple commands that should keep your covered.\nFirst, you will want to initiate and label a screen session.\n\nThe -S flag and name are optional, but if you are going to have more than one session, you should probably label it, save your brain 🧠 for more meaningful tasks.\nNow you can start running your interactive scripts or initiate a pipeline with a workflow manager such as Nextflow.\nWant to step away from this session to disconnect or run a different script or pipeline❓\n\nTo see a list of available screen sessions\n\nTo return to an active screen session.\n\nOr to terminate a session.\n\nThis is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post…"
   },
   {
     "objectID": "publications/publications.html",
