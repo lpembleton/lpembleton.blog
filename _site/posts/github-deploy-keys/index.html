@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-05-23">
-<meta name="description" content="A guide to using the screen command in remote sessions">
+<meta name="dcterms.date" content="2023-07-03">
+<meta name="description" content="A guide to using GitHub deploy keys to deploy private repos in remote compute sessions">
 
-<title>Luke Pembleton - Screen Utility and Terminal Multiplexing</title>
+<title>Luke Pembleton - GitHub Deploy Keys</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,6 +23,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -67,13 +130,13 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta property="og:description" content="A guide to using the screen command in remote sessions">
-<meta property="og:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta property="og:title" content="Luke Pembleton - GitHub Deploy Keys">
+<meta property="og:description" content="A guide to using GitHub deploy keys to deploy private repos in remote compute sessions">
+<meta property="og:image" content="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta name="twitter:description" content="A guide to using the screen command in remote sessions">
-<meta name="twitter:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta name="twitter:title" content="Luke Pembleton - GitHub Deploy Keys">
+<meta name="twitter:description" content="A guide to using GitHub deploy keys to deploy private repos in remote compute sessions">
+<meta name="twitter:image" content="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -143,16 +206,19 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Screen Utility and Terminal Multiplexing</h1>
+      <h1 class="title">GitHub Deploy Keys</h1>
                   <div>
         <div class="description">
-          A guide to using the screen command in remote sessions
+          A guide to using GitHub deploy keys to deploy private repos in remote compute sessions
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">Screen</div>
+                <div class="quarto-category">github</div>
+                <div class="quarto-category">git</div>
+                <div class="quarto-category">ssh key</div>
                 <div class="quarto-category">AWS</div>
-                <div class="quarto-category">Terminal</div>
+                <div class="quarto-category">remote</div>
+                <div class="quarto-category">cloud</div>
               </div>
                   </div>
   </div>
@@ -170,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 23, 2023</p>
+        <p class="date">July 3, 2023</p>
       </div>
     </div>
     
@@ -194,30 +260,77 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@project2204">Leif Christoph Gottwald</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
+<p><img src="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@chunlea">Chunli&nbsp;Ju</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
 </figure>
 </div>
-<p>If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.</p>
-<p>Even when running production pipelines that harness AWS batch with workflow managers such as Nextflow it is still valuable to maintain access to console output and messages over the lifetime of the pipelines, which can be days.</p>
-<p>Thankfully there is a very simple Linux command that solves all these problems, 🌟 screen 🌟</p>
-<p><img src="images/screen.png" class="img-fluid"></p>
-<p>Screen is a linux utility, known as a terminal multiplier, which in very simple terms, allows you to detach and reattach to different terminal sessions. Importantly this also allows remote processes to continue even after you (purposely or unexpectedly) disconnect.</p>
-<p>It is likely that this utility is already installed on your remote instance. Screen comes pre-installed in both the Amazon Linux 2023 and Ubuntu Server 22.04 LTS AMIs.</p>
-<p>To get you started I have compiled a few simple commands that should keep your covered.</p>
-<p>First, you will want to initiate and label a screen session.</p>
-<p><img src="images/screen-s.png" class="img-fluid"></p>
-<p>The -S flag and name are optional, but if you are going to have more than one session, you should probably label it, save your brain 🧠 for more meaningful tasks.</p>
-<p>Now you can start running your interactive scripts or initiate a pipeline with a workflow manager such as <a href="https://www.nextflow.io/">Nextflow</a>.</p>
-<p>Want to step away from this session to disconnect or run a different script or pipeline❓</p>
-<p><img src="images/shortcut-green.png" class="img-fluid" width="500"></p>
-<p>To see a list of available screen sessions</p>
-<p><img src="images/screen-ls.png" class="img-fluid"></p>
-<p>To return to an active screen session.</p>
-<p><img src="images/screen-r.png" class="img-fluid"></p>
-<p>Or to terminate a session.</p>
-<p><img src="images/screen-xs-quit.png" class="img-fluid"></p>
-<p>This is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post…</p>
+<p>If you use private GitHub repositories and have wondered what is the best way of being able to deploy your repositories to remote compute environments such as AWS, you are not alone. However, there is an elegant and secure solution that doesn’t require you to store your high-level GitHub SSH key in a remote instance.</p>
+<p>GitHub has a feature called deploy keys which allows you to add a separate SSH key to your private repository without write access. Furthermore, you can secure this key on your remote compute instance with a password, similar to what you might do on your local machine.</p>
+<ol type="1">
+<li><p>The first step, remote into your remote compute instance ☁️</p></li>
+<li><p>Run the following command to generate your SSH key</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ssh-keygen</span> <span class="at">-t</span> ed25519 <span class="at">-C</span> <span class="st">"your_email@example.com"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ol>
+<div class="callout-tip callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you are only going to use one repository, accept the default name when prompted to “Enter a file in which to save the key”. However, if you want to connect to multiple repositories don’t press Enter to accept the defaults. Instead, enter a name that relates to the corresponding repository you are wanting to connect to.</p>
+</div>
+</div>
+<ol start="3" type="1">
+<li><p>Use <code>cat</code> to print the public SSH key to the screen and then copy it to your clipboard 📋</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> /home/<span class="op">&lt;</span>USER-NAME<span class="op">&gt;</span>/.ssh/<span class="op">&lt;</span>KEY-NAME<span class="op">&gt;</span>.pub</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Go to your GitHub repository and click <strong>Settings.</strong></p>
+<p><img src="images/github-settings.png" class="img-fluid"></p></li>
+<li><p>Then click <strong>Deploy keys</strong> from the side menu and then click <strong>Add deploy key.</strong></p>
+<p><img src="images/github-deploykeys.png" class="img-fluid"></p></li>
+<li><p>Paste in your public ssh key and add a relevant title and click <strong>Add key</strong></p>
+<p><img src="images/github-addnew.png" class="img-fluid"></p></li>
+</ol>
+<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ensure you leave ‘Allow write access’ un-ticked.</p>
+</div>
+</div>
+<p><strong>Multiple repositories?</strong></p>
+<p>What’s that you say, you have more than one repository, I would be worried if you didn’t. However, what you will initially find is that GitHub will not let you use the same ssh deploy key for a second repo. The solution? Generate a second key, but now you have to manually change between keys when you move between repos, and even more so remember which key is for which.</p>
+<p>As always with Linux and git there is a elegant solution, a ssh config file.</p>
+<ol type="1">
+<li><p>Create a ssh config file with the following commands</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.ssh/config</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 600 ~/.ssh/config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Using a command line text editor like vi edit the config file</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vi</span> ~/.ssh/config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p>Add the following configuration information</p>
+<pre><code>Host repo-alias
+  Hostname github.com
+  IdentityFile=/home/&lt;USER-NAME&gt;/.ssh/&lt;KEY-NAME&gt;</code></pre></li>
+<li><p>What are these fields?</p>
+<ul>
+<li><p>Host: the repostory’s alias on GitHub</p></li>
+<li><p>Hostname: the hosting service i.e.&nbsp;github.com</p></li>
+<li><p>IdentityFile: file path to the ssh key you previously generated</p></li>
+</ul></li>
+<li><p>Repeat this process for any other repositories and SSH keys</p></li>
+<li><p>If you have added the alias and host name correctly, Git should automatically select the appropriate SSH key.</p></li>
+</ol>
+<p>With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key is automatically selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.</p>
+<p>Happy coding! 🧑‍💻🔑</p>
 
 
 

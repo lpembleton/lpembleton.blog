@@ -1,0 +1,92 @@
+---
+title: "GitHub Deploy Keys"
+description: "A guide to using GitHub deploy keys to deploy private repos in remote compute sessions"
+author: "LW Pembleton"
+date: 03 07 2023
+categories: [github, git, ssh key, AWS, remote, cloud]
+image: images/chunli-ju-8fs1X0JFgFE-unsplash.jpg
+draft: false
+---
+
+![~Photo by [Chunli Ju](https://unsplash.com/@chunlea) on Unsplash~](images/chunli-ju-8fs1X0JFgFE-unsplash.jpg)
+
+If you use private GitHub repositories and have wondered what is the best way of being able to deploy your repositories to remote compute environments such as AWS, you are not alone. However, there is an elegant and secure solution that doesn't require you to store your high-level GitHub SSH key in a remote instance.
+
+GitHub has a feature called deploy keys which allows you to add a separate SSH key to your private repository without write access. Furthermore, you can secure this key on your remote compute instance with a password, similar to what you might do on your local machine.
+
+1.  The first step, remote into your remote compute instance ☁️
+
+2.  Run the following command to generate your SSH key
+
+    ``` bash
+    ssh-keygen -t ed25519 -C "your_email@example.com"
+    ```
+
+::: callout-tip
+If you are only going to use one repository, accept the default name when prompted to "Enter a file in which to save the key". However, if you want to connect to multiple repositories don't press Enter to accept the defaults. Instead, enter a name that relates to the corresponding repository you are wanting to connect to.
+:::
+
+3.  Use `cat` to print the public SSH key to the screen and then copy it to your clipboard 📋
+
+    ``` bash
+    cat /home/<USER-NAME>/.ssh/<KEY-NAME>.pub
+    ```
+
+4.  Go to your GitHub repository and click **Settings.**
+
+    ![](images/github-settings.png)
+
+5.  Then click **Deploy keys** from the side menu and then click **Add deploy key.**
+
+    ![](images/github-deploykeys.png)
+
+6.  Paste in your public ssh key and add a relevant title and click **Add key**
+
+    ![](images/github-addnew.png)
+
+::: callout-warning
+Ensure you leave 'Allow write access' un-ticked.
+:::
+
+**Multiple repositories?**
+
+What's that you say, you have more than one repository, I would be worried if you didn't. However, what you will initially find is that GitHub will not let you use the same ssh deploy key for a second repo. The solution? Generate a second key, but now you have to manually change between keys when you move between repos, and even more so remember which key is for which.
+
+As always with Linux and git there is a elegant solution, a ssh config file.
+
+1.  Create a ssh config file with the following commands
+
+    ``` bash
+    touch ~/.ssh/config
+    chmod 600 ~/.ssh/config
+    ```
+
+2.  Using a command line text editor like vi edit the config file
+
+    ``` bash
+    vi ~/.ssh/config
+    ```
+
+3.  Add the following configuration information
+
+    ```         
+    Host repo-alias
+      Hostname github.com
+      IdentityFile=/home/<USER-NAME>/.ssh/<KEY-NAME>
+    ```
+
+4.  What are these fields?
+
+    -   Host: the repostory's alias on GitHub
+
+    -   Hostname: the hosting service i.e. github.com
+
+    -   IdentityFile: file path to the ssh key you previously generated
+
+5.  Repeat this process for any other repositories and SSH keys
+
+6.  If you have added the alias and host name correctly, Git should automatically select the appropriate SSH key.
+
+With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key is automatically selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.
+
+Happy coding! 🧑‍💻🔑
