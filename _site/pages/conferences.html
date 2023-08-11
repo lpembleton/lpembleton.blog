@@ -6,11 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-05-23">
-<meta name="description" content="A guide to using the screen command in remote sessions">
 
-<title>Luke Pembleton - Screen Utility and Terminal Multiplexing</title>
+<title>Luke Pembleton - Conferences</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,26 +23,26 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -67,25 +64,25 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta property="og:description" content="A guide to using the screen command in remote sessions">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts\screen\images\leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta property="og:title" content="Luke Pembleton - Conferences">
+<meta property="og:description" content="A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural community 🌾">
+<meta property="og:image" content="images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta name="twitter:description" content="A guide to using the screen command in remote sessions">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts\screen\images\leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta name="twitter:title" content="Luke Pembleton - Conferences">
+<meta name="twitter:description" content="A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural community 🌾">
+<meta name="twitter:image" content="images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
   </div>
@@ -95,16 +92,20 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html">
+    <a class="nav-link" href="../index.html">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html">
+    <a class="nav-link" href="../blog.html">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../publications/publications.html">
+    <a class="nav-link" href="../publications/publications.html">
  <span class="menu-text">Publications</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../pages/conferences.html" aria-current="page">
+ <span class="menu-text">Conferences</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/lpembleton"><i class="bi bi-github" role="img">
@@ -140,86 +141,85 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-body">
-      <h1 class="title">Screen Utility and Terminal Multiplexing</h1>
-                  <div>
-        <div class="description">
-          A guide to using the screen command in remote sessions
-        </div>
-      </div>
-                          <div class="quarto-categories">
-                <div class="quarto-category">Screen</div>
-                <div class="quarto-category">AWS</div>
-                <div class="quarto-category">Terminal</div>
-              </div>
-                  </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta">
-
-      <div>
-      <div class="quarto-title-meta-heading">Author</div>
-      <div class="quarto-title-meta-contents">
-               <p>LW Pembleton </p>
-            </div>
-    </div>
-      
-      <div>
-      <div class="quarto-title-meta-heading">Published</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date">May 23, 2023</p>
-      </div>
-    </div>
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
-    
-</nav>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    </div>
+    
 <!-- main -->
-<main class="content quarto-banner-title-block" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Conferences</h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@project2204">Leif Christoph Gottwald</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
+<p><img src="images/sigmund-eTgMFFzroGc-unsplash.jpg" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/photos/eTgMFFzroGc">Sigmund</a>&nbsp;on&nbsp;Unsplash</sub></figcaption><p></p>
 </figure>
 </div>
-<p>If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.</p>
-<p>Even when running production pipelines that harness AWS batch with workflow managers such as Nextflow it is still valuable to maintain access to console output and messages over the lifetime of the pipelines, which can be days.</p>
-<p>Thankfully there is a very simple Linux command that solves all these problems, 🌟 screen 🌟</p>
-<p><img src="images/screen.png" class="img-fluid"></p>
-<p>Screen is a linux utility, known as a terminal multiplier, which in very simple terms, allows you to detach and reattach to different terminal sessions. Importantly this also allows remote processes to continue even after you (purposely or unexpectedly) disconnect.</p>
-<p>It is likely that this utility is already installed on your remote instance. Screen comes pre-installed in both the Amazon Linux 2023 and Ubuntu Server 22.04 LTS AMIs.</p>
-<p>To get you started I have compiled a few simple commands that should keep your covered.</p>
-<p>First, you will want to initiate and label a screen session.</p>
-<p><img src="images/screen-s.png" class="img-fluid"></p>
-<p>The -S flag and name are optional, but if you are going to have more than one session, you should probably label it, save your brain 🧠 for more meaningful tasks.</p>
-<p>Now you can start running your interactive scripts or initiate a pipeline with a workflow manager such as <a href="https://www.nextflow.io/">Nextflow</a>.</p>
-<p>Want to step away from this session to disconnect or run a different script or pipeline❓</p>
-<p><img src="images/shortcut-green.png" class="img-fluid" width="500"></p>
-<p>To see a list of available screen sessions</p>
-<p><img src="images/screen-ls.png" class="img-fluid"></p>
-<p>To return to an active screen session.</p>
-<p><img src="images/screen-r.png" class="img-fluid"></p>
-<p>Or to terminate a session.</p>
-<p><img src="images/screen-xs-quit.png" class="img-fluid"></p>
-<p>This is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post…</p>
+<section id="virtual-conferences-meetups" class="level2">
+<h2 class="anchored" data-anchor-id="virtual-conferences-meetups">Virtual Conferences &amp; Meetups</h2>
+<p>A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural community 🌾</p>
+<section id="reoccurring" class="level3">
+<h3 class="anchored" data-anchor-id="reoccurring">Reoccurring 🔁</h3>
+<p><strong>Posit <a href="https://posit.co/data-science-hangout/">Data Science Hangout</a></strong> - Live Every Thursday at 12 PM ET.</p>
+<p><em>Each week, host Rachael Dempsey invites an accomplished data science leader to talk about their experience and answer questions from the audience. The discussion focuses mainly on the human elements of data science leadership. There’s no sales or marketing fluff, just great insights from inspiring professionals.</em></p>
+<p>📹 <a href="https://posit.co/past-hangouts/">Past hangouts</a> are also available to watch.<br>
+<br>
+</p>
+<p><a href="https://www.nextflow.io/podcasts.html"><strong>Channels</strong></a> the nextflow podcast - Pre-recorded every fortnight.</p>
+<p>Talking about news in the Nextflow ecosytem and speaking with pioneers in the field.</p>
+<hr>
+</section>
+<section id="scheduled" class="level3">
+<h3 class="anchored" data-anchor-id="scheduled">Scheduled 📆</h3>
+<p><a href="https://posit.co/conference/"><strong>Posit::conf(2023)</strong></a> - September 17-20, 2023<em>.</em></p>
+<p><em>Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.</em></p>
+<p><a href="https://reg.conf.posit.co/flow/posit/positconf23/reg/login">Register</a> | Follow on <a href="https://twitter.com/posit_pbc">twitter</a><br>
+<br>
+</p>
+<p><a href="https://www.dockercon.com/"><strong>dockercon 2023</strong></a> - October 4-5, 2023.</p>
+<p><em>DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.</em></p>
+<p><a href="https://www.dockercon.com/2023/begin">Register</a> | Follow on <a href="https://twitter.com/Docker">twitter</a><br>
+<br>
+</p>
+<p><a href="https://summit.nextflow.io/"><strong>Nextflow SUMMIT</strong></a> - October 16-20, 2023</p>
+<p><em>A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.</em></p>
+<p><a href="https://summit.nextflow.io/purchase/">Register</a> | Follow on <a href="https://twitter.com/SeqeraLabs">twitter</a><br>
+<br>
+</p>
+<p><a href="https://githubuniverse.com/"><strong>GitHub Universe</strong></a> - November 8-9, 2023.</p>
+<p><em>The annual developer event is back, better, and bigger than ever at San Francisco’s Yerba Buena Center for the Arts and online.</em></p>
+<p>Registration opens soon | Follow on <a href="https://twitter.com/githubuniverse">twitter</a></p>
+<hr>
+</section>
+<section id="past-events" class="level3">
+<h3 class="anchored" data-anchor-id="past-events">Past Events 🗄️</h3>
+<p><a href="https://rstats.ai/nyr.html"><strong>New York R Conference</strong></a> - July 11-12, 2023.</p>
+<p><em>The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.</em></p>
+<p><a href="https://www.landeranalytics.com/post/nyr-2023-recap">Conference recordings.</a><br>
+<br>
+</p>
+<p><a href="https://bioc2023.bioconductor.org/"><strong>Bioconductor Conference</strong></a>, August 2-4, 2023.</p>
+<p><em>Bioconductor conference highlights current developments within and beyond the Bioconductor project.</em></p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
