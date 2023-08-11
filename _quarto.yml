@@ -21,6 +21,8 @@ website:
         href: https://github.com/lpembleton
       - icon: twitter
         href: https://twitter.com/lwpembleton
+      - icon: mastodon
+        href: https://genomic.social/@lwpembleton
       - text: "{{< ai google-scholar >}}"
         href: https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en
       - text: "{{< ai publons >}}"

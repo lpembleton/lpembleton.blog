@@ -9,6 +9,9 @@ about:
     - icon: twitter
       text: Twitter
       href: https://twitter.com/lwpembleton
+    - icon: mastodon
+      text: mastodon
+      href: https://genomic.social/@lwpembleton
     - icon: github
       text: Github
       href: https://github.com/lpembleton
