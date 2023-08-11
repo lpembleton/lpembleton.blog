@@ -1,11 +1,9 @@
 ---
-title: "Conferences"
+title: "Virtual Conferences & Meetups"
 image: images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg
 ---
 
 ![~Photo by [Sigmund](https://unsplash.com/photos/eTgMFFzroGc) on Unsplash~](images/sigmund-eTgMFFzroGc-unsplash.jpg)
-
-## Virtual Conferences & Meetups
 
 A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural community 🌾
 
