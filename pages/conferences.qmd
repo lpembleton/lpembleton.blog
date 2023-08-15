@@ -5,18 +5,18 @@ image: images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg
 
 ![~Photo by [Sigmund](https://unsplash.com/photos/eTgMFFzroGc) on Unsplash~](images/sigmund-eTgMFFzroGc-unsplash.jpg)
 
-A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural community 🌾
+A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural science community 🌾
 
 ### Reoccurring 🔁
 
-**Posit [Data Science Hangout](https://posit.co/data-science-hangout/)** - Live Every Thursday at 12 PM ET.
+📌**Posit [Data Science Hangout](https://posit.co/data-science-hangout/)** - Live Every Thursday at 12 PM ET.
 
 *Each week, host Rachael Dempsey invites an accomplished data science leader to talk about their experience and answer questions from the audience. The discussion focuses mainly on the human elements of data science leadership. There's no sales or marketing fluff, just great insights from inspiring professionals.*
 
 📹 [Past hangouts](https://posit.co/past-hangouts/) are also available to watch.\
 \
 
-[**Channels**](https://www.nextflow.io/podcasts.html) the nextflow podcast - Pre-recorded every fortnight.
+📌[**Channels**](https://www.nextflow.io/podcasts.html) the nextflow podcast - Pre-recorded every fortnight.
 
 Talking about news in the Nextflow ecosytem and speaking with pioneers in the field.
 
@@ -24,44 +24,54 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 ### Scheduled 📆
 
-[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
+#### *2023*
+
+📌[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
 
 *Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
 
-[Register](https://reg.conf.posit.co/flow/posit/positconf23/reg/login) \| Follow on [twitter](https://twitter.com/posit_pbc)\
+[Register](https://reg.conf.posit.co/flow/posit/positconf23/reg/login) \| Follow on [Twitter](https://twitter.com/posit_pbc)\
 \
 
-[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
+📌[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
 
 *DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
 
-[Register](https://www.dockercon.com/2023/begin) \| Follow on [twitter](https://twitter.com/Docker)\
+[Register](https://www.dockercon.com/2023/begin) \| Follow on [Twitter](https://twitter.com/Docker)\
 \
 
-[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023
+📌[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023
 
 *A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.*
 
-[Register](https://summit.nextflow.io/purchase/) \| Follow on [twitter](https://twitter.com/SeqeraLabs)\
+[Register](https://summit.nextflow.io/purchase/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)\
 \
 
-[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
+📌[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
 
 *The annual developer event is back, better, and bigger than ever at San Francisco's Yerba Buena Center for the Arts and online.*
 
-Registration opens soon \| Follow on [twitter](https://twitter.com/githubuniverse)
+Registration opens soon \| Follow on [Twitter](https://twitter.com/githubuniverse)
+
+#### *2024*
+
+📌[**useR! 2024**](https://www.r-project.org/conferences/) - July 8-11, 2024
+
+*useR! is the main meeting of the R user and developer community, its program consists of both invited and user-contributed presentations.*
+
+Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
 
 ------------------------------------------------------------------------
 
 ### Past Events 🗄️
 
-[**New York R Conference**](https://rstats.ai/nyr.html) - July 11-12, 2023.
+✅[**New York R Conference**](https://rstats.ai/nyr.html) - July 11-12, 2023.
 
 *The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.*
 
 [Conference recordings.](https://www.landeranalytics.com/post/nyr-2023-recap)\
 \
 
-[**Bioconductor Conference**](https://bioc2023.bioconductor.org/), August 2-4, 2023.
+✅[**Bioconductor Conference**](https://bioc2023.bioconductor.org/), August 2-4, 2023.
 
 *Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
