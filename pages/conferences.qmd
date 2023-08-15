@@ -65,6 +65,12 @@ Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \|
 
 ### Past Events 🗄️
 
+✅[**ShinyConf2023**](https://shinyconf.appsilon.com/) - 15-17 March, 2023
+
+*ShinyConf is a virtual event hosted by Appsilon with support from Posit. This year's Shiny conference Showcases recent advancements in R Shiny technology such as open source packages, Shiny interoperability, and commercial applications*
+
+[Conference recordings](https://www.youtube.com/playlist?list=PLexAKolMzPcriOdeLwoMxQOyHRnMguEv4)\
+
 ✅[**New York R Conference**](https://rstats.ai/nyr.html) - July 11-12, 2023.
 
 *The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.*
