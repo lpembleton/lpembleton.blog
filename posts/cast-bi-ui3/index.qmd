@@ -156,11 +156,9 @@ catt -d <name_of_chromecast> stop
 catt cast_url http://\<BLUEIRIS-IP-ADDRESS\>:81/ui3.htm?timeout=0&group=groupname
 ```
 
-```         
 ::: callout-note
 I would also recommended adding the `clipview=confirmed` parameter if you have AI detection on. This will show thumbnails of confirmed events.
 :::
-```
 
 -   Further url parameters can been found in the [UI3 documentation](https://bp2008.github.io/ui3/ui3/help/help.html#urlparameters).
 
