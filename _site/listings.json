@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/cast-bi-ui3/index.html",
       "/posts/github-deploy-keys/index.html",
       "/posts/screen/index.html",
       "/posts/aws-endpoints/index.html",

@@ -1,20 +1,20 @@
 ---
-title: "How to Cast Blue Iris UI3 to Google TV Chromecast and Computer Monitor"
-description: "A guide to us..."
+title: "How to Cast Blue Iris UI3"
+description: "A guide to casting Blue Iris UI3 to a Chromecast device and monitor"
 author: "LW Pembleton"
-date: 01 08 2023
+date: 28 08 2023
 categories: [Smarthome, Blue Iris, Security, Chromecast]
-image: images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg
-draft: true
+image: images/bookcase.jpg
+draft: false
 ---
 
-![~Photo by [Leif Christoph Gottwald](https://unsplash.com/@project2204) on Unsplash~](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
+![](images/bookcase.jpg){fig-align="center"}
 
-When it comes to setting up a wall-mounted security display or displaying cameras discreetly in a bookcase, you may initially think incorporating it into your home assistant dashboard is the best option or that you need to mini pc attached to a monitor.
+When it comes to setting up a wall-mounted security display or displaying cameras discreetly in a bookcase, you may initially think incorporating it into your [Home Assistant](https://www.home-assistant.io/) dashboard is the best option or that you need to mini PC attached to a monitor.
 
-Home Assistant, while an excellent smart home management platform, will struggle to handle multiple live camera streams resulting in unbearable delays or glitchy streams. The best option is actually relatively inexpensive and simple to setup. It involves using a google tv chromecast and a computer monitor (with HDMI port) or a small TV, of which you might likely find you already have these lying around.
+Home Assistant, while an excellent smart home management platform, will struggle to handle multiple live camera streams resulting in unbearable delays or glitchy streams. The best option is actually relatively inexpensive and simple to setup. It involves using a Google TV chromecast and a computer monitor (with HDMI port) or a small TV, of which you might likely find you already have these lying around.
 
-In this blog post, I will guide you through the process of casting the Blue Iris UI3 interface to both a Google TV Chromecast and a computer monitor, ensuring a high-quality display and lag-free security camera video streams. Although you can just use cast all the things to case the Blue Iris UI3 directly to your chromecast, you will soon find that after 10min your chromecast will enter ambient mode and you will loose connect and display of your camera feeds. The following guide will sort all of this our for your
+In this blog post, I will guide you through the process of casting the [Blue Iris](https://blueirissoftware.com/) UI3 interface to both a Google TV Chromecast and a computer monitor, ensuring a high-quality display and lag-free security camera video streams. Although you can just use cast all the things to case the Blue Iris UI3 directly to your Chromecast, you will soon find that after 10min your Chromecast will enter ambient mode and you will lose connection with the display of your camera feeds. The following guide will sort all of this out for your
 
 ### Prerequisites.
 
@@ -68,9 +68,9 @@ This should work with other Chromecast devices, just note that some of the menus
 
 -   Open a command prompt or terminal window and navigate to the folder containing the extracted files.
 
--   Executing the following command in the command prompt or terminal:
+-   Execute the following command in the command prompt or terminal:
 
-```         
+``` bash
 adb connect <YOUR_CHROMECAST_IP_ADDRESS>
 ```
 
@@ -86,7 +86,7 @@ Once you've accepted the connection request, you can proceed with Step 4 and ent
 
 -   Enter the following command to change the screen timeout value to one month (in seconds):
 
-```         
+``` bash
 adb shell settings put system screen_off_timeout 2592000000
 ```
 
@@ -112,17 +112,17 @@ adb shell settings put system screen_off_timeout 2592000000
 
 -   Install [CATT](https://github.com/skorokithakis/catt) using [pipx](https://pypa.github.io/pipx/)
 
-    ```         
+    ``` bash
     pipx install catt
     ```
 
     ::: callout-note
     You can using pip, however pipx is recommended by the developer of CATT
     :::
-    
+
 -   Next you need to identify your chromecast device. To scan you local network run the following
 
-```         
+``` bash
 catt scan
 ```
 
@@ -134,32 +134,36 @@ catt scan
 
 -   To cast the UI3 web interface to your chromecast and monitor enter the following command
 
--   catt cast_url http://\<BLUEIRIS-IP-ADDRESS\>:81/ui3.htm?timeout=0
+``` bash
+catt cast_url http://\<BLUEIRIS-IP-ADDRESS\>:81/ui3.htm?timeout=0
+```
 
--   Replace BLUEIRIS-IP-ADDRESS with the
+-   Replace <BLUEIRIS-IP-ADDRESS> with the IP of your Blue Iris server.
 
     ::: callout-note
     Note we have added `timeout=0` to the url to prevent the web interface timing out
     :::
 
--   Once the UI3 interface is loaded and configured, go back to the command prompt or terminal window.
-
--   Enter the following command to start casting to your Chromecast:
-
-```         
-catt cast_url YOUR_UI3_URL
-```
-
--   Replace "YOUR_UI3_URL" with the URL of the Blue Iris UI3 interface you configured.
-
 -   To stop casting or if there is a disconnection and you need to recast, you first need to run the stop command
 
-```         
+``` bash
 catt -d <name_of_chromecast> stop
 ```
 
--   To cast only the camera group you created
+-   To cast only the camera group you created add the `group=groupname` parameter to the url
+
+``` bash
+catt cast_url http://\<BLUEIRIS-IP-ADDRESS\>:81/ui3.htm?timeout=0&group=groupname
+```
+
+```         
+::: callout-note
+I would also recommended adding the `clipview=confirmed` parameter if you have AI detection on. This will show thumbnails of confirmed events.
+:::
+```
+
+-   Further url parameters can been found in the [UI3 documentation](https://bp2008.github.io/ui3/ui3/help/help.html#urlparameters).
 
 ### Conclusion
 
-By following these steps, you can easily cast the Blue Iris UI3 interface to both your Google TV Chromecast and your computer monitor. The use of CATT ensures a smooth and high-quality display, while the screen timeout changes and 'stay awake' settings on the Chromecast prevent disruptions during extended use. Enjoy easy access to your Blue Iris cameras on the big screen!
+By following these steps, you can easily cast the Blue Iris UI3 interface to your Google TV Chromecast and attached screen. The use of CATT ensures a smooth and high-quality display, while the screen timeout changes and 'stay awake' settings on the Chromecast prevent disruptions during extended use. Enjoy easy access to your Blue Iris cameras on the big screen!
