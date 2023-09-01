@@ -70,11 +70,11 @@ ul.task-list li input[type="checkbox"] {
 
 <meta property="og:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
 <meta property="og:description" content="A guide to using the screen command in remote sessions">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta property="og:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
 <meta name="twitter:description" content="A guide to using the screen command in remote sessions">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta name="twitter:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -186,6 +186,12 @@ ul.task-list li input[type="checkbox"] {
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">August 31, 2023</p>
+      </div>
+    </div>
       
     </div>
     
@@ -208,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@project2204">Leif Christoph Gottwald</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
+<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@project2204">Leif&nbsp;Christoph&nbsp;Gottwald</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
 <p>If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.</p>
@@ -228,6 +234,19 @@ ul.task-list li input[type="checkbox"] {
 <p><img src="images/screen-ls.png" class="img-fluid"></p>
 <p>To return to an active screen session.</p>
 <p><img src="images/screen-r.png" class="img-fluid"></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Encountering the error message ‘there is no screen to be resumed’? Don’t worry, there’s a simple solution. If you unexpectedly disconnected from your previous session you may find that screen fails to recognise the detachment. Adding the -d flag to your command can save the day. This flag instructs screen to detach from any existing session before you attempt to reattach. By doing so, you’re ensuring a clean reconnection even in scenarios where your previous session’s state might not have been properly recognized due to an abrupt disconnection.</p>
+</div>
+</div>
 <p>Or to terminate a session.</p>
 <p><img src="images/screen-xs-quit.png" class="img-fluid"></p>
 <p>This is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post…</p>

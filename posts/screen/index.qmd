@@ -3,12 +3,13 @@ title: "Screen Utility and Terminal Multiplexing"
 description: "A guide to using the screen command in remote sessions"
 author: "LW Pembleton"
 date: 23 05 2023
+date-modified: last-modified
 categories: [Screen, AWS, Terminal]
 image: images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg
 draft: false
 ---
 
-![~Photo by [Leif Christoph Gottwald](https://unsplash.com/@project2204) on Unsplash~](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
+![~Photo by [Leif\ Christoph\ Gottwald](https://unsplash.com/@project2204) on Unsplash~](images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg)
 
 If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.
 
@@ -43,6 +44,10 @@ To see a list of available screen sessions
 To return to an active screen session.
 
 ![](images/screen-r.png)
+
+::: callout-warning
+Encountering the error message 'there is no screen to be resumed'? Don't worry, there's a simple solution. If you unexpectedly disconnected from your previous session you may find that screen fails to recognise the detachment. Adding the -d flag to your command can save the day. This flag instructs screen to detach from any existing session before you attempt to reattach. By doing so, you're ensuring a clean reconnection even in scenarios where your previous session's state might not have been properly recognized due to an abrupt disconnection.
+:::
 
 Or to terminate a session.
 

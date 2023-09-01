@@ -1,5 +1,6 @@
 ---
-title: "lpembleton.site"
+title: "Ponderings in Diagon Alley"
+description: "Exploring the world of genomics, R and cloud computing"
 listing:
   contents: posts
   sort: "date desc"
