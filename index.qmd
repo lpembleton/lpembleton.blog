@@ -1,7 +1,7 @@
 ---
 title: "Dr Luke Pembleton"
 description:
-  I am a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug.
+  Genomic Breeding Scientist and Global Strategic Science Manager at Barenbrug.
 image: avatar.jpg
 about:
   template: jolla
