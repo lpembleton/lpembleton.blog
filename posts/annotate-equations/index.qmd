@@ -119,4 +119,4 @@ An example using the Hardy-Weinberg equation:\
 
 If you want to see how this looks in a pdf and/or see the LaTeX code inside the correpsonding quarto .qmd file visit [my github repo](https://github.com/lpembleton/annotate-equations).
 
-For more in-depth instructions and possibilities with annotate-equations in LaTeX, refer to the documentation at [https://github.com/st--/annotate-equations/blob/main/annotate-equations.pdf](https://github.com/st–/annotate-equations/blob/main/annotate-equations.pdf)
+For more in-depth instructions and possibilities with annotate-equations in LaTeX, refer to the documentation at [https://github.com/st--/annotate-equations/blob/main/annotate-equations.pdf](https://github.com/st--/annotate-equations/blob/main/annotate-equations.pdf)
