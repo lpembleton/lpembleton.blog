@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/annotate-equations/index.html",
       "/posts/cast-bi-ui3/index.html",
       "/posts/github-deploy-keys/index.html",
       "/posts/screen/index.html",

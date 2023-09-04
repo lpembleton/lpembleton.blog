@@ -5,7 +5,7 @@ author: "LW Pembleton"
 date: 03 09 2023
 categories: [equations, quarto, annotate, LaTeX]
 image: images/eq_header.png
-draft: true
+draft: false
 ---
 
 ![](images/eq_header.png)
