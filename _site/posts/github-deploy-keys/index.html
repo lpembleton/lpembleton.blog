@@ -104,11 +104,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="Luke Pembleton - GitHub Deploy Keys">
 <meta property="og:description" content="A guide to using GitHub deploy keys to deploy private repos in remote compute sessions">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
+<meta property="og:image" content="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - GitHub Deploy Keys">
 <meta name="twitter:description" content="A guide to using GitHub deploy keys to deploy private repos in remote compute sessions">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
+<meta name="twitter:image" content="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -223,6 +223,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">September 13, 2023</p>
+      </div>
+    </div>
       
     </div>
     
@@ -293,7 +299,7 @@ Warning
 </div>
 <p><strong>Multiple repositories?</strong></p>
 <p>What’s that you say, you have more than one repository, I would be worried if you didn’t. However, what you will initially find is that GitHub will not let you use the same ssh deploy key for a second repo. The solution? Generate a second key, but now you have to manually change between keys when you move between repos, and even more so remember which key is for which.</p>
-<p>As always with Linux and git there is a elegant solution, a ssh config file.</p>
+<p>As always with Linux and git there is an elegant solution, a SSH config file.</p>
 <ol type="1">
 <li><p>Create a ssh config file with the following commands</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.ssh/config</span>
@@ -301,19 +307,47 @@ Warning
 <li><p>Using a command line text editor like vi edit the config file</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">vi</span> ~/.ssh/config</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Add the following configuration information</p>
-<pre><code>Host repo-alias
-  Hostname github.com
-  IdentityFile=/home/&lt;USER-NAME&gt;/.ssh/&lt;KEY-NAME&gt;</code></pre></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> repo-alias</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">Hostname</span> github.com</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">User</span> git</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">IdentityFile</span> /home/<span class="op">&lt;</span>USER-NAME<span class="op">&gt;</span>/.ssh/<span class="op">&lt;</span>KEY-NAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>What are these fields?</p>
 <ul>
-<li><p>Host: the repostory’s alias on GitHub</p></li>
-<li><p>Hostname: the hosting service i.e.&nbsp;github.com</p></li>
-<li><p>IdentityFile: file path to the ssh key you previously generated</p></li>
-</ul></li>
+<li><p><strong>Host:</strong> An alias to assign to the corresponding repository (<em>does not need to be the same as the repo name</em>)</p></li>
+<li><p><strong>Hostname:</strong> the hosting service i.e.&nbsp;github.com</p></li>
+<li><p><strong>User:</strong> service using the ssh key (in this case git)</p></li>
+<li><p><strong>IdentityFile:</strong> file path to the ssh key you previously generated</p></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>While the alias you choose doesn’t have to match the repository name, it’s crucial to make it memorable. Using the repository name as the alias is a straightforward and effective approach.</p>
+</div>
+</div></li>
 <li><p>Repeat this process for any other repositories and SSH keys</p></li>
-<li><p>If you have added the alias and host name correctly, Git should automatically select the appropriate SSH key.</p></li>
 </ol>
-<p>With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key is automatically selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.</p>
+<p>Now that you have added all your SSH keys along with a corresponding alias you can easily direct git to use the relevant key when working with different repositories.</p>
+<p>To do this you insert the <code>alias</code> into the repository address between <code>git@</code> and <code>:repo-owner-name/repo-name.git</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@<span class="op">&lt;</span>alias<span class="op">&gt;</span>:repo-owner-name/repo-name.git .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once you have cloned a repository and want to run other commands such as <code>git pull</code> all you need to do is include the repo alias and address similar to the clone command.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull <span class="op">&lt;</span>alias<span class="op">&gt;</span>:repo-owner-name/repo-name</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For instance, imagine Harry Potter 🧙🔮 maintains a GitHub repository named <code>lumos</code> and wishes to link it to a remote compute instance using the alias <code>pipeline1</code>. In his SSH config file, he would set it up like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> pipeline1</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="ex">HostName</span> github.com</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="ex">User</span> git</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="ex">IdentityFile</span> ~/.ssh/pipeline1_id_ed25519</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now, when he wants to clone the repository, he can simply execute:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@pipeline1:harrypotter/lumos.git .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To fetch updates, he can use:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> pull pipeline1:harrypotter/lumos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key can be selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.</p>
 <p>Happy coding! 🧑‍💻🔑</p>
 
 

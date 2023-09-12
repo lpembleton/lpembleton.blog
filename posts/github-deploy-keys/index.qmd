@@ -3,6 +3,7 @@ title: "GitHub Deploy Keys"
 description: "A guide to using GitHub deploy keys to deploy private repos in remote compute sessions"
 author: "LW Pembleton"
 date: 03 07 2023
+date-modified: last-modified
 categories: [github, git, ssh key, AWS, remote, cloud]
 image: images/chunli-ju-8fs1X0JFgFE-unsplash.jpg
 draft: false
@@ -52,7 +53,7 @@ Ensure you leave 'Allow write access' un-ticked.
 
 What's that you say, you have more than one repository, I would be worried if you didn't. However, what you will initially find is that GitHub will not let you use the same ssh deploy key for a second repo. The solution? Generate a second key, but now you have to manually change between keys when you move between repos, and even more so remember which key is for which.
 
-As always with Linux and git there is a elegant solution, a ssh config file.
+As always with Linux and git there is an elegant solution, a SSH config file.
 
 1.  Create a ssh config file with the following commands
 
@@ -69,24 +70,64 @@ As always with Linux and git there is a elegant solution, a ssh config file.
 
 3.  Add the following configuration information
 
-    ```         
+    ``` bash
     Host repo-alias
       Hostname github.com
-      IdentityFile=/home/<USER-NAME>/.ssh/<KEY-NAME>
+      User git
+      IdentityFile /home/<USER-NAME>/.ssh/<KEY-NAME>
     ```
 
 4.  What are these fields?
 
-    -   Host: the repostory's alias on GitHub
+    -   **Host:** An alias to assign to the corresponding repository (*does not need to be the same as the repo name*)
 
-    -   Hostname: the hosting service i.e. github.com
+    -   **Hostname:** the hosting service i.e. github.com
 
-    -   IdentityFile: file path to the ssh key you previously generated
+    -   **User:** service using the ssh key (in this case git)
+
+    -   **IdentityFile:** file path to the ssh key you previously generated
+
+    ::: callout-tip
+    While the alias you choose doesn't have to match the repository name, it's crucial to make it memorable. Using the repository name as the alias is a straightforward and effective approach.
+    :::
 
 5.  Repeat this process for any other repositories and SSH keys
 
-6.  If you have added the alias and host name correctly, Git should automatically select the appropriate SSH key.
+Now that you have added all your SSH keys along with a corresponding alias you can easily direct git to use the relevant key when working with different repositories.
 
-With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key is automatically selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.
+To do this you insert the `alias` into the repository address between `git@` and `:repo-owner-name/repo-name.git`
+
+``` bash
+git clone git@<alias>:repo-owner-name/repo-name.git .
+```
+
+Once you have cloned a repository and want to run other commands such as `git pull` all you need to do is include the repo alias and address similar to the clone command.
+
+``` bash
+git pull <alias>:repo-owner-name/repo-name
+```
+
+For instance, imagine Harry Potter 🧙🔮 maintains a GitHub repository named `lumos` and wishes to link it to a remote compute instance using the alias `pipeline1`. In his SSH config file, he would set it up like this:
+
+``` bash
+Host pipeline1
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/pipeline1_id_ed25519
+```
+
+Now, when he wants to clone the repository, he can simply execute:
+
+``` bash
+git clone git@pipeline1:harrypotter/lumos.git .
+```
+
+To fetch updates, he can use:
+
+``` bash
+git pull pipeline1:harrypotter/lumos
+```
+
+With these steps, you have now streamlined your deployment process and ensured the appropriate SSH key can be selected. I hope this guide has been helpful in demystifying the process of deploying private repositories and managing SSH keys.
 
 Happy coding! 🧑‍💻🔑
