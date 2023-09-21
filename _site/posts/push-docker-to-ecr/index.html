@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-05-23">
-<meta name="description" content="A guide to using the screen command in remote sessions">
+<meta name="dcterms.date" content="2023-09-13">
+<meta name="description" content="A guide to transfer your docker images to your private AWS container repository">
 
-<title>Luke Pembleton - Screen Utility and Terminal Multiplexing</title>
+<title>Luke Pembleton - Pushing Docker Images to AWS ECR</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -68,13 +68,13 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta property="og:description" content="A guide to using the screen command in remote sessions">
-<meta property="og:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta property="og:title" content="Luke Pembleton - Pushing Docker Images to AWS ECR">
+<meta property="og:description" content="A guide to transfer your docker images to your private AWS container repository">
+<meta property="og:image" content="https://lpembleton.rbind.io/posts/push-docker-to-ecr/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Screen Utility and Terminal Multiplexing">
-<meta name="twitter:description" content="A guide to using the screen command in remote sessions">
-<meta name="twitter:image" content="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg">
+<meta name="twitter:title" content="Luke Pembleton - Pushing Docker Images to AWS ECR">
+<meta name="twitter:description" content="A guide to transfer your docker images to your private AWS container repository">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/push-docker-to-ecr/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -155,16 +155,16 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Screen Utility and Terminal Multiplexing</h1>
+      <h1 class="title">Pushing Docker Images to AWS ECR</h1>
                   <div>
         <div class="description">
-          A guide to using the screen command in remote sessions
+          A guide to transfer your docker images to your private AWS container repository
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">Screen</div>
+                <div class="quarto-category">Docker</div>
                 <div class="quarto-category">AWS</div>
-                <div class="quarto-category">Terminal</div>
+                <div class="quarto-category">ECR</div>
               </div>
                   </div>
   </div>
@@ -182,16 +182,10 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">May 23, 2023</p>
+        <p class="date">September 13, 2023</p>
       </div>
     </div>
     
-      <div>
-      <div class="quarto-title-meta-heading">Modified</div>
-      <div class="quarto-title-meta-contents">
-        <p class="date-modified">September 15, 2023</p>
-      </div>
-    </div>
       
     </div>
     
@@ -199,18 +193,7 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#starting-a-screen-session" id="toc-starting-a-screen-session" class="nav-link active" data-scroll-target="#starting-a-screen-session">Starting a screen session</a></li>
-  <li><a href="#detach-from-screen-session" id="toc-detach-from-screen-session" class="nav-link" data-scroll-target="#detach-from-screen-session">Detach from screen session</a></li>
-  <li><a href="#list-screen-sessions" id="toc-list-screen-sessions" class="nav-link" data-scroll-target="#list-screen-sessions">List screen sessions</a></li>
-  <li><a href="#re-attached-to-a-screen-session" id="toc-re-attached-to-a-screen-session" class="nav-link" data-scroll-target="#re-attached-to-a-screen-session">Re-attached to a screen session</a></li>
-  <li><a href="#terminate-a-screen-session" id="toc-terminate-a-screen-session" class="nav-link" data-scroll-target="#terminate-a-screen-session">Terminate a screen session</a></li>
-  <li><a href="#scrolling-in-a-screen-session" id="toc-scrolling-in-a-screen-session" class="nav-link" data-scroll-target="#scrolling-in-a-screen-session">Scrolling in a screen session</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -224,72 +207,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@project2204">Leif&nbsp;Christoph&nbsp;Gottwald</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
+<p><img src="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@chunlea">Chunli&nbsp;Ju</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
-<p>If you are using AWS (or other cloud computing platforms), particularly in an interactive or development mode, you will have experienced the frustration of network disconnects resulting in either termination of processes or loss of access to console output.</p>
-<p>Even when running production pipelines that harness AWS batch with workflow managers such as Nextflow it is still valuable to maintain access to console output and messages over the lifetime of the pipelines, which can be days.</p>
-<p>Thankfully there is a very simple Linux command that solves all these problems, 🌟 screen 🌟</p>
-<p><img src="images/screen.png" class="img-fluid"></p>
-<p>Screen is a linux utility, known as a terminal multiplier, which in very simple terms, allows you to detach and reattach to different terminal sessions. Importantly this also allows remote processes to continue even after you (purposely or unexpectedly) disconnect.</p>
-<p>It is likely that this utility is already installed on your remote instance. Screen comes pre-installed in both the Amazon Linux 2023 and Ubuntu Server 22.04 LTS AMIs.</p>
-<p>To get you started I have compiled a few simple commands that should keep your covered.</p>
-<section id="starting-a-screen-session" class="level3">
-<h3 class="anchored" data-anchor-id="starting-a-screen-session">Starting a screen session</h3>
-<p>To get started, you’ll want to initiate and label a screen session. While the -S flag and name are optional, it’s advisable to label your session, sparing your brain 🧠 for more meaningful tasks. Here’s how to do it:</p>
-<p><img src="images/screen-s.png" class="img-fluid"></p>
-<p>Now that you have your screen session set up, you can run your interactive scripts or initiate a pipeline with a workflow manager such as <a href="https://www.nextflow.io/">Nextflow</a>. Screen ensures that these processes continue running even if you need to step away, disconnect, or work on other tasks.</p>
-</section>
-<section id="detach-from-screen-session" class="level3">
-<h3 class="anchored" data-anchor-id="detach-from-screen-session">Detach from screen session</h3>
-<p>If you want to step away from your active session to disconnect or to run a different script use the follow keyboard shortcut</p>
-<p><img src="images/shortcut-green.png" class="img-fluid" width="303"></p>
-</section>
-<section id="list-screen-sessions" class="level3">
-<h3 class="anchored" data-anchor-id="list-screen-sessions">List screen sessions</h3>
-<p>To see a list of available screen sessions</p>
-<p><img src="images/screen-ls.png" class="img-fluid"></p>
-</section>
-<section id="re-attached-to-a-screen-session" class="level3">
-<h3 class="anchored" data-anchor-id="re-attached-to-a-screen-session">Re-attached to a screen session</h3>
-<p>To return to an active screen session.</p>
-<p><img src="images/screen-r.png" class="img-fluid"></p>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Warning
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Encountering the error message ‘there is no screen to be resumed’? Don’t worry, there’s a simple solution. If you unexpectedly disconnected from your previous session you may find that screen fails to recognise the detachment. Adding the -d flag to your command can save the day. This flag instructs screen to detach from any existing session before you attempt to reattach. By doing so, you’re ensuring a clean reconnection even in scenarios where your previous session’s state might not have been properly recognized due to an abrupt disconnection.</p>
-</div>
-</div>
-</section>
-<section id="terminate-a-screen-session" class="level3">
-<h3 class="anchored" data-anchor-id="terminate-a-screen-session">Terminate a screen session</h3>
-<p>If you are currently within the screen session you wish to terminate it is as simple as typing <code>exit</code> and hitting <code>enter</code></p>
-<p>If you are detached from the session you want to terminate then you need to pass a <code>quit</code> command through to the relevant screen session using the <code>-X</code> flag.</p>
-<p><img src="images/screen-xs-quit.png" class="img-fluid"></p>
-</section>
-<section id="scrolling-in-a-screen-session" class="level3">
-<h3 class="anchored" data-anchor-id="scrolling-in-a-screen-session">Scrolling in a screen session</h3>
-<p>You will soon notice that you cannot scroll inside a screen session as you would in your normal terminal. Initially this is pretty frustrating 😧 especially when you are trying to work through large log files or errors printed to the terminal.</p>
-<p>However, there is a simple way to scroll within a screen session. First, use the following keyboard shortcut</p>
-<p><img src="images/Ctrl-A-shortcut.png" class="img-fluid" width="202"></p>
-<p>Now press</p>
-<p><img src="images/shortcut-leftsqbracket.png" class="img-fluid" width="70"></p>
-<p>You can now scroll up and down with the keyboard or mouse wheel.</p>
-<p><img src="images/shortcut-scroll.png" class="img-fluid" width="116"></p>
-<p>When finished just press <code>q</code> or</p>
-<p><img src="images/shortcut-rightsqbracket.png" class="img-fluid" width="70"></p>
-<p>This is certainly not the complete list of screen functions. For power users 🧑‍💻 there is an array of other great features. Maybe something for a future post…</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
