@@ -11,3 +11,9 @@ toc-location: left
 
 # Enable banner style title blocks
 title-block-banner: true
+
+comments:
+  giscus:
+    repo: lpembleton/lpembleton.blog
+    category: Blog
+    
