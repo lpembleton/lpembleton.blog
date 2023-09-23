@@ -12,7 +12,7 @@ about:
     - icon: mastodon
       text: mastodon
       href: https://genomic.social/@lwpembleton
-    - icon: "{{< iconify exploding-head >}}"
+    - icon: "{{< iconify arcticons bluesky-alt size=28px >}}"
       text: bsky
       href: https://bsky.app/profile/lwpembleton.bsky.social
     - icon: github

@@ -25,9 +25,9 @@ website:
         href: https://genomic.social/@lwpembleton
       - text: "{{< iconify arcticons bluesky-alt size=28px >}}"
         href: https://bsky.app/profile/lwpembleton.bsky.social
-      - text: "{{< ai google-scholar >}}"
+      - text: "{{< iconify academicons google-scholar-square size=24px >}}"
         href: https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en
-      - text: "{{< ai publons >}}"
+      - text: "{{< iconify academicons publons-square size=24px >}}"
         href: https://publons.com/researcher/3450394/luke-pembleton/
       - icon: linkedin
         href: https://linkedin.com/in/lpembleton
