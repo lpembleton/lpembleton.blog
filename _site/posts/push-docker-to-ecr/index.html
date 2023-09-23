@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-09-13">
+<meta name="dcterms.date" content="2023-09-24">
 <meta name="description" content="A guide to transfer your docker images to your private AWS container repository">
 
 <title>Luke Pembleton - Pushing Docker Images to AWS ECR</title>
@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -70,11 +104,11 @@ ul.task-list li input[type="checkbox"] {
 
 <meta property="og:title" content="Luke Pembleton - Pushing Docker Images to AWS ECR">
 <meta property="og:description" content="A guide to transfer your docker images to your private AWS container repository">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/push-docker-to-ecr/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
+<meta property="og:image" content="images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Pushing Docker Images to AWS ECR">
 <meta name="twitter:description" content="A guide to transfer your docker images to your private AWS container repository">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/push-docker-to-ecr/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg">
+<meta name="twitter:image" content="images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -124,6 +158,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://genomic.social/@lwpembleton" rel="" target=""><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social" rel="" target=""><i class="bi bi-{{< iconify exploding-head >}}" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -182,7 +221,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">September 13, 2023</p>
+        <p class="date">September 24, 2023</p>
       </div>
     </div>
     
@@ -193,7 +232,20 @@ ul.task-list li input[type="checkbox"] {
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#pushing-docker-images-to-your-aws-private-ecr" id="toc-pushing-docker-images-to-your-aws-private-ecr" class="nav-link active" data-scroll-target="#pushing-docker-images-to-your-aws-private-ecr">Pushing Docker Images to Your AWS Private ECR</a>
+  <ul class="collapse">
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites ✅</a></li>
+  <li><a href="#step-1-create-an-ecr-repository-destination-setup" id="toc-step-1-create-an-ecr-repository-destination-setup" class="nav-link" data-scroll-target="#step-1-create-an-ecr-repository-destination-setup">Step 1: Create an ECR Repository <em>(Destination Setup)</em> 📭</a></li>
+  <li><a href="#step-2-prepare-your-local-docker-image-label-your-cargo" id="toc-step-2-prepare-your-local-docker-image-label-your-cargo" class="nav-link" data-scroll-target="#step-2-prepare-your-local-docker-image-label-your-cargo">Step 2: Prepare Your Local Docker Image <em>(Label Your Cargo)</em> 🏷️</a></li>
+  <li><a href="#step-3-authenticate-the-docker-cli-with-aws-secure-the-payment" id="toc-step-3-authenticate-the-docker-cli-with-aws-secure-the-payment" class="nav-link" data-scroll-target="#step-3-authenticate-the-docker-cli-with-aws-secure-the-payment">Step 3: Authenticate the Docker CLI with AWS <em>(Secure the Payment)</em> 🔑</a></li>
+  <li><a href="#step-4-push-the-docker-image-to-ecr-send-it-off" id="toc-step-4-push-the-docker-image-to-ecr-send-it-off" class="nav-link" data-scroll-target="#step-4-push-the-docker-image-to-ecr-send-it-off">Step 4: Push the Docker Image to ECR <em>(Send It Off)</em> 🚚</a></li>
+  </ul></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
@@ -207,12 +259,71 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@chunlea">Chunli&nbsp;Ju</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
+<p><img src="images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@barrettward">Barrett&nbsp;Ward</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
+<section id="pushing-docker-images-to-your-aws-private-ecr" class="level1">
+<h1>Pushing Docker Images to Your AWS Private ECR</h1>
+<p>Amazon Elastic Container Registry (ECR) is your go-to solution for efficient management and deployment of <a href="https://www.docker.com/">Docker</a> container images in AWS. In the realm of bioinformatics, Docker containers play a pivotal role in ensuring the reproducibility of analyses and are the backbone of workflow managers like <a href="https://www.nextflow.io/">Nextflow</a>. While you could continuously fetch Docker containers from platforms like <a href="https://hub.docker.com/">Docker Hub</a> or <a href="https://quay.io/">Quay</a>, this not only leads to slower 🐢operations but also incurs higher data transfer expenses 💸</p>
+<p>Think of ECR as not just a repository for your custom images but as the hub for all your container needs, whether they’re custom or public. Setting up ECR is a breeze, and it promises significant workflow cost reductions, accelerated 🏎️ pipelines, and enhanced VPC security 🔒 by minimizing unnecessary exposure to the internet 🌐 With ECR, you have a dependable partner to streamline your container image handling and supercharge your bioinformatics endeavours.</p>
+<p>Pushing Docker images to AWS ECR is a straightforward process, much like sending a parcel. Imagine it as a four-step journey:</p>
+<ol type="1">
+<li><p><strong>Destination Setup:</strong> 📭 First, create an AWS ECR repository – think of this as setting the delivery destination for your Docker image, just like specifying an address for your parcel.</p></li>
+<li><p><strong>Label Your Cargo:</strong> 🏷️ Next, attach a tag to your Docker image that contains the ECR repository’s address. Think of this step as labelling your parcel with the recipient’s address.</p></li>
+<li><p><strong>Secure the Payment:</strong> 🔑 Authenticate your Docker CLI with AWS, which is similar to paying for postage – it ensures you have the right to send your image to AWS ECR.</p></li>
+<li><p><strong>Send It Off:</strong> 🚚 Finally, push your Docker image to AWS ECR, much like posting your parcel to its destination.</p></li>
+</ol>
+<p>Now let’s explore these steps in a little more detail 👇</p>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites ✅</h2>
+<p>Before you begin, ensure you have the following prerequisites in place:</p>
+<ol type="1">
+<li><p><strong>AWS Account</strong>: You must have an AWS account to create and use an ECR repository.</p></li>
+<li><p><strong>Docker</strong>: Docker must be installed on your local machine. You can download it from <a href="https://www.docker.com/">Docker’s official website</a>.</p></li>
+<li><p><strong>AWS CLI</strong>: Make sure the AWS Command Line Interface (CLI) is <a href="https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html">installed</a> and configured with your AWS credentials. You can configure it using <code>aws configure</code>.</p></li>
+</ol>
+</section>
+<section id="step-1-create-an-ecr-repository-destination-setup" class="level2">
+<h2 class="anchored" data-anchor-id="step-1-create-an-ecr-repository-destination-setup">Step 1: Create an ECR Repository <em>(Destination Setup)</em> 📭</h2>
+<p>First, you need to set up an ECR repository to store your Docker images. Follow these steps:</p>
+<ol type="1">
+<li><p><strong>Login to AWS Console</strong>: Log in to your AWS Management Console.</p></li>
+<li><p><strong>Open ECR</strong>: Navigate to the Amazon Elastic Container Registry (ECR) service.</p></li>
+<li><p><strong>Create a Repository</strong>: Click on the “Create repository” button.</p></li>
+<li><p><strong>Repository Settings</strong>: Enter a unique name for your repository and configure any additional settings, such as Private vs.&nbsp;Public visibility.</p></li>
+<li><p><strong>Create Repository</strong>: Click the “Create repository” button to create your ECR repository.</p></li>
+</ol>
+<p>Now that you have your ECR repository set up, it’s time to prepare your local Docker image.</p>
+</section>
+<section id="step-2-prepare-your-local-docker-image-label-your-cargo" class="level2">
+<h2 class="anchored" data-anchor-id="step-2-prepare-your-local-docker-image-label-your-cargo">Step 2: Prepare Your Local Docker Image <em>(Label Your Cargo)</em> 🏷️</h2>
+<p>Before you can push your Docker image to ECR, you need to tag it with the relevant ECR URI. Here’s how you can do it:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image tag <span class="op">&lt;</span>IMAGE_NAME<span class="op">&gt;</span>:<span class="op">&lt;</span>IMAGE_TAG<span class="op">&gt;</span> <span class="op">&lt;</span>REPOSITORY_URI<span class="op">&gt;</span>:<span class="op">&lt;</span>IMAGE_TAG<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For example, if your image is named “myapp” and has a tag “v1.0,” and your repository URI is “123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo,” you would run:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image tag myapp:v1.0 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo:v1.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You can verify that your image is correctly tagged by running:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> images</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="step-3-authenticate-the-docker-cli-with-aws-secure-the-payment" class="level2">
+<h2 class="anchored" data-anchor-id="step-3-authenticate-the-docker-cli-with-aws-secure-the-payment">Step 3: Authenticate the Docker CLI with AWS <em>(Secure the Payment)</em> 🔑</h2>
+<p>To enable secure communication between Docker and your ECR repository, you need to authenticate the Docker CLI with AWS. AWS provides a temporary authentication token for this purpose. Here’s how you can do it:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ecr get-login-password <span class="at">--region</span> <span class="op">&lt;</span>REPOSITORY_REGION<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">docker</span> login <span class="at">--username</span> AWS <span class="at">--password-stdin</span> <span class="op">&lt;</span>REPOSITORY_URI<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Replace <code>&lt;REPOSITORY_REGION&gt;</code> with the AWS region where your ECR repository is located (e.g., us-east-1), and <code>&lt;REPOSITORY_URI&gt;</code> with the URI of your ECR repository.</p>
+<p>Please note that the authentication token provided by AWS is temporary and will expire after 12 hours.</p>
+</section>
+<section id="step-4-push-the-docker-image-to-ecr-send-it-off" class="level2">
+<h2 class="anchored" data-anchor-id="step-4-push-the-docker-image-to-ecr-send-it-off">Step 4: Push the Docker Image to ECR <em>(Send It Off)</em> 🚚</h2>
+<p>With authentication in place, it’s time to push your Docker image to Amazon ECR:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image push <span class="op">&lt;</span>REPOSITORY_URI<span class="op">&gt;</span>:<span class="op">&lt;</span>IMAGE_TAG<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> image push 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo:v1.0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This command will upload your Docker image to your ECR repository.</p>
+<p>And that’s it! You have successfully pushed your Docker image to your AWS Private ECR repository. You can now use this image for deploying containers on AWS services like Batch just point to its URI in your relevant scripts.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -447,6 +558,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
   }
 });
+</script>
+<script src="https://giscus.app/client.js" data-repo="lpembleton/lpembleton.blog" data-repo-id="R_kgDOIfz78A" data-category="Blog" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 </div> <!-- /content -->
 

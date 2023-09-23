@@ -2,13 +2,105 @@
 title: "Pushing Docker Images to AWS ECR"
 description: "A guide to transfer your docker images to your private AWS container repository"
 author: "LW Pembleton"
-date: 13 09 2023
+date: 24 09 2023
 categories: [Docker, AWS, ECR]
-image: images/chunli-ju-8fs1X0JFgFE-unsplash.jpg
-draft: true
+image: images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg
+draft: false
+highlight-style: ayu
 ---
 
-![~Photo by [Chunli Ju](https://unsplash.com/@chunlea) on Unsplash~](images/chunli-ju-8fs1X0JFgFE-unsplash.jpg)
+![~Photo by [Barrett\ Ward](https://unsplash.com/@barrettward) on Unsplash~](images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg)
 
+# Pushing Docker Images to Your AWS Private ECR
 
+Amazon Elastic Container Registry (ECR) is your go-to solution for efficient management and deployment of [Docker](https://www.docker.com/) container images in AWS. In the realm of bioinformatics, Docker containers play a pivotal role in ensuring the reproducibility of analyses and are the backbone of workflow managers like [Nextflow](https://www.nextflow.io/). While you could continuously fetch Docker containers from platforms like [Docker Hub](https://hub.docker.com/) or [Quay](https://quay.io/), this not only leads to slower 🐢operations but also incurs higher data transfer expenses 💸
 
+Think of ECR as not just a repository for your custom images but as the hub for all your container needs, whether they're custom or public. Setting up ECR is a breeze, and it promises significant workflow cost reductions, accelerated 🏎️ pipelines, and enhanced VPC security 🔒 by minimizing unnecessary exposure to the internet 🌐 With ECR, you have a dependable partner to streamline your container image handling and supercharge your bioinformatics endeavours.
+
+Pushing Docker images to AWS ECR is a straightforward process, much like sending a parcel. Imagine it as a four-step journey:
+
+1.  **Destination Setup:** 📭 First, create an AWS ECR repository -- think of this as setting the delivery destination for your Docker image, just like specifying an address for your parcel.
+
+2.  **Label Your Cargo:** 🏷️ Next, attach a tag to your Docker image that contains the ECR repository's address. Think of this step as labelling your parcel with the recipient's address.
+
+3.  **Secure the Payment:** 🔑 Authenticate your Docker CLI with AWS, which is similar to paying for postage -- it ensures you have the right to send your image to AWS ECR.
+
+4.  **Send It Off:** 🚚 Finally, push your Docker image to AWS ECR, much like posting your parcel to its destination.
+
+Now let's explore these steps in a little more detail 👇
+
+## Prerequisites ✅
+
+Before you begin, ensure you have the following prerequisites in place:
+
+1.  **AWS Account**: You must have an AWS account to create and use an ECR repository.
+
+2.  **Docker**: Docker must be installed on your local machine. You can download it from [Docker's official website](https://www.docker.com/).
+
+3.  **AWS CLI**: Make sure the AWS Command Line Interface (CLI) is [installed](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) and configured with your AWS credentials. You can configure it using `aws configure`.
+
+## Step 1: Create an ECR Repository *(Destination Setup)* 📭
+
+First, you need to set up an ECR repository to store your Docker images. Follow these steps:
+
+1.  **Login to AWS Console**: Log in to your AWS Management Console.
+
+2.  **Open ECR**: Navigate to the Amazon Elastic Container Registry (ECR) service.
+
+3.  **Create a Repository**: Click on the "Create repository" button.
+
+4.  **Repository Settings**: Enter a unique name for your repository and configure any additional settings, such as Private vs. Public visibility.
+
+5.  **Create Repository**: Click the "Create repository" button to create your ECR repository.
+
+Now that you have your ECR repository set up, it's time to prepare your local Docker image.
+
+## Step 2: Prepare Your Local Docker Image *(Label Your Cargo)* 🏷️
+
+Before you can push your Docker image to ECR, you need to tag it with the relevant ECR URI. Here's how you can do it:
+
+``` bash
+docker image tag <IMAGE_NAME>:<IMAGE_TAG> <REPOSITORY_URI>:<IMAGE_TAG>
+```
+
+For example, if your image is named "myapp" and has a tag "v1.0," and your repository URI is "123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo," you would run:
+
+``` bash
+docker image tag myapp:v1.0 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo:v1.0
+```
+
+You can verify that your image is correctly tagged by running:
+
+``` bash
+docker images
+```
+
+## Step 3: Authenticate the Docker CLI with AWS *(Secure the Payment)* 🔑
+
+To enable secure communication between Docker and your ECR repository, you need to authenticate the Docker CLI with AWS. AWS provides a temporary authentication token for this purpose. Here's how you can do it:
+
+``` bash
+aws ecr get-login-password --region <REPOSITORY_REGION> | docker login --username AWS --password-stdin <REPOSITORY_URI>
+```
+
+Replace `<REPOSITORY_REGION>` with the AWS region where your ECR repository is located (e.g., us-east-1), and `<REPOSITORY_URI>` with the URI of your ECR repository.
+
+Please note that the authentication token provided by AWS is temporary and will expire after 12 hours.
+
+## Step 4: Push the Docker Image to ECR *(Send It Off)* 🚚
+
+With authentication in place, it's time to push your Docker image to Amazon ECR:
+
+``` bash
+docker image push <REPOSITORY_URI>:<IMAGE_TAG>
+```
+
+For example:
+
+``` bash
+docker image push 123456789012.dkr.ecr.us-east-1.amazonaws.com/myapp-repo:v1.0
+```
+
+This command will upload your Docker image to your ECR repository.
+
+And that's it! You have successfully pushed your Docker image to your AWS Private ECR repository. You can now use this image for deploying containers on AWS services like Batch just point to its URI in your relevant scripts.

@@ -101,16 +101,12 @@ ul.task-list li input[type="checkbox"] {
 
 <meta property="og:title" content="Luke Pembleton - Ponderings in Diagon Alley">
 <meta property="og:description" content="Exploring the world of genomics, R and cloud computing">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/annotate-equations/images/eq_header.png">
+<meta property="og:image" content="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta property="og:image:height" content="814">
-<meta property="og:image:width" content="1644">
 <meta name="twitter:title" content="Luke Pembleton - Ponderings in Diagon Alley">
 <meta name="twitter:description" content="Exploring the world of genomics, R and cloud computing">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/annotate-equations/images/eq_header.png">
+<meta name="twitter:image" content="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
-<meta name="twitter:image-height" content="814">
-<meta name="twitter:image-width" content="1644">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
@@ -159,6 +155,11 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://genomic.social/@lwpembleton" rel="" target=""><i class="bi bi-mastodon" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social" rel="" target=""><i class="bi bi-{{< iconify exploding-head >}}" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -213,7 +214,7 @@ ul.task-list li input[type="checkbox"] {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(7)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Batch">Batch <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Blue Iris">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Chromecast">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="EBS">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Endpoints">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gateway">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LaTeX">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nextflow">Nextflow <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Screen">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Security">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Smarthome">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Terminal">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="annotate">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cloud">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="equations">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quarto">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="remote">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ssh key">ssh key <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(8)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Batch">Batch <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Blue Iris">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Chromecast">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Docker">Docker <span class="quarto-category-count">(1)</span></div><div class="category" data-category="EBS">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ECR">ECR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Endpoints">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gateway">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LaTeX">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nextflow">Nextflow <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Screen">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Security">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Smarthome">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Terminal">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="annotate">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cloud">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="equations">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quarto">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="remote">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ssh key">ssh key <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -226,7 +227,48 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="equations,quarto,annotate,LaTeX" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1693841921428" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="0" data-categories="Docker,AWS,ECR" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1695487697857" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="thumbnail">
+<p><a href="./posts/push-docker-to-ecr/index.html"> <img src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./posts/push-docker-to-ecr/index.html">
+<h3 class="no-anchor listing-title">
+Pushing Docker Images to AWS ECR
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('Docker'); return false;">
+Docker
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+AWS
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('ECR'); return false;">
+ECR
+</div>
+</div>
+<a href="./posts/push-docker-to-ecr/index.html">
+<div class="listing-description">
+<p>A guide to transfer your docker images to your private AWS container repository</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/push-docker-to-ecr/index.html">
+<div class="listing-date">
+Sep 24, 2023
+</div>
+<div class="listing-author">
+LW Pembleton
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="equations,quarto,annotate,LaTeX" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1693841921428" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
 <p><a href="./posts/annotate-equations/index.html"> <img src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"> </a></p>
 </div>
@@ -270,7 +312,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Smarthome,Blue Iris,Security,Chromecast" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1693328940466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="2" data-categories="Smarthome,Blue Iris,Security,Chromecast" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1693328940466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
 <div class="thumbnail">
 <p><a href="./posts/cast-bi-ui3/index.html"> <img src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -314,7 +356,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="github,git,ssh key,AWS,remote,cloud" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1694534480408" data-listing-date-modified-sort="1694534480000" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="3" data-categories="github,git,ssh key,AWS,remote,cloud" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1694534480408" data-listing-date-modified-sort="1694534480000" data-listing-reading-time-sort="4">
 <div class="thumbnail">
 <p><a href="./posts/github-deploy-keys/index.html"> <img src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -364,7 +406,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="Screen,AWS,Terminal" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1694749092928" data-listing-date-modified-sort="1694749092000" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="4" data-categories="Screen,AWS,Terminal" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1694749092928" data-listing-date-modified-sort="1694749092000" data-listing-reading-time-sort="3">
 <div class="thumbnail">
 <p><a href="./posts/screen/index.html"> <img src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -405,7 +447,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="AWS,Endpoints,Gateway,Batch" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1684341132440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="5" data-categories="AWS,Endpoints,Gateway,Batch" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1684341132440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
 <div class="thumbnail">
 <p><a href="./posts/aws-endpoints/index.html"> <img src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -449,7 +491,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Nextflow,AWS,Batch,EBS" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1675353326732" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="6" data-categories="Nextflow,AWS,Batch,EBS" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1675353326732" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
 <div class="thumbnail">
 <p><a href="./posts/aws-batch-ebs-autoscale/index.html"> <img src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"> </a></p>
 </div>
@@ -493,7 +535,7 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="Nextflow,AWS,Batch" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1675353290782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
+<div class="quarto-post image-right" data-index="7" data-categories="Nextflow,AWS,Batch" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1675353290782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
 <div class="thumbnail">
 <p><a href="./posts/nextflow-on-aws-batch/index.html"> <img src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"> </a></p>
 </div>
