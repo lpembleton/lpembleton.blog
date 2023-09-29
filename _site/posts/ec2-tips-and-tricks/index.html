@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2023-08-28">
-<meta name="description" content="A guide to casting Blue Iris UI3 to a Chromecast device and monitor">
+<meta name="dcterms.date" content="2023-09-24">
+<meta name="description" content="A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics">
 
-<title>Luke Pembleton - How to Cast Blue Iris UI3</title>
+<title>Luke Pembleton - EC2 Ramblings</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -101,13 +101,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - How to Cast Blue Iris UI3">
-<meta property="og:description" content="A guide to casting Blue Iris UI3 to a Chromecast device and monitor">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/cast-bi-ui3/images/bookcase.jpg">
+<meta property="og:title" content="Luke Pembleton - EC2 Ramblings">
+<meta property="og:description" content="A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics">
+<meta property="og:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - How to Cast Blue Iris UI3">
-<meta name="twitter:description" content="A guide to casting Blue Iris UI3 to a Chromecast device and monitor">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/cast-bi-ui3/images/bookcase.jpg">
+<meta name="twitter:title" content="Luke Pembleton - EC2 Ramblings">
+<meta name="twitter:description" content="A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics">
+<meta name="twitter:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -192,17 +192,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">How to Cast Blue Iris UI3</h1>
+      <h1 class="title">EC2 Ramblings</h1>
                   <div>
         <div class="description">
-          A guide to casting Blue Iris UI3 to a Chromecast device and monitor
+          A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">Smarthome</div>
-                <div class="quarto-category">Blue Iris</div>
-                <div class="quarto-category">Security</div>
-                <div class="quarto-category">Chromecast</div>
+                <div class="quarto-category">EC2</div>
+                <div class="quarto-category">AWS</div>
+                <div class="quarto-category">Bioinformatics</div>
               </div>
                   </div>
   </div>
@@ -220,7 +219,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">August 28, 2023</p>
+        <p class="date">September 24, 2023</p>
       </div>
     </div>
     
@@ -235,16 +234,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#prerequisites." id="toc-prerequisites." class="nav-link active" data-scroll-target="#prerequisites.">Prerequisites.</a></li>
-  <li><a href="#step-1-enable-developer-mode-and-usb-debugging-on-chromecast" id="toc-step-1-enable-developer-mode-and-usb-debugging-on-chromecast" class="nav-link" data-scroll-target="#step-1-enable-developer-mode-and-usb-debugging-on-chromecast">Step 1: Enable Developer Mode and USB Debugging on Chromecast</a></li>
-  <li><a href="#step-2-get-the-ip-address-of-the-chromecast" id="toc-step-2-get-the-ip-address-of-the-chromecast" class="nav-link" data-scroll-target="#step-2-get-the-ip-address-of-the-chromecast">Step 2: Get the IP Address of the Chromecast</a></li>
-  <li><a href="#step-3-install-android-developer-kit-adb" id="toc-step-3-install-android-developer-kit-adb" class="nav-link" data-scroll-target="#step-3-install-android-developer-kit-adb">Step 3: Install Android Developer Kit (ADB)</a></li>
-  <li><a href="#step-4-change-the-screen-timeout-value-on-chromecast" id="toc-step-4-change-the-screen-timeout-value-on-chromecast" class="nav-link" data-scroll-target="#step-4-change-the-screen-timeout-value-on-chromecast">Step 4: Change the Screen Timeout Value on Chromecast</a></li>
-  <li><a href="#step-5-turn-on-stay-awake-on-chromecast" id="toc-step-5-turn-on-stay-awake-on-chromecast" class="nav-link" data-scroll-target="#step-5-turn-on-stay-awake-on-chromecast">Step 5: Turn on ‘Stay Awake’ on Chromecast</a></li>
-  <li><a href="#step-6-set-up-camera-groups-in-blue-iris" id="toc-step-6-set-up-camera-groups-in-blue-iris" class="nav-link" data-scroll-target="#step-6-set-up-camera-groups-in-blue-iris">Step 6: Set Up Camera Groups in Blue Iris</a></li>
-  <li><a href="#step-7-setup-cast-all-the-things-catt" id="toc-step-7-setup-cast-all-the-things-catt" class="nav-link" data-scroll-target="#step-7-setup-cast-all-the-things-catt">Step 7: Setup Cast All The Things (CATT)</a></li>
-  <li><a href="#step-8-cast-blue-iris-ui3-to-chromecast" id="toc-step-8-cast-blue-iris-ui3-to-chromecast" class="nav-link" data-scroll-target="#step-8-cast-blue-iris-ui3-to-chromecast">Step 8: Cast Blue Iris UI3 to Chromecast</a></li>
-  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#installing-aws-cli" id="toc-installing-aws-cli" class="nav-link active" data-scroll-target="#installing-aws-cli">Installing AWS CLI</a></li>
+  <li><a href="#mount-at-secondary-volume-such-as-a-nitro-nvme-ssd" id="toc-mount-at-secondary-volume-such-as-a-nitro-nvme-ssd" class="nav-link" data-scroll-target="#mount-at-secondary-volume-such-as-a-nitro-nvme-ssd">Mount at secondary volume such as a Nitro NVME SSD</a></li>
   </ul>
 </nav>
 </nav>
@@ -260,171 +251,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="images/bookcase.jpg" class="img-fluid figure-img"></p>
+<p><img src="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@karlp">Karl Pawlowicz</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
-<p>When it comes to setting up a wall-mounted security display or displaying cameras discreetly in a bookcase, you may initially think incorporating it into your <a href="https://www.home-assistant.io/">Home Assistant</a> dashboard is the best option or that you need to mini PC attached to a monitor.</p>
-<p>Home Assistant, while an excellent smart home management platform, will struggle to handle multiple live camera streams resulting in unbearable delays or glitchy streams. The best option is actually relatively inexpensive and simple to setup. It involves using a Google TV chromecast and a computer monitor (with HDMI port) or a small TV, of which you might likely find you already have these lying around.</p>
-<p>In this blog post, I will guide you through the process of casting the <a href="https://blueirissoftware.com/">Blue Iris</a> UI3 interface to both a Google TV Chromecast and a computer monitor, ensuring a high-quality display and lag-free security camera video streams. Although you can just use cast all the things to case the Blue Iris UI3 directly to your Chromecast, you will soon find that after 10min your Chromecast will enter ambient mode and you will lose connection with the display of your camera feeds. The following guide will sort all of this out for your</p>
-<section id="prerequisites." class="level3">
-<h3 class="anchored" data-anchor-id="prerequisites.">Prerequisites.</h3>
-<p>Before we begin, make sure you have the following:</p>
-<ul>
-<li><p>A Google TV Chromecast connected to your monitor or TV.</p></li>
-<li><p>Blue Iris software installed and running on a computer.</p></li>
-<li><p>Python 3</p></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
+<p>The following is writing with the default assumption of a Ubuntu base image</p>
+<section id="installing-aws-cli" class="level2">
+<h2 class="anchored" data-anchor-id="installing-aws-cli">Installing AWS CLI</h2>
+<p>AWS CLI is a most to enable you to transfer files and results between S3 and your EC2 instance</p>
+<p>First you will need to install <code>unzip</code></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you can download and install the AWS CLI</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="st">"https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"</span> <span class="at">-o</span> <span class="st">"awscliv2.zip"</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> awscliv2.zip</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./aws/install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This should automatically appear in your path and you can call it with <code>aws</code></p>
+<p>You will need to configure it with your credentials so that it will have the appropriate permissions to connect to S3</p>
+<p><code>aws configure</code></p>
+</section>
+<section id="mount-at-secondary-volume-such-as-a-nitro-nvme-ssd" class="level2">
+<h2 class="anchored" data-anchor-id="mount-at-secondary-volume-such-as-a-nitro-nvme-ssd">Mount at secondary volume such as a Nitro NVME SSD</h2>
+<p>If you launch a storage-optimised EC2 instance such as one from the I4i to take advantage of the super-fast local storage performance you might get a rude shock at first. Where is the SSD, all you initially have access to is the EBS boot volume. Nothing to fear, it is there, it just hasn’t been mounted yet.</p>
+<p>use the <code>lsblk</code> command to view your available disk devices and their mount points.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span>         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">loop1</span>          7:1    0  55.6M  1 loop /snap/core18/2745</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">loop2</span>          7:2    0  63.3M  1 loop /snap/core20/1879</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">loop3</span>          7:3    0 111.9M  1 loop /snap/lxd/24322</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="ex">loop4</span>          7:4    0  53.2M  1 loop /snap/snapd/19122</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme1n1</span>      259:0    0   1.7T  0 disk </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme0n1</span>      259:1    0     8G  0 disk </span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├─nvme0n1p1</span>  259:2    0   7.9G  0 part /</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="ex">├─nvme0n1p14</span> 259:3    0     4M  0 part </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="ex">└─nvme0n1p15</span> 259:4    0   106M  0 part /boot/efi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Identify the name of missing drive you want to mount, for example <code>nvme1n1</code></p>
+<p>Now check whether there is a file system already on the device</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> file <span class="at">-s</span> /dev/<span class="op">&lt;</span>DRIVE-NAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If this just shows <code>data</code> as the screen output there is not file system currently on the device. However if it shows other information for example</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">[ubuntu</span> ~]$ sudo file <span class="at">-s</span> /dev/nvme1n1</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">/dev/nvme1n1:</span> SGI XFS filesystem data <span class="er">(</span><span class="ex">blksz</span> 4096, inosz 512, v2 dirs<span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It means there is already a file system.</p>
+<p>Assuming there is no current files system (likely scenario for new instances) you need to make one with the <code>mkfs -t</code> command before you can mount it.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mkfs <span class="at">-t</span> xfs /dev/<span class="op">&lt;</span>DRIVE-NAME<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Note
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This should work with other Chromecast devices, just note that some of the menus and steps listed below may differ.</p>
+<p>If you get a <code>mkfs.xfs</code> is not found error. You just need to install the XFS tools first using:</p>
+<p><code>sudo apt-get install xfsprog</code></p>
 </div>
 </div>
-</section>
-<section id="step-1-enable-developer-mode-and-usb-debugging-on-chromecast" class="level3">
-<h3 class="anchored" data-anchor-id="step-1-enable-developer-mode-and-usb-debugging-on-chromecast">Step 1: Enable Developer Mode and USB Debugging on Chromecast</h3>
-<ul>
-<li><p>Connect your Chromecast to the same Wi-Fi network as your computer and TV/monitor.</p></li>
-<li><p>On your Chromecast device go to <strong>Settings</strong> and the <strong>System</strong> submenu.</p></li>
-<li><p>In <strong>System</strong> click on <strong>about</strong> and scroll down until you find <strong>Android TV OS Build</strong>.</p></li>
-<li><p>Press the <strong>OK</strong> or <strong>Enter</strong> button 7 times to enable developer mode. - You should see a message saying ‘You are now a developer.’</p></li>
-<li><p>Note that at about 5 presses it should start to notify that you are about the enable developer mode.</p></li>
-<li><p>Now, go back to the main settings menu and select <strong>Developer options.</strong></p></li>
-<li><p>Turn on <strong>Enable developer options</strong> if not already</p></li>
-<li><p>Then turn on <strong>USB debugging.</strong></p></li>
-</ul>
-</section>
-<section id="step-2-get-the-ip-address-of-the-chromecast" class="level3">
-<h3 class="anchored" data-anchor-id="step-2-get-the-ip-address-of-the-chromecast">Step 2: Get the IP Address of the Chromecast</h3>
-<ul>
-<li><p>Open the <strong>Network and Internet</strong> menu in the Chromecast and the IP address should be displayed in the right-hand panel.</p>
-<p>Or alternatively;</p></li>
-<li><p>Open the Google Home app on your smartphone or tablet.</p></li>
-<li><p>Tap on your Chromecast device, then tap on the gear icon to access the device settings.</p></li>
-<li><p>The IP address should be displayed under the <strong>Device information</strong> section.</p></li>
-</ul>
-</section>
-<section id="step-3-install-android-developer-kit-adb" class="level3">
-<h3 class="anchored" data-anchor-id="step-3-install-android-developer-kit-adb">Step 3: Install Android Developer Kit (ADB)</h3>
-<ul>
-<li><p>Download the Android SDK Platform-Tools package from the <a href="https://developer.android.com/tools/releases/platform-tools">official Android website</a>.</p></li>
-<li><p>Extract the downloaded zip file to a location on your computer.</p></li>
-<li><p>Open a command prompt or terminal window and navigate to the folder containing the extracted files.</p></li>
-<li><p>Execute the following command in the command prompt or terminal:</p></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> connect <span class="op">&lt;</span>YOUR_CHROMECAST_IP_ADDRESS<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><p>Replace &lt;YOUR_CHROMECAST_IP_ADDRESS&gt; with the IP address you obtained earlier.</p></li>
-<li><p>On your Chromecast-connected TV or monitor, you will see a pop-up notification or a prompt asking for your permission to allow the connection from the specified IP address.</p></li>
-<li><p>Accept the connection by selecting “Allow” or “Accept” on your Chromecast device.</p></li>
-</ul>
-<p>Once you’ve accepted the connection request, you can proceed with Step 4 and enter the command to change the screen timeout value.</p>
-</section>
-<section id="step-4-change-the-screen-timeout-value-on-chromecast" class="level3">
-<h3 class="anchored" data-anchor-id="step-4-change-the-screen-timeout-value-on-chromecast">Step 4: Change the Screen Timeout Value on Chromecast</h3>
-<ul>
-<li>Enter the following command to change the screen timeout value to one month (in seconds):</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">adb</span> shell settings put system screen_off_timeout 2592000000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="step-5-turn-on-stay-awake-on-chromecast" class="level3">
-<h3 class="anchored" data-anchor-id="step-5-turn-on-stay-awake-on-chromecast">Step 5: Turn on ‘Stay Awake’ on Chromecast</h3>
-<ul>
-<li><p>On your Chromecast device still within the <strong>Developer options.</strong></p></li>
-<li><p>Turn on <strong>Stay awake.</strong></p></li>
-</ul>
-</section>
-<section id="step-6-set-up-camera-groups-in-blue-iris" class="level3">
-<h3 class="anchored" data-anchor-id="step-6-set-up-camera-groups-in-blue-iris">Step 6: Set Up Camera Groups in Blue Iris</h3>
-<ul>
-<li><p>Launch the Blue Iris software on your computer.</p></li>
-<li><p>Go to the ‘Cameras’ tab and select the cameras you want to group together to display on the Chromecast.</p></li>
-<li><p>Right-click on the selected cameras and choose ‘Group Cameras.’</p></li>
-<li><p>Give the camera group a name and click ‘OK.’</p></li>
-</ul>
-</section>
-<section id="step-7-setup-cast-all-the-things-catt" class="level3">
-<h3 class="anchored" data-anchor-id="step-7-setup-cast-all-the-things-catt">Step 7: Setup Cast All The Things (CATT)</h3>
-<ul>
-<li><p>Open a command prompt or terminal window on your computer.</p></li>
-<li><p>Install <a href="https://github.com/skorokithakis/catt">CATT</a> using <a href="https://pypa.github.io/pipx/">pipx</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pipx</span> install catt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>You can using pip, however pipx is recommended by the developer of CATT</p>
-</div>
-</div></li>
-<li><p>Next you need to identify your chromecast device. To scan you local network run the following</p></li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">catt</span> scan</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>Take note of the relevant chromecase device name. You will need it in the next step.</li>
-</ul>
-</section>
-<section id="step-8-cast-blue-iris-ui3-to-chromecast" class="level3">
-<h3 class="anchored" data-anchor-id="step-8-cast-blue-iris-ui3-to-chromecast">Step 8: Cast Blue Iris UI3 to Chromecast</h3>
-<ul>
-<li><p>Open a web browser and navigate to http://&lt;BLUEIRIS-IP-ADDRESS&gt;:81/ui3.htm? to check the Blue Iris UI3 interface is functioning.</p></li>
-<li><p>To cast the UI3 web interface to your chromecast and monitor enter the following command</p></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">catt</span> cast_url http://\&lt;BLUEIRIS-IP-ADDRESS\&gt;:81/ui3.htm<span class="pp">?</span>timeout=0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li><p>Replace <blueiris-ip-address> with the IP of your Blue Iris server.</blueiris-ip-address></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note we have added <code>timeout=0</code> to the url to prevent the web interface timing out</p>
-</div>
-</div></li>
-<li><p>To stop casting or if there is a disconnection and you need to recast, you first need to run the stop command</p></li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">catt</span> <span class="at">-d</span> <span class="op">&lt;</span>name_of_chromecast<span class="op">&gt;</span> stop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul>
-<li>To cast only the camera group you created add the <code>group=groupname</code> parameter to the url</li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">catt</span> cast_url http://\&lt;BLUEIRIS-IP-ADDRESS\&gt;:81/ui3.htm<span class="pp">?</span>timeout=0<span class="kw">&amp;</span><span class="va">group</span><span class="op">=</span>groupname</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>I would also recommended adding the <code>clipview=confirmed</code> parameter if you have AI detection on. This will show thumbnails of confirmed events.</p>
-</div>
-</div>
-<ul>
-<li>Further url parameters can been found in the <a href="https://bp2008.github.io/ui3/ui3/help/help.html#urlparameters">UI3 documentation</a>.</li>
-</ul>
-</section>
-<section id="conclusion" class="level3">
-<h3 class="anchored" data-anchor-id="conclusion">Conclusion</h3>
-<p>By following these steps, you can easily cast the Blue Iris UI3 interface to your Google TV Chromecast and attached screen. The use of CATT ensures a smooth and high-quality display, while the screen timeout changes and ‘stay awake’ settings on the Chromecast prevent disruptions during extended use. Enjoy easy access to your Blue Iris cameras on the big screen!</p>
+<p>Once the filesystem is established, all you need to do is mount it and point it at a directory.</p>
+<p>You can point it at any directory but in this example we are going to create a directory call <code>data</code></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> data</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mount /dev/<span class="op">&lt;</span>DRIVE-NAME<span class="op">&gt;</span> /home/ubuntu/data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>To check this has all worked correctly if you run <code>lsblk</code> again you should see your drive of interest show up with the associated mountpoint directory.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span>         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">loop1</span>          7:1    0  55.6M  1 loop /snap/core18/2745</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ex">loop2</span>          7:2    0  63.3M  1 loop /snap/core20/1879</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="ex">loop3</span>          7:3    0 111.9M  1 loop /snap/lxd/24322</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ex">loop4</span>          7:4    0  53.2M  1 loop /snap/snapd/19122</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme1n1</span>      259:0    0   1.7T  0 disk /home/ubuntu/data</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="ex">nvme0n1</span>      259:1    0     8G  0 disk </span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="ex">├─nvme0n1p1</span>  259:2    0   7.9G  0 part /</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="ex">├─nvme0n1p14</span> 259:3    0     4M  0 part </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="ex">└─nvme0n1p15</span> 259:4    0   106M  0 part /boot/efi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>It is likely you will need to update the ownership permission of the mounted directory as it would have been mount as <code>root</code></p>
+<p>To change the permissions to reflect your current user</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> chown <span class="at">-R</span> <span class="va">$USER</span> /home/ubuntu/data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For more details visit the aws <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html">help page</a></p>
 
 
 </section>

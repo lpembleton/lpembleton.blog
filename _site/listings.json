@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/aws-cli-s3/index.html",
       "/posts/push-docker-to-ecr/index.html",
       "/posts/annotate-equations/index.html",
       "/posts/cast-bi-ui3/index.html",

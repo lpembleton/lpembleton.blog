@@ -26,13 +26,6 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 #### *2023*
 
-📌[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
-
-*Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
-
-[Register](https://reg.conf.posit.co/flow/posit/positconf23/reg/login) \| Follow on [Twitter](https://twitter.com/posit_pbc)\
-\
-
 📌[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
 
 *DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
@@ -81,3 +74,7 @@ Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \|
 ✅[**Bioconductor Conference**](https://bioc2023.bioconductor.org/), August 2-4, 2023.
 
 *Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
+
+✅[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
+
+*Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*

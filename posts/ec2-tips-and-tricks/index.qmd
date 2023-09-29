@@ -1,0 +1,122 @@
+---
+title: "EC2 Ramblings"
+description: "A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics"
+author: "LW Pembleton"
+date: 24 09 2023
+categories: [EC2, AWS, Bioinformatics]
+image: images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg
+draft: true
+highlight-style: ayu
+---
+
+![~Photo by [Karl Pawlowicz](https://unsplash.com/@karlp) on Unsplash~](images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg)
+
+The following is writing with the default assumption of a Ubuntu base image
+
+## Installing AWS CLI
+
+AWS CLI is a most to enable you to transfer files and results between S3 and your EC2 instance
+
+First you will need to install `unzip`
+
+``` bash
+sudo apt-get install unzip
+```
+
+Now you can download and install the AWS CLI
+
+``` bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
+This should automatically appear in your path and you can call it with `aws`
+
+You will need to configure it with your credentials so that it will have the appropriate permissions to connect to S3
+
+`aws configure`
+
+## Mount at secondary volume such as a Nitro NVME SSD
+
+If you launch a storage-optimised EC2 instance such as one from the I4i to take advantage of the super-fast local storage performance you might get a rude shock at first. Where is the SSD, all you initially have access to is the EBS boot volume. Nothing to fear, it is there, it just hasn't been mounted yet.
+
+use the `lsblk` command to view your available disk devices and their mount points.
+
+``` bash
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312
+loop1          7:1    0  55.6M  1 loop /snap/core18/2745
+loop2          7:2    0  63.3M  1 loop /snap/core20/1879
+loop3          7:3    0 111.9M  1 loop /snap/lxd/24322
+loop4          7:4    0  53.2M  1 loop /snap/snapd/19122
+nvme1n1      259:0    0   1.7T  0 disk 
+nvme0n1      259:1    0     8G  0 disk 
+├─nvme0n1p1  259:2    0   7.9G  0 part /
+├─nvme0n1p14 259:3    0     4M  0 part 
+└─nvme0n1p15 259:4    0   106M  0 part /boot/efi
+```
+
+Identify the name of missing drive you want to mount, for example `nvme1n1`
+
+Now check whether there is a file system already on the device
+
+``` bash
+sudo file -s /dev/<DRIVE-NAME>
+```
+
+If this just shows `data` as the screen output there is not file system currently on the device. However if it shows other information for example
+
+``` bash
+[ubuntu ~]$ sudo file -s /dev/nvme1n1
+/dev/nvme1n1: SGI XFS filesystem data (blksz 4096, inosz 512, v2 dirs)
+```
+
+It means there is already a file system.
+
+Assuming there is no current files system (likely scenario for new instances) you need to make one with the `mkfs -t` command before you can mount it.
+
+``` bash
+sudo mkfs -t xfs /dev/<DRIVE-NAME>
+```
+
+::: callout-tip
+If you get a `mkfs.xfs` is not found error. You just need to install the XFS tools first using:
+
+`sudo apt-get install xfsprog`
+:::
+
+Once the filesystem is established, all you need to do is mount it and point it at a directory.
+
+You can point it at any directory but in this example we are going to create a directory call `data`
+
+``` bash
+mkdir data
+sudo mount /dev/<DRIVE-NAME> /home/ubuntu/data
+```
+
+To check this has all worked correctly if you run `lsblk` again you should see your drive of interest show up with the associated mountpoint directory.
+
+``` bash
+NAME         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+loop0          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312
+loop1          7:1    0  55.6M  1 loop /snap/core18/2745
+loop2          7:2    0  63.3M  1 loop /snap/core20/1879
+loop3          7:3    0 111.9M  1 loop /snap/lxd/24322
+loop4          7:4    0  53.2M  1 loop /snap/snapd/19122
+nvme1n1      259:0    0   1.7T  0 disk /home/ubuntu/data
+nvme0n1      259:1    0     8G  0 disk 
+├─nvme0n1p1  259:2    0   7.9G  0 part /
+├─nvme0n1p14 259:3    0     4M  0 part 
+└─nvme0n1p15 259:4    0   106M  0 part /boot/efi
+```
+
+It is likely you will need to update the ownership permission of the mounted directory as it would have been mount as `root`
+
+To change the permissions to reflect your current user
+
+``` bash
+sudo chown -R $USER /home/ubuntu/data
+```
+
+For more details visit the aws [help page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)

@@ -1,0 +1,83 @@
+---
+title: "Streamlining Your AWS CLI S3 File Operations"
+description: "A guide to using the AWS Command Line Interface to interact with S3"
+author: "LW Pembleton"
+date: 25 09 2023
+categories: [AWS, S3]
+image: images/usgs-35Z2ylLRCO8-unsplash.jpg
+draft: false
+highlight-style: ayu
+---
+
+![~Photo by [USGS](https://unsplash.com/@usgs) on Unsplash~](images/usgs-35Z2ylLRCO8-unsplash.jpg)
+
+{{< fa brands aws >}} Amazon Web Services Command Line Interface (AWS CLI) is your trusty companion for seamlessly interacting with AWS services directly from your terminal. It empowers you to manage and automate various AWS resources and operations effortlessly. In this blog post, we'll explore two essential aspects of AWS CLI: moving files in and out of AWS S3 buckets {{< fa solid bucket >}} using the aws s3 cp and aws s3 sync commands.
+
+## AWS CLI S3 Sync: Your Data Synchronisation Solution
+
+### The aws s3 sync Command {{< fa solid arrows-rotate >}}
+
+`aws s3 sync` is a command that should be in the toolkit of anyone dealing with AWS S3. This command enables you to synchronise files and directories between a source and a destination, which can be an S3 bucket, a local drive, or even between S3 buckets. Here's the basic syntax:
+
+``` bash
+aws s3 sync <SOURCE> <DESTINATION>
+```
+
+`aws s3 sync` will only copy new and updated files by checking the destination folder first. There is also the ability to delete files in the *destination* that are no longer present in the *source* by applying the `--delete` flag.
+
+In addition to the ability to synchronise files and directories, `aws s3 sync` has the ability to handle specific file filtering. You can precisely control which files to include or exclude using two essential parameters:
+
+-   --exclude <PATTERN>: Exclude files matching the specified pattern.
+-   --include <PATTERN>: Include files matching the specified pattern.
+
+By default, all files are included, so when you need to sync only certain files, like .png images, you must first exclude all files and then include only those with the .png extension:
+
+``` bash
+aws s3 sync <SOURCE> <DESTINATION>\
+  --exclude '*'\
+  --include '*.png'
+```
+
+Be mindful of the order of these filters; they are applied from left to right. For instance, the following command may seem similar but produces a different outcome:
+
+``` bash
+aws s3 sync <SOURCE> <DESTINATION>\
+  --include `*.png`\
+  --exclude '\*'
+```
+
+Here, all `.png` files are initially included, but then all files are excluded, resulting in no transfers.
+
+::: tip
+To preview the actions of an AWS CLI command without executing it, add the `–dryrun` flag. It's a handy way to ensure your command behaves as expected.
+:::
+
+## AWS CLI S3 Copy: Efficient File Transfers {{< fa regular copy >}}
+
+### The `aws s3 cp` Command
+
+While `aws s3 sync` focuses on synchronisation and can be used to update files at the destination, `aws s3 cp` is primarily designed for simple and efficient file transfers. It copies files and directories from a source to a destination, which can be local, remote, or even between S3 buckets. The basic syntax is as follows:
+
+``` bash
+aws s3 cp <SOURCE> <DESTINATION>
+```
+
+Unlike `aws s3 sync`, `aws s3 cp` doesn't handle recursive synchronization. It's a straightforward file copy operation, regardless of whether the file is already present in the *destination*. Here's an example:
+
+``` bash
+aws s3 cp my-local-file.txt s3://my-destination-bucket/
+```
+
+In this case, my-local-file.txt is copied to the specified S3 bucket. `aws s3 cp` excels in scenarios where you need to upload or download individual files without worrying about folder structures.
+
+::: callout-tip
+Similar to `aws s3 sync` you can use the --include and --exclude parameters to filter.
+:::
+
+## Differentiating `aws s3 cp` and `aws s3 sync`
+
+-   **Synchronisation vs. Copy:** aws s3 sync is designed for synchronising files between a source and a destination, ensuring that both locations have the same set of files. `aws s3 cp`, on the other hand, focuses on copying individual files or directories from a source to a destination.
+
+-   **Complexity:** `aws s3 sync` offers advanced features like file filtering and recursive synchronisation, making it suitable for managing complex data synchronization tasks. `aws s3 cp` is simpler and more suitable for straightforward efficient file transfers.
+
+In conclusion, AWS CLI's `aws s3 cp` and `aws s3 sync` commands cater to different aspects of managing files in AWS S3. By understanding their strengths and use cases, you can efficiently handle a wide range of file-related tasks in your AWS environment.
