@@ -4,12 +4,12 @@ description: "A guide to using the AWS Command Line Interface to interact with S
 author: "LW Pembleton"
 date: 25 09 2023
 categories: [AWS, S3]
-image: images/usgs-35Z2ylLRCO8-unsplash.jpg
+image: images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg
 draft: false
 highlight-style: ayu
 ---
 
-![~Photo by [USGS](https://unsplash.com/@usgs) on Unsplash~](images/usgs-35Z2ylLRCO8-unsplash.jpg)
+![~Photo by [Jesse Vermeulen](https://unsplash.com/@jessevermeulen) on Unsplash~](images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg)
 
 {{< fa brands aws >}} Amazon Web Services Command Line Interface (AWS CLI) is your trusty companion for seamlessly interacting with AWS services directly from your terminal. It empowers you to manage and automate various AWS resources and operations effortlessly. In this blog post, we'll explore two essential aspects of AWS CLI: moving files in and out of AWS S3 buckets {{< fa solid bucket >}} using the aws s3 cp and aws s3 sync commands.
 

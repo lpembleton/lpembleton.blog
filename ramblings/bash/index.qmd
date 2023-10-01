@@ -1,0 +1,62 @@
+---
+title: "Bash"
+description: "A collection of short Bash commonds and tricks that individually are too short for a blog post"
+author: "LW Pembleton"
+date-modified: last-modified
+categories: [Bash]
+image: images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg
+draft: false
+highlight-style: ayu
+---
+
+![](images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg)
+
+## Using {tee} to log command outputs.
+
+When working in a Bash terminal and you want to log the output of a command for future reference, the tee command is a handy tool, especially in multi step analyses. Here's a quick tip on how to use it effectively:
+
+**Basic Usage:** To log the output of a command and simultaneously view it on the terminal, use the following format:
+
+``` bash
+my_command | tee my_log.txt
+```
+
+Replace `my_command` with your actual command and `my_log.txt` with the desired log file name.
+
+**Appending to Existing Logs:** To append output to an existing log file (useful for logging multiple command or runs of the same command), use the `-a` option with `tee`:
+
+``` bash
+my_command | tee -a my_existing_log.txt
+```
+
+Capture standard error aswell: By default `tee` captures standard out (stdout) and saves it to file whilst also printing to screen. However if you want to capture standard error (stderr) as well as stdout just add `2>&1` after your command before you pipe to `tee`:
+
+``` bash
+my_command 2>&1 | tee my_log.txt
+```
+
+## Using {basename} in Bash for File Name Extraction
+
+In Bash, you can use the `basename` command to extract the file name from a given file path. This is particularly useful when you're working on tasks like data processing pipelines or automation scripts and need to isolate the file's name from its full path.
+
+Basic Syntax:
+
+``` bash
+basename [PATH]
+```
+
+Usage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:
+
+``` bash
+basename /path/to/your/file.txt
+```
+
+You will obtain just the file name `file.txt` as output:
+
+If you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:
+
+``` bash
+basename file.txt .txt
+```
+
+Which in this example will return `file`

@@ -1,5 +1,11 @@
 [
   {
+    "listing": "/ramblings.html",
+    "items": [
+      "/ramblings/bash/index.html"
+    ]
+  },
+  {
     "listing": "/blog.html",
     "items": [
       "/posts/aws-cli-s3/index.html",

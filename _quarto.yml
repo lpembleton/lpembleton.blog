@@ -13,6 +13,8 @@ website:
         href: index.qmd
       - text: Blog
         href: blog.qmd
+      - text: Ramblings
+        href: ramblings.qmd
       - text: Publications
         href: publications/publications.qmd
       - text: Conferences

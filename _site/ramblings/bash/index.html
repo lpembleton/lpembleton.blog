@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="LW Pembleton">
+<meta name="description" content="A collection of short Bash commonds and tricks that individually are too short for a blog post">
 
-<title>Luke Pembleton - Virtual Conferences &amp; Meetups</title>
+<title>Luke Pembleton - Bash</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,28 +22,62 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -64,13 +100,13 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - Virtual Conferences &amp; Meetups">
-<meta property="og:description" content="">
-<meta property="og:image" content="https://lpembleton.rbind.io/pages/images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg">
+<meta property="og:title" content="Luke Pembleton - Bash">
+<meta property="og:description" content="A collection of short Bash commonds and tricks that individually are too short for a blog post">
+<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Virtual Conferences &amp; Meetups">
-<meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/pages/images/sigmund-eTgMFFzroGc-unsplash.jpg.jpg">
+<meta name="twitter:title" content="Luke Pembleton - Bash">
+<meta name="twitter:description" content="A collection of short Bash commonds and tricks that individually are too short for a blog post">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -82,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
   </div>
@@ -93,23 +129,23 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html" rel="" target="">
+    <a class="nav-link" href="../../index.html" rel="" target="">
  <span class="menu-text">About</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog.html" rel="" target="">
+    <a class="nav-link" href="../../blog.html" rel="" target="">
  <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../ramblings.html" rel="" target="">
+    <a class="nav-link" href="../../ramblings.html" rel="" target="">
  <span class="menu-text">Ramblings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../publications/publications.html" rel="" target="">
+    <a class="nav-link" href="../../publications/publications.html" rel="" target="">
  <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../pages/conferences.html" rel="" target="" aria-current="page">
+    <a class="nav-link" href="../../pages/conferences.html" rel="" target="">
  <span class="menu-text">Conferences</span></a>
   </li>  
   <li class="nav-item compact">
@@ -165,80 +201,64 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Virtual Conferences &amp; Meetups</h1>
-</div>
+<h1 class="title">Bash</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Bash</div>
+  </div>
+  </div>
 
+<div>
+  <div class="description">
+    A collection of short Bash commonds and tricks that individually are too short for a blog post
+  </div>
+</div>
 
 
 <div class="quarto-title-meta">
 
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>LW Pembleton </p>
+          </div>
+  </div>
     
   
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">October 2, 2023</p>
+    </div>
+  </div>
     
   </div>
   
 
 </header>
 
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/sigmund-eTgMFFzroGc-unsplash.jpg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/photos/eTgMFFzroGc">Sigmund</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
-</figure>
-</div>
-<p>A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data science 📊 life science 🧪🧬 and agricultural science community 🌾</p>
-<section id="reoccurring" class="level3">
-<h3 class="anchored" data-anchor-id="reoccurring">Reoccurring 🔁</h3>
-<p>📌<strong>Posit <a href="https://posit.co/data-science-hangout/">Data Science Hangout</a></strong> - Live Every Thursday at 12 PM ET.</p>
-<p><em>Each week, host Rachael Dempsey invites an accomplished data science leader to talk about their experience and answer questions from the audience. The discussion focuses mainly on the human elements of data science leadership. There’s no sales or marketing fluff, just great insights from inspiring professionals.</em></p>
-<p>📹 <a href="https://posit.co/past-hangouts/">Past hangouts</a> are also available to watch.<br>
-<br>
-</p>
-<p>📌<a href="https://www.nextflow.io/podcasts.html"><strong>Channels</strong></a> the nextflow podcast - Pre-recorded every fortnight.</p>
-<p>Talking about news in the Nextflow ecosytem and speaking with pioneers in the field.</p>
-<hr>
+<p><img src="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg" class="img-fluid"></p>
+<section id="using-tee-to-log-command-outputs." class="level2">
+<h2 class="anchored" data-anchor-id="using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</h2>
+<p>When working in a Bash terminal and you want to log the output of a command for future reference, the tee command is a handy tool, especially in multi step analyses. Here’s a quick tip on how to use it effectively:</p>
+<p><strong>Basic Usage:</strong> To log the output of a command and simultaneously view it on the terminal, use the following format:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Replace <code>my_command</code> with your actual command and <code>my_log.txt</code> with the desired log file name.</p>
+<p><strong>Appending to Existing Logs:</strong> To append output to an existing log file (useful for logging multiple command or runs of the same command), use the <code>-a</code> option with <code>tee</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> my_existing_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Capture standard error aswell: By default <code>tee</code> captures standard out (stdout) and saves it to file whilst also printing to screen. However if you want to capture standard error (stderr) as well as stdout just add <code>2&gt;&amp;1</code> after your command before you pipe to <code>tee</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="scheduled" class="level3">
-<h3 class="anchored" data-anchor-id="scheduled">Scheduled 📆</h3>
-<section id="section" class="level4">
-<h4 class="anchored" data-anchor-id="section"><em>2023</em></h4>
-<p>📌<a href="https://www.dockercon.com/"><strong>dockercon 2023</strong></a> - October 4-5, 2023.</p>
-<p><em>DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.</em></p>
-<p><a href="https://www.dockercon.com/2023/begin">Register</a> | Follow on <a href="https://twitter.com/Docker">Twitter</a><br>
-<br>
-</p>
-<p>📌<a href="https://summit.nextflow.io/"><strong>Nextflow SUMMIT</strong></a> - October 16-20, 2023</p>
-<p><em>A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.</em></p>
-<p><a href="https://summit.nextflow.io/purchase/">Register</a> | Follow on <a href="https://twitter.com/SeqeraLabs">Twitter</a><br>
-<br>
-</p>
-<p>📌<a href="https://githubuniverse.com/"><strong>GitHub Universe</strong></a> - November 8-9, 2023.</p>
-<p><em>The annual developer event is back, better, and bigger than ever at San Francisco’s Yerba Buena Center for the Arts and online.</em></p>
-<p><a href="https://githubuniverse.com/">Register</a> | Follow on <a href="https://twitter.com/githubuniverse">Twitter</a></p>
-</section>
-<section id="section-1" class="level4">
-<h4 class="anchored" data-anchor-id="section-1"><em>2024</em></h4>
-<p>📌<a href="https://www.r-project.org/conferences/"><strong>useR! 2024</strong></a> - July 8-11, 2024</p>
-<p><em>useR! is the main meeting of the R user and developer community, its program consists of both invited and user-contributed presentations.</em></p>
-<p>Registration opens soon | Follow on <a href="https://twitter.com/_useRconf">Twitter</a> | Follow on <a href="https://mastodon.social/@useR_conf">Mastodon</a></p>
-<hr>
-</section>
-</section>
-<section id="past-events" class="level3">
-<h3 class="anchored" data-anchor-id="past-events">Past Events 🗄️</h3>
-<p>✅<a href="https://shinyconf.appsilon.com/"><strong>ShinyConf2023</strong></a> - 15-17 March, 2023</p>
-<p><em>ShinyConf is a virtual event hosted by Appsilon with support from Posit. This year’s Shiny conference Showcases recent advancements in R Shiny technology such as open source packages, Shiny interoperability, and commercial applications</em></p>
-<p><a href="https://www.youtube.com/playlist?list=PLexAKolMzPcriOdeLwoMxQOyHRnMguEv4">Conference recordings</a><br>
-</p>
-<p>✅<a href="https://rstats.ai/nyr.html"><strong>New York R Conference</strong></a> - July 11-12, 2023.</p>
-<p><em>The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.</em></p>
-<p><a href="https://www.landeranalytics.com/post/nyr-2023-recap">Conference recordings.</a><br>
-<br>
-</p>
-<p>✅<a href="https://bioc2023.bioconductor.org/"><strong>Bioconductor Conference</strong></a>, August 2-4, 2023.</p>
-<p><em>Bioconductor conference highlights current developments within and beyond the Bioconductor project.</em></p>
-<p>✅<a href="https://posit.co/conference/"><strong>Posit::conf(2023)</strong></a> - September 17-20, 2023<em>.</em></p>
-<p><em>Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.</em></p>
+<section id="using-basename-in-bash-for-file-name-extraction" class="level2">
+<h2 class="anchored" data-anchor-id="using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</h2>
+<p>In Bash, you can use the <code>basename</code> command to extract the file name from a given file path. This is particularly useful when you’re working on tasks like data processing pipelines or automation scripts and need to isolate the file’s name from its full path.</p>
+<p>Basic Syntax:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Usage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> /path/to/your/file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You will obtain just the file name <code>file.txt</code> as output:</p>
+<p>If you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> file.txt .txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Which in this example will return <code>file</code></p>
 
 
 </section>
