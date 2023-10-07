@@ -1,0 +1,59 @@
+---
+title: "R"
+description: "A worthy collection of short R commands and tricks "
+author: "LW Pembleton"
+date-modified: last-modified
+categories: [R]
+image: images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg
+draft: false
+highlight-style: ayu
+---
+
+![~Photo by Daria\ Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
+
+## Using {custom_annotation} to embed one plots inside another.
+
+Embedded plots can be a powerful tool for showcasing data across an extended axis while still emphasizing specific sections.
+
+Creating these are very easy. Here is a quick guide and example:
+
+**Step 1:** Create your base plot.
+
+Begin by establishing your base plot, which will serve as the canvas for your embedded plot. Typically, the base plot is the primary focus of your visualization.
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(mdthemes)
+data(mtcars)
+
+base_plot <- ggplot(mtcars, aes(hp, mpg)) +
+  geom_point(size = 4, alpha = 0.6, colour = "#22333b") +
+  geom_smooth(size = 1.5, se = F, colour = "#3a86ff") +
+  labs(title = "Example of a plot **embedded** within another",
+    subtitle = "Using the function *'annotation_custom()'*") +
+  md_theme_bw() +
+  xlim(50, 200)
+```
+
+**Step 2:** Create your plot that you want to embed within the canvas.
+
+Your embedded plot doesn't have to be the same type as your base plot. Feel free to customize it according to your data visualization needs.
+
+```{r, warning = FALSE, message = FALSE}
+embedded_plot <- ggplot(mtcars, aes(hp, mpg)) +
+  geom_point(size = 4, alpha = 0.6, colour = "#22333b") +
+  geom_smooth(size = 1.5, se = F, colour = "#3a86ff") +
+  md_theme_bw()
+```
+
+**Step 3:** Use `custom_annotate()` to embed the plot.
+
+Now, it's time to embed the plot within the canvas using the **`annotation_custom()`** function. You'll need to specify the X and Y positions for the embedded plot:
+
+```{r, warning = FALSE, message = FALSE}
+base_plot + annotation_custom(ggplotGrob(embedded_plot), 
+                              xmin = 125, 
+                              xmax = 200, 
+                              ymin = 22, 
+                              ymax = 35)
+```

@@ -1,6 +1,6 @@
 ---
 title: "Bash"
-description: "A collection of short Bash commonds and tricks that individually are too short for a blog post"
+description: "A collection of short Bash commands and tricks that individually are too short for a blog post"
 author: "LW Pembleton"
 date-modified: last-modified
 categories: [Bash]

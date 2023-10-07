@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
+<meta name="description" content="A worthy collection of short R commands and tricks">
 
-<title>Luke Pembleton - Bash</title>
+<title>Luke Pembleton - R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -100,13 +100,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="Luke Pembleton - Bash">
-<meta property="og:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta property="og:title" content="Luke Pembleton - R">
+<meta property="og:description" content="A worthy collection of short R commands and tricks">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Bash">
-<meta name="twitter:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta name="twitter:title" content="Luke Pembleton - R">
+<meta name="twitter:description" content="A worthy collection of short R commands and tricks">
+<meta name="twitter:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -201,15 +201,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bash</h1>
+<h1 class="title">R</h1>
   <div class="quarto-categories">
-    <div class="quarto-category">Bash</div>
+    <div class="quarto-category">R</div>
   </div>
   </div>
 
 <div>
   <div class="description">
-    A collection of short Bash commands and tricks that individually are too short for a blog post
+    A worthy collection of short R commands and tricks
   </div>
 </div>
 
@@ -236,29 +236,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p><img src="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg" class="img-fluid"></p>
-<section id="using-tee-to-log-command-outputs." class="level2">
-<h2 class="anchored" data-anchor-id="using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</h2>
-<p>When working in a Bash terminal and you want to log the output of a command for future reference, the tee command is a handy tool, especially in multi step analyses. Here’s a quick tip on how to use it effectively:</p>
-<p><strong>Basic Usage:</strong> To log the output of a command and simultaneously view it on the terminal, use the following format:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Replace <code>my_command</code> with your actual command and <code>my_log.txt</code> with the desired log file name.</p>
-<p><strong>Appending to Existing Logs:</strong> To append output to an existing log file (useful for logging multiple command or runs of the same command), use the <code>-a</code> option with <code>tee</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> my_existing_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Capture standard error aswell: By default <code>tee</code> captures standard out (stdout) and saves it to file whilst also printing to screen. However if you want to capture standard error (stderr) as well as stdout just add <code>2&gt;&amp;1</code> after your command before you pipe to <code>tee</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="using-basename-in-bash-for-file-name-extraction" class="level2">
-<h2 class="anchored" data-anchor-id="using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</h2>
-<p>In Bash, you can use the <code>basename</code> command to extract the file name from a given file path. This is particularly useful when you’re working on tasks like data processing pipelines or automation scripts and need to isolate the file’s name from its full path.</p>
-<p>Basic Syntax:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Usage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> /path/to/your/file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>You will obtain just the file name <code>file.txt</code> as output:</p>
-<p>If you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> file.txt .txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Which in this example will return <code>file</code></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;Daria&nbsp;Nepriakhina&nbsp;on&nbsp;Unsplash</sub></figcaption>
+</figure>
+</div>
+<section id="using-custom_annotation-to-embed-one-plots-inside-another." class="level2">
+<h2 class="anchored" data-anchor-id="using-custom_annotation-to-embed-one-plots-inside-another.">Using {custom_annotation} to embed one plots inside another.</h2>
+<p>Embedded plots can be a powerful tool for showcasing data across an extended axis while still emphasizing specific sections.</p>
+<p>Creating these are very easy. Here is a quick guide and example:</p>
+<p><strong>Step 1:</strong> Create your base plot.</p>
+<p>Begin by establishing your base plot, which will serve as the canvas for your embedded plot. Typically, the base plot is the primary focus of your visualization.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdthemes)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>base_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(hp, mpg)) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"#22333b"</span>) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">se =</span> F, <span class="at">colour =</span> <span class="st">"#3a86ff"</span>) <span class="sc">+</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Example of a plot **embedded** within another"</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Using the function *'annotation_custom()'*"</span>) <span class="sc">+</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">50</span>, <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Step 2:</strong> Create your plot that you want to embed within the canvas.</p>
+<p>Your embedded plot doesn’t have to be the same type as your base plot. Feel free to customize it according to your data visualization needs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>embedded_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mtcars, <span class="fu">aes</span>(hp, mpg)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">4</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">colour =</span> <span class="st">"#22333b"</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">size =</span> <span class="fl">1.5</span>, <span class="at">se =</span> F, <span class="at">colour =</span> <span class="st">"#3a86ff"</span>) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">md_theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Step 3:</strong> Use <code>custom_annotate()</code> to embed the plot.</p>
+<p>Now, it’s time to embed the plot within the canvas using the <strong><code>annotation_custom()</code></strong> function. You’ll need to specify the X and Y positions for the embedded plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>base_plot <span class="sc">+</span> <span class="fu">annotation_custom</span>(<span class="fu">ggplotGrob</span>(embedded_plot), </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                              <span class="at">xmin =</span> <span class="dv">125</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">xmax =</span> <span class="dv">200</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ymin =</span> <span class="dv">22</span>, </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">ymax =</span> <span class="dv">35</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
 
 
 </section>

@@ -4,7 +4,7 @@
     "href": "ramblings.html",
     "title": "Ramblings",
     "section": "",
-    "text": "Bash\n\n\n\n\n\n\n\nBash\n\n\n\n\nA collection of short Bash commonds and tricks that individually are too short for a blog post\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
+    "text": "Bash\n\n\n\n\n\n\n\nBash\n\n\n\n\nA collection of short Bash commands and tricks that individually are too short for a blog post\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nR\n\n\n\n\n\n\n\nR\n\n\n\n\nA worthy collection of short R commands and tricks\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "publications/publications.html",
@@ -236,5 +236,19 @@
     "title": "Bash",
     "section": "Using {basename} in Bash for File Name Extraction",
     "text": "Using {basename} in Bash for File Name Extraction\nIn Bash, you can use the basename command to extract the file name from a given file path. This is particularly useful when you’re working on tasks like data processing pipelines or automation scripts and need to isolate the file’s name from its full path.\nBasic Syntax:\nbasename [PATH]\nUsage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:\nbasename /path/to/your/file.txt\nYou will obtain just the file name file.txt as output:\nIf you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:\nbasename file.txt .txt\nWhich in this example will return file"
+  },
+  {
+    "objectID": "ramblings/R/index.html#using-custom_annotation-to-embed-one-plots-inside-another.",
+    "href": "ramblings/R/index.html#using-custom_annotation-to-embed-one-plots-inside-another.",
+    "title": "R",
+    "section": "Using {custom_annotation} to embed one plots inside another.",
+    "text": "Using {custom_annotation} to embed one plots inside another.\nEmbedded plots can be a powerful tool for showcasing data across an extended axis while still emphasizing specific sections.\nCreating these are very easy. Here is a quick guide and example:\nStep 1: Create your base plot.\nBegin by establishing your base plot, which will serve as the canvas for your embedded plot. Typically, the base plot is the primary focus of your visualization.\n\nlibrary(tidyverse)\nlibrary(mdthemes)\ndata(mtcars)\n\nbase_plot &lt;- ggplot(mtcars, aes(hp, mpg)) +\n  geom_point(size = 4, alpha = 0.6, colour = \"#22333b\") +\n  geom_smooth(size = 1.5, se = F, colour = \"#3a86ff\") +\n  labs(title = \"Example of a plot **embedded** within another\",\n    subtitle = \"Using the function *'annotation_custom()'*\") +\n  md_theme_bw() +\n  xlim(50, 200)\n\nStep 2: Create your plot that you want to embed within the canvas.\nYour embedded plot doesn’t have to be the same type as your base plot. Feel free to customize it according to your data visualization needs.\n\nembedded_plot &lt;- ggplot(mtcars, aes(hp, mpg)) +\n  geom_point(size = 4, alpha = 0.6, colour = \"#22333b\") +\n  geom_smooth(size = 1.5, se = F, colour = \"#3a86ff\") +\n  md_theme_bw()\n\nStep 3: Use custom_annotate() to embed the plot.\nNow, it’s time to embed the plot within the canvas using the annotation_custom() function. You’ll need to specify the X and Y positions for the embedded plot:\n\nbase_plot + annotation_custom(ggplotGrob(embedded_plot), \n                              xmin = 125, \n                              xmax = 200, \n                              ymin = 22, \n                              ymax = 35)"
+  },
+  {
+    "objectID": "ramblings/R/index.html",
+    "href": "ramblings/R/index.html",
+    "title": "R",
+    "section": "",
+    "text": "Photo by Daria Nepriakhina on Unsplash"
   }
 ]
