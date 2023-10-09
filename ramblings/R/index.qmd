@@ -9,7 +9,7 @@ draft: false
 highlight-style: ayu
 ---
 
-![~Photo by Daria\ Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
+![~Photo by Daria Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
 
 ## Using {custom_annotation} to embed one plots inside another.
 
@@ -56,4 +56,72 @@ base_plot + annotation_custom(ggplotGrob(embedded_plot),
                               xmax = 200, 
                               ymin = 22, 
                               ymax = 35)
+```
+
+## Adding linking colours to plot titles instead of a legend
+
+Enhancing your plot titles with linking colours 🌈 is a clever strategy to maximise your plot realestate by eliminating legends, all while looking fantastic!
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+library(ggplot2) # For plotting
+library(palmerpenguins) # For the example penguin dataset
+library(ggtext) # For HTML rendering of text to support colour
+                # Also for Markdown rendering of text
+
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+                 size = 2) +
+  scale_color_manual(values = c("#FF8C00","#9932CC","#008B8B")) +
+  labs(title = "Penguin flipper length versus body mass",
+       subtitle = "Penguin species
+       <span style='color:#FF8C00;'>*Pygoscelis adeliae*</span>, 
+       <span style='color:#9932CC;'>*Pygoscelis papua*</span> and 
+       <span style='color:#008B8B;'>*Pygoscelis antarcticus*</span>",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)")  +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none")
+
+```
+
+To achieve this style you will need:
+
+1.  the [{ggtext}](https://wilkelab.org/ggtext/) package which will perform the [HTML rendering](https://www.w3schools.com/tags/tag_span.asp), in this case in the subtitle to define the text colour.
+
+2.  Adding `plot.subtitle = element_markdown()` to the theme, [{ggtext}](https://wilkelab.org/ggtext/) will perform [markdown rendering](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#styling-text), for example making specific text bold, or in the above example, italicised.
+
+3.  and finally, adding `legend.position = "none"` also to the theme will remove the old clunky default legend
+
+Here is the full code 👇 enjoy!
+
+```{r, eval = FALSE}
+library(ggplot2) # For plotting
+library(palmerpenguins) # For the example penguin dataset
+library(ggtext) # For HTML rendering of text to support colour
+                # Also for Markdown rendering of text
+
+ggplot(data = penguins, 
+       aes(x = flipper_length_mm, 
+           y = body_mass_g)) +
+  geom_point(aes(color = species, 
+                 shape = species),
+                 size = 2) +
+  scale_color_manual(values = c("#FF8C00","#9932CC","#008B8B")) +
+  labs(title = "Penguin flipper length versus body mass",
+       subtitle = "Penguin species
+       <span style='color:#FF8C00;'>*Pygoscelis adeliae*</span>, 
+       <span style='color:#9932CC;'>*Pygoscelis papua*</span> and 
+       <span style='color:#008B8B;'>*Pygoscelis antarcticus*</span>",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)")  +
+  theme_minimal() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none")
+
 ```
