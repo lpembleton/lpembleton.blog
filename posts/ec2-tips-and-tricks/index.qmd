@@ -1,6 +1,6 @@
 ---
 title: "EC2 Ramblings"
-description: "A collection of mini guides, tips and tricks to using EC2 instances focus on bioinformatics"
+description: "A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics"
 author: "LW Pembleton"
 date: 24 09 2023
 categories: [EC2, AWS, Bioinformatics]
@@ -9,9 +9,9 @@ draft: true
 highlight-style: ayu
 ---
 
-![~Photo by [Karl Pawlowicz](https://unsplash.com/@karlp) on Unsplash~](images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg)
+![~Photo by [Karl Pawlowicz](https://unsplash.com/@karlp) on Unsplash~](images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg)
 
-The following is writing with the default assumption of a Ubuntu base image
+The following is writing with the default assumption of a Ubuntu 22.04 LTS base image
 
 ## Installing AWS CLI
 
@@ -37,7 +37,15 @@ You will need to configure it with your credentials so that it will have the app
 
 `aws configure`
 
-## Mount at secondary volume such as a Nitro NVME SSD
+Alternatively, a more secure option is to pass the relevant S3 permissions to your EC2 instance using an IAM instance profile. Details on setting up a IAM role with S3 permissions can be found [here](https://cloud-gc.readthedocs.io/en/latest/chapter03_advanced-tutorial/iam-role.html).
+
+You can add the IAM profile when first creating your instance under 'Advanced details'
+
+![](images/iam-instance-profile.png)
+
+or to an existing instance by selecting the instance, clicking 'Actions' drop-down menu and then 'Modify IAM role' under 'Security' and then choosing the relevant IAM role. Then press 'Update IAM role'
+
+## Mount a secondary volume such as a Nitro NVME SSD
 
 If you launch a storage-optimised EC2 instance such as one from the I4i to take advantage of the super-fast local storage performance you might get a rude shock at first. Where is the SSD, all you initially have access to is the EBS boot volume. Nothing to fear, it is there, it just hasn't been mounted yet.
 
@@ -120,3 +128,133 @@ sudo chown -R $USER /home/ubuntu/data
 ```
 
 For more details visit the aws [help page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
+
+::: callout-caution
+nvme drives on EC2 instances are typically ephemeral disks, meaning they physically exist on the actual host instance and therefore they do not persist after reboots or shutdown. All data will be lost and you will need to remount after a restart.
+:::
+
+## Installing the latest stable R on Ubuntu
+
+#### Step 1: Obtain the R Project GPG Key
+
+To start, you need to acquire the R Project's public GPG key. This key will ensure the authenticity and security of the software you're about to install. Open your terminal and use the following command:
+
+``` bash
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg –dearmor -o /usr/share/keyrings/r-project.gpg 
+```
+
+#### Step 2: Add the R Source List to APT
+
+With the GPG key in place, it's time to add the R source list to APT. This list is essential for Ubuntu to recognise the repository where R is located. Run the following command:
+
+``` bash
+echo "deb [signed-by=/usr/share/keyrings/r-project.gpg] https://cloud.r-project.org/bin/linux/ubuntu jammy-cran40/" | sudo tee -a /etc/apt/sources.list.d/r-project.list 
+```
+
+#### Step 3: Update Your Package List
+
+To make Ubuntu aware of the new source you've added, update your package list with the following command:
+
+``` bash
+sudo apt update 
+```
+
+#### Step 4: Install R with APT
+
+Now, you're ready to install R on your system. Execute this command:
+
+``` bash
+sudo apt install –no-install-recommends r-base 
+```
+
+::: callout-tip
+If prompted to confirm the installation, simply press 'y' and then 'Enter' to proceed.
+:::
+
+That's it! You've successfully installed the latest stable version of R on your Ubuntu machine.
+
+## Install relevant R packages
+
+Although install packages in R on windows is relatively straightforward using \`instally.packages()\`, on linux you will need to manually install any external dependencies. Below are the relevant details for some common packages
+
+### Tidyverse
+
+the tidyverse is a large collection of packages and therefore naturally there are a few dependencies. The follow should install all the required libraries.
+
+``` bash
+sudo apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+```
+
+### BLGR
+
+The genomic selection package BLGR has two additional dependecies.
+
+https://github.com/gdlc/BGLR-R
+
+https://askubuntu.com/questions/623578/installing-blas-and-lapack-packages
+
+https://thecoatlessprofessor.com/programming/cpp/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/
+
+### Tmisc
+
+https://github.com/stephenturner/Tmisc
+
+### argparser
+
+https://cran.r-project.org/web/packages/argparser/index.html
+
+### here
+
+https://here.r-lib.org/
+
+## Installing bioinformatic software
+
+### PLINK2
+
+Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the [website](https://www.cog-genomics.org/plink/2.0/#new) and unpacking it. Then just move the executable to your bin dir.
+
+For example:
+
+``` bash
+wget https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20231011.zip
+unzip plink2_linux_x86_64_20231011.zip
+sudo mv plink2 /bin/
+```
+
+### VCFtools
+
+Grab the tarball from the github [release page](https://github.com/vcftools/vcftools/releases) and unpack it.
+
+``` bash
+wget https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1.16.tar.gz
+tar -xvf vcftools-0.1.16.tar.gz
+```
+
+The PERL5LIB environment variable needs to be set to include the Vcf.pm module.
+
+``` bash
+export PERL5LIB=/path/to/your/vcftools-directory/src/perl/
+```
+
+Before you can compile the program you need to install the following dependency
+
+``` bash
+sudo apt install build-essential
+sudo apt install pkg-config
+sudo apt install zlib1g-dev
+```
+
+You must now compile the program.
+
+``` bash
+cd vcftools-0.1.16/
+./configure
+make
+sudo make install
+```
+
+VCFtools will be automatically added to your user path so you should now be able to call it with `vcftools`
+
+### Bcftools
+
+A similar process to VCFtools, grab the bcftools tarball from the latest [releases page](http://www.htslib.org/download/).

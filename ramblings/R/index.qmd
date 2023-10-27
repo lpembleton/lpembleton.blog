@@ -193,3 +193,240 @@ ggplot(data = penguins,
         plot.subtitle = element_markdown(),
         legend.position = "none")
 ```
+
+## Transform axis numbers into more readable formats
+
+Want to avoid number labels on your plots that are difficult to read or interpret such as the all too common scientific e notation as seen in this example? 👇
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+library(tidyverse)
+library(ggplot2) # For plotting
+library(ggtext) # For HTML rendering of text to support colour
+                # Also for Markdown rendering of text
+
+data <- tibble::tribble(
+             ~Month,   ~Year,     ~Region, ~Production_Litres,
+             "July", "22/23",       "NSW",        80742825.35,
+           "August", "22/23",       "NSW",        85515267.53,
+        "September", "22/23",       "NSW",        89642883.77,
+          "October", "22/23",       "NSW",        92774430.63,
+         "November", "22/23",       "NSW",         86431638.4,
+         "December", "22/23",       "NSW",        86230113.71,
+          "January", "22/23",       "NSW",        81030159.32,
+         "February", "22/23",       "NSW",        72891273.03,
+            "March", "22/23",       "NSW",        78366274.94,
+            "April", "22/23",       "NSW",         75805741.9,
+              "May", "22/23",       "NSW",        79986532.53,
+             "June", "22/23",       "NSW",        80446060.32,
+             "July", "22/23",       "VIC",       386373862.86,
+           "August", "22/23",       "VIC",        450615318.9,
+        "September", "22/23",       "VIC",       527734837.67,
+          "October", "22/23",       "VIC",        575715726.1,
+         "November", "22/23",       "VIC",       519338047.94,
+         "December", "22/23",       "VIC",       499009041.08,
+          "January", "22/23",       "VIC",       423251928.39,
+         "February", "22/23",       "VIC",       323689836.55,
+            "March", "22/23",       "VIC",        333750042.9,
+            "April", "22/23",       "VIC",       340058086.75,
+              "May", "22/23",       "VIC",        388157951.5,
+             "June", "22/23",       "VIC",       373346197.82,
+             "July", "22/23", "Australia",        570199372.1,
+           "August", "22/23", "Australia",       659242110.71,
+        "September", "22/23", "Australia",       797167795.77,
+          "October", "22/23", "Australia",       888535142.24,
+         "November", "22/23", "Australia",        818914946.8,
+         "December", "22/23", "Australia",       790237598.05,
+          "January", "22/23", "Australia",       693408820.19,
+         "February", "22/23", "Australia",       553467890.76,
+            "March", "22/23", "Australia",       580325765.96,
+            "April", "22/23", "Australia",       577153026.75,
+              "May", "22/23", "Australia",       623257518.13,
+             "June", "22/23", "Australia",       576627597.06,
+             "July", "23/24",       "NSW",        87662230.03,
+           "August", "23/24",       "NSW",        93724243.26,
+        "September", "23/24",       "NSW",        96012475.27,
+             "July", "23/24",       "VIC",       382943134.47,
+           "August", "23/24",       "VIC",       447394128.72,
+        "September", "23/24",       "VIC",       526453329.78,
+             "July", "23/24", "Australia",       576952581.71,
+           "August", "23/24", "Australia",       670893737.51,
+        "September", "23/24", "Australia",       809301895.87
+        )
+data <- data |> mutate(Month = factor(Month, levels = c("July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June")))
+
+
+ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linetype = Year, group = interaction(Region, Year))) +
+  geom_smooth(se=FALSE) +
+  scale_color_manual(values = c("#000000","#428bca","#b5b682")) +
+  labs(title = "Australian Dairy Milk Production",
+       subtitle = "<span style='color:#000000;'>**National Production**</span> and key dairy states 
+         <span style='color:#b5b682;'>**Victoria**</span> and 
+         <span style='color:#428bca;'>**New South Wales.**</span>",
+       x = "",
+       y = "Production (Litres)",
+       caption = "Data Source: Dairy Australia Milk Production Report September 2023")  +
+    theme_classic() +
+    theme(panel.grid = element_blank(),
+          plot.subtitle = element_markdown(),
+          legend.position = "top") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = "none", linetype = guide_legend(override.aes = list(color = "#000000")))
+
+```
+
+The label_number_si() function from the [{scales}](https://scales.r-lib.org/) package will conveniently convert your unclear labels to a more appropriate format. Lets apply it to our example from above. 🥳🎉
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+library(ggplot2) # For plotting
+library(ggtext) # For HTML rendering of text to support colour
+                # Also for Markdown rendering of text
+
+data <- tibble::tribble(
+             ~Month,   ~Year,     ~Region, ~Production_Litres,
+             "July", "22/23",       "NSW",        80742825.35,
+           "August", "22/23",       "NSW",        85515267.53,
+        "September", "22/23",       "NSW",        89642883.77,
+          "October", "22/23",       "NSW",        92774430.63,
+         "November", "22/23",       "NSW",         86431638.4,
+         "December", "22/23",       "NSW",        86230113.71,
+          "January", "22/23",       "NSW",        81030159.32,
+         "February", "22/23",       "NSW",        72891273.03,
+            "March", "22/23",       "NSW",        78366274.94,
+            "April", "22/23",       "NSW",         75805741.9,
+              "May", "22/23",       "NSW",        79986532.53,
+             "June", "22/23",       "NSW",        80446060.32,
+             "July", "22/23",       "VIC",       386373862.86,
+           "August", "22/23",       "VIC",        450615318.9,
+        "September", "22/23",       "VIC",       527734837.67,
+          "October", "22/23",       "VIC",        575715726.1,
+         "November", "22/23",       "VIC",       519338047.94,
+         "December", "22/23",       "VIC",       499009041.08,
+          "January", "22/23",       "VIC",       423251928.39,
+         "February", "22/23",       "VIC",       323689836.55,
+            "March", "22/23",       "VIC",        333750042.9,
+            "April", "22/23",       "VIC",       340058086.75,
+              "May", "22/23",       "VIC",        388157951.5,
+             "June", "22/23",       "VIC",       373346197.82,
+             "July", "22/23", "Australia",        570199372.1,
+           "August", "22/23", "Australia",       659242110.71,
+        "September", "22/23", "Australia",       797167795.77,
+          "October", "22/23", "Australia",       888535142.24,
+         "November", "22/23", "Australia",        818914946.8,
+         "December", "22/23", "Australia",       790237598.05,
+          "January", "22/23", "Australia",       693408820.19,
+         "February", "22/23", "Australia",       553467890.76,
+            "March", "22/23", "Australia",       580325765.96,
+            "April", "22/23", "Australia",       577153026.75,
+              "May", "22/23", "Australia",       623257518.13,
+             "June", "22/23", "Australia",       576627597.06,
+             "July", "23/24",       "NSW",        87662230.03,
+           "August", "23/24",       "NSW",        93724243.26,
+        "September", "23/24",       "NSW",        96012475.27,
+             "July", "23/24",       "VIC",       382943134.47,
+           "August", "23/24",       "VIC",       447394128.72,
+        "September", "23/24",       "VIC",       526453329.78,
+             "July", "23/24", "Australia",       576952581.71,
+           "August", "23/24", "Australia",       670893737.51,
+        "September", "23/24", "Australia",       809301895.87
+        )
+data <- data |> mutate(Month = factor(Month, levels = c("July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June")))
+
+
+ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linetype = Year, group = interaction(Region, Year))) +
+  geom_smooth(se=FALSE) +
+  scale_color_manual(values = c("#000000","#428bca","#b5b682")) +
+  scale_y_continuous(labels = scales::label_number_si(), breaks=seq(0,900000000,100000000)) +
+  labs(title = "Australian Dairy Milk Production",
+       subtitle = "<span style='color:#000000;'>**National Production**</span> and key dairy states 
+         <span style='color:#b5b682;'>**Victoria**</span> and 
+         <span style='color:#428bca;'>**New South Wales.**</span>",
+       x = "",
+       y = "Production (Litres)",
+       caption = "Data Source: Dairy Australia Milk Production Report September 2023")  +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "top") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = "none", linetype = guide_legend(override.aes = list(color = "#000000")))
+
+```
+
+Here is the full code 👇 enjoy!
+
+```{r, eval = FALSE}
+library(ggplot2) # For plotting
+library(ggtext) # For HTML rendering of text to support colour
+                # Also for Markdown rendering of text
+library(scales)
+
+data2 <- tibble::tribble(
+             ~Month,   ~Year,     ~Region, ~Production_Litres,
+             "July", "22/23",       "NSW",        80742825.35,
+           "August", "22/23",       "NSW",        85515267.53,
+        "September", "22/23",       "NSW",        89642883.77,
+          "October", "22/23",       "NSW",        92774430.63,
+         "November", "22/23",       "NSW",         86431638.4,
+         "December", "22/23",       "NSW",        86230113.71,
+          "January", "22/23",       "NSW",        81030159.32,
+         "February", "22/23",       "NSW",        72891273.03,
+            "March", "22/23",       "NSW",        78366274.94,
+            "April", "22/23",       "NSW",         75805741.9,
+              "May", "22/23",       "NSW",        79986532.53,
+             "June", "22/23",       "NSW",        80446060.32,
+             "July", "22/23",       "VIC",       386373862.86,
+           "August", "22/23",       "VIC",        450615318.9,
+        "September", "22/23",       "VIC",       527734837.67,
+          "October", "22/23",       "VIC",        575715726.1,
+         "November", "22/23",       "VIC",       519338047.94,
+         "December", "22/23",       "VIC",       499009041.08,
+          "January", "22/23",       "VIC",       423251928.39,
+         "February", "22/23",       "VIC",       323689836.55,
+            "March", "22/23",       "VIC",        333750042.9,
+            "April", "22/23",       "VIC",       340058086.75,
+              "May", "22/23",       "VIC",        388157951.5,
+             "June", "22/23",       "VIC",       373346197.82,
+             "July", "22/23", "Australia",        570199372.1,
+           "August", "22/23", "Australia",       659242110.71,
+        "September", "22/23", "Australia",       797167795.77,
+          "October", "22/23", "Australia",       888535142.24,
+         "November", "22/23", "Australia",        818914946.8,
+         "December", "22/23", "Australia",       790237598.05,
+          "January", "22/23", "Australia",       693408820.19,
+         "February", "22/23", "Australia",       553467890.76,
+            "March", "22/23", "Australia",       580325765.96,
+            "April", "22/23", "Australia",       577153026.75,
+              "May", "22/23", "Australia",       623257518.13,
+             "June", "22/23", "Australia",       576627597.06,
+             "July", "23/24",       "NSW",        87662230.03,
+           "August", "23/24",       "NSW",        93724243.26,
+        "September", "23/24",       "NSW",        96012475.27,
+             "July", "23/24",       "VIC",       382943134.47,
+           "August", "23/24",       "VIC",       447394128.72,
+        "September", "23/24",       "VIC",       526453329.78,
+             "July", "23/24", "Australia",       576952581.71,
+           "August", "23/24", "Australia",       670893737.51,
+        "September", "23/24", "Australia",       809301895.87
+        )
+data <- data |> mutate(Month = factor(Month, levels = c("July", "August", "September", "October", "November", "December", "January", "February", "March", "April", "May", "June")))
+
+
+ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linetype = Year, group = interaction(Region, Year))) +
+  geom_smooth(se=FALSE) +
+  scale_color_manual(values = c("#000000","#428bca","#b5b682")) +
+  scale_y_continuous(labels = scales::label_number_si()) +
+  labs(title = "Australian Dairy Milk Production",
+       subtitle = "<span style='color:#000000;'>**National Production**</span> and key dairy states 
+         <span style='color:#b5b682;'>**Victoria**</span> and 
+         <span style='color:#428bca;'>**New South Wales.**</span>",
+       x = "",
+       y = "Production (Litres)",
+       caption = "Data Source: Dairy Australia Milk Production Report September 2023")  +
+  theme_classic() +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "top") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  guides(colour = "none", linetype = guide_legend(override.aes = list(color = "#000000")))
+
+```

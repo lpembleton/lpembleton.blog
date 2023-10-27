@@ -227,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">October 10, 2023</p>
+      <p class="date-modified">October 28, 2023</p>
     </div>
   </div>
     
@@ -370,6 +370,97 @@ Note
 <span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(),</span>
 <span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="transform-axis-numbers-into-more-readable-formats" class="level2">
+<h2 class="anchored" data-anchor-id="transform-axis-numbers-into-more-readable-formats">Transform axis numbers into more readable formats</h2>
+<p>Want to avoid number labels on your plots that are difficult to read or interpret such as the all too common scientific e notation as seen in this example? 👇</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>The label_number_si() function from the <a href="https://scales.r-lib.org/">{scales}</a> package will conveniently convert your unclear labels to a more appropriate format. Lets apply it to our example from above. 🥳🎉</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here is the full code 👇 enjoy!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2) <span class="co"># For plotting</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext) <span class="co"># For HTML rendering of text to support colour</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                <span class="co"># Also for Markdown rendering of text</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>data2 <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>             <span class="sc">~</span>Month,   <span class="sc">~</span>Year,     <span class="sc">~</span>Region, <span class="sc">~</span>Production_Litres,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">80742825.35</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">85515267.53</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">89642883.77</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>          <span class="st">"October"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">92774430.63</span>,</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>         <span class="st">"November"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,         <span class="fl">86431638.4</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>         <span class="st">"December"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">86230113.71</span>,</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>          <span class="st">"January"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">81030159.32</span>,</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>         <span class="st">"February"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">72891273.03</span>,</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>            <span class="st">"March"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">78366274.94</span>,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            <span class="st">"April"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,         <span class="fl">75805741.9</span>,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>              <span class="st">"May"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">79986532.53</span>,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>             <span class="st">"June"</span>, <span class="st">"22/23"</span>,       <span class="st">"NSW"</span>,        <span class="fl">80446060.32</span>,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">386373862.86</span>,</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,        <span class="fl">450615318.9</span>,</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">527734837.67</span>,</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>          <span class="st">"October"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,        <span class="fl">575715726.1</span>,</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>         <span class="st">"November"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">519338047.94</span>,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>         <span class="st">"December"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">499009041.08</span>,</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>          <span class="st">"January"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">423251928.39</span>,</span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>         <span class="st">"February"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">323689836.55</span>,</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>            <span class="st">"March"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,        <span class="fl">333750042.9</span>,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>            <span class="st">"April"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">340058086.75</span>,</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>              <span class="st">"May"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,        <span class="fl">388157951.5</span>,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>             <span class="st">"June"</span>, <span class="st">"22/23"</span>,       <span class="st">"VIC"</span>,       <span class="fl">373346197.82</span>,</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,        <span class="fl">570199372.1</span>,</span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">659242110.71</span>,</span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">797167795.77</span>,</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>          <span class="st">"October"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">888535142.24</span>,</span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a>         <span class="st">"November"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,        <span class="fl">818914946.8</span>,</span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>         <span class="st">"December"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">790237598.05</span>,</span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>          <span class="st">"January"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">693408820.19</span>,</span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>         <span class="st">"February"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">553467890.76</span>,</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a>            <span class="st">"March"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">580325765.96</span>,</span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>            <span class="st">"April"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">577153026.75</span>,</span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>              <span class="st">"May"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">623257518.13</span>,</span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>             <span class="st">"June"</span>, <span class="st">"22/23"</span>, <span class="st">"Australia"</span>,       <span class="fl">576627597.06</span>,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"23/24"</span>,       <span class="st">"NSW"</span>,        <span class="fl">87662230.03</span>,</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"23/24"</span>,       <span class="st">"NSW"</span>,        <span class="fl">93724243.26</span>,</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"23/24"</span>,       <span class="st">"NSW"</span>,        <span class="fl">96012475.27</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"23/24"</span>,       <span class="st">"VIC"</span>,       <span class="fl">382943134.47</span>,</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"23/24"</span>,       <span class="st">"VIC"</span>,       <span class="fl">447394128.72</span>,</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"23/24"</span>,       <span class="st">"VIC"</span>,       <span class="fl">526453329.78</span>,</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>             <span class="st">"July"</span>, <span class="st">"23/24"</span>, <span class="st">"Australia"</span>,       <span class="fl">576952581.71</span>,</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>           <span class="st">"August"</span>, <span class="st">"23/24"</span>, <span class="st">"Australia"</span>,       <span class="fl">670893737.51</span>,</span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a>        <span class="st">"September"</span>, <span class="st">"23/24"</span>, <span class="st">"Australia"</span>,       <span class="fl">809301895.87</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">Month =</span> <span class="fu">factor</span>(Month, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"July"</span>, <span class="st">"August"</span>, <span class="st">"September"</span>, <span class="st">"October"</span>, <span class="st">"November"</span>, <span class="st">"December"</span>, <span class="st">"January"</span>, <span class="st">"February"</span>, <span class="st">"March"</span>, <span class="st">"April"</span>, <span class="st">"May"</span>, <span class="st">"June"</span>)))</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> Month, <span class="at">y =</span> Production_Litres, <span class="at">colour =</span> Region, <span class="at">linetype =</span> Year, <span class="at">group =</span> <span class="fu">interaction</span>(Region, Year))) <span class="sc">+</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#000000"</span>,<span class="st">"#428bca"</span>,<span class="st">"#b5b682"</span>)) <span class="sc">+</span></span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number_si</span>()) <span class="sc">+</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Australian Dairy Milk Production"</span>,</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"&lt;span style='color:#000000;'&gt;**National Production**&lt;/span&gt; and key dairy states </span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a><span class="st">         &lt;span style='color:#b5b682;'&gt;**Victoria**&lt;/span&gt; and </span></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a><span class="st">         &lt;span style='color:#428bca;'&gt;**New South Wales.**&lt;/span&gt;"</span>,</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">""</span>,</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Production (Litres)"</span>,</span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Data Source: Dairy Australia Milk Production Report September 2023"</span>)  <span class="sc">+</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(),</span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">vjust =</span> <span class="fl">0.5</span>, <span class="at">hjust=</span><span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour =</span> <span class="st">"none"</span>, <span class="at">linetype =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"#000000"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
