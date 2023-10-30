@@ -8,6 +8,7 @@ website:
   twitter-card: 
     site: "@lwpembleton"
   google-analytics: G-NQ96R1Y33J
+  cookie-consent: true
   navbar:
     right:
       - text: About
