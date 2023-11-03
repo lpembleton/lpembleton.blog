@@ -430,3 +430,25 @@ ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linet
   guides(colour = "none", linetype = guide_legend(override.aes = list(color = "#000000")))
 
 ```
+
+## Elegantly Join 3+ tibbles using a common key
+
+Joining two tibbles is simple and concise using the join commands from [dplyr](https://dplyr.tidyverse.org/). However, when you have three or more tibbles to join, you will often find yourself either writing a long pipe or taking a stepwise approach of joining the first two into a new object and using that to join with the third tibble, and so on.
+
+Nevertheless, you can avoid all this by combining the reduce function from the 🐈‍⬛ [purrr](https://purrr.tidyverse.org/) package with the relevant join command. Below is a simple example. 👇
+
+```{r, echo = TRUE}
+library(dplyr)
+library(purrr)
+
+dt1 <- tibble(character = c("Harry", "Hermione", "Draco"),
+              house = c("Gryffindor", "Gryffindor", "Slytherin"))
+
+dt2 <- tibble(character = c("Harry", "Hermione", "Draco"),
+              wand = c("Holly-phonenix-feather", "Vine-dragon-heartstring", "Hawthorn-unicorn-hair"))
+
+dt3 <- tibble(character = c("Harry", "Hermione", "Draco"),
+              gender = c("Male", "Female", "Male"))            
+
+reduce(list(dt1, dt2, dt3), left_join, by = 'character')
+```
