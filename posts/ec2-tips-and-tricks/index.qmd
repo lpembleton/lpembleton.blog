@@ -140,7 +140,7 @@ nvme drives on EC2 instances are typically ephemeral disks, meaning they physica
 To start, you need to acquire the R Project's public GPG key. This key will ensure the authenticity and security of the software you're about to install. Open your terminal and use the following command:
 
 ``` bash
-wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg –dearmor -o /usr/share/keyrings/r-project.gpg 
+wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor -o /usr/share/keyrings/r-project.gpg 
 ```
 
 #### Step 2: Add the R Source List to APT
@@ -164,7 +164,7 @@ sudo apt update
 Now, you're ready to install R on your system. Execute this command:
 
 ``` bash
-sudo apt install –no-install-recommends r-base 
+sudo apt install --no-install-recommends r-base 
 ```
 
 ::: callout-tip
@@ -185,6 +185,8 @@ the tidyverse is a large collection of packages and therefore naturally there ar
 sudo apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 ```
 
+need to install make
+
 ### BLGR
 
 The genomic selection package BLGR has two additional dependecies.
@@ -192,6 +194,10 @@ The genomic selection package BLGR has two additional dependecies.
 https://github.com/gdlc/BGLR-R
 
 https://askubuntu.com/questions/623578/installing-blas-and-lapack-packages
+
+```         
+sudo apt-get install libblas-dev liblapack-dev
+```
 
 https://thecoatlessprofessor.com/programming/cpp/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/
 

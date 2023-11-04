@@ -254,7 +254,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 4, 2023</p>
+      <p class="date-modified">November 5, 2023</p>
     </div>
   </div>
     
@@ -492,8 +492,8 @@ Note
 </section>
 <section id="elegantly-join-3-tibbles-using-a-common-key" class="level2">
 <h2 class="anchored" data-anchor-id="elegantly-join-3-tibbles-using-a-common-key">Elegantly Join 3+ tibbles using a common key</h2>
-<p>Joining two tibbles is simple and concise using the join commands from dplyr. However when you have three or more tibbles to join, you will often find yourself writing a long pipe common or taking a stepwise approach of joining the first two into a new object and using that to join with the third tibble and so on.</p>
-<p>However, you can avoid all this by combing the reduce function the 🐈‍⬛ purrrr package along with the relevant join command. Below is a simple example. 👇</p>
+<p>Joining two tibbles is simple and concise using the join commands from <a href="https://dplyr.tidyverse.org/">dplyr</a>. However, when you have three or more tibbles to join, you will often find yourself either writing a long pipe or taking a stepwise approach of joining the first two into a new object and using that to join with the third tibble, and so on.</p>
+<p>Nevertheless, you can avoid all this by combining the reduce function from the 🐈‍⬛ <a href="https://purrr.tidyverse.org/">purrr</a> package with the relevant join command. Below is a simple example. 👇</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
@@ -515,6 +515,69 @@ Note
 1 Harry     Gryffindor Holly-phonenix-feather  Male  
 2 Hermione  Gryffindor Vine-dragon-heartstring Female
 3 Draco     Slytherin  Hawthorn-unicorn-hair   Male  </code></pre>
+</div>
+</div>
+</section>
+<section id="add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" class="level2">
+<h2 class="anchored" data-anchor-id="add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data">Add a prefix to column names when pivoting from long data to wide data</h2>
+<p>At times, you may find it necessary to apply a prefix to the column names created when transitioning from long-format data to wide-format data. The good news is that the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a> function streamlines this process by offering the names_prefix argument. This feature proves particularly valuable when working with multiple tibbles that share similar naming conventions and structures. After all, nobody enjoys dealing with default conflict resultion of identical column names like colname1.x, colname1.y, colname2.x, colname2.y, and so on.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>                 <span class="sc">~</span>Date, <span class="sc">~</span>Measurement, <span class="sc">~</span>Value,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>             20100101L,   <span class="st">"T.Max_oC"</span>,   <span class="fl">31.2</span>,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>             20100102L,   <span class="st">"T.Max_oC"</span>,   <span class="fl">31.7</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>             20100103L,   <span class="st">"T.Max_oC"</span>,   <span class="fl">32.5</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>             20100104L,   <span class="st">"T.Max_oC"</span>,   <span class="fl">28.9</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>             20100101L,   <span class="st">"T.Min_oC"</span>,   <span class="fl">21.3</span>,</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>             20100102L,   <span class="st">"T.Min_oC"</span>,   <span class="fl">21.5</span>,</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>             20100103L,   <span class="st">"T.Min_oC"</span>,   <span class="fl">22.2</span>,</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>             20100104L,   <span class="st">"T.Min_oC"</span>,   <span class="fl">22.1</span>,</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>             20100101L,    <span class="st">"Rain_mm"</span>,    <span class="fl">0.6</span>,</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>             20100102L,    <span class="st">"Rain_mm"</span>,    <span class="fl">0.4</span>,</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>             20100103L,    <span class="st">"Rain_mm"</span>,    <span class="fl">0.8</span>,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>             20100104L,    <span class="st">"Rain_mm"</span>,    <span class="fl">6.8</span>,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>             20100101L,    <span class="st">"Evap_mm"</span>,    <span class="fl">4.1</span>,</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>             20100102L,    <span class="st">"Evap_mm"</span>,    <span class="fl">4.6</span>,</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>             20100103L,    <span class="st">"Evap_mm"</span>,    <span class="fl">5.9</span>,</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>             20100104L,    <span class="st">"Evap_mm"</span>,    <span class="fl">4.4</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>             )</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 x 3
+       Date Measurement Value
+      &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;
+ 1 20100101 T.Max_oC     31.2
+ 2 20100102 T.Max_oC     31.7
+ 3 20100103 T.Max_oC     32.5
+ 4 20100104 T.Max_oC     28.9
+ 5 20100101 T.Min_oC     21.3
+ 6 20100102 T.Min_oC     21.5
+ 7 20100103 T.Min_oC     22.2
+ 8 20100104 T.Min_oC     22.1
+ 9 20100101 Rain_mm       0.6
+10 20100102 Rain_mm       0.4
+11 20100103 Rain_mm       0.8
+12 20100104 Rain_mm       6.8
+13 20100101 Evap_mm       4.1
+14 20100102 Evap_mm       4.6
+15 20100103 Evap_mm       5.9
+16 20100104 Evap_mm       4.4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>weather <span class="sc">|&gt;</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> Measurement, </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_prefix =</span> <span class="st">"UQGatton_"</span>,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 x 5
+      Date UQGatton_T.Max_oC UQGatton_T.Min_oC UQGatton_Rain_mm UQGatton_Evap_mm
+     &lt;int&gt;             &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
+1 20100101              31.2              21.3              0.6              4.1
+2 20100102              31.7              21.5              0.4              4.6
+3 20100103              32.5              22.2              0.8              5.9
+4 20100104              28.9              22.1              6.8              4.4</code></pre>
 </div>
 </div>
 

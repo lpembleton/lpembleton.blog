@@ -452,3 +452,39 @@ dt3 <- tibble(character = c("Harry", "Hermione", "Draco"),
 
 reduce(list(dt1, dt2, dt3), left_join, by = 'character')
 ```
+
+## Add a prefix to column names when pivoting from long-data to wide-data
+
+At times, you may find it necessary to apply a prefix to the column names created when transitioning from long-format data to wide-format data. The good news is that the [pivot_wider()](https://tidyr.tidyverse.org/reference/pivot_wider.html) function streamlines this process by offering the names_prefix argument. This feature proves particularly valuable when working with multiple tibbles that share similar naming conventions and structures. After all, nobody enjoys dealing with default conflict resultion of identical column names like colname1.x, colname1.y, colname2.x, colname2.y, and so on.
+
+```{r, echo = TRUE}
+library(tidyr)
+library(tibble)
+
+weather <- tribble(
+                 ~Date, ~Measurement, ~Value,
+             20100101L,   "T.Max_oC",   31.2,
+             20100102L,   "T.Max_oC",   31.7,
+             20100103L,   "T.Max_oC",   32.5,
+             20100104L,   "T.Max_oC",   28.9,
+             20100101L,   "T.Min_oC",   21.3,
+             20100102L,   "T.Min_oC",   21.5,
+             20100103L,   "T.Min_oC",   22.2,
+             20100104L,   "T.Min_oC",   22.1,
+             20100101L,    "Rain_mm",    0.6,
+             20100102L,    "Rain_mm",    0.4,
+             20100103L,    "Rain_mm",    0.8,
+             20100104L,    "Rain_mm",    6.8,
+             20100101L,    "Evap_mm",    4.1,
+             20100102L,    "Evap_mm",    4.6,
+             20100103L,    "Evap_mm",    5.9,
+             20100104L,    "Evap_mm",    4.4
+             )
+weather
+
+weather |> 
+  pivot_wider(names_from = Measurement, 
+              names_prefix = "UQGatton_",
+              values_from = Value)
+
+```
