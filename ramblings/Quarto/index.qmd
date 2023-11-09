@@ -1,0 +1,42 @@
+---
+title: "Quarto"
+description: "A collection of short Quarto code snippets and tricks that individually are too short for a blog post"
+author: "LW Pembleton"
+date-modified: last-modified
+categories: [Quarto]
+image: images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg
+draft: false
+highlight-style: ayu
+---
+
+![\~Photo by Solstice Hannan on Unsplash\~](images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg)
+
+## Folding Non-Executable Code in Quarto Documents
+
+In [Quarto](https://quarto.org/), folding non-executable code blocks may seem challenging since the built-in [code-folding](https://quarto.org/docs/output-formats/html-code.html#folding-code) \`#\| code-fold: true\` for non-executed blocks is not supported. This can be particularly inconvenient when working with extensive external commands like bash scripts used for data preprocessing.
+
+Fortunately, a simple solution is available, as [shared](https://github.com/quarto-dev/quarto-cli/issues/4693) in response to a Quarto GitHub issue. You can achieve code folding for non-executable code by wrapping it in HTML `<details>` tags. Here's an example:
+
+````         
+<details>
+<summary>Code: My non-executable code</summary>
+
+```bash
+cat vcf_file | sed -n '/#CHROM/,$p' | cut -f 1,2,4,5 > variant_info.txt 
+```
+
+</details>
+````
+
+Which when rendered will look like 👇
+
+<details>
+<summary>Code: My non-executable code</summary>
+
+```bash
+cat vcf_file | sed -n '/#CHROM/,$p' | cut -f 1,2,4,5 > variant_info.txt 
+```
+
+</details>
+
+This method allows you to organize and present non-executable code blocks more effectively in your Quarto documents.

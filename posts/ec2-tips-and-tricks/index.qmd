@@ -130,7 +130,7 @@ sudo chown -R $USER /home/ubuntu/data
 For more details visit the aws [help page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
 
 ::: callout-caution
-nvme drives on EC2 instances are typically ephemeral disks, meaning they physically exist on the actual host instance and therefore they do not persist after reboots or shutdown. All data will be lost and you will need to remount after a restart.
+nvme drives on EC2 instances are typically ephemeral disks, meaning they physically exist on the actual host instance and therefore they do not persist after reboots or shutdown (as the new physical host will change). All data will be lost and you will need to remount after a restart.
 :::
 
 ## Installing the latest stable R on Ubuntu
@@ -175,7 +175,15 @@ That's it! You've successfully installed the latest stable version of R on your 
 
 ## Install relevant R packages
 
-Although install packages in R on windows is relatively straightforward using \`instally.packages()\`, on linux you will need to manually install any external dependencies. Below are the relevant details for some common packages
+Installing packages in R on Windows is a relatively straightforward process, typically accomplished using the \`instally.packages()\` function. However, the process can be a bit more involved on Linux, as you'll often need to manually install external dependencies. In this article, we'll provide you with essential details for common packages, making the installation process smoother.
+
+In many cases, you'll find that the 'make' command is a fundamental requirement. While you can install 'make' as a standalone package, it's usually more beneficial to install a comprehensive set of build tools through the 'build-essential' package.
+
+To install 'build-essential' on a Debian-based Linux system like Ubuntu, run the following command in your terminal:
+
+``` bash
+sudo apt-get install build-essential
+```
 
 ### Tidyverse
 
@@ -196,7 +204,7 @@ https://github.com/gdlc/BGLR-R
 https://askubuntu.com/questions/623578/installing-blas-and-lapack-packages
 
 ```         
-sudo apt-get install libblas-dev liblapack-dev
+sudo apt-get install libblas-dev liblapack-dev gfortran
 ```
 
 https://thecoatlessprofessor.com/programming/cpp/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/

@@ -129,11 +129,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -519,7 +519,7 @@ Note
 </div>
 </section>
 <section id="add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" class="level2">
-<h2 class="anchored" data-anchor-id="add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data">Add a prefix to column names when pivoting from long data to wide data</h2>
+<h2 class="anchored" data-anchor-id="add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data">Add a prefix to column names when pivoting from long-data to wide-data</h2>
 <p>At times, you may find it necessary to apply a prefix to the column names created when transitioning from long-format data to wide-format data. The good news is that the <a href="https://tidyr.tidyverse.org/reference/pivot_wider.html">pivot_wider()</a> function streamlines this process by offering the names_prefix argument. This feature proves particularly valuable when working with multiple tibbles that share similar naming conventions and structures. After all, nobody enjoys dealing with default conflict resultion of identical column names like colname1.x, colname1.y, colname2.x, colname2.y, and so on.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
