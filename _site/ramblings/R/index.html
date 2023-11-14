@@ -129,11 +129,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta name="twitter:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -254,7 +254,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 5, 2023</p>
+      <p class="date-modified">November 12, 2023</p>
     </div>
   </div>
     
@@ -578,6 +578,22 @@ Note
 2 20100102              31.7              21.5              0.4              4.6
 3 20100103              32.5              22.2              0.8              5.9
 4 20100104              28.9              22.1              6.8              4.4</code></pre>
+</div>
+</div>
+</section>
+<section id="initalise-an-empty-tibble-with-predined-column-names" class="level2">
+<h2 class="anchored" data-anchor-id="initalise-an-empty-tibble-with-predined-column-names">Initalise an empty tibble with predined column names</h2>
+<p>Before diving into a loop of calculations, it’s often beneficial to initialise an empty tibble to seamlessly store results from each iteration. Instead of manually specifying column names, you can streamline the process by leveraging the power of the <a href="https://purrr.tidyverse.org/reference/map.html">map_dfc()</a> command in <a href="https://purrr.tidyverse.org/">{purrr}</a> 🐈 Simply pass a vector of column names to tibble, and watch your data structure effortlessly take shape.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>vec_colnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Wizard"</span>, <span class="st">"House"</span>, <span class="st">"Wand"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>empty_tibble <span class="ot">&lt;-</span> vec_colnames <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dfc</span>(setNames, <span class="at">object =</span> <span class="fu">list</span>(<span class="fu">character</span>()))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>empty_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 x 3
+# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
 </div>
 </div>
 

@@ -488,3 +488,16 @@ weather |>
               values_from = Value)
 
 ```
+
+## Initalise an empty tibble with predined column names
+
+Before diving into a loop of calculations, it's often beneficial to initialise an empty tibble to seamlessly store results from each iteration. Instead of manually specifying column names, you can streamline the process by leveraging the power of the [map_dfc()](https://purrr.tidyverse.org/reference/map.html) command in [{purrr}](https://purrr.tidyverse.org/) 🐈 Simply pass a vector of column names to tibble, and watch your data structure effortlessly take shape.
+
+```{r, echo = TRUE}
+vec_colnames <- c("Wizard", "House", "Wand")
+
+empty_tibble <- vec_colnames |>
+  purrr::map_dfc(setNames, object = list(character()))
+
+empty_tibble
+```
