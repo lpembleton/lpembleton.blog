@@ -501,3 +501,16 @@ empty_tibble <- vec_colnames |>
 
 empty_tibble
 ```
+
+`map_dfc()` has now been superseded 🏗 by `map()` and I have also updated the code to be more explicate and inline with {purrr} recommendations. Thanks [Jim Gardner](https://jimgar.github.io/) for the [suggestions and edits](https://fosstodon.org/@jimgar/111409203326035011).
+
+```{r, echo = TRUE}
+vec_colnames <- c("Wizard", "House", "Wand")
+
+empty_tibble <- vec_colnames |> 
+  purrr::map(\(x) setNames(object = tibble::tibble(character()), nm = x)) |> 
+  purrr::list_cbind()
+
+empty_tibble
+```
+

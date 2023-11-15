@@ -254,7 +254,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 12, 2023</p>
+      <p class="date-modified">November 16, 2023</p>
     </div>
   </div>
     
@@ -591,6 +591,20 @@ Note
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map_dfc</span>(setNames, <span class="at">object =</span> <span class="fu">list</span>(<span class="fu">character</span>()))</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>empty_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 0 x 3
+# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
+</div>
+</div>
+<p><code>map_dfc()</code> has now been superseded 🏗 by <code>map()</code> and I have also updated the code to be more explicate and inline with {purrr} recommendations. Thanks <a href="https://jimgar.github.io/">Jim Gardner</a> for the <a href="https://fosstodon.org/@jimgar/111409203326035011">suggestions and edits</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>vec_colnames <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Wizard"</span>, <span class="st">"House"</span>, <span class="st">"Wand"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>empty_tibble <span class="ot">&lt;-</span> vec_colnames <span class="sc">|&gt;</span> </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(\(x) <span class="fu">setNames</span>(<span class="at">object =</span> tibble<span class="sc">::</span><span class="fu">tibble</span>(<span class="fu">character</span>()), <span class="at">nm =</span> x)) <span class="sc">|&gt;</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">list_cbind</span>()</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>empty_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 x 3
 # i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
