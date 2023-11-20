@@ -1,0 +1,88 @@
+---
+title: "Navigating EC2 Pricing - The Better Way"
+description: "An interative visual analysis of EC2 instance prices for better informed selection"
+author: "LW Pembleton"
+date: 18 11 2023
+categories: [EC2, AWS, Bioinformatics]
+image: images/growtika-TKAg3WignSw-unsplash.jpg
+draft: false
+highlight-style: ayu
+---
+
+![~Photo by [Growtika](https://unsplash.com/@growtika) on Unsplash~](images/growtika-TKAg3WignSw-unsplash.jpg)
+
+## Navigating EC2 pricing - *the better way*
+
+When it comes to choosing the ideal AWS EC2 instance for your workload, navigating through the myriad of options can be a daunting task. Factors like memory, CPU, instance type, and family interplay in a complex pricing 💵 dance 🕺 that isn't always logical (at least not on the surface), often leaving you puzzled about the most cost-effective choice 😕
+
+To simplify this process for myself I went ahead and developed an interactive plot that maps out the relationship between AWS EC2 instance types, their associated memory, CPU configurations, and pricing in the AU ap-southeast-2 region. This tool allows me to make informed decisions by visualizing the cost-effectiveness of different instance types based on their specific needs.
+
+How often doing bioinformatics dev work do you say I just need a couple of CPUs, but a **good** 💪 amount of RAM, maybe 64GB, but what if I max that out 🤔 should I just go for more at the start, say 96GB? I wonder whether that will cost much extra? What even instance family do I want for this?...Sure go ahead trawl 🔍 through the endless AWS tables and lists of EC2 instance type, compare, then search for the hourly price, cross reference... or just look at a plot 👇
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(readxl)
+library(paletteer)
+library(plotly)
+
+data <- read_excel("data/aws-ec2-instance-comparison.xlsx", sheet = "EC2_relevant")
+data <- data |> mutate(Clock_Speed_GHz = ifelse(Clock_Speed_GHz=="unknown", NA, Clock_Speed_GHz)) |>
+  mutate(Clock_Speed_GHz = as.numeric(Clock_Speed_GHz))
+
+# TODO: change number of decimals on clock speed
+
+data2 <- data |> 
+  filter(Memory_GiB <= 1000) |> 
+  filter(vCPUs <= 72) |>
+  mutate(vCPUs = as.factor(vCPUs))
+#high mem and vCPUs options removed as these are likely uneeded in a dev environment and have more of a role in batch job queues for multi job processing. 
+
+x <- sort(unique(data2$vCPUs))
+
+my_pal <- setNames(as.vector(paletteer_d("ggthemes::Tableau_20", length(x))), as.character(x))
+
+x_breaks <- c(1, 2, 4, 6, 8, 16, 32, 48, 64, 96, 128, 192, 256, 384, 512, 976)
+y_breaks <- c(0.1, 0.2, 0.3, 0.4, 0.5, 1, 2, 5, 10, 15, 20, 40)
+
+plot_ly() %>%
+  add_trace(data = data2, x = ~Memory_GiB, y = ~On_Demand,
+            type = "scatter", mode = "markers",
+            text = ~paste("Price US$: ", On_Demand, 
+                          '<br>Name:', API_Name,
+                          '<br>Type:', Instance_Type,
+                          '<br>Ghz:', Clock_Speed_GHz,
+                          '<br>Network:', Network_Performance,
+                          '<br>Storage:', Instance_Storage),
+            color = ~vCPUs, colors = my_pal, size = ~Clock_Speed_GHz, showlegend = T) %>%
+  layout(., 
+         yaxis = list(title = 'Hourly Price (US$)', type = "log", autotick = F, tickmode = "array", tickvals = y_breaks),
+         xaxis = list(title = 'Memory (GiB)', type = "log", autotick = F, tickmode = "array", tickvals = x_breaks),
+         title = 'AWS On Demand EC2 Instances<br>ap-southeast-2 region', 
+         legend = list(title=list(text='<b> vCPUs </b>'))) 
+```
+
+The x-axis represents memory allocation while the y-axis denotes the hourly price. I chose memory or RAM to be be my x-axis as I feel it is most commonly the more important determining variable in a bioinformatic dev environment. Number of vCPUs is represented by the various colours and CPU clock speed (GHz) controls the point size. Each point correspond to a specific instance type available for EC2 on-demand usage, and full instance details are displayed when hovering over the point, revealing additional information such as network and storage configurations.
+
+::: callout-note
+To keep the plot focused and useable I removed instances with more than 1000GB of RAM and/or more than 72 vCPUs. It is also unlikely you wouldn't be after these for a dev environment - they are better suited to BATCH queues with multi job processing.
+:::
+
+::: callout-warning
+These prices were valid in October 2023, however, they are likely to change overtime.
+:::
+
+### It pays to shop around
+
+While there is not surprisingly a correlation between memory and pricing, there are scenarios across the spectrum where you can get an instance with more RAM 🐏 at a lower price than another instance with less RAM, and the same with vCPU number, etc. It is about finding those sweet spots 🍭 that work for our needs.
+
+An example of this: say you are after an instance with 16GB of RAM you might go for the standard compute optimised c5.2xlarge for \$0.44/hr, orrr you could instead get a memory optimised z1d.xlarge with a higher clock speed and twice as much RAM (32GB) for pretty much the same price \$0.452/hr 😊️ orrr the memory optimised r5a.xlarge also with 32GB RAM but at a much lower \$0.272/hr 😀 Yes nearly 40% cheaper than maybe your initial default choice but with twice as much RAM 😏👍
+
+### Future Prospects:
+
+As of now, the interactive scatter plot encompasses data solely from the AU ap-southeast-2 region. I'm open to expanding and updating this tool to include additional regions or further refine its functionalities based on the community's interest and feedback. Some of things features I am thinking of adding are:
+
+-   the ability to highlight instances with similar prices, when hovering over a point
+
+-   the ability to search for a instance type/name
+
+-   add jitter to prevent overlapping points - the ability to copy the instance name when hovering

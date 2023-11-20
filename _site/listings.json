@@ -10,6 +10,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/aws-ec2-pricing/index.html",
       "/posts/aws-cli-s3/index.html",
       "/posts/push-docker-to-ecr/index.html",
       "/posts/annotate-equations/index.html",
