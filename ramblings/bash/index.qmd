@@ -60,3 +60,27 @@ basename file.txt .txt
 ```
 
 Which in this example will return `file`
+
+## Streamling File Transfer via a Bastion Host
+
+![](images/bastion.png)
+
+Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn\'t have to be a complex process. With a straightforward command utilising **`scp`** and the **`ProxyJump`** feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here\'s how to automate the transfer to the endpoint private server via the public-facing bastion host.
+
+``` bash
+scp -J <user-name>@<Public-IPv4-DNS> \
+	<file-to-transfer> \
+	<user-name>@<IP-address>:/path/for/remote/file
+```
+
+For systems where **`ProxyJump`** isn\'t available, you can opt for the **`ProxyCommand`** method instead.
+
+``` bash
+scp -o 'ProxyCommand ssh <user-name>@<Public-IPv4-DNS> -W %h:%p' \
+  <file-to-transfer> \
+  <user-name>@<IP-address>:/path/for/remote/file
+```
+
+::: callout-note
+It\'s worth noting that while both methods facilitate the transfer, **`ProxyJump`** is recommended over **`ProxyCommand`** as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.
+:::
