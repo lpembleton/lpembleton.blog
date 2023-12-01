@@ -1,1 +1,7 @@
 /* css styles */
+
+// import google fonts
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+// use Nunito font if avaliable
+$font-family-sans-serif:  "Sora", sans-serif !default;

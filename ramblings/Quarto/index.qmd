@@ -7,6 +7,7 @@ categories: [Quarto]
 image: images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg
 draft: false
 highlight-style: ayu
+toc: true
 ---
 
 ![\~Photo by Solstice Hannan on Unsplash\~](images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg)
@@ -31,9 +32,10 @@ cat vcf_file | sed -n '/#CHROM/,$p' | cut -f 1,2,4,5 > variant_info.txt
 Which when rendered will look like 👇
 
 <details>
+
 <summary>Code: My non-executable code</summary>
 
-```bash
+``` bash
 cat vcf_file | sed -n '/#CHROM/,$p' | cut -f 1,2,4,5 > variant_info.txt 
 ```
 

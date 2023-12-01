@@ -1,3 +1,87 @@
 /*-- scss:defaults --*/
 // Base document colors
-$navbar-bg: #363b74;
+//$navbar-bg: #363b74;
+
+// Import fonts (define mainfont in _quarto.yml)
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;800&family=Nunito:wght@300;800&family=Roboto+Mono:wght@400;700&display=swap');
+
+// Colors
+$dark-sage-green: 	#052b6b;
+$cream: #fffcf7;
+$dark-gray: #5A5856;
+$gray: #052b6b;
+$light-gray: #949799;
+$bright-green: #5cdb95;
+$light-blue: #7BB3FF; 
+$black: #000000;
+$burnt-orange: #ad7237;
+$very-light-blue: #edf2fb;
+$very-light-purple: #edf2f4;
+$link-green: #1982c4;
+
+
+// Base document colors
+$navbar-bg: $cream;
+$navbar-fg: $gray; 
+$navbar-hl: $bright-green; 
+$body-bg: $cream;
+$body-color: $gray;
+$footer-bg: $cream; 
+//$link-color: $bright-green;
+$link-color: $link-green;
+$btn-link-color: $bright-green;
+$footer-fg: $dark-sage-green;
+
+// Inline code
+$code-bg: $very-light-blue;
+$code-color: $burnt-orange; //$purple; 
+
+// Code blocks
+$code-block-bg: $very-light-blue;
+
+/*-- scss:rules --*/
+
+/* ELEMENT SELECTORS */
+
+.highlight {
+    background: linear-gradient(120deg, #5cdb95 0%, #5cdb95 100%);
+    background-repeat: no-repeat;
+    background-size: 100% 50%;
+    background-position: 0 80%;
+}
+
+
+.centre-title {
+    text-align: center;
+    left: 50%;
+    color: $bright-green;
+}
+
+
+#centre-title {
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: $bright-green;
+  //text-align: center;
+}
+
+h1 {
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: $dark-sage-green;
+}
+
+h2, h3, h4, h5, h6 {
+  letter-spacing: 3px;
+  font-weight: 700;
+  color: $gray;
+}
+
+h3 {
+  font-size: 35px;
+}
+
+body {
+  line-height: 1.5;
+  font-size: 19.5px;
+}

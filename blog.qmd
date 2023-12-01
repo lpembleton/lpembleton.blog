@@ -1,5 +1,5 @@
 ---
-title: "Ponderings in Diagon Alley"
+title: <h1><span class="highlight">Ponderings in Diagon Alley</span></h1>
 description: "Exploring the world of genomics, R and cloud computing"
 listing:
   contents: posts

@@ -8,18 +8,22 @@ website:
   twitter-card: 
     site: "@lwpembleton"
   google-analytics: G-NQ96R1Y33J
-  cookie-consent: true
+  cookie-consent:
+    type: express
+    prefs-text: "Cookie Preferences 🍪"
+    
   navbar:
+    logo: assets/lpembleton/img/dna-logo.svg
     right:
-      - text: About
+      - text: ABOUT
         href: index.qmd
-      - text: Blog
+      - text: BLOG
         href: blog.qmd
-      - text: Ramblings
+      - text: RAMBLINGS
         href: ramblings.qmd
-      - text: Publications
+      - text: PUBLICATIONS
         href: publications/publications.qmd
-      - text: Conferences
+      - text: CONFERENCES
         href: pages/conferences.qmd
       - icon: github
         href: https://github.com/lpembleton
@@ -37,10 +41,21 @@ website:
         href: https://linkedin.com/in/lpembleton
       - text: "{{< fa solid box-open >}}"
         href: https://lpembleton.github.io/StAMPP/
+        
+  page-footer:  
+    left: "&#169; 2023 Luke Pembleton &#8729; Made with [Quarto](https://quarto.org)"
+    center: |
+      <a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener">{{< fa brands mastodon >}}</a>
+      <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener">{{< fa brands github >}}</a>
+      <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener">{{< fa brands twitter >}}</a>
+      <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en" title="Google Scholar" target="_blank"rel="noopener">{{< ai google-scholar >}}</a>
+      <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener">{{< fa brands linkedin >}}</a>
+
+        
 format:
   html:
     theme: 
-    - litera
-    - theme.scss
+      - theme.scss
+    mainfont: Nunito
 
 editor: visual

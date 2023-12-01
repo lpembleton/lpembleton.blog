@@ -138,7 +138,7 @@ cookieconsent.run({
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -157,23 +157,23 @@ cookieconsent.run({
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">About</span></a>
+ <span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+ <span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../ramblings.html" rel="" target="">
- <span class="menu-text">Ramblings</span></a>
+ <span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../publications/publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+ <span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../pages/conferences.html" rel="" target="">
- <span class="menu-text">Conferences</span></a>
+ <span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/lpembleton" rel="" target=""><i class="bi bi-github" role="img">
@@ -222,7 +222,18 @@ cookieconsent.run({
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#using-tee-to-log-command-outputs." id="toc-using-tee-to-log-command-outputs." class="nav-link active" data-scroll-target="#using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</a></li>
+  <li><a href="#using-basename-in-bash-for-file-name-extraction" id="toc-using-basename-in-bash-for-file-name-extraction" class="nav-link" data-scroll-target="#using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</a></li>
+  <li><a href="#streamling-file-transfer-via-a-bastion-host" id="toc-streamling-file-transfer-via-a-bastion-host" class="nav-link" data-scroll-target="#streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</a></li>
+  <li><a href="#extract-data-lines-from-a-vcf-file" id="toc-extract-data-lines-from-a-vcf-file" class="nav-link" data-scroll-target="#extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -254,7 +265,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 24, 2023</p>
+      <p class="date-modified">November 30, 2023</p>
     </div>
   </div>
     
@@ -290,11 +301,11 @@ cookieconsent.run({
 <section id="streamling-file-transfer-via-a-bastion-host" class="level2">
 <h2 class="anchored" data-anchor-id="streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</h2>
 <p><img src="images/bastion.png" class="img-fluid"></p>
-<p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn't have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here's how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
+<p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For systems where <strong><code>ProxyJump</code></strong> isn't available, you can opt for the <strong><code>ProxyCommand</code></strong> method instead.</p>
+<p>For systems where <strong><code>ProxyJump</code></strong> isn’t available, you can opt for the <strong><code>ProxyCommand</code></strong> method instead.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-o</span> <span class="st">'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p'</span> <span class="dt">\</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -308,9 +319,16 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It's worth noting that while both methods facilitate the transfer, <strong><code>ProxyJump</code></strong> is recommended over <strong><code>ProxyCommand</code></strong> as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.</p>
+<p>It’s worth noting that while both methods facilitate the transfer, <strong><code>ProxyJump</code></strong> is recommended over <strong><code>ProxyCommand</code></strong> as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.</p>
 </div>
 </div>
+</section>
+<section id="extract-data-lines-from-a-vcf-file" class="level2">
+<h2 class="anchored" data-anchor-id="extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</h2>
+<p><img src="images/vcffileformat.png" class="img-fluid"></p>
+<p>Visual inspection 🔍 of the data lines (i.e.&nbsp;genotype fields) of VCF file is often impeded ⛔ by the large number of meta-information lines at the top. A simple sed command that looks for the mandatory body header line can get your past this hurdle 🚧</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'/#CHROM/,$p'</span> filename.vcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In short this command searches for the pattern ‘#CHROM’ and then starts printing to the screen until the end of the file. Pipe this into a head command (<code>| head</code>) and you now have a quick and simple way 🟢 to inspect the start of a VCF file.</p>
 
 
 </section>

@@ -7,6 +7,7 @@ categories: [R]
 image: images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg
 draft: false
 highlight-style: ayu
+toc: true
 ---
 
 ![~Photo by Daria Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
@@ -513,4 +514,3 @@ empty_tibble <- vec_colnames |>
 
 empty_tibble
 ```
-

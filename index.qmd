@@ -1,5 +1,5 @@
 ---
-title: "Dr Luke Pembleton"
+title: <centre-title><span class="highlight">Dr Luke Pembleton</span></centre-title>
 description:
   Genomic Breeding Scientist and Global Strategic Science Manager at Barenbrug.
 image: avatar.jpg
@@ -27,21 +27,21 @@ about:
       href: https://linkedin.com/in/lpembleton
 ---
 
-# Education
+<h2>[Education]{.highlight}</h2>
 
 🎓 Doctor of Philosophy, Molecular Genetics from La Trobe University, 2014
 
 🎓 Bachelor of Agricultural Science, Rural Technology from the University of Queensland, 2010
 
-## About Me
+<h2>[About Me]{.highlight}</h2>
 
-Dr Luke Pembleton is a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug. He leads the development and implementation of commercial genomic breeding and associated 'omic' technologies.
+I am a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug where I lead the development and implementation of commercial genomic breeding and associated 'omic' technologies.
 
-## Interest and Skills
+<h2>[Interest and Skills]{.highlight}</h2>
 
 Most of my technical work is focused on the fields of 🧬 **Genomics**, **Genomic Selection** and **Genomic Breeding** in plants, primarily **forages** 🌱. Skilled in **bioinformatics** 👨‍💻 and passionate about the **R** programing language. Enjoy developing **cloud computing** ☁️ environments for research and production pipelines, often orchestrated with the workflow manager **Nextflow** 🔂.
 
-## Experience
+<h2>[Experience]{.highlight}</h2>
 
 ![](images/Barenbrug.svg){width="36"} **Genomic Breeding Scientist \| Global Strategic Science Manager**
 

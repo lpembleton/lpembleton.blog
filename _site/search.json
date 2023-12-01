@@ -2,7 +2,7 @@
   {
     "objectID": "ramblings.html",
     "href": "ramblings.html",
-    "title": "Ramblings",
+    "title": "",
     "section": "",
     "text": "Bash\n\n\n\n\n\n\n\nBash\n\n\n\n\nA collection of short Bash commands and tricks that individually are too short for a blog post\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nQuarto\n\n\n\n\n\n\n\nQuarto\n\n\n\n\nA collection of short Quarto code snippets and tricks that individually are too short for a blog post\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nR\n\n\n\n\n\n\n\nR\n\n\n\n\nA worthy collection of short R commands and tricks\n\n\n\n\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
   },
@@ -137,7 +137,7 @@
     "href": "index.html",
     "title": "Dr Luke Pembleton",
     "section": "",
-    "text": "🎓 Doctor of Philosophy, Molecular Genetics from La Trobe University, 2014\n🎓 Bachelor of Agricultural Science, Rural Technology from the University of Queensland, 2010\n\n\nDr Luke Pembleton is a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug. He leads the development and implementation of commercial genomic breeding and associated ‘omic’ technologies.\n\n\n\nMost of my technical work is focused on the fields of 🧬 Genomics, Genomic Selection and Genomic Breeding in plants, primarily forages 🌱. Skilled in bioinformatics 👨‍💻 and passionate about the R programing language. Enjoy developing cloud computing ☁️ environments for research and production pipelines, often orchestrated with the workflow manager Nextflow 🔂.\n\n\n\n Genomic Breeding Scientist | Global Strategic Science Manager\nBarenbrug | August 2021 - Current\n~\n Senior Research Scientist\nAgriculture Victoria Research | April 2017 - August 2021\n~\n Research Scientist\nAgriculture Victoria Research | October 2014 - March 2017\n~\n Research Assistant\nVictorian Department of Primary Industries | June 2009 - December 2009"
+    "text": "Education\n\n🎓 Doctor of Philosophy, Molecular Genetics from La Trobe University, 2014\n🎓 Bachelor of Agricultural Science, Rural Technology from the University of Queensland, 2010\n\nAbout Me\n\nI am a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug where I lead the development and implementation of commercial genomic breeding and associated ‘omic’ technologies.\n\nInterest and Skills\n\nMost of my technical work is focused on the fields of 🧬 Genomics, Genomic Selection and Genomic Breeding in plants, primarily forages 🌱. Skilled in bioinformatics 👨‍💻 and passionate about the R programing language. Enjoy developing cloud computing ☁️ environments for research and production pipelines, often orchestrated with the workflow manager Nextflow 🔂.\n\nExperience\n\n Genomic Breeding Scientist | Global Strategic Science Manager\nBarenbrug | August 2021 - Current\n~\n Senior Research Scientist\nAgriculture Victoria Research | April 2017 - August 2021\n~\n Research Scientist\nAgriculture Victoria Research | October 2014 - March 2017\n~\n Research Assistant\nVictorian Department of Primary Industries | June 2009 - December 2009"
   },
   {
     "objectID": "index.html#about-me",
@@ -150,20 +150,20 @@
     "objectID": "index.html#interest-and-skills",
     "href": "index.html#interest-and-skills",
     "title": "Dr Luke Pembleton",
-    "section": "",
-    "text": "Most of my technical work is focused on the fields of 🧬 Genomics, Genomic Selection and Genomic Breeding in plants, primarily forages 🌱. Skilled in bioinformatics 👨‍💻 and passionate about the R programing language. Enjoy developing cloud computing ☁️ environments for research and production pipelines, often orchestrated with the workflow manager Nextflow 🔂."
+    "section": "Interest and Skills",
+    "text": "Interest and Skills\nMost of my technical work is focused on the fields of 🧬 Genomics, Genomic Selection and Genomic Breeding in plants, primarily forages 🌱. Skilled in bioinformatics 👨‍💻 and passionate about the R programing language. Enjoy developing cloud computing ☁️ environments for research and production pipelines, often orchestrated with the workflow manager Nextflow 🔂."
   },
   {
     "objectID": "index.html#experience",
     "href": "index.html#experience",
     "title": "Dr Luke Pembleton",
-    "section": "",
-    "text": "Genomic Breeding Scientist | Global Strategic Science Manager\nBarenbrug | August 2021 - Current\n~\n Senior Research Scientist\nAgriculture Victoria Research | April 2017 - August 2021\n~\n Research Scientist\nAgriculture Victoria Research | October 2014 - March 2017\n~\n Research Assistant\nVictorian Department of Primary Industries | June 2009 - December 2009"
+    "section": "Experience",
+    "text": "Experience\n Genomic Breeding Scientist | Global Strategic Science Manager\nBarenbrug | August 2021 - Current\n~\n Senior Research Scientist\nAgriculture Victoria Research | April 2017 - August 2021\n~\n Research Scientist\nAgriculture Victoria Research | October 2014 - March 2017\n~\n Research Assistant\nVictorian Department of Primary Industries | June 2009 - December 2009"
   },
   {
     "objectID": "blog.html",
     "href": "blog.html",
-    "title": "Ponderings in Diagon Alley",
+    "title": "",
     "section": "",
     "text": "Navigating EC2 Pricing - The Better Way\n\n\n\n\n\n\n\nEC2\n\n\nAWS\n\n\nBioinformatics\n\n\n\n\nAn interative visual analysis of EC2 instance prices for better informed selection\n\n\n\n\n\n\nNov 18, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nStreamlining Your AWS CLI S3 File Operations\n\n\n\n\n\n\n\nAWS\n\n\nS3\n\n\n\n\nA guide to using the AWS Command Line Interface to interact with S3\n\n\n\n\n\n\nSep 25, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nPushing Docker Images to AWS ECR\n\n\n\n\n\n\n\nDocker\n\n\nAWS\n\n\nECR\n\n\n\n\nA guide to transfer your docker images to your private AWS container repository\n\n\n\n\n\n\nSep 24, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nAnnotate equations\n\n\n\n\n\n\n\nequations\n\n\nquarto\n\n\nannotate\n\n\nLaTeX\n\n\n\n\nA guide to annotating equations in quarto documents\n\n\n\n\n\n\nSep 3, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nHow to Cast Blue Iris UI3\n\n\n\n\n\n\n\nSmarthome\n\n\nBlue Iris\n\n\nSecurity\n\n\nChromecast\n\n\n\n\nA guide to casting Blue Iris UI3 to a Chromecast device and monitor\n\n\n\n\n\n\nAug 28, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nGitHub Deploy Keys\n\n\n\n\n\n\n\ngithub\n\n\ngit\n\n\nssh key\n\n\nAWS\n\n\nremote\n\n\ncloud\n\n\n\n\nA guide to using GitHub deploy keys to deploy private repos in remote compute sessions\n\n\n\n\n\n\nJul 3, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nScreen Utility and Terminal Multiplexing\n\n\n\n\n\n\n\nScreen\n\n\nAWS\n\n\nTerminal\n\n\n\n\nA guide to using the screen command in remote sessions\n\n\n\n\n\n\nMay 23, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nEndpoints for AWS VPC\n\n\n\n\n\n\n\nAWS\n\n\nEndpoints\n\n\nGateway\n\n\nBatch\n\n\n\n\nA guide to setting up endpoints for your AWS VPC\n\n\n\n\n\n\nMay 18, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nEBS Auto-scaling on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\nEBS\n\n\n\n\nAn introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow\n\n\n\n\n\n\nFeb 3, 2023\n\n\nLW Pembleton\n\n\n\n\n\n\n  \n\n\n\n\nNextflow on AWS Batch\n\n\n\n\n\n\n\nNextflow\n\n\nAWS\n\n\nBatch\n\n\n\n\nAn introductory guide to setting up Nextflow with AWS Batch\n\n\n\n\n\n\nNov 25, 2022\n\n\nLW Pembleton\n\n\n\n\n\n\nNo matching items"
   },
@@ -266,6 +266,13 @@
     "text": "Using {basename} in Bash for File Name Extraction\nIn Bash, you can use the basename command to extract the file name from a given file path. This is particularly useful when you’re working on tasks like data processing pipelines or automation scripts and need to isolate the file’s name from its full path.\nBasic Syntax:\nbasename [PATH]\nUsage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:\nbasename /path/to/your/file.txt\nYou will obtain just the file name file.txt as output:\nIf you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:\nbasename file.txt .txt\nWhich in this example will return file"
   },
   {
+    "objectID": "ramblings/bash/index.html#streamling-file-transfer-via-a-bastion-host",
+    "href": "ramblings/bash/index.html#streamling-file-transfer-via-a-bastion-host",
+    "title": "Bash",
+    "section": "Streamling File Transfer via a Bastion Host",
+    "text": "Streamling File Transfer via a Bastion Host\n\nAccessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising scp and the ProxyJump feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.\nscp -J &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; \\\n    &lt;file-to-transfer&gt; \\\n    &lt;user-name&gt;@&lt;IP-address&gt;:/path/for/remote/file\nFor systems where ProxyJump isn’t available, you can opt for the ProxyCommand method instead.\nscp -o 'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p' \\\n  &lt;file-to-transfer&gt; \\\n  &lt;user-name&gt;@&lt;IP-address&gt;:/path/for/remote/file\n\n\n\n\n\n\nNote\n\n\n\nIt’s worth noting that while both methods facilitate the transfer, ProxyJump is recommended over ProxyCommand as it adds an extra layer of encryption to the traffic, enhancing security during file transfers."
+  },
+  {
     "objectID": "ramblings/R/index.html",
     "href": "ramblings/R/index.html",
     "title": "R",
@@ -315,10 +322,10 @@
     "text": "Initalise an empty tibble with predined column names\nBefore diving into a loop of calculations, it’s often beneficial to initialise an empty tibble to seamlessly store results from each iteration. Instead of manually specifying column names, you can streamline the process by leveraging the power of the map_dfc() command in {purrr} 🐈 Simply pass a vector of column names to tibble, and watch your data structure effortlessly take shape.\n\nvec_colnames &lt;- c(\"Wizard\", \"House\", \"Wand\")\n\nempty_tibble &lt;- vec_colnames |&gt;\n  purrr::map_dfc(setNames, object = list(character()))\n\nempty_tibble\n\n# A tibble: 0 x 3\n# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;\n\n\nmap_dfc() has now been superseded 🏗 by map() and I have also updated the code to be more explicate and inline with {purrr} recommendations. Thanks Jim Gardner for the suggestions and edits.\n\nvec_colnames &lt;- c(\"Wizard\", \"House\", \"Wand\")\n\nempty_tibble &lt;- vec_colnames |&gt; \n  purrr::map(\\(x) setNames(object = tibble::tibble(character()), nm = x)) |&gt; \n  purrr::list_cbind()\n\nempty_tibble\n\n# A tibble: 0 x 3\n# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;"
   },
   {
-    "objectID": "ramblings/bash/index.html#streamling-file-transfer-via-a-bastion-host",
-    "href": "ramblings/bash/index.html#streamling-file-transfer-via-a-bastion-host",
+    "objectID": "ramblings/bash/index.html#extract-data-lines-from-a-vcf-file",
+    "href": "ramblings/bash/index.html#extract-data-lines-from-a-vcf-file",
     "title": "Bash",
-    "section": "Streamling File Transfer via a Bastion Host",
-    "text": "Streamling File Transfer via a Bastion Host\n\nAccessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn't have to be a complex process. With a straightforward command utilising scp and the ProxyJump feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here's how to automate the transfer to the endpoint private server via the public-facing bastion host.\nscp -J &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; \\\n    &lt;file-to-transfer&gt; \\\n    &lt;user-name&gt;@&lt;IP-address&gt;:/path/for/remote/file\nFor systems where ProxyJump isn't available, you can opt for the ProxyCommand method instead.\nscp -o 'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p' \\\n  &lt;file-to-transfer&gt; \\\n  &lt;user-name&gt;@&lt;IP-address&gt;:/path/for/remote/file\n\n\n\n\n\n\nNote\n\n\n\nIt's worth noting that while both methods facilitate the transfer, ProxyJump is recommended over ProxyCommand as it adds an extra layer of encryption to the traffic, enhancing security during file transfers."
+    "section": "Extract Data Lines From a VCF File",
+    "text": "Extract Data Lines From a VCF File\n\nVisual inspection 🔍 of the data lines (i.e. genotype fields) of VCF file is often impeded ⛔ by the large number of meta-information lines at the top. A simple sed command that looks for the mandatory body header line can get your past this hurdle 🚧\nsed -n '/#CHROM/,$p' filename.vcf\nIn short this command searches for the pattern ‘#CHROM’ and then starts printing to the screen until the end of the file. Pipe this into a head command (| head) and you now have a quick and simple way 🟢 to inspect the start of a VCF file."
   }
 ]
