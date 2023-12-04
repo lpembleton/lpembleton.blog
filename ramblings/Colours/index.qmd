@@ -1,0 +1,107 @@
+---
+title: "Colours"
+description: "A collection colour palettes with copy paste hex codes"
+author: "LW Pembleton"
+date-modified: last-modified
+categories: [Colours]
+image: images/patternpad.png
+draft: false
+highlight-style: ayu
+toc: true
+---
+
+## Agriculture
+
+::: color-palette
+::: {.color-palette__swatch style="background: #1F1E1F;"}
+::: color-palette__label
+<strong>Eerie Black</strong> ##1F1E1F
+:::
+:::
+
+::: {.color-palette__swatch style="background: #66666E;"}
+::: color-palette__label
+<strong>Dim gray</strong> #66666E
+:::
+:::
+
+::: {.color-palette__swatch style="background: #023047;"}
+::: color-palette__label
+<strong>Prussian Blue</strong> #023047
+:::
+:::
+
+::: {.color-palette__swatch style="background: #598392;"}
+::: color-palette__label
+<strong>Air Force Blue</strong> #598392
+:::
+:::
+
+::: {.color-palette__swatch style="background: #226F54;"}
+::: color-palette__label
+<strong>Dark Spring Green</strong> #226F54
+:::
+:::
+
+::: {.color-palette__swatch style="background: #87C38F;"}
+::: color-palette__label
+<strong>Pistachio</strong> #87C38F
+:::
+:::
+
+::: {.color-palette__swatch style="background: #E76F51;"}
+::: color-palette__label
+<strong>Burnt Sienna</strong> #E76F51
+:::
+:::
+
+::: {.color-palette__swatch style="background: #F4A261;"}
+::: color-palette__label
+<strong>Sandy Brown</strong> #F4A261
+:::
+:::
+:::
+
+```{r}
+agriculture <- c("#1f1e1f", "#66666e", "#023047", "#598392", "#226f54", "#87c38f", "#e76f51", "#f4a261")
+```
+
+
+
+## Halloween
+
+::: color-palette
+::: {.color-palette__swatch style="background: #79C250;"}
+::: color-palette__label
+<strong>Mantis</strong> #79C250
+:::
+:::
+
+::: {.color-palette__swatch style="background: #52307D;"}
+::: color-palette__label
+<strong>Purple Haze</strong> #52307D
+:::
+:::
+
+::: {.color-palette__swatch style="background: #FE8622;"}
+::: color-palette__label
+<strong>Carrot Orange</strong> #FE8622
+:::
+:::
+
+::: {.color-palette__swatch style="background: #ECCC60;"}
+::: color-palette__label
+<strong>Sand</strong> #ECCC60
+:::
+:::
+
+::: {.color-palette__swatch style="background: #2F2D2E;"}
+::: color-palette__label
+<strong>Thunder</strong> #2F2D2E
+:::
+:::
+:::
+
+```{r}
+halloween <- c("#79C250", "#52307D", "#FE8622", "#ECCC60", "#2F2D2E")
+```

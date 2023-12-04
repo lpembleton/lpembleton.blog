@@ -77,9 +77,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -114,10 +116,10 @@ gtag('config', 'G-NQ96R1Y33J', { 'anonymize_ip': true});
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
-  "consent_type":"implied",
+  "consent_type":"express",
   "palette":"light",
   "language":"en",
-  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
@@ -129,11 +131,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - Bash">
 <meta property="og:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Bash">
 <meta name="twitter:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -145,6 +147,9 @@ cookieconsent.run({
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
@@ -570,10 +575,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></div>   
+    <div class="nav-footer-center">
+      <div class="footer-contents"><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"></a>
+</div>  
+    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

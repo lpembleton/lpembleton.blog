@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2023-09-24">
 <meta name="description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
 
-<title>Luke Pembleton - EC2 Ramblings</title>
+<title>Luke Pembleton - EC2 Village</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -78,9 +78,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -115,10 +117,10 @@ gtag('config', 'G-NQ96R1Y33J', { 'anonymize_ip': true});
 document.addEventListener('DOMContentLoaded', function () {
 cookieconsent.run({
   "notice_banner_type":"simple",
-  "consent_type":"implied",
+  "consent_type":"express",
   "palette":"light",
   "language":"en",
-  "page_load_consent_levels":["strictly-necessary","functionality","tracking","targeting"],
+  "page_load_consent_levels":["strictly-necessary"],
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
@@ -128,13 +130,13 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Luke Pembleton - EC2 Ramblings">
+<meta property="og:title" content="Luke Pembleton - EC2 Village">
 <meta property="og:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
 <meta property="og:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - EC2 Ramblings">
+<meta name="twitter:title" content="Luke Pembleton - EC2 Village">
 <meta name="twitter:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
-<meta name="twitter:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -146,6 +148,9 @@ cookieconsent.run({
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
@@ -158,23 +163,23 @@ cookieconsent.run({
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
     <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">About</span></a>
+ <span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+ <span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../ramblings.html" rel="" target="">
- <span class="menu-text">Ramblings</span></a>
+ <span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../publications/publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+ <span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../pages/conferences.html" rel="" target="">
- <span class="menu-text">Conferences</span></a>
+ <span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/lpembleton" rel="" target=""><i class="bi bi-github" role="img">
@@ -223,7 +228,7 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">EC2 Ramblings</h1>
+      <h1 class="title">EC2 Village</h1>
                   <div>
         <div class="description">
           A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics
@@ -268,20 +273,8 @@ cookieconsent.run({
   <li><a href="#installing-aws-cli" id="toc-installing-aws-cli" class="nav-link active" data-scroll-target="#installing-aws-cli">Installing AWS CLI</a></li>
   <li><a href="#mount-a-secondary-volume-such-as-a-nitro-nvme-ssd" id="toc-mount-a-secondary-volume-such-as-a-nitro-nvme-ssd" class="nav-link" data-scroll-target="#mount-a-secondary-volume-such-as-a-nitro-nvme-ssd">Mount a secondary volume such as a Nitro NVME SSD</a></li>
   <li><a href="#installing-the-latest-stable-r-on-ubuntu" id="toc-installing-the-latest-stable-r-on-ubuntu" class="nav-link" data-scroll-target="#installing-the-latest-stable-r-on-ubuntu">Installing the latest stable R on Ubuntu</a></li>
-  <li><a href="#install-relevant-r-packages" id="toc-install-relevant-r-packages" class="nav-link" data-scroll-target="#install-relevant-r-packages">Install relevant R packages</a>
-  <ul class="collapse">
-  <li><a href="#tidyverse" id="toc-tidyverse" class="nav-link" data-scroll-target="#tidyverse">Tidyverse</a></li>
-  <li><a href="#blgr" id="toc-blgr" class="nav-link" data-scroll-target="#blgr">BLGR</a></li>
-  <li><a href="#tmisc" id="toc-tmisc" class="nav-link" data-scroll-target="#tmisc">Tmisc</a></li>
-  <li><a href="#argparser" id="toc-argparser" class="nav-link" data-scroll-target="#argparser">argparser</a></li>
-  <li><a href="#here" id="toc-here" class="nav-link" data-scroll-target="#here">here</a></li>
-  </ul></li>
-  <li><a href="#installing-bioinformatic-software" id="toc-installing-bioinformatic-software" class="nav-link" data-scroll-target="#installing-bioinformatic-software">Installing bioinformatic software</a>
-  <ul class="collapse">
-  <li><a href="#plink2" id="toc-plink2" class="nav-link" data-scroll-target="#plink2">PLINK2</a></li>
-  <li><a href="#vcftools" id="toc-vcftools" class="nav-link" data-scroll-target="#vcftools">VCFtools</a></li>
-  <li><a href="#bcftools" id="toc-bcftools" class="nav-link" data-scroll-target="#bcftools">Bcftools</a></li>
-  </ul></li>
+  <li><a href="#install-relevant-r-packages" id="toc-install-relevant-r-packages" class="nav-link" data-scroll-target="#install-relevant-r-packages">Install relevant R packages</a></li>
+  <li><a href="#installing-bioinformatic-software" id="toc-installing-bioinformatic-software" class="nav-link" data-scroll-target="#installing-bioinformatic-software">Installing bioinformatic software</a></li>
   </ul>
 </nav>
 </nav>
@@ -301,10 +294,10 @@ cookieconsent.run({
 <figcaption class="figure-caption"><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@karlp">Karl&nbsp;Pawlowicz</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
-<p>The following is writing with the default assumption of a Ubuntu 22.04 LTS base image</p>
+<p>The following is written with the default assumption of a Ubuntu 22.04 LTS base image</p>
 <section id="installing-aws-cli" class="level2">
 <h2 class="anchored" data-anchor-id="installing-aws-cli">Installing AWS CLI</h2>
-<p>AWS CLI is a most to enable you to transfer files and results between S3 and your EC2 instance</p>
+<p>AWS CLI is a must to enable you to transfer files and results between S3 and your EC2 instance</p>
 <p>First you will need to install <code>unzip</code></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install unzip</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Now you can download and install the AWS CLI</p>
@@ -312,16 +305,16 @@ cookieconsent.run({
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> awscliv2.zip</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> ./aws/install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This should automatically appear in your path and you can call it with <code>aws</code></p>
-<p>You will need to configure it with your credentials so that it will have the appropriate permissions to connect to S3</p>
+<p>You will need to configure it with your credentials so that it will have the appropriate permissions 🔑 to connect to S3</p>
 <p><code>aws configure</code></p>
 <p>Alternatively, a more secure option is to pass the relevant S3 permissions to your EC2 instance using an IAM instance profile. Details on setting up a IAM role with S3 permissions can be found <a href="https://cloud-gc.readthedocs.io/en/latest/chapter03_advanced-tutorial/iam-role.html">here</a>.</p>
 <p>You can add the IAM profile when first creating your instance under ‘Advanced details’</p>
 <p><img src="images/iam-instance-profile.png" class="img-fluid"></p>
-<p>or to an existing instance by selecting the instance, clicking ‘Actions’ drop-down menu and then ‘Modify IAM role’ under ‘Security’ and then choosing the relevant IAM role. Then press ‘Update IAM role’</p>
+<p>or to an existing instance by selecting the instance, clicking ‘Actions’ drop-down menu and then ‘Modify IAM role’ under ‘Security’ and then choosing the relevant IAM role. Then press ‘Update IAM role’.</p>
 </section>
 <section id="mount-a-secondary-volume-such-as-a-nitro-nvme-ssd" class="level2">
 <h2 class="anchored" data-anchor-id="mount-a-secondary-volume-such-as-a-nitro-nvme-ssd">Mount a secondary volume such as a Nitro NVME SSD</h2>
-<p>If you launch a storage-optimised EC2 instance such as one from the I4i to take advantage of the super-fast local storage performance you might get a rude shock at first. Where is the SSD, all you initially have access to is the EBS boot volume. Nothing to fear, it is there, it just hasn’t been mounted yet.</p>
+<p>If you launch a storage-optimised EC2 instance such as one from the <a href="https://aws.amazon.com/ec2/instance-types/i4i/">I4i family</a> to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume... Nothing to fear, it is there, it just hasn’t been mounted yet.</p>
 <p>use the <code>lsblk</code> command to view your available disk devices and their mount points.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span>         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312</span>
@@ -434,49 +427,33 @@ Tip
 <p>In many cases, you’ll find that the ‘make’ command is a fundamental requirement. While you can install ‘make’ as a standalone package, it’s usually more beneficial to install a comprehensive set of build tools through the ‘build-essential’ package.</p>
 <p>To install ‘build-essential’ on a Debian-based Linux system like Ubuntu, run the following command in your terminal:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install build-essential</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section id="tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="tidyverse">Tidyverse</h3>
-<p>the tidyverse is a large collection of packages and therefore naturally there are a few dependencies. The follow should install all the required libraries.</p>
+<section id="tidyverse" class="level4">
+<h4 class="anchored" data-anchor-id="tidyverse">Tidyverse</h4>
+<p>the <a href="https://www.tidyverse.org/">tidyverse</a> is a large collection of packages and therefore naturally there are a reasonable list of dependencies. The following should install all the required libraries.</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>need to install make</p>
 </section>
-<section id="blgr" class="level3">
-<h3 class="anchored" data-anchor-id="blgr">BLGR</h3>
-<p>The genomic selection package BLGR has two additional dependecies.</p>
-<p>https://github.com/gdlc/BGLR-R</p>
-<p>https://askubuntu.com/questions/623578/installing-blas-and-lapack-packages</p>
-<pre><code>sudo apt-get install libblas-dev liblapack-dev gfortran</code></pre>
-<p>https://thecoatlessprofessor.com/programming/cpp/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/</p>
-</section>
-<section id="tmisc" class="level3">
-<h3 class="anchored" data-anchor-id="tmisc">Tmisc</h3>
-<p>https://github.com/stephenturner/Tmisc</p>
-</section>
-<section id="argparser" class="level3">
-<h3 class="anchored" data-anchor-id="argparser">argparser</h3>
-<p>https://cran.r-project.org/web/packages/argparser/index.html</p>
-</section>
-<section id="here" class="level3">
-<h3 class="anchored" data-anchor-id="here">here</h3>
-<p>https://here.r-lib.org/</p>
+<section id="blgr" class="level4">
+<h4 class="anchored" data-anchor-id="blgr">BLGR</h4>
+<p>The genomic selection package <a href="https://github.com/gdlc/BGLR-R">BLGR</a> has a few additional dependencies.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libblas-dev liblapack-dev gfortran</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="installing-bioinformatic-software" class="level2">
 <h2 class="anchored" data-anchor-id="installing-bioinformatic-software">Installing bioinformatic software</h2>
-<section id="plink2" class="level3">
-<h3 class="anchored" data-anchor-id="plink2">PLINK2</h3>
+<section id="plink2" class="level4">
+<h4 class="anchored" data-anchor-id="plink2">PLINK2</h4>
 <p>Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the <a href="https://www.cog-genomics.org/plink/2.0/#new">website</a> and unpacking it. Then just move the executable to your bin dir.</p>
 <p>For example:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20231011.zip</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> plink2_linux_x86_64_20231011.zip</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv plink2 /bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="vcftools" class="level3">
-<h3 class="anchored" data-anchor-id="vcftools">VCFtools</h3>
+<section id="vcftools" class="level4">
+<h4 class="anchored" data-anchor-id="vcftools">VCFtools</h4>
 <p>Grab the tarball from the github <a href="https://github.com/vcftools/vcftools/releases">release page</a> and unpack it.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1.16.tar.gz</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> vcftools-0.1.16.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The PERL5LIB environment variable needs to be set to include the Vcf.pm module.</p>
+<p>The PERL5LIB environment variable needs to be set to include the vcf.pm module.</p>
 <div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PERL5LIB</span><span class="op">=</span>/path/to/your/vcftools-directory/src/perl/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Before you can compile the program you need to install the following dependency</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install build-essential</span>
@@ -489,9 +466,9 @@ Tip
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>VCFtools will be automatically added to your user path so you should now be able to call it with <code>vcftools</code></p>
 </section>
-<section id="bcftools" class="level3">
-<h3 class="anchored" data-anchor-id="bcftools">Bcftools</h3>
-<p>A similar process to VCFtools, grab the bcftools tarball from the latest <a href="http://www.htslib.org/download/">releases page</a>.</p>
+<section id="bcftools" class="level4">
+<h4 class="anchored" data-anchor-id="bcftools">BCFtools</h4>
+<p>A similar process to VCFtools, grab the BCFtools tarball from the latest <a href="http://www.htslib.org/download/">releases page</a> and run <code>configure</code>, <code>make</code> and <code>install</code>.</p>
 
 
 </section>
@@ -736,10 +713,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">
-      &nbsp;
-    </div>   
-    <div class="nav-footer-center"><div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences</a></div></div>
+    <div class="nav-footer-left">© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></div>   
+    <div class="nav-footer-center">
+      <div class="footer-contents"><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"></a>
+<a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"></a>
+</div>  
+    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>

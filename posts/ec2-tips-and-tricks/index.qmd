@@ -1,5 +1,5 @@
 ---
-title: "EC2 Ramblings"
+title: "EC2 Village"
 description: "A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics"
 author: "LW Pembleton"
 date: 24 09 2023
@@ -11,11 +11,11 @@ highlight-style: ayu
 
 ![~Photo by [Karl Pawlowicz](https://unsplash.com/@karlp) on Unsplash~](images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg)
 
-The following is writing with the default assumption of a Ubuntu 22.04 LTS base image
+The following is written with the default assumption of a Ubuntu 22.04 LTS base image
 
 ## Installing AWS CLI
 
-AWS CLI is a most to enable you to transfer files and results between S3 and your EC2 instance
+AWS CLI is a must to enable you to transfer files and results between S3 and your EC2 instance
 
 First you will need to install `unzip`
 
@@ -33,7 +33,7 @@ sudo ./aws/install
 
 This should automatically appear in your path and you can call it with `aws`
 
-You will need to configure it with your credentials so that it will have the appropriate permissions to connect to S3
+You will need to configure it with your credentials so that it will have the appropriate permissions 🔑 to connect to S3
 
 `aws configure`
 
@@ -43,11 +43,11 @@ You can add the IAM profile when first creating your instance under 'Advanced de
 
 ![](images/iam-instance-profile.png)
 
-or to an existing instance by selecting the instance, clicking 'Actions' drop-down menu and then 'Modify IAM role' under 'Security' and then choosing the relevant IAM role. Then press 'Update IAM role'
+or to an existing instance by selecting the instance, clicking 'Actions' drop-down menu and then 'Modify IAM role' under 'Security' and then choosing the relevant IAM role. Then press 'Update IAM role'.
 
 ## Mount a secondary volume such as a Nitro NVME SSD
 
-If you launch a storage-optimised EC2 instance such as one from the I4i to take advantage of the super-fast local storage performance you might get a rude shock at first. Where is the SSD, all you initially have access to is the EBS boot volume. Nothing to fear, it is there, it just hasn't been mounted yet.
+If you launch a storage-optimised EC2 instance such as one from the [I4i family](https://aws.amazon.com/ec2/instance-types/i4i/) to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume\... Nothing to fear, it is there, it just hasn't been mounted yet.
 
 use the `lsblk` command to view your available disk devices and their mount points.
 
@@ -185,45 +185,25 @@ To install 'build-essential' on a Debian-based Linux system like Ubuntu, run the
 sudo apt-get install build-essential
 ```
 
-### Tidyverse
+#### Tidyverse
 
-the tidyverse is a large collection of packages and therefore naturally there are a few dependencies. The follow should install all the required libraries.
+the [tidyverse](https://www.tidyverse.org/) is a large collection of packages and therefore naturally there are a reasonable list of dependencies. The following should install all the required libraries.
 
 ``` bash
 sudo apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
 ```
 
-need to install make
+#### BLGR
 
-### BLGR
+The genomic selection package [BLGR](https://github.com/gdlc/BGLR-R) has a few additional dependencies.
 
-The genomic selection package BLGR has two additional dependecies.
-
-https://github.com/gdlc/BGLR-R
-
-https://askubuntu.com/questions/623578/installing-blas-and-lapack-packages
-
-```         
+``` bash
 sudo apt-get install libblas-dev liblapack-dev gfortran
 ```
 
-https://thecoatlessprofessor.com/programming/cpp/rcpp-rcpparmadillo-and-os-x-mavericks-lgfortran-and-lquadmath-error/
-
-### Tmisc
-
-https://github.com/stephenturner/Tmisc
-
-### argparser
-
-https://cran.r-project.org/web/packages/argparser/index.html
-
-### here
-
-https://here.r-lib.org/
-
 ## Installing bioinformatic software
 
-### PLINK2
+#### PLINK2
 
 Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the [website](https://www.cog-genomics.org/plink/2.0/#new) and unpacking it. Then just move the executable to your bin dir.
 
@@ -235,7 +215,7 @@ unzip plink2_linux_x86_64_20231011.zip
 sudo mv plink2 /bin/
 ```
 
-### VCFtools
+#### VCFtools
 
 Grab the tarball from the github [release page](https://github.com/vcftools/vcftools/releases) and unpack it.
 
@@ -244,7 +224,7 @@ wget https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1
 tar -xvf vcftools-0.1.16.tar.gz
 ```
 
-The PERL5LIB environment variable needs to be set to include the Vcf.pm module.
+The PERL5LIB environment variable needs to be set to include the vcf.pm module.
 
 ``` bash
 export PERL5LIB=/path/to/your/vcftools-directory/src/perl/
@@ -269,6 +249,6 @@ sudo make install
 
 VCFtools will be automatically added to your user path so you should now be able to call it with `vcftools`
 
-### Bcftools
+#### BCFtools
 
-A similar process to VCFtools, grab the bcftools tarball from the latest [releases page](http://www.htslib.org/download/).
+A similar process to VCFtools, grab the BCFtools tarball from the latest [releases page](http://www.htslib.org/download/) and run `configure`, `make` and `install`.

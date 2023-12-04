@@ -85,3 +85,46 @@ body {
   line-height: 1.5;
   font-size: 19.5px;
 }
+
+
+
+
+
+
+.color-palette{
+	display:grid;
+	grid-gap:0rem;
+	grid-template-columns:repeat(4, 1fr);
+	min-height:13rem;
+	justify-content:center;
+	margin:2rem auto;
+	width:100%
+}
+.color-palette__swatch{
+	align-items:flex-end;
+	display:flex;
+	min-height:13rem;
+	justify-content:center;
+	transition:transform .2s ease-out
+}
+.color-palette__swatch:hover{
+	transform:scale(1.05)
+}
+.color-palette__label{
+	background:rgba(255,255,255,.5);
+	font-size:1.05rem;
+	padding:1rem .5rem;
+	text-align:center;
+	width:100%
+}
+.dark .color-palette__label{
+	background-color:rgb(23,25,25, 0.8)
+}
+.color-palette__label span,
+.color-palette__label strong
+/* keep one of these; you shouldn't need both!*/{
+	display:block;
+	font-weight:600;
+	text-transform:uppercase
+}
+

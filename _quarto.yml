@@ -7,6 +7,7 @@ website:
   open-graph: true
   twitter-card: 
     site: "@lwpembleton"
+    image: assets/lpembleton/img/tcard.png
   google-analytics: G-NQ96R1Y33J
   cookie-consent:
     type: express
