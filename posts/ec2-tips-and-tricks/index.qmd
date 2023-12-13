@@ -2,8 +2,8 @@
 title: "EC2 Village"
 description: "A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics"
 author: "LW Pembleton"
-date: 24 09 2023
-categories: [EC2, AWS, Bioinformatics]
+date: 14 12 2023
+categories: [EC2, AWS, Bioinformatics, S3]
 image: images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg
 draft: true
 highlight-style: ayu
@@ -11,13 +11,27 @@ highlight-style: ayu
 
 ![~Photo by [Karl Pawlowicz](https://unsplash.com/@karlp) on Unsplash~](images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg)
 
-The following is written with the default assumption of a Ubuntu 22.04 LTS base image
+This originally started as a collection of notes I had made after progressively setting up multiple EC2 dev environments. Then I thought it might as well tidy it up 🧹🧼 a bit and push it out as a blog post in the hope it will help others. I plan to progressively add to it, so shout-out 💬 if you have suggestions.
+
+The following is written with the default assumption of a Ubuntu 22.04 LTS base image.
+
+## Notes when creating a new EC2 instance
+
+When creating your EC2 instance ensure that under the storage settings that you change the default gp2 to gp3. [gp3](https://aws.amazon.com/blogs/storage/migrate-your-amazon-ebs-volumes-from-gp2-to-gp3-and-save-up-to-20-on-costs/) has higher baseline performance, adjustable IOPS and throughput. Plus it's cheaper per GiB (\$0.08 vs \$0.10/GiB-month) 🤔 hmmm, maybe that is why AWS hasn't gotten around to changing it to the default when creating EC2 instances.
+
+![](images/gp3.png)
+
+When you are selecting an instance type, you should check out the [ec2-instance-selector](https://github.com/aws/amazon-ec2-instance-selector) and my blog post on [Navigating EC2 Pricing - The Better Way](https://lpembleton.rbind.io/posts/aws-ec2-pricing/)
+
+::: callout-note
+gp3 does now appear to be the default of Amazon Linux AMIs, however gp2 is still the default for Ubuntus AMIs.
+:::
 
 ## Installing AWS CLI
 
 AWS CLI is a must to enable you to transfer files and results between S3 and your EC2 instance
 
-First you will need to install `unzip`
+First, you will need to install `unzip`
 
 ``` bash
 sudo apt-get install unzip
@@ -31,23 +45,23 @@ unzip awscliv2.zip
 sudo ./aws/install
 ```
 
-This should automatically appear in your path and you can call it with `aws`
+This should automatically appear in your path, and you can call it with `aws`
 
-You will need to configure it with your credentials so that it will have the appropriate permissions 🔑 to connect to S3
+You will need to configure it with your credentials to grant the necessary permissions 🔑
 
 `aws configure`
 
-Alternatively, a more secure option is to pass the relevant S3 permissions to your EC2 instance using an IAM instance profile. Details on setting up a IAM role with S3 permissions can be found [here](https://cloud-gc.readthedocs.io/en/latest/chapter03_advanced-tutorial/iam-role.html).
+Alternatively, a more secure option is to pass the relevant S3 permissions to your EC2 instance using an IAM instance profile. Details on setting up an IAM role with S3 permissions can be found [here](https://cloud-gc.readthedocs.io/en/latest/chapter03_advanced-tutorial/iam-role.html).
 
 You can add the IAM profile when first creating your instance under 'Advanced details'
 
 ![](images/iam-instance-profile.png)
 
-or to an existing instance by selecting the instance, clicking 'Actions' drop-down menu and then 'Modify IAM role' under 'Security' and then choosing the relevant IAM role. Then press 'Update IAM role'.
+or to an existing instance by selecting the instance, clicking the 'Actions' drop-down menu and then 'Modify IAM role' under 'Security' and then choosing the relevant IAM role. Then press 'Update IAM role'.
 
 ## Mount a secondary volume such as a Nitro NVME SSD
 
-If you launch a storage-optimised EC2 instance such as one from the [I4i family](https://aws.amazon.com/ec2/instance-types/i4i/) to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume\... Nothing to fear, it is there, it just hasn't been mounted yet.
+If you launch a storage-optimised EC2 instance such as one from the [I4i family](https://aws.amazon.com/ec2/instance-types/i4i/) to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume\... Nothing to fear; it is there, it just hasn't been mounted yet.
 
 use the `lsblk` command to view your available disk devices and their mount points.
 
@@ -65,7 +79,7 @@ nvme0n1      259:1    0     8G  0 disk
 └─nvme0n1p15 259:4    0   106M  0 part /boot/efi
 ```
 
-Identify the name of missing drive you want to mount, for example `nvme1n1`
+Identify the name of the missing drive you want to mount, for example, `nvme1n1`
 
 Now check whether there is a file system already on the device
 
@@ -73,7 +87,7 @@ Now check whether there is a file system already on the device
 sudo file -s /dev/<DRIVE-NAME>
 ```
 
-If this just shows `data` as the screen output there is not file system currently on the device. However if it shows other information for example
+If this just shows `data` as the screen output there is no file system currently on the device. However, if it shows other information for example
 
 ``` bash
 [ubuntu ~]$ sudo file -s /dev/nvme1n1
@@ -82,7 +96,7 @@ If this just shows `data` as the screen output there is not file system currentl
 
 It means there is already a file system.
 
-Assuming there is no current files system (likely scenario for new instances) you need to make one with the `mkfs -t` command before you can mount it.
+Assuming there is no current file system (likely scenario for new instances) you need to make one with the `mkfs -t` command before you can mount it.
 
 ``` bash
 sudo mkfs -t xfs /dev/<DRIVE-NAME>
@@ -96,7 +110,7 @@ If you get a `mkfs.xfs` is not found error. You just need to install the XFS too
 
 Once the filesystem is established, all you need to do is mount it and point it at a directory.
 
-You can point it at any directory but in this example we are going to create a directory call `data`
+You can point it at any directory, but in this example, we are going to create a directory called `data`
 
 ``` bash
 mkdir data
@@ -119,7 +133,7 @@ nvme0n1      259:1    0     8G  0 disk
 └─nvme0n1p15 259:4    0   106M  0 part /boot/efi
 ```
 
-It is likely you will need to update the ownership permission of the mounted directory as it would have been mount as `root`
+It is likely you will need to update the ownership permission of the mounted directory as it would have been mounted as `root`
 
 To change the permissions to reflect your current user
 
@@ -130,8 +144,49 @@ sudo chown -R $USER /home/ubuntu/data
 For more details visit the aws [help page](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html)
 
 ::: callout-caution
-nvme drives on EC2 instances are typically ephemeral disks, meaning they physically exist on the actual host instance and therefore they do not persist after reboots or shutdown (as the new physical host will change). All data will be lost and you will need to remount after a restart.
+nvme drives on EC2 instances are typically ephemeral disks, which means they physically exist on the actual host instance and therefore they do not persist after reboots or shutdown (as the new physical host will change). All data will be lost and you will need to remount after a restart.
 :::
+
+## Resource Monitoring
+
+#### atop
+
+atop is a Linux tool that provides real-time monitoring and detailed insights into system resource usage, displaying data on CPU, memory, disk, and network activities. It offers a comprehensive overview of processes, their resource consumption, and system-level performance metrics.
+
+However, more importantly, it logs resource usage so you can go back and review CPU and/or memory spikes to determine what is causing errors, or commands to terminate early and whether a different instance size is necessary.
+
+installing atop:
+
+``` bash
+sudo apt-get update
+sudo apt-get -y install atop sysstat
+```
+
+Configure atop reporting frequency and what statistics it captures: atop by default logs every 600 seconds (1 min), lets increase that to 60 second to help pick up on memory spikes that might be killing tasks.
+
+``` bash
+sudo sed -i 's/^LOGINTERVAL=600.*/LOGINTERVAL=60/' /usr/share/atop/atop.daily
+sudo sed -i -e 's|5-55/10|*/1|' -e 's|every 10 minutes|every 1 minute|' -e 's|debian-sa1|debian-sa1 -S XALL|g' /etc/cron.d/sysstat
+sudo bash -c "echo 'SA1_OPTIONS=\"-S XALL\"' >> /etc/default/sysstat"
+```
+
+Activate and restart the services:
+
+``` bash
+sudo systemctl enable atop.service crond.service sysstat.service
+
+sudo systemctl restart atop.service crond.service sysstat.service
+```
+
+atop creates log files in `/var/log/atop` saves with the format `atop_ccyymmdd`
+
+To view historical log results, run the command:
+
+``` bash
+atop -r logfile
+```
+
+Where `logfile` is the path and name of the log file of the relevant day. Once viewing the log results, use a lowercase {{< kbd t >}} to move forwards to the next resource usage snapshot and an upper case {{< kbd T >}} to move back.
 
 ## Installing the latest stable R on Ubuntu
 
@@ -175,7 +230,7 @@ That's it! You've successfully installed the latest stable version of R on your 
 
 ## Install relevant R packages
 
-Installing packages in R on Windows is a relatively straightforward process, typically accomplished using the \`instally.packages()\` function. However, the process can be a bit more involved on Linux, as you'll often need to manually install external dependencies. In this article, we'll provide you with essential details for common packages, making the installation process smoother.
+Installing packages in R on Windows is a relatively straightforward process, typically accomplished using the \`install.packages()\` function. However, the process can be a bit more involved on Linux, as you'll often need to manually install external system dependencies. In this article, I'll provide you with essential details for common packages, making the installation process smoother.
 
 In many cases, you'll find that the 'make' command is a fundamental requirement. While you can install 'make' as a standalone package, it's usually more beneficial to install a comprehensive set of build tools through the 'build-essential' package.
 
@@ -185,12 +240,25 @@ To install 'build-essential' on a Debian-based Linux system like Ubuntu, run the
 sudo apt-get install build-essential
 ```
 
+The [remotes](https://github.com/r-lib/remotes) R package provides a simple method to find out what system requirements certain R packages have on linux. Below is an example that lists out the requirements of the tidyverse package.
+
+``` r
+install.packages("remotes") 
+remotes::system_requirements(os = "ubuntu", os_release = "20.04", package = "tidyverse")
+```
+
 #### Tidyverse
 
-the [tidyverse](https://www.tidyverse.org/) is a large collection of packages and therefore naturally there are a reasonable list of dependencies. The following should install all the required libraries.
+the [tidyverse](https://www.tidyverse.org/) is a large collection of packages, and therefore, naturally, there is a reasonable list of dependencies. The following should install all the required libraries.
 
 ``` bash
-sudo apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev
+sudo apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev zlib1g-dev libxml2-dev libfontconfig1-dev libfribidi-dev libharfbuzz-dev libicu-dev
+```
+
+To install tidyverse via CRAN:
+
+``` r
+install.packages("tidyverse")
 ```
 
 #### BLGR
@@ -201,11 +269,25 @@ The genomic selection package [BLGR](https://github.com/gdlc/BGLR-R) has a few a
 sudo apt-get install libblas-dev liblapack-dev gfortran
 ```
 
+To install BGLR via CRAN:
+
+``` r
+install.packages("BGLR")
+```
+
+#### Working with S3 objects within R
+
+If you search for a R packages for working with AWS S3 files within R, you will likely come across [aws.s3](https://github.com/cloudyr/aws.s3). It is a great package and makes the process of dealing with S3 file within R super simple. While aws.s3 is great, it doesn't appear to be maintained anymore and there have been no updates since May 2020. If you are storing your credentials within your EC2 instance with `aws configure` (which I don't recommed) then aws.s3 seems to still work great, and many people still use it. However, if you provide your S3 credentials via an IAM profile it appears to be problematic, and the [aws.ec2metadata update trick](https://github.com/cloudyr/aws.s3/issues/151) no longer works (mileage for others may vary).
+
+For this reason I suggest you check out [paws](https://www.paws-r-sdk.com/) which is still in active development. It should automatically detect your credentials and there is a [code example](https://www.paws-r-sdk.com/examples/s3/) for downloading and uploading S3 files.
+
+I plan to add an example snippet in time of reading a file directly from S3 into an R object using paws as the process is not as straight forwards as some would expect.
+
 ## Installing bioinformatic software
 
 #### PLINK2
 
-Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the [website](https://www.cog-genomics.org/plink/2.0/#new) and unpacking it. Then just move the executable to your bin dir.
+Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the [website](https://www.cog-genomics.org/plink/2.0/#new) and unpacking it. Then just move the executable to your bin directory.
 
 For example:
 
@@ -217,7 +299,7 @@ sudo mv plink2 /bin/
 
 #### VCFtools
 
-Grab the tarball from the github [release page](https://github.com/vcftools/vcftools/releases) and unpack it.
+Grab the tarball from the GitHub [release page](https://github.com/vcftools/vcftools/releases) and unpack it.
 
 ``` bash
 wget https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1.16.tar.gz
@@ -238,7 +320,7 @@ sudo apt install pkg-config
 sudo apt install zlib1g-dev
 ```
 
-You must now compile the program.
+You can now compile the program.
 
 ``` bash
 cd vcftools-0.1.16/
@@ -252,3 +334,7 @@ VCFtools will be automatically added to your user path so you should now be able
 #### BCFtools
 
 A similar process to VCFtools, grab the BCFtools tarball from the latest [releases page](http://www.htslib.org/download/) and run `configure`, `make` and `install`.
+
+## What's next
+
+more to come...

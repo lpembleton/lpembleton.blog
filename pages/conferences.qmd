@@ -26,33 +26,33 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 #### *2023*
 
-📌[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
-
-*DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
-
-[Register](https://www.dockercon.com/2023/begin) \| Follow on [Twitter](https://twitter.com/Docker)\
-\
-
-📌[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023
-
-*A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.*
-
-[Register](https://summit.nextflow.io/purchase/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)\
-\
-
-📌[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
-
-*The annual developer event is back, better, and bigger than ever at San Francisco's Yerba Buena Center for the Arts and online.*
-
-[Register](https://githubuniverse.com/) \| Follow on [Twitter](https://twitter.com/githubuniverse)
-
 #### *2024*
+
+📌[**ShinyConf2024**](https://www.shinyconf.com/) - 17-19 April, 2024
+
+*The third edition of the largest virtual R Shiny conference.*
+
+📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Boston** - May 14-17, 2024
+
+*A showcase of the latest developments and innovations from the Nextflow world held in Boston and typically streamed online.*
+
+[Subscribe for updates](https://summit.nextflow.io/subscribe-2024/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
 
 📌[**useR! 2024**](https://www.r-project.org/conferences/) - July 8-11, 2024
 
 *useR! is the main meeting of the R user and developer community, its program consists of both invited and user-contributed presentations.*
 
 Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
+
+📌**Posit::conf(2024)** **\| Seattle** - August 12-14, 2024*.*
+
+*Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
+
+📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Barcelona** - October 21-25, 2024
+
+*A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and typically streamed online.*
+
+[Subscribe for updates](https://summit.nextflow.io/subscribe-2024/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
 
 ------------------------------------------------------------------------
 
@@ -75,6 +75,26 @@ Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \|
 
 *Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
 
+[Conference recordings.](https://www.youtube.com/watch?v=sTq6skZGgoI&list=PLdl4u5ZRDMQRVvXBi29h7MDtRn-AQGlXS)
+
 ✅[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
 
 *Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
+
+✅[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
+
+*DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
+
+[Conference recordings.](https://www.youtube.com/watch?v=2RKDu-K0qzU&list=PLkA60AVN3hh_t73mQG7RIvvMRTpm1ompt)\
+
+✅[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023 \| November 28-30, 2023
+
+*A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.*
+
+Conference recordings - [Barcelona](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmUotnP-tWRVNtuNWpN7xbpL)\| [Boston](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmVeXGTg6aFNlaeTEMTs3GOt)\
+
+✅[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
+
+*The annual developer event is back, better, and bigger than ever at San Francisco's Yerba Buena Center for the Arts and online.*
+
+[Conference recordings.](https://www.youtube.com/watch?v=NrQkdDVupQE&list=PL0lo9MOBetEGF_pCQVCc_3z36ihKSolLC)

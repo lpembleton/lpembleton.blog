@@ -7,11 +7,21 @@ See also:
 -   [Publons Profile](https://publons.com/researcher/3450394/luke-pembleton/)
 -   [Google Scholar Profile](https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en)
 
+## Patents
+
+💡Application Number: [2022260858](https://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo=2022260858)\
+Title: *Methods for the selection of plants having a high yield phenotype.* \
+Date: 19-04-2022
+
+💡Application Number: [2014218508](https://pericles.ipaustralia.gov.au/ols/auspat/applicationDetails.do?applicationNo=2014218508)\
+Title: *Manipulation of self-incompatibility in plants.\
+*Date: 19-02-2014
+
 ## Publications by date
 
 📄 M. M. Malmberg, C. Smith, P. Thakur, M. C. Drayton, J. Wilson, M. Shinozuka, W. Clayton, C. Inch, G. C. Spangenberg, K. F. Smith, N. O. I. Cogan, **L. W. Pembleton** (2023). [Developing an integrated genomic selection approach beyond biomass for varietal protection and nutritive traits in perennial ryegrass (*Lolium perenne L.*)](https://doi.org/10.1007/s00122-023-04263-8) Theoretical and Applied Genetics 136, 44.
 
-📄 Erez Naim-Feil, Edmond J. Breen, **Luke W. Pembleton**, Laura E. Spooner, German C. Spangenberg, Noel O. I. Cogan  (2022). [Empirical Evaluation of Inflorescences’ Morphological Attributes for Yield Optimization of Medicinal Cannabis Cultivars.](https://doi.org/10.3389/fpls.2022.858519) Frontiers in Plant Science, 13.
+📄 Erez Naim-Feil, Edmond J. Breen, **Luke W. Pembleton**, Laura E. Spooner, German C. Spangenberg, Noel O. I. Cogan (2022). [Empirical Evaluation of Inflorescences' Morphological Attributes for Yield Optimization of Medicinal Cannabis Cultivars.](https://doi.org/10.3389/fpls.2022.858519) Frontiers in Plant Science, 13.
 
 📄 Yongjun Li, Sukhjiwan Kaur, **Luke W. Pembleton**, Hossein Valipour-Kahrood, Garry M. Rosewarne, Hans D. Daetwyler (2022). [Strategies of preserving genetic diversity while maximizing genetic response from implementing genomic selection in pulse breeding programs.](https://doi.org/10.1007/s00122-022-04071-6) Theoretical and Applied Genetics, 1-16.
 
