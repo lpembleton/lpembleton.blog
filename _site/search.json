@@ -252,6 +252,13 @@
     "text": "See also:"
   },
   {
+    "objectID": "publications/publications.html#patents",
+    "href": "publications/publications.html#patents",
+    "title": "Publications",
+    "section": "Patents",
+    "text": "Patents\n💡Application Number: 2022260858\nTitle: Methods for the selection of plants having a high yield phenotype.\nDate: 19-04-2022\n💡Application Number: 2014218508\nTitle: Manipulation of self-incompatibility in plants.\nDate: 19-02-2014"
+  },
+  {
     "objectID": "publications/publications.html#publications-by-date",
     "href": "publications/publications.html#publications-by-date",
     "title": "Publications",
@@ -327,12 +334,5 @@
     "title": "R",
     "section": "Initalise an empty tibble with predined column names",
     "text": "Initalise an empty tibble with predined column names\nBefore diving into a loop of calculations, it’s often beneficial to initialise an empty tibble to seamlessly store results from each iteration. Instead of manually specifying column names, you can streamline the process by leveraging the power of the map_dfc() command in {purrr} 🐈 Simply pass a vector of column names to tibble, and watch your data structure effortlessly take shape.\n\nvec_colnames &lt;- c(\"Wizard\", \"House\", \"Wand\")\n\nempty_tibble &lt;- vec_colnames |&gt;\n  purrr::map_dfc(setNames, object = list(character()))\n\nempty_tibble\n\n# A tibble: 0 x 3\n# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;\n\n\nmap_dfc() has now been superseded 🏗 by map() and I have also updated the code to be more explicate and inline with {purrr} recommendations. Thanks Jim Gardner for the suggestions and edits.\n\nvec_colnames &lt;- c(\"Wizard\", \"House\", \"Wand\")\n\nempty_tibble &lt;- vec_colnames |&gt; \n  purrr::map(\\(x) setNames(object = tibble::tibble(character()), nm = x)) |&gt; \n  purrr::list_cbind()\n\nempty_tibble\n\n# A tibble: 0 x 3\n# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;"
-  },
-  {
-    "objectID": "publications/publications.html#patents",
-    "href": "publications/publications.html#patents",
-    "title": "Publications",
-    "section": "Patents",
-    "text": "Patents\n💡Application Number: 2022260858\nTitle: Methods for the selection of plants having a high yield phenotype.\nDate: 19-04-2022\n💡Application Number: 2014218508\nTitle: Manipulation of self-incompatibility in plants.\nDate: 19-02-2014"
   }
 ]

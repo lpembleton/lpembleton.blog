@@ -5,7 +5,7 @@ author: "LW Pembleton"
 date: 14 12 2023
 categories: [EC2, AWS, Bioinformatics, S3]
 image: images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg
-draft: true
+draft: false
 highlight-style: ayu
 ---
 
