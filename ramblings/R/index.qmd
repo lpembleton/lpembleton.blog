@@ -514,3 +514,121 @@ empty_tibble <- vec_colnames |>
 
 empty_tibble
 ```
+
+## Highlight points of interest with annotations
+
+Utilising arrow and text annotations can significantly elevate the impact of your visualisations by directing attention to crucial data points or subsets within a plot. These annotations serve as a powerful tool to effectively convey your message to the reader. Checkout the following example for a demonstration.
+
+```{r, echo = FALSE}
+library(ggplot2)
+library(ggtext)
+
+ngs_data <- tibble::tribble(
+                                   ~Platform, ~Yield, ~Price_per_Gb,            ~Company, ~Flowcells, ~Yield_per_flowcell,
+                   "ILMN NextSeq 550 1fcell",   120L,          43.8,          "Illumina",         1L,                120L,
+                   "ILMN HiSeq 4000 2fcells",  1500L,            25,          "Illumina",         2L,                750L,
+            "ILMN NextSeq 1000 P1/P2 1fcell",   120L,         30.61,          "Illumina",         1L,                120L,
+               "ILMN NextSeq 2000 P3 1fcell",   360L,          17.3,          "Illumina",         1L,                360L,
+                   "ILMN NovaSeq SP 2fcells",   800L,          10.9,          "Illumina",         2L,                400L,
+                   "ILMN NovaSeq S1 2fcells",  1000L,          10.9,          "Illumina",         2L,                500L,
+                   "ILMN NovaSeq S2 2fcells",  2000L,          7.97,          "Illumina",         2L,               1000L,
+              "ILMN NovaSeq S4 v1.5 2fcells",  6000L,          4.84,          "Illumina",         2L,               3000L,
+  "ILMN NovaSeq X & X Plus 1.5B 10B 2fcells",  6000L,           3.2,          "Illumina",         2L,               3000L,
+                "ILMN NovaSeq X 25B 1fcells",  8000L,             2,          "Illumina",         1L,               8000L,
+     "ElemBio AVITI 2fcell x3 pricing model",  1800L,             2,        "ElementBio",         2L,                900L,
+     "ElemBio AVITI 2fcell 2x150 Cloudbreak",   600L,             5,        "ElementBio",         2L,                300L,
+     "ElemBio AVITI 2fcell 2x300 Cloudbreak",   360L,   13.55555556,        "ElementBio",         2L,                180L,
+   "Singular Genomics G4 F2 4fcell Standard",   200L,            16, "Singular Genomics",         4L,                 50L,
+   "Singular Genomics G4 F2 4fcell Max Read",   200L,            16, "Singular Genomics",         4L,                 50L,
+            "Singular Genomics G4 F3 4fcell",   540L,             8, "Singular Genomics",         4L,                135L,
+                     "MGI DNBSEQ-T7 4fcells",  6000L,           1.5,               "MGI",         4L,               1500L,
+         "MGI DNBSEQ-G400C  CoolMPS 2fcells",  1440L,             5,               "MGI",         2L,                720L,
+         "MGI DNBSEQ-G400RS  HotMPS 2fcells",   720L,           5.8,               "MGI",         2L,                360L
+  )
+
+ggplot(data = ngs_data, aes(x=Yield_per_flowcell, y=Price_per_Gb, colour=Company, fill=Company)) +
+  geom_point(size=2) +
+  scale_y_continuous(trans = "log10") +
+  scale_x_continuous(trans = "log10") +
+  scale_color_manual(values = c("Illumina" = "#F9A31E", 
+                                "MGI" ="#006AB7", 
+                                "ElementBio" = "#0A7537", 
+                                "Singular Genomics" = "#1E1E1E")) +
+  theme_classic() +
+  ylab("Price per Gb ($)") +
+  xlab("Yield per Flowcell (Gb)") +
+  annotate(geom = "curve", 
+           x = 400, y = 2.5, 
+           xend = 800, yend = 2, 
+           curvature = .3, 
+           arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = 300, y = 3, label = paste(strwrap("Newer companies like Element Biosciences are challanging Illumina's price point in the mid-tier benchtop sequencing category", width = 70), collapse = "\n"), hjust = "centre", size=3) +
+  labs(title = "Sequencing costs for current benchtop and production-scale platforms", 
+       subtitle = "Companies
+       <span style='color:#FFB542;'>**Illumina**</span>, 
+       <span style='color:#006AB7;'>**MGI**</span>,
+       <span style='color:#12B460;'>**Element Biosciences**</span> and
+       <span style='color:#1E1E1E;'>**Singular Genomics**</span>",
+       caption = "Note: X & Y axis log10 transformed. \n Data Source: Next-Generation-Sequencing.v1.10.31 @albertvilella") +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none")
+```
+
+Here is the full code 👇 showing how to use the `annotate` function, enjoy!
+
+```{r, eval = FALSE}
+library(ggplot2)
+library(ggtext)
+
+ngs_data <- tibble::tribble(
+                                   ~Platform, ~Yield, ~Price_per_Gb,            ~Company, ~Flowcells, ~Yield_per_flowcell,
+                   "ILMN NextSeq 550 1fcell",   120L,          43.8,          "Illumina",         1L,                120L,
+                   "ILMN HiSeq 4000 2fcells",  1500L,            25,          "Illumina",         2L,                750L,
+            "ILMN NextSeq 1000 P1/P2 1fcell",   120L,         30.61,          "Illumina",         1L,                120L,
+               "ILMN NextSeq 2000 P3 1fcell",   360L,          17.3,          "Illumina",         1L,                360L,
+                   "ILMN NovaSeq SP 2fcells",   800L,          10.9,          "Illumina",         2L,                400L,
+                   "ILMN NovaSeq S1 2fcells",  1000L,          10.9,          "Illumina",         2L,                500L,
+                   "ILMN NovaSeq S2 2fcells",  2000L,          7.97,          "Illumina",         2L,               1000L,
+              "ILMN NovaSeq S4 v1.5 2fcells",  6000L,          4.84,          "Illumina",         2L,               3000L,
+  "ILMN NovaSeq X & X Plus 1.5B 10B 2fcells",  6000L,           3.2,          "Illumina",         2L,               3000L,
+                "ILMN NovaSeq X 25B 1fcells",  8000L,             2,          "Illumina",         1L,               8000L,
+     "ElemBio AVITI 2fcell x3 pricing model",  1800L,             2,        "ElementBio",         2L,                900L,
+     "ElemBio AVITI 2fcell 2x150 Cloudbreak",   600L,             5,        "ElementBio",         2L,                300L,
+     "ElemBio AVITI 2fcell 2x300 Cloudbreak",   360L,   13.55555556,        "ElementBio",         2L,                180L,
+   "Singular Genomics G4 F2 4fcell Standard",   200L,            16, "Singular Genomics",         4L,                 50L,
+   "Singular Genomics G4 F2 4fcell Max Read",   200L,            16, "Singular Genomics",         4L,                 50L,
+            "Singular Genomics G4 F3 4fcell",   540L,             8, "Singular Genomics",         4L,                135L,
+                     "MGI DNBSEQ-T7 4fcells",  6000L,           1.5,               "MGI",         4L,               1500L,
+         "MGI DNBSEQ-G400C  CoolMPS 2fcells",  1440L,             5,               "MGI",         2L,                720L,
+         "MGI DNBSEQ-G400RS  HotMPS 2fcells",   720L,           5.8,               "MGI",         2L,                360L
+  )
+
+ggplot(data = ngs_data, aes(x=Yield_per_flowcell, y=Price_per_Gb, colour=Company, fill=Company)) +
+  geom_point(size=2) +
+  scale_y_continuous(trans = "log10") +
+  scale_x_continuous(trans = "log10") +
+  scale_color_manual(values = c("Illumina" = "#FFB542", 
+                                "MGI" ="#006AB7", 
+                                "ElementBio" = "#12B460", 
+                                "Singular Genomics" = "#1E1E1E")) +
+  theme_classic() +
+  ylab("Price per Gb ($)") +
+  xlab("Yield per Flowcell (Gb)") +
+  annotate(geom = "curve", 
+           x = 400, y = 2.5, 
+           xend = 800, yend = 2, 
+           curvature = .3, 
+           arrow = arrow(length = unit(2, "mm"))) +
+  annotate(geom = "text", x = 300, y = 3, label = paste(strwrap("Newer companies like Element Biosciences are challanging Illumina's price point in the mid-tier benchtop sequencing category", width = 70), collapse = "\n"), hjust = "centre", size=3) +
+  labs(title = "Sequencing costs for current benchtop and production-scale platforms", 
+       subtitle = "Companies
+       <span style='color:#FFB542;'>**Illumina**</span>, 
+       <span style='color:#006AB7;'>**MGI**</span>,
+       <span style='color:#12B460;'>**Element Biosciences**</span> and
+       <span style='color:#1E1E1E;'>**Singular Genomics**</span>",
+       caption = "Note: X & Y axis log10 transformed. \n Data Source: Next-Generation-Sequencing.v1.10.31 @albertvilella") +
+  theme(panel.grid = element_blank(),
+        plot.subtitle = element_markdown(),
+        legend.position = "none")
+```

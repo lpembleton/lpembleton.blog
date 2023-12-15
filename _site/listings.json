@@ -11,6 +11,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/ec2-tips-and-tricks/index.html",
       "/posts/aws-ec2-pricing/index.html",
       "/posts/aws-cli-s3/index.html",
       "/posts/push-docker-to-ecr/index.html",

@@ -131,11 +131,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -238,6 +238,7 @@ cookieconsent.run({
   <li><a href="#elegantly-join-3-tibbles-using-a-common-key" id="toc-elegantly-join-3-tibbles-using-a-common-key" class="nav-link" data-scroll-target="#elegantly-join-3-tibbles-using-a-common-key">Elegantly Join 3+ tibbles using a common key</a></li>
   <li><a href="#add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" id="toc-add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" class="nav-link" data-scroll-target="#add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data">Add a prefix to column names when pivoting from long-data to wide-data</a></li>
   <li><a href="#initalise-an-empty-tibble-with-predined-column-names" id="toc-initalise-an-empty-tibble-with-predined-column-names" class="nav-link" data-scroll-target="#initalise-an-empty-tibble-with-predined-column-names">Initalise an empty tibble with predined column names</a></li>
+  <li><a href="#highlight-points-of-interest-with-annotations" id="toc-highlight-points-of-interest-with-annotations" class="nav-link" data-scroll-target="#highlight-points-of-interest-with-annotations">Highlight points of interest with annotations</a></li>
   </ul>
 </nav>
     </div>
@@ -272,7 +273,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 30, 2023</p>
+      <p class="date-modified">December 16, 2023</p>
     </div>
   </div>
     
@@ -627,6 +628,71 @@ Note
 <pre><code># A tibble: 0 x 3
 # i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
 </div>
+</div>
+</section>
+<section id="highlight-points-of-interest-with-annotations" class="level2">
+<h2 class="anchored" data-anchor-id="highlight-points-of-interest-with-annotations">Highlight points of interest with annotations</h2>
+<p>Utilising arrow and text annotations can significantly elevate the impact of your visualisations by directing attention to crucial data points or subsets within a plot. These annotations serve as a powerful tool to effectively convey your message to the reader. Checkout the following example for a demonstration.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Here is the full code 👇 showing how to use the <code>annotate</code> function, enjoy!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggtext)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>ngs_data <span class="ot">&lt;-</span> tibble<span class="sc">::</span><span class="fu">tribble</span>(</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>                                   <span class="sc">~</span>Platform, <span class="sc">~</span>Yield, <span class="sc">~</span>Price_per_Gb,            <span class="sc">~</span>Company, <span class="sc">~</span>Flowcells, <span class="sc">~</span>Yield_per_flowcell,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"ILMN NextSeq 550 1fcell"</span>,   120L,          <span class="fl">43.8</span>,          <span class="st">"Illumina"</span>,         1L,                120L,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"ILMN HiSeq 4000 2fcells"</span>,  1500L,            <span class="dv">25</span>,          <span class="st">"Illumina"</span>,         2L,                750L,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>            <span class="st">"ILMN NextSeq 1000 P1/P2 1fcell"</span>,   120L,         <span class="fl">30.61</span>,          <span class="st">"Illumina"</span>,         1L,                120L,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>               <span class="st">"ILMN NextSeq 2000 P3 1fcell"</span>,   360L,          <span class="fl">17.3</span>,          <span class="st">"Illumina"</span>,         1L,                360L,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"ILMN NovaSeq SP 2fcells"</span>,   800L,          <span class="fl">10.9</span>,          <span class="st">"Illumina"</span>,         2L,                400L,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"ILMN NovaSeq S1 2fcells"</span>,  1000L,          <span class="fl">10.9</span>,          <span class="st">"Illumina"</span>,         2L,                500L,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>                   <span class="st">"ILMN NovaSeq S2 2fcells"</span>,  2000L,          <span class="fl">7.97</span>,          <span class="st">"Illumina"</span>,         2L,               1000L,</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>              <span class="st">"ILMN NovaSeq S4 v1.5 2fcells"</span>,  6000L,          <span class="fl">4.84</span>,          <span class="st">"Illumina"</span>,         2L,               3000L,</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"ILMN NovaSeq X &amp; X Plus 1.5B 10B 2fcells"</span>,  6000L,           <span class="fl">3.2</span>,          <span class="st">"Illumina"</span>,         2L,               3000L,</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ILMN NovaSeq X 25B 1fcells"</span>,  8000L,             <span class="dv">2</span>,          <span class="st">"Illumina"</span>,         1L,               8000L,</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>     <span class="st">"ElemBio AVITI 2fcell x3 pricing model"</span>,  1800L,             <span class="dv">2</span>,        <span class="st">"ElementBio"</span>,         2L,                900L,</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>     <span class="st">"ElemBio AVITI 2fcell 2x150 Cloudbreak"</span>,   600L,             <span class="dv">5</span>,        <span class="st">"ElementBio"</span>,         2L,                300L,</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>     <span class="st">"ElemBio AVITI 2fcell 2x300 Cloudbreak"</span>,   360L,   <span class="fl">13.55555556</span>,        <span class="st">"ElementBio"</span>,         2L,                180L,</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Singular Genomics G4 F2 4fcell Standard"</span>,   200L,            <span class="dv">16</span>, <span class="st">"Singular Genomics"</span>,         4L,                 50L,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>   <span class="st">"Singular Genomics G4 F2 4fcell Max Read"</span>,   200L,            <span class="dv">16</span>, <span class="st">"Singular Genomics"</span>,         4L,                 50L,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>            <span class="st">"Singular Genomics G4 F3 4fcell"</span>,   540L,             <span class="dv">8</span>, <span class="st">"Singular Genomics"</span>,         4L,                135L,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>                     <span class="st">"MGI DNBSEQ-T7 4fcells"</span>,  6000L,           <span class="fl">1.5</span>,               <span class="st">"MGI"</span>,         4L,               1500L,</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>         <span class="st">"MGI DNBSEQ-G400C  CoolMPS 2fcells"</span>,  1440L,             <span class="dv">5</span>,               <span class="st">"MGI"</span>,         2L,                720L,</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>         <span class="st">"MGI DNBSEQ-G400RS  HotMPS 2fcells"</span>,   720L,           <span class="fl">5.8</span>,               <span class="st">"MGI"</span>,         2L,                360L</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> ngs_data, <span class="fu">aes</span>(<span class="at">x=</span>Yield_per_flowcell, <span class="at">y=</span>Price_per_Gb, <span class="at">colour=</span>Company, <span class="at">fill=</span>Company)) <span class="sc">+</span></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="sc">+</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">trans =</span> <span class="st">"log10"</span>) <span class="sc">+</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Illumina"</span> <span class="ot">=</span> <span class="st">"#FFB542"</span>, </span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"MGI"</span> <span class="ot">=</span><span class="st">"#006AB7"</span>, </span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"ElementBio"</span> <span class="ot">=</span> <span class="st">"#12B460"</span>, </span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>                                <span class="st">"Singular Genomics"</span> <span class="ot">=</span> <span class="st">"#1E1E1E"</span>)) <span class="sc">+</span></span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>() <span class="sc">+</span></span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Price per Gb ($)"</span>) <span class="sc">+</span></span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Yield per Flowcell (Gb)"</span>) <span class="sc">+</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"curve"</span>, </span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>           <span class="at">x =</span> <span class="dv">400</span>, <span class="at">y =</span> <span class="fl">2.5</span>, </span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>           <span class="at">xend =</span> <span class="dv">800</span>, <span class="at">yend =</span> <span class="dv">2</span>, </span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">curvature =</span> .<span class="dv">3</span>, </span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">arrow =</span> <span class="fu">arrow</span>(<span class="at">length =</span> <span class="fu">unit</span>(<span class="dv">2</span>, <span class="st">"mm"</span>))) <span class="sc">+</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="at">geom =</span> <span class="st">"text"</span>, <span class="at">x =</span> <span class="dv">300</span>, <span class="at">y =</span> <span class="dv">3</span>, <span class="at">label =</span> <span class="fu">paste</span>(<span class="fu">strwrap</span>(<span class="st">"Newer companies like Element Biosciences are challanging Illumina's price point in the mid-tier benchtop sequencing category"</span>, <span class="at">width =</span> <span class="dv">70</span>), <span class="at">collapse =</span> <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>), <span class="at">hjust =</span> <span class="st">"centre"</span>, <span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Sequencing costs for current benchtop and production-scale platforms"</span>, </span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">"Companies</span></span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="st">       &lt;span style='color:#FFB542;'&gt;**Illumina**&lt;/span&gt;, </span></span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="st">       &lt;span style='color:#006AB7;'&gt;**MGI**&lt;/span&gt;,</span></span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="st">       &lt;span style='color:#12B460;'&gt;**Element Biosciences**&lt;/span&gt; and</span></span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="st">       &lt;span style='color:#1E1E1E;'&gt;**Singular Genomics**&lt;/span&gt;"</span>,</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption =</span> <span class="st">"Note: X &amp; Y axis log10 transformed. </span><span class="sc">\n</span><span class="st"> Data Source: Next-Generation-Sequencing.v1.10.31 @albertvilella"</span>) <span class="sc">+</span></span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(),</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
