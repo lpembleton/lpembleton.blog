@@ -565,9 +565,9 @@ ggplot(data = ngs_data, aes(x=Yield_per_flowcell, y=Price_per_Gb, colour=Company
   annotate(geom = "text", x = 300, y = 3, label = paste(strwrap("Newer companies like Element Biosciences are challanging Illumina's price point in the mid-tier benchtop sequencing category", width = 70), collapse = "\n"), hjust = "centre", size=3) +
   labs(title = "Sequencing costs for current benchtop and production-scale platforms", 
        subtitle = "Companies
-       <span style='color:#FFB542;'>**Illumina**</span>, 
+       <span style='color:#F9A31E;'>**Illumina**</span>, 
        <span style='color:#006AB7;'>**MGI**</span>,
-       <span style='color:#12B460;'>**Element Biosciences**</span> and
+       <span style='color:#0A7537;'>**Element Biosciences**</span> and
        <span style='color:#1E1E1E;'>**Singular Genomics**</span>",
        caption = "Note: X & Y axis log10 transformed. \n Data Source: Next-Generation-Sequencing.v1.10.31 @albertvilella") +
   theme(panel.grid = element_blank(),
