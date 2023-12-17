@@ -186,7 +186,7 @@ To view historical log results, run the command:
 atop -r logfile
 ```
 
-Where `logfile` is the path and name of the log file of the relevant day. Once viewing the log results, use a lowercase {{< kbd t >}} to move forwards to the next resource usage snapshot and an upper case {{< kbd T >}} to move back.
+Where `logfile` is the path and name of the log file of the relevant day. Once viewing the log results, press {{< kbd t >}} to move forwards to the next resource usage snapshot and {{< kbd Shift >}} + {{< kbd t >}} to move back.
 
 ## Installing the latest stable R on Ubuntu
 

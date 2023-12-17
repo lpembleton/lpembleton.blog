@@ -66,8 +66,6 @@ toc: true
 agriculture <- c("#1f1e1f", "#66666e", "#023047", "#598392", "#226f54", "#87c38f", "#e76f51", "#f4a261")
 ```
 
-
-
 ## Halloween
 
 ::: color-palette
@@ -104,4 +102,89 @@ agriculture <- c("#1f1e1f", "#66666e", "#023047", "#598392", "#226f54", "#87c38f
 
 ```{r}
 halloween <- c("#79C250", "#52307D", "#FE8622", "#ECCC60", "#2F2D2E")
+```
+
+## Sequencing Companies
+
+More to be used as a colour reference rather than a palette, as the contrast between some (i.e. Nanopore & MGI) is too low.
+
+::: color-palette
+::: {.color-palette__swatch style="background: #F9A31E;"}
+::: color-palette__label
+<strong>Illumina</strong> #79C250
+:::
+:::
+
+::: {.color-palette__swatch style="background: #0083A9;"}
+::: color-palette__label
+<strong>Oxford Nanopore</strong> #2F2D2E
+:::
+:::
+
+::: {.color-palette__swatch style="background: #006AB7;"}
+::: color-palette__label
+<strong>MGI</strong> #52307D
+:::
+:::
+
+::: {.color-palette__swatch style="background: #0A7537;"}
+::: color-palette__label
+<strong>Element Biosciences</strong> #FE8622
+:::
+:::
+
+::: {.color-palette__swatch style="background: #1E1E1E;"}
+::: color-palette__label
+<strong>Singular Genomics</strong> #ECCC60
+:::
+:::
+:::
+
+```{r}
+seq_companies <- c("#F9A31E", "#0083A9", "#006AB7", "#0A7537", "#1E1E1E")
+```
+
+
+## Windows Desktops
+
+::: color-palette
+::: {.color-palette__swatch style="background: #008080;"}
+::: color-palette__label
+<strong>95 Green</strong> #79C250
+:::
+:::
+
+::: {.color-palette__swatch style="background: #C0C0C0;"}
+::: color-palette__label
+<strong>95 Grey</strong> #2F2D2E
+:::
+:::
+
+::: {.color-palette__swatch style="background: #3A6EA5;"}
+::: color-palette__label
+<strong>ME Blue</strong> #52307D
+:::
+:::
+
+::: {.color-palette__swatch style="background: #D4D0C8;"}
+::: color-palette__label
+<strong>ME Grey</strong> #FE8622
+:::
+:::
+
+::: {.color-palette__swatch style="background: #255FDC;"}
+::: color-palette__label
+<strong>XP Blue</strong> #ECCC60
+:::
+:::
+
+::: {.color-palette__swatch style="background: #48AF48;"}
+::: color-palette__label
+<strong>XP Green</strong> #ECCC60
+:::
+:::
+:::
+
+```{r}
+win_desktops <- c('#008080', '#C0C0C0', '#3A6EA5', '#D4D0C8', '#255FDC', '#48AF48')
 ```

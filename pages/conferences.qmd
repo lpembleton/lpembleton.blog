@@ -81,6 +81,8 @@ Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \|
 
 *Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
 
+[Conference recordings.](https://www.youtube.com/watch?v=sYliwvml9Es&list=PL9HYL-VRX0oRFZslRGHwHuwea7SvAATHp)
+
 ✅[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
 
 *DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*

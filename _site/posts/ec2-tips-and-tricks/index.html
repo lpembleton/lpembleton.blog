@@ -67,6 +67,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -134,11 +135,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - EC2 Village">
 <meta property="og:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
+<meta property="og:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - EC2 Village">
 <meta name="twitter:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/ec2-tips-and-tricks/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -430,7 +431,7 @@ Caution
 <p>atop creates log files in <code>/var/log/atop</code> saves with the format <code>atop_ccyymmdd</code></p>
 <p>To view historical log results, run the command:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">atop</span> <span class="at">-r</span> logfile</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Where <code>logfile</code> is the path and name of the log file of the relevant day. Once viewing the log results, use a lowercase <kbd>t</kbd> to move forwards to the next resource usage snapshot and an upper case <kbd>T</kbd> to move back.</p>
+<p>Where <code>logfile</code> is the path and name of the log file of the relevant day. Once viewing the log results, press <kbd>t</kbd> to move forwards to the next resource usage snapshot and <kbd>Shift</kbd> + <kbd>t</kbd> to move back.</p>
 </section>
 </section>
 <section id="installing-the-latest-stable-r-on-ubuntu" class="level2">
