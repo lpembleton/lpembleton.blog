@@ -1,6 +1,6 @@
 ---
 title: "Colours"
-description: "A collection colour palettes with copy paste hex codes"
+description: "A collection colour palettes and reference panels with copy paste hex codes"
 author: "LW Pembleton"
 date-modified: last-modified
 categories: [Colours]

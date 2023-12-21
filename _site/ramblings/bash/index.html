@@ -66,6 +66,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
 <script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
@@ -131,11 +132,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - Bash">
 <meta property="og:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta property="og:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Bash">
 <meta name="twitter:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/bash/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -236,6 +237,7 @@ cookieconsent.run({
   <li><a href="#using-basename-in-bash-for-file-name-extraction" id="toc-using-basename-in-bash-for-file-name-extraction" class="nav-link" data-scroll-target="#using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</a></li>
   <li><a href="#streamling-file-transfer-via-a-bastion-host" id="toc-streamling-file-transfer-via-a-bastion-host" class="nav-link" data-scroll-target="#streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</a></li>
   <li><a href="#extract-data-lines-from-a-vcf-file" id="toc-extract-data-lines-from-a-vcf-file" class="nav-link" data-scroll-target="#extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</a></li>
+  <li><a href="#separate-columns-in-file-with-multiple-whitespaces" id="toc-separate-columns-in-file-with-multiple-whitespaces" class="nav-link" data-scroll-target="#separate-columns-in-file-with-multiple-whitespaces">Separate columns in file with multiple whitespaces</a></li>
   </ul>
 </nav>
     </div>
@@ -270,7 +272,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">November 30, 2023</p>
+      <p class="date-modified">December 21, 2023</p>
     </div>
   </div>
     
@@ -334,6 +336,16 @@ Note
 <p>Visual inspection 🔍 of the data lines (i.e.&nbsp;genotype fields) of VCF file is often impeded ⛔ by the large number of meta-information lines at the top. A simple sed command that looks for the mandatory body header line can get your past this hurdle 🚧</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'/#CHROM/,$p'</span> filename.vcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In short this command searches for the pattern ‘#CHROM’ and then starts printing to the screen until the end of the file. Pipe this into a head command (<code>| head</code>) and you now have a quick and simple way 🟢 to inspect the start of a VCF file.</p>
+</section>
+<section id="separate-columns-in-file-with-multiple-whitespaces" class="level2">
+<h2 class="anchored" data-anchor-id="separate-columns-in-file-with-multiple-whitespaces">Separate columns in file with multiple whitespaces</h2>
+<p>When dealing with tabular text files where columns are inconsistently separated by varying numbers of whitespaces, a quick solution comes through using the translate command <code>tr</code> and the <code>-s</code> squeeze repeats feature. By employing <code>tr</code> to convert multiple consecutive whitespaces into a single whitespace, you can seamlessly tidy 🧹 the data before applying <code>cut</code> for column extraction.</p>
+<p>For instance, to isolate the 3rd and 4th columns from a file:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="at">-s</span> <span class="st">' '</span> <span class="op">&lt;</span> file.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">' '</span> <span class="at">-f</span> 2,3</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ^^^                            ^^^^^^</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># squeeze repeats            get 2nd &amp; 3rd field</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

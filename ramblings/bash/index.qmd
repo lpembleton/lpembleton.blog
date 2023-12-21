@@ -86,7 +86,6 @@ scp -o 'ProxyCommand ssh <user-name>@<Public-IPv4-DNS> -W %h:%p' \
 It's worth noting that while both methods facilitate the transfer, **`ProxyJump`** is recommended over **`ProxyCommand`** as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.
 :::
 
-
 ## Extract Data Lines From a VCF File
 
 ![](images/vcffileformat.png)
@@ -97,4 +96,18 @@ Visual inspection 🔍 of the data lines (i.e. genotype fields) of VCF file is o
 sed -n '/#CHROM/,$p' filename.vcf
 ```
 
-In short this command searches for the pattern '#CHROM' and then starts printing to the screen until the end of the file. Pipe this into a head command (` | head`) and you now have a quick and simple way 🟢 to inspect the start of a VCF file. 
+In short this command searches for the pattern '#CHROM' and then starts printing to the screen until the end of the file. Pipe this into a head command (`| head`) and you now have a quick and simple way 🟢 to inspect the start of a VCF file.
+
+## Separate columns in file with multiple whitespaces
+
+When dealing with tabular text files where columns are inconsistently separated by varying numbers of whitespaces, a quick solution comes through using the translate command `tr` and the `-s` squeeze repeats feature. By employing `tr` to convert multiple consecutive whitespaces into a single whitespace, you can seamlessly tidy 🧹 the data before applying `cut` for column extraction.
+
+For instance, to isolate the 3rd and 4th columns from a file:
+
+``` bash
+tr -s ' ' < file.txt | cut -d ' ' -f 2,3
+#  ^^^                            ^^^^^^
+#   |                                |
+#   |                                |
+# squeeze repeats            get 2nd & 3rd field
+```
