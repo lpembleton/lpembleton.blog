@@ -132,11 +132,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -240,6 +240,7 @@ cookieconsent.run({
   <li><a href="#add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" id="toc-add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data" class="nav-link" data-scroll-target="#add-a-prefix-to-column-names-when-pivoting-from-long-data-to-wide-data">Add a prefix to column names when pivoting from long-data to wide-data</a></li>
   <li><a href="#initalise-an-empty-tibble-with-predined-column-names" id="toc-initalise-an-empty-tibble-with-predined-column-names" class="nav-link" data-scroll-target="#initalise-an-empty-tibble-with-predined-column-names">Initalise an empty tibble with predined column names</a></li>
   <li><a href="#highlight-points-of-interest-with-annotations" id="toc-highlight-points-of-interest-with-annotations" class="nav-link" data-scroll-target="#highlight-points-of-interest-with-annotations">Highlight points of interest with annotations</a></li>
+  <li><a href="#order-a-boxplot-for-improved-across-axis-comparisions" id="toc-order-a-boxplot-for-improved-across-axis-comparisions" class="nav-link" data-scroll-target="#order-a-boxplot-for-improved-across-axis-comparisions">Order a boxplot for improved across axis comparisions</a></li>
   </ul>
 </nav>
     </div>
@@ -274,7 +275,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 16, 2023</p>
+      <p class="date-modified">December 24, 2023</p>
     </div>
   </div>
     
@@ -694,6 +695,38 @@ Note
 <span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> <span class="fu">element_markdown</span>(),</span>
 <span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>        <span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="order-a-boxplot-for-improved-across-axis-comparisions" class="level2">
+<h2 class="anchored" data-anchor-id="order-a-boxplot-for-improved-across-axis-comparisions">Order a boxplot for improved across axis comparisions</h2>
+<p>If you are using a boxplot to demonstrate differences across multiple groups you may encounter the problem whereby the standard order of groups results in a saw tough pattern which can make it difficult to compare across groups 😕👇</p>
+<p>When creating a boxplot to showcase differences and variations among multiple groups, you might run into an issue where the default order of groups creates a jagged pattern 👇 This can really complicate the comparison process across these groups 😕</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>To enhance the clarity of your visual representation and make comparisons easier, you should consider reordering the groups in a more intuitive or meaningful sequence. This can help in presenting the data in a way that is more easily understandable and conducive to drawing accurate conclusions.</p>
+<p>To reorder x from low to high based on y-values use the <code>reorder</code> function within the ggplot mappings.</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(manufacturer, cty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">y =</span> cty)) <span class="sc">+</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#219ebc"</span>) <span class="sc">+</span> </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_dotplot</span>(<span class="at">binaxis=</span><span class="st">'y'</span>, </span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>               <span class="at">stackdir=</span><span class="st">'center'</span>, </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>               <span class="at">dotsize=</span><span class="fl">0.5</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>               <span class="at">fill =</span> <span class="st">"#f4a261"</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle=</span><span class="dv">65</span>, <span class="at">vjust=</span><span class="fl">0.6</span>)) <span class="sc">+</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">"City Mileage vs Class"</span>, </span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">"Ordered x axis"</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">"Source: mpg"</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Class of Vehicle"</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"City Mileage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 

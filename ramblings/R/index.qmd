@@ -632,3 +632,62 @@ ggplot(data = ngs_data, aes(x=Yield_per_flowcell, y=Price_per_Gb, colour=Company
         plot.subtitle = element_markdown(),
         legend.position = "none")
 ```
+
+## Order a boxplot for improved across axis comparisions
+
+If you are using a boxplot to demonstrate differences across multiple groups you may encounter the problem whereby the standard order of groups results in a saw tough pattern which can make it difficult to compare across groups 😕👇
+
+When creating a boxplot to showcase differences and variations among multiple groups, you might run into an issue where the default order of groups creates a jagged pattern 👇 This can really complicate the comparison process across these groups 😕
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+library(tidyverse)
+theme_set(theme_bw())
+
+ggplot(mpg, aes(x = manufacturer, y =cty)) + 
+  geom_boxplot(fill = "#219ebc") + 
+  geom_dotplot(binaxis='y', 
+               stackdir='center', 
+               dotsize=0.5,
+               fill = "#f4a261") +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="City Mileage vs Class", 
+       subtitle="Unordered x axis",
+       caption="Source: mpg",
+       x="Class of Vehicle",
+       y="City Mileage")
+```
+
+To enhance the clarity of your visual representation and make comparisons easier, you should consider reordering the groups in a more intuitive or meaningful sequence. This can help in presenting the data in a way that is more easily understandable and conducive to drawing accurate conclusions.
+
+To reorder x from low to high based on y-values use the `reorder` function within the ggplot mappings. 
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) + 
+  geom_boxplot(fill = "#219ebc") + 
+  geom_dotplot(binaxis='y', 
+               stackdir='center', 
+               dotsize=0.5,
+               fill = "#f4a261") +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="City Mileage vs Class", 
+       subtitle="Ordered x axis",
+       caption="Source: mpg",
+       x="Class of Vehicle",
+       y="City Mileage")
+```
+
+```{r, eval = FALSE}
+library(tidyverse)
+ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) + 
+  geom_boxplot(fill = "#219ebc") + 
+  geom_dotplot(binaxis='y', 
+               stackdir='center', 
+               dotsize=0.5,
+               fill = "#f4a261") +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + 
+  labs(title="City Mileage vs Class", 
+       subtitle="Ordered x axis",
+       caption="Source: mpg",
+       x="Class of Vehicle",
+       y="City Mileage")
+```

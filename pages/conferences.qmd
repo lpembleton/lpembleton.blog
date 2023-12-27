@@ -13,8 +13,15 @@ A list of virtual 🧑‍💻 (or hybrid) conferences and meetups for the data s
 
 *Each week, host Rachael Dempsey invites an accomplished data science leader to talk about their experience and answer questions from the audience. The discussion focuses mainly on the human elements of data science leadership. There's no sales or marketing fluff, just great insights from inspiring professionals.*
 
-📹 [Past hangouts](https://posit.co/past-hangouts/) are also available to watch.\
+📹 [Past hangouts](#0) are also available to watch.\
 \
+📌[**New York Open Statistical Programming Meetup**](https://nyhackr.org/index.html) - Every Month.
+
+Originally starting as the New York R Meetup it has now grown to incorporate knowledge of statistical programming techniques in open-source languages such as R, Python, Julia and Go, and data science in general.
+
+📹 [Past meetups](https://nyhackr.org/past-talks.html) are also available to watch.
+
+Follow on [Twitter](https://twitter.com/nyhackr)
 
 📌[**Channels**](https://www.nextflow.io/podcasts.html) the nextflow podcast - Pre-recorded every fortnight.
 
@@ -24,13 +31,17 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 ### Scheduled 📆
 
-#### *2023*
-
 #### *2024*
 
 📌[**ShinyConf2024**](https://www.shinyconf.com/) - 17-19 April, 2024
 
 *The third edition of the largest virtual R Shiny conference.*
+
+📌[**SatRdays London**](https://satrday-london-2024.jumpingrivers.com/#about) - 27 April, 2024
+
+*SatRdays events are for everyone with an interest in R, whether you're a seasoned pro or just getting started.*
+
+[Register](https://satrday-london-2024.jumpingrivers.com/#registration)
 
 📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Boston** - May 14-17, 2024
 
@@ -38,11 +49,11 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 [Subscribe for updates](https://summit.nextflow.io/subscribe-2024/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
 
-📌[**useR! 2024**](https://www.r-project.org/conferences/) - July 8-11, 2024
+📌[**useR! 2024**](https://events.linuxfoundation.org/user/) - July 8-11, 2024
 
 *useR! is the main meeting of the R user and developer community, its program consists of both invited and user-contributed presentations.*
 
-Registration opens soon \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
+[Register](https://events.linuxfoundation.org/user/) \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
 
 📌**Posit::conf(2024)** **\| Seattle** - August 12-14, 2024*.*
 

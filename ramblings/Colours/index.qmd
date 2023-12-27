@@ -15,7 +15,7 @@ toc: true
 ::: color-palette
 ::: {.color-palette__swatch style="background: #1F1E1F;"}
 ::: color-palette__label
-<strong>Eerie Black</strong> ##1F1E1F
+<strong>Eerie Black</strong> #1F1E1F
 :::
 :::
 
@@ -64,6 +64,46 @@ toc: true
 
 ```{r}
 agriculture <- c("#1f1e1f", "#66666e", "#023047", "#598392", "#226f54", "#87c38f", "#e76f51", "#f4a261")
+```
+
+## Agricultural Seasons
+
+A subset of the colour blind 🎨👓 friendly palette from [Bang Wong 2011](https://doi.org/10.1038/nmeth.1618), with predefined allocation to agriculture seasons. The colour associations are meant to be semi-logical (taken from typical seasonal colour associations) to enable more natural interpretation, without constant legend referencing.
+
+::: color-palette
+::: {.color-palette__swatch style="background: #0072B2;"}
+::: color-palette__label
+<strong>Winter</strong> #0072B2
+:::
+:::
+
+::: {.color-palette__swatch style="background: #F0E442;"}
+::: color-palette__label
+<strong>Early Spring</strong> #F0E442
+:::
+:::
+
+::: {.color-palette__swatch style="background: #009E73;"}
+::: color-palette__label
+<strong>Late Spring</strong> #009E73
+:::
+:::
+
+::: {.color-palette__swatch style="background: #56B4E9;"}
+::: color-palette__label
+<strong>Summer</strong> #56B4E9
+:::
+:::
+
+::: {.color-palette__swatch style="background: #D55E00;"}
+::: color-palette__label
+<strong>Autumn</strong> #D55E00
+:::
+:::
+:::
+
+```{r}
+ag_seasons <- c("#0072B2", "#F0E442", "#009E73", "#56B4E9", "#D55E00")
 ```
 
 ## Halloween
@@ -143,7 +183,6 @@ More to be used as a colour reference rather than a palette, as the contrast bet
 ```{r}
 seq_companies <- c("#F9A31E", "#0083A9", "#006AB7", "#0A7537", "#1E1E1E")
 ```
-
 
 ## Windows Desktops
 
