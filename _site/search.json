@@ -56,6 +56,20 @@
     "text": "Separate columns in file with multiple whitespaces\nWhen dealing with tabular text files where columns are inconsistently separated by varying numbers of whitespaces, a quick solution comes through using the translate command tr and the -s squeeze repeats feature. By employing tr to convert multiple consecutive whitespaces into a single whitespace, you can seamlessly tidy 🧹 the data before applying cut for column extraction.\nFor instance, to isolate the 3rd and 4th columns from a file:\ntr -s ' ' &lt; file.txt | cut -d ' ' -f 2,3\n#  ^^^                            ^^^^^^\n#   |                                |\n#   |                                |\n# squeeze repeats            get 2nd & 3rd field"
   },
   {
+    "objectID": "ramblings/bash/index.html#human-readable-file-and-directory-sizes",
+    "href": "ramblings/bash/index.html#human-readable-file-and-directory-sizes",
+    "title": "Bash",
+    "section": "Human-readable file and directory sizes",
+    "text": "Human-readable file and directory sizes\nWant human readable file sizes in your ls commands? Simply add - ld\n# Size in bytes\nls -l\n\n# Human readable sizes\nls -h \nSame principle applies to directory sizes with the du disk usage command\n# List directory sizes 1 level deep\ndu -hd1\n\n# List the total size of the current directory\ndu -hs"
+  },
+  {
+    "objectID": "ramblings/bash/index.html#quickly-search-your-bash-history-for-a-previous-command",
+    "href": "ramblings/bash/index.html#quickly-search-your-bash-history-for-a-previous-command",
+    "title": "Bash",
+    "section": "Quickly search your bash history for a previous command",
+    "text": "Quickly search your bash history for a previous command\nSay goodbye to pressing ▲ endlessly in bash to get back to a previously used command. Instead your can press Ctrl + R and search for any matching text in your previous command history. Keep pressing Ctrl + R to cycle through more matches.\n💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment # that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append #cmd for later after the command. That way, you have a unique Ctrl + R search phrase for quicker retrieval."
+  },
+  {
     "objectID": "posts/push-docker-to-ecr/index.html",
     "href": "posts/push-docker-to-ecr/index.html",
     "title": "Pushing Docker Images to AWS ECR",
@@ -350,6 +364,13 @@
     "text": "Eerie Black #1F1E1F\n\n\n\n\nDim gray #66666E\n\n\n\n\nPrussian Blue #023047\n\n\n\n\nAir Force Blue #598392\n\n\n\n\nDark Spring Green #226F54\n\n\n\n\nPistachio #87C38F\n\n\n\n\nBurnt Sienna #E76F51\n\n\n\n\nSandy Brown #F4A261\n\n\n\n\nagriculture &lt;- c(\"#1f1e1f\", \"#66666e\", \"#023047\", \"#598392\", \"#226f54\", \"#87c38f\", \"#e76f51\", \"#f4a261\")"
   },
   {
+    "objectID": "ramblings/Colours/index.html#agricultural-seasons",
+    "href": "ramblings/Colours/index.html#agricultural-seasons",
+    "title": "Colours",
+    "section": "Agricultural Seasons",
+    "text": "Agricultural Seasons\nA subset of the colour blind 🎨👓 friendly palette from Bang Wong 2011, with predefined allocation to agriculture seasons. The colour associations are meant to be semi-logical (taken from typical seasonal colour associations) to enable more natural interpretation, without constant legend referencing.\n\n\n\nWinter #0072B2\n\n\n\n\nEarly Spring #F0E442\n\n\n\n\nLate Spring #009E73\n\n\n\n\nSummer #56B4E9\n\n\n\n\nAutumn #D55E00\n\n\n\n\nag_seasons &lt;- c(\"#0072B2\", \"#F0E442\", \"#009E73\", \"#56B4E9\", \"#D55E00\")"
+  },
+  {
     "objectID": "ramblings/Colours/index.html#halloween",
     "href": "ramblings/Colours/index.html#halloween",
     "title": "Colours",
@@ -432,33 +453,5 @@
     "title": "R",
     "section": "Order a boxplot for improved across axis comparisions",
     "text": "Order a boxplot for improved across axis comparisions\nIf you are using a boxplot to demonstrate differences across multiple groups you may encounter the problem whereby the standard order of groups results in a saw tough pattern which can make it difficult to compare across groups 😕👇\nWhen creating a boxplot to showcase differences and variations among multiple groups, you might run into an issue where the default order of groups creates a jagged pattern 👇 This can really complicate the comparison process across these groups 😕\n\n\n\n\n\nTo enhance the clarity of your visual representation and make comparisons easier, you should consider reordering the groups in a more intuitive or meaningful sequence. This can help in presenting the data in a way that is more easily understandable and conducive to drawing accurate conclusions.\nTo reorder x from low to high based on y-values use the reorder function within the ggplot mappings.\n\n\n\n\n\n\nlibrary(tidyverse)\nggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) + \n  geom_boxplot(fill = \"#219ebc\") + \n  geom_dotplot(binaxis='y', \n               stackdir='center', \n               dotsize=0.5,\n               fill = \"#f4a261\") +\n  theme(axis.text.x = element_text(angle=65, vjust=0.6)) + \n  labs(title=\"City Mileage vs Class\", \n       subtitle=\"Ordered x axis\",\n       caption=\"Source: mpg\",\n       x=\"Class of Vehicle\",\n       y=\"City Mileage\")"
-  },
-  {
-    "objectID": "ramblings/Colours/index.html#agriculture-seasons",
-    "href": "ramblings/Colours/index.html#agriculture-seasons",
-    "title": "Colours",
-    "section": "Agriculture Seasons",
-    "text": "Agriculture Seasons\nA subset of the colour blind 🎨👓 friendly palette from Bang Wong 2011, with predefined allocation to agriculture seasons.\n\n\n\nWinter #0072B2\n\n\n\n\nEarly Spring #F0E442\n\n\n\n\nLate Spring #009E73\n\n\n\n\nSummer #56B4E9\n\n\n\n\nAutumn #D55E00\n\n\n\n\nag_seasons &lt;- c(\"#0072B2\", \"#F0E442\", \"#009E73\", \"#56B4E9\", \"#D55E00\")"
-  },
-  {
-    "objectID": "ramblings/bash/index.html#quickly-search-your-bash-history-for-a-previous-command",
-    "href": "ramblings/bash/index.html#quickly-search-your-bash-history-for-a-previous-command",
-    "title": "Bash",
-    "section": "Quickly search your bash history for a previous command",
-    "text": "Quickly search your bash history for a previous command\nSay goodbye to pressing ▲ endlessly in bash to get back to a previously used command. Instead your can press Ctrl + R and search for any matching text in your previous command history. Keep pressing Ctrl + R to cycle through more matches.\n💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment # that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append #cmd for later after the command. That way, you have a unique Ctrl + R search phrase for quicker retrieval."
-  },
-  {
-    "objectID": "ramblings/bash/index.html#human-readable-file-and-directory-sizes",
-    "href": "ramblings/bash/index.html#human-readable-file-and-directory-sizes",
-    "title": "Bash",
-    "section": "Human-readable file and directory sizes",
-    "text": "Human-readable file and directory sizes\nWant human readable file sizes in your ls commands? Simply add - ld\n# Size in bytes\nls -l\n\n# Human readable sizes\nls -h \nSame principle applies to directory sizes with the du disk usage command\n# List directory sizes 1 level deep\ndu -hd1"
-  },
-  {
-    "objectID": "ramblings/Colours/index.html#agricultural-seasons",
-    "href": "ramblings/Colours/index.html#agricultural-seasons",
-    "title": "Colours",
-    "section": "Agricultural Seasons",
-    "text": "Agricultural Seasons\nA subset of the colour blind 🎨👓 friendly palette from Bang Wong 2011, with predefined allocation to agriculture seasons. The colour associations are meant to be semi-logical (taken from typical seasonal colour associations) to enable more natural interpretation, without constant legend referencing.\n\n\n\nWinter #0072B2\n\n\n\n\nEarly Spring #F0E442\n\n\n\n\nLate Spring #009E73\n\n\n\n\nSummer #56B4E9\n\n\n\n\nAutumn #D55E00\n\n\n\n\nag_seasons &lt;- c(\"#0072B2\", \"#F0E442\", \"#009E73\", \"#56B4E9\", \"#D55E00\")"
   }
 ]

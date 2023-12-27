@@ -659,7 +659,7 @@ ggplot(mpg, aes(x = manufacturer, y =cty)) +
 
 To enhance the clarity of your visual representation and make comparisons easier, you should consider reordering the groups in a more intuitive or meaningful sequence. This can help in presenting the data in a way that is more easily understandable and conducive to drawing accurate conclusions.
 
-To reorder x from low to high based on y-values use the `reorder` function within the ggplot mappings. 
+To reorder x from low to high based on y-values use the `reorder` function within the ggplot mappings.
 
 ```{r, warning = FALSE, message = FALSE, echo = FALSE}
 ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) + 
@@ -675,6 +675,8 @@ ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) +
        x="Class of Vehicle",
        y="City Mileage")
 ```
+
+Here is the full code 👇 showing how to use the `reorder` function, enjoy!
 
 ```{r, eval = FALSE}
 library(tidyverse)
