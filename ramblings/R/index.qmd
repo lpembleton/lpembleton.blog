@@ -693,3 +693,71 @@ ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) +
        x="Class of Vehicle",
        y="City Mileage")
 ```
+
+## Labelling Legends
+
+Legend titles and value labels in visual representations by default often lack clarity and may appear disorganized. This happens as they're directly derived from data and column headings, typically designed to be concise and format-free in programming. Consequently, they might seem puzzling or cluttered. Consider the plot below: if you're acquainted with the `mpg` dataset, you'd recognise `drv` as denoting drive train type—where `4` stands for 4-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive, while `cyl` indicates the number of cylinders.
+
+However, if you do not know of the `mpg` dataset, which lets be honest is the likely scenario of your target audience, then you might just leave them as puzzled as a possum 😕 
+
+```{r, echo = FALSE}
+library(tidyverse)
+library(ggdist)
+
+ggplot(data = mpg |> 
+         filter(cyl != 5) |>
+         mutate(cyl = as.factor(cyl)),
+       aes(x = hwy, y = cyl, fill = cyl)) +
+  stat_halfeye(
+    point_color = NA, .width = 0, height = 0.5,
+    position = position_nudge(y = 0.2),
+    alpha = 0.7,
+    slab_colour = "black"
+  ) +
+  geom_point(position = position_jitter(width = 0.2, height = 0.15, seed = 1),
+             alpha = 0.8,
+             size = 3,
+             aes(colour = drv)) +
+  scale_colour_manual(values = c("#fe7f2d", "#619b8a", "#233d4d")) +
+  scale_fill_manual(values = c("#90e0ef", "#0077b6", "#03045e")) +
+  theme_bw() +
+  ylab("Cylinders") +
+  xlab("Highway Miles per Gallon") +
+  ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
+```
+
+However correcting this in your plots is dead simple. Just add label and name (title) details to the `scale_colour_*` and `scale_fill_*` functions as demonstrated below 👇
+
+```{r, echo = TRUE}
+ggplot(data = mpg |> 
+         filter(cyl != 5) |>
+         mutate(cyl = as.factor(cyl)),
+       aes(x = hwy, y = cyl, fill = cyl)) +
+  stat_halfeye(
+    point_color = NA, .width = 0, height = 0.5,
+    position = position_nudge(y = 0.2),
+    alpha = 0.7,
+    slab_colour = "black"
+  ) +
+  geom_point(position = position_jitter(width = 0.2, height = 0.15, seed = 1),
+             alpha = 0.7,
+             size = 3,
+             aes(colour = drv)) +
+  scale_colour_manual(values = c("#fe7f2d", "#619b8a", "#233d4d"),
+                      labels = c("4 wheel drive",                                           # <1> 
+                                 "Front wheel drive",                                       # <1> 
+                                 "Rear wheel drive"),                                       # <1>
+                      name = "Drive Train") +                                               # <2>
+  scale_fill_manual(values = c("#90e0ef", "#0077b6", "#03045e"),
+                    name = "Cylinders") +                                                   # <3>
+  theme_bw() +
+  ylab("Cylinders") +
+  xlab("Highway Miles per Gallon") +
+  ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
+```
+
+1. Add new labels to the three point data categories
+2. Add a name/title to the point data legend
+3. Add a name/title to the distribution data legend
+
+Be a champion and help out your audience 👍 

@@ -113,6 +113,7 @@ tr -s ' ' < file.txt | cut -d ' ' -f 2,3
 ```
 
 ## Human-readable file and directory sizes
+
 Want human readable file sizes in your ls commands? Simply add `- ld`
 
 ``` bash
@@ -134,9 +135,7 @@ du -hs
 ```
 
 ## Quickly search your bash history for a previous command
-Say goodbye to pressing {{< kbd ▲ >}} endlessly in bash to get back to a previously used command. Instead your can press {{< kbd Ctrl >}} + {{< kbd R >}} and search for any matching text in your previous command history. Keep pressing {{< kbd Ctrl >}} + {{< kbd R >}} to cycle through more matches. 
 
-💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment `#` that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append `#cmd for later` after the command. That way, you have a unique {{< kbd Ctrl >}} + {{< kbd R >}} search phrase for quicker retrieval. 
+Say goodbye to pressing {{< kbd ▲ >}} endlessly in bash to get back to a previously used command. Instead your can press {{< kbd Ctrl >}} + {{< kbd R >}} and search for any matching text in your previous command history. Keep pressing {{< kbd Ctrl >}} + {{< kbd R >}} to cycle through more matches.
 
-
-
+💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment `#` that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append `#cmd for later` after the command. That way, you have a unique {{< kbd Ctrl >}} + {{< kbd R >}} search phrase for quicker retrieval.

@@ -132,11 +132,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site-name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -241,6 +241,7 @@ cookieconsent.run({
   <li><a href="#initalise-an-empty-tibble-with-predined-column-names" id="toc-initalise-an-empty-tibble-with-predined-column-names" class="nav-link" data-scroll-target="#initalise-an-empty-tibble-with-predined-column-names">Initalise an empty tibble with predined column names</a></li>
   <li><a href="#highlight-points-of-interest-with-annotations" id="toc-highlight-points-of-interest-with-annotations" class="nav-link" data-scroll-target="#highlight-points-of-interest-with-annotations">Highlight points of interest with annotations</a></li>
   <li><a href="#order-a-boxplot-for-improved-across-axis-comparisions" id="toc-order-a-boxplot-for-improved-across-axis-comparisions" class="nav-link" data-scroll-target="#order-a-boxplot-for-improved-across-axis-comparisions">Order a boxplot for improved across axis comparisions</a></li>
+  <li><a href="#labelling-legends" id="toc-labelling-legends" class="nav-link" data-scroll-target="#labelling-legends">Labelling Legends</a></li>
   </ul>
 </nav>
     </div>
@@ -275,7 +276,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">December 24, 2023</p>
+      <p class="date-modified">January 6, 2024</p>
     </div>
   </div>
     
@@ -713,6 +714,7 @@ Note
 <p><img src="index_files/figure-html/unnamed-chunk-18-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
+<p>Here is the full code 👇 showing how to use the <code>reorder</code> function, enjoy!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(manufacturer, cty, <span class="at">na.rm =</span> <span class="cn">TRUE</span>), <span class="at">y =</span> cty)) <span class="sc">+</span> </span>
@@ -728,6 +730,64 @@ Note
 <span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">x=</span><span class="st">"Class of Vehicle"</span>,</span>
 <span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">y=</span><span class="st">"City Mileage"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+</section>
+<section id="labelling-legends" class="level2">
+<h2 class="anchored" data-anchor-id="labelling-legends">Labelling Legends</h2>
+<p>Legend titles and value labels in visual representations by default often lack clarity and may appear disorganized. This happens as they’re directly derived from data and column headings, typically designed to be concise and format-free in programming. Consequently, they might seem puzzling or cluttered. Consider the plot below: if you’re acquainted with the <code>mpg</code> dataset, you’d recognise <code>drv</code> as denoting drive train type—where <code>4</code> stands for 4-wheel drive, <code>f</code> for front-wheel drive, and <code>r</code> for rear-wheel drive, while <code>cyl</code> indicates the number of cylinders.</p>
+<p>However, if you do not know of the <code>mpg</code> dataset, which lets be honest is the likely scenario of your target audience, then you might just leave them as puzzled as a possum 😕</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-20-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>However correcting this in your plots is dead simple. Just add label and name (title) details to the <code>scale_colour_*</code> and <code>scale_fill_*</code> functions as demonstrated below 👇</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-14"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-14-1"><a href="#annotated-cell-14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-14-2"><a href="#annotated-cell-14-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(cyl <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-14-3"><a href="#annotated-cell-14-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">cyl =</span> <span class="fu">as.factor</span>(cyl)),</span>
+<span id="annotated-cell-14-4"><a href="#annotated-cell-14-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> cyl, <span class="at">fill =</span> cyl)) <span class="sc">+</span></span>
+<span id="annotated-cell-14-5"><a href="#annotated-cell-14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_halfeye</span>(</span>
+<span id="annotated-cell-14-6"><a href="#annotated-cell-14-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">point_color =</span> <span class="cn">NA</span>, <span class="at">.width =</span> <span class="dv">0</span>, <span class="at">height =</span> <span class="fl">0.5</span>,</span>
+<span id="annotated-cell-14-7"><a href="#annotated-cell-14-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_nudge</span>(<span class="at">y =</span> <span class="fl">0.2</span>),</span>
+<span id="annotated-cell-14-8"><a href="#annotated-cell-14-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="annotated-cell-14-9"><a href="#annotated-cell-14-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">slab_colour =</span> <span class="st">"black"</span></span>
+<span id="annotated-cell-14-10"><a href="#annotated-cell-14-10" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="annotated-cell-14-11"><a href="#annotated-cell-14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.15</span>, <span class="at">seed =</span> <span class="dv">1</span>),</span>
+<span id="annotated-cell-14-12"><a href="#annotated-cell-14-12" aria-hidden="true" tabindex="-1"></a>             <span class="at">alpha =</span> <span class="fl">0.7</span>,</span>
+<span id="annotated-cell-14-13"><a href="#annotated-cell-14-13" aria-hidden="true" tabindex="-1"></a>             <span class="at">size =</span> <span class="dv">3</span>,</span>
+<span id="annotated-cell-14-14"><a href="#annotated-cell-14-14" aria-hidden="true" tabindex="-1"></a>             <span class="fu">aes</span>(<span class="at">colour =</span> drv)) <span class="sc">+</span></span>
+<span id="annotated-cell-14-15"><a href="#annotated-cell-14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#fe7f2d"</span>, <span class="st">"#619b8a"</span>, <span class="st">"#233d4d"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-14-16" class="code-annotation-target"><a href="#annotated-cell-14-16" aria-hidden="true" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"4 wheel drive"</span>,</span>
+<span id="annotated-cell-14-17"><a href="#annotated-cell-14-17" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"Front wheel drive"</span>,</span>
+<span id="annotated-cell-14-18"><a href="#annotated-cell-14-18" aria-hidden="true" tabindex="-1"></a>                                 <span class="st">"Rear wheel drive"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-14-19" class="code-annotation-target"><a href="#annotated-cell-14-19" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name =</span> <span class="st">"Drive Train"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-14-20"><a href="#annotated-cell-14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#90e0ef"</span>, <span class="st">"#0077b6"</span>, <span class="st">"#03045e"</span>),</span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-14" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-14-21" class="code-annotation-target"><a href="#annotated-cell-14-21" aria-hidden="true" tabindex="-1"></a>                    <span class="at">name =</span> <span class="st">"Cylinders"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-14-22"><a href="#annotated-cell-14-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-14-23"><a href="#annotated-cell-14-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Cylinders"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-14-24"><a href="#annotated-cell-14-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Highway Miles per Gallon"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-14-25"><a href="#annotated-cell-14-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Fuel economy for 38 popular car models from 1999 to 2008"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-14" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-lines="16,17,18" data-code-annotation="1" data-code-cell="annotated-cell-14">Add new labels to the three point data categories</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-lines="19" data-code-annotation="2" data-code-cell="annotated-cell-14">Add a name/title to the point data legend</span>
+</dd>
+<dt data-target-cell="annotated-cell-14" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-lines="21" data-code-annotation="3" data-code-cell="annotated-cell-14">Add a name/title to the distribution data legend</span>
+</dd>
+</dl>
+</div>
+<div class="cell-output-display">
+<p><img src="index_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>Be a champion and help out your audience 👍</p>
 
 
 </section>
