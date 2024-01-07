@@ -10,6 +10,8 @@ draft: false
 
 ![](images/eq_header.png)
 
+👍 *Featured as a highlight ✨ in R Weekly [2023-W37](https://rweekly.org/2023-W37.html) and the R Weekly* [Podcast](https://rweekly.fireside.fm/137) 🎧
+
 ## Annotating Equations
 
 Using the LaTeX [annotate-equations](https://github.com/st--/annotate-equations) package in Quarto allows you to easily annotate equations within your quarto reports, documents or manuscripts. Currently as far as I am aware this only works for pdfs.

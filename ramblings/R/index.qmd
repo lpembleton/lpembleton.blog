@@ -1,6 +1,6 @@
 ---
 title: "R"
-description: "A worthy collection of short R commands and tricks "
+description: "A worthy collection of short R commands and tricks"
 author: "LW Pembleton"
 date-modified: last-modified
 categories: [R]
@@ -11,6 +11,8 @@ toc: true
 ---
 
 ![~Photo by Daria Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
+
+A worthy collection of short R commands and tricks. 👍 *As featured in R Weekly [2023-W44](https://rweekly.org/2023-W44.html)*
 
 ## Using {custom_annotation} to embed one plots inside another.
 
@@ -696,9 +698,9 @@ ggplot(mpg, aes(x = reorder(manufacturer, cty, na.rm = TRUE), y = cty)) +
 
 ## Labelling Legends
 
-Legend titles and value labels in visual representations by default often lack clarity and may appear disorganized. This happens as they're directly derived from data and column headings, typically designed to be concise and format-free in programming. Consequently, they might seem puzzling or cluttered. Consider the plot below: if you're acquainted with the `mpg` dataset, you'd recognise `drv` as denoting drive train type—where `4` stands for 4-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive, while `cyl` indicates the number of cylinders.
+Legend titles and value labels in visual representations by default often lack clarity and may appear disorganized. This happens as they're directly derived from data and column headings, typically designed to be concise and format-free in programming. Consequently, they might seem puzzling or cluttered. Consider the plot below: if you're acquainted with the `mpg` dataset, you'd recognise `drv` as denoting drive train type---where `4` stands for 4-wheel drive, `f` for front-wheel drive, and `r` for rear-wheel drive, while `cyl` indicates the number of cylinders.
 
-However, if you do not know of the `mpg` dataset, which lets be honest is the likely scenario of your target audience, then you might just leave them as puzzled as a possum 😕 
+However, if you do not know of the `mpg` dataset, which lets be honest is the likely scenario of your target audience, then you might just leave them as puzzled as a possum 😕
 
 ```{r, echo = FALSE}
 library(tidyverse)
@@ -756,8 +758,8 @@ ggplot(data = mpg |>
   ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
 ```
 
-1. Add new labels to the three point data categories
-2. Add a name/title to the point data legend
-3. Add a name/title to the distribution data legend
+1.  Add new labels to the three point data categories
+2.  Add a name/title to the point data legend
+3.  Add a name/title to the distribution data legend
 
-Be a champion and help out your audience 👍 
+Be a champion and help out your audience 👍

@@ -55,9 +55,22 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 [Register](https://events.linuxfoundation.org/user/) \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
 
+📌**BioC2024: Bioconductor Conference**, 24 - 26 July, 2024.
+
+*Where software and biology connect. Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
+
+[Website](https://bioc2024.bioconductor.org/) 👈 *note link is currently broken* \|
+[Mastodon](https://genomic.social/@bioconductor)
+
 📌**Posit::conf(2024)** **\| Seattle** - August 12-14, 2024*.*
 
 *Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
+
+📌[**EuroBioC2024: European Bioconductor Conference**](https://eurobioc2024.bioconductor.org/), 4 - 6 September, 2024.
+
+*Where software and biology connect. Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
+
+[Website](https://bioc2024.bioconductor.org/) \| [Mastodon](https://genomic.social/@bioconductor)
 
 📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Barcelona** - October 21-25, 2024
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.536">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -91,7 +91,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -100,6 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -126,6 +133,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en"
   });
 });
 </script> 
@@ -135,10 +144,10 @@ cookieconsent.run({
 <meta property="og:title" content="Luke Pembleton - Bash">
 <meta property="og:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
 <meta property="og:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
-<meta property="og:site-name" content="Luke Pembleton">
+<meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Bash">
 <meta name="twitter:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -147,9 +156,9 @@ cookieconsent.run({
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
     </a>
@@ -164,65 +173,65 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">ABOUT</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">BLOG</span></a>
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../ramblings.html" rel="" target="">
- <span class="menu-text">RAMBLINGS</span></a>
+    <a class="nav-link" href="../../ramblings.html"> 
+<span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../publications/publications.html" rel="" target="">
- <span class="menu-text">PUBLICATIONS</span></a>
+    <a class="nav-link" href="../../publications/publications.html"> 
+<span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../pages/conferences.html" rel="" target="">
- <span class="menu-text">CONFERENCES</span></a>
+    <a class="nav-link" href="../../pages/conferences.html"> 
+<span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/lpembleton" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/lpembleton"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/lwpembleton" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/lwpembleton"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://genomic.social/@lwpembleton" rel="" target=""><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://genomic.social/@lwpembleton"> <i class="bi bi-mastodon" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social"> 
+<span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://linkedin.com/in/lpembleton" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://linkedin.com/in/lpembleton"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/" rel="" target="">
- <span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
+    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/"> 
+<span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -235,7 +244,9 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#using-tee-to-log-command-outputs." id="toc-using-tee-to-log-command-outputs." class="nav-link active" data-scroll-target="#using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</a></li>
+  <li><a href="#working-with-tar-and-gz-files" id="toc-working-with-tar-and-gz-files" class="nav-link active" data-scroll-target="#working-with-tar-and-gz-files">Working with Tar and Gz Files 🗜️</a></li>
+  <li><a href="#monitoring-process-times" id="toc-monitoring-process-times" class="nav-link" data-scroll-target="#monitoring-process-times">Monitoring process times ⏱️</a></li>
+  <li><a href="#using-tee-to-log-command-outputs." id="toc-using-tee-to-log-command-outputs." class="nav-link" data-scroll-target="#using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</a></li>
   <li><a href="#using-basename-in-bash-for-file-name-extraction" id="toc-using-basename-in-bash-for-file-name-extraction" class="nav-link" data-scroll-target="#using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</a></li>
   <li><a href="#streamling-file-transfer-via-a-bastion-host" id="toc-streamling-file-transfer-via-a-bastion-host" class="nav-link" data-scroll-target="#streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</a></li>
   <li><a href="#extract-data-lines-from-a-vcf-file" id="toc-extract-data-lines-from-a-vcf-file" class="nav-link" data-scroll-target="#extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</a></li>
@@ -276,50 +287,99 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 1, 2024</p>
+      <p class="date-modified">January 8, 2024</p>
     </div>
   </div>
     
   </div>
   
 
+
 </header>
 
+
 <p><img src="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg" class="img-fluid"></p>
+<section id="working-with-tar-and-gz-files" class="level2">
+<h2 class="anchored" data-anchor-id="working-with-tar-and-gz-files">Working with Tar and Gz Files 🗜️</h2>
+<p>Although in bioinformatics we like our data, the more the merrier. System admins and our cloud computing bills often hold a different view. Consquently more often then not in bioinformatics you will encounter files that have the .gz extension. These have been compressed by the popular <a href="https://en.wikipedia.org/wiki/Gzip">Gzip</a> algorithm to save disk space.</p>
+<p>Uncompressing and recompressing such files, is straighforwards and even viewing their contents, is akin to using the cat command:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Uncompress a .gz file</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gunzip</span> sample01.vcf.gz</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Compress a file</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">gzip</span> sample01.vcf</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View contents of a .gz file</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">zcat</span> sample01.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can use <code>zcat</code> to pipe the uncompressed contents of a .gz file into other bash commands like <code>sed</code>, <code>grep</code>, <code>awk</code> etc, without writing the uncompressed file to disk.</p>
+</div>
+</div>
+<p>Another prevalent file type you may come across is one with a .tar.gz extension. These files are Tar archives that have undergone compression with the Gzip algorithm. Essentially, they are a collection of files or directories bundled into an archive. They find common usage in backups, software distribution, or as a convenient way to store related files.</p>
+<p>When extracting content from compressed tar files, the tar command is your go-to:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> archive.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>-x</code> is the extract option, <code>-f</code> specifies that the filename to extract will follow after, while <code>-v</code> is optional, it will print the names of the files being extracted from the archive to the terminal.</p>
+<p>You can also extract just specific files from the archive, provided you know their names 🔮</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xf</span> archive.tar.gz file1 file2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>However, if the specific file names elude you (we are only human), you can list the contents of the archive with:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-tf</span> archive.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you get a bit of variety in your bioinformatic journey and stumble upon a .<code>tar.bz2</code> file, no fear it has just been compressed with the <a href="https://en.wikipedia.org/wiki/Bzip2">bzip2</a> algorithm. Just treat it the same as the <code>.tar.gz</code> file, and <code>tar</code> will do all the hard work.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> archive.tar.bz2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="monitoring-process-times" class="level2">
+<h2 class="anchored" data-anchor-id="monitoring-process-times">Monitoring process times ⏱️</h2>
+<p>An often overlooked tool that significantly aids in optimizing processes is the ‘time’ command in Unix-based systems. This powerful tool not only executes a given command but also provides valuable information about how much time the command took to run.</p>
+<p>To quantify the duration of a process, simply append the <code>time</code> command at the beginning:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="bu">time</span> bcftools filter <span class="at">-O</span> z <span class="at">-o</span> filtered.vcf.gz <span class="at">-i</span> <span class="st">'%QUAL&gt;50'</span> in.vcf.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The output of the time command will typically have three components:</p>
+<p><strong>Real time (real):</strong> This is the actual clock time elapsed during the execution of the command.</p>
+<p><strong>User CPU time (user):</strong> This represents the amount of CPU time spent in user-mode code (i.e., within the process).</p>
+<p><strong>System CPU time (sys):</strong> This denotes the CPU time spent in the kernel within the system calls made by the command.</p>
+<p>In the world of bioinformatics where there is 101 ways to do the same time, it is often wise to do some benchmarking with the time command to ensure you are using the most efficient tool.</p>
+</section>
 <section id="using-tee-to-log-command-outputs." class="level2">
 <h2 class="anchored" data-anchor-id="using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</h2>
 <p>When working in a Bash terminal and you want to log the output of a command for future reference, the tee command is a handy tool, especially in multi step analyses. Here’s a quick tip on how to use it effectively:</p>
 <p><strong>Basic Usage:</strong> To log the output of a command and simultaneously view it on the terminal, use the following format:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Replace <code>my_command</code> with your actual command and <code>my_log.txt</code> with the desired log file name.</p>
 <p><strong>Appending to Existing Logs:</strong> To append output to an existing log file (useful for logging multiple command or runs of the same command), use the <code>-a</code> option with <code>tee</code>:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> my_existing_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="kw">|</span> <span class="fu">tee</span> <span class="at">-a</span> my_existing_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Capture standard error aswell: By default <code>tee</code> captures standard out (stdout) and saves it to file whilst also printing to screen. However if you want to capture standard error (stderr) as well as stdout just add <code>2&gt;&amp;1</code> after your command before you pipe to <code>tee</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">my_command</span> <span class="dv">2</span><span class="op">&gt;&amp;</span><span class="dv">1</span> <span class="kw">|</span> <span class="fu">tee</span> my_log.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="using-basename-in-bash-for-file-name-extraction" class="level2">
 <h2 class="anchored" data-anchor-id="using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</h2>
 <p>In Bash, you can use the <code>basename</code> command to extract the file name from a given file path. This is particularly useful when you’re working on tasks like data processing pipelines or automation scripts and need to isolate the file’s name from its full path.</p>
 <p>Basic Syntax:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> <span class="pp">[</span><span class="ss">PATH</span><span class="pp">]</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Usage Example: Suppose you have the following file path: /path/to/your/file.txt. Using the basename command as follows:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> /path/to/your/file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> /path/to/your/file.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You will obtain just the file name <code>file.txt</code> as output:</p>
 <p>If you also want to remove the trailing suffix simply add the suffix as a second argument to the end of the command:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> file.txt .txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> file.txt .txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which in this example will return <code>file</code></p>
 </section>
 <section id="streamling-file-transfer-via-a-bastion-host" class="level2">
 <h2 class="anchored" data-anchor-id="streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</h2>
 <p><img src="images/bastion.png" class="img-fluid"></p>
 <p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>For systems where <strong><code>ProxyJump</code></strong> isn’t available, you can opt for the <strong><code>ProxyCommand</code></strong> method instead.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-o</span> <span class="st">'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p'</span> <span class="dt">\</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-o</span> <span class="st">'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p'</span> <span class="dt">\</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -338,38 +398,38 @@ Note
 <h2 class="anchored" data-anchor-id="extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</h2>
 <p><img src="images/vcffileformat.png" class="img-fluid"></p>
 <p>Visual inspection 🔍 of the data lines (i.e.&nbsp;genotype fields) of VCF file is often impeded ⛔ by the large number of meta-information lines at the top. A simple sed command that looks for the mandatory body header line can get your past this hurdle 🚧</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'/#CHROM/,$p'</span> filename.vcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sed</span> <span class="at">-n</span> <span class="st">'/#CHROM/,$p'</span> filename.vcf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In short this command searches for the pattern ‘#CHROM’ and then starts printing to the screen until the end of the file. Pipe this into a head command (<code>| head</code>) and you now have a quick and simple way 🟢 to inspect the start of a VCF file.</p>
 </section>
 <section id="separate-columns-in-file-with-multiple-whitespaces" class="level2">
 <h2 class="anchored" data-anchor-id="separate-columns-in-file-with-multiple-whitespaces">Separate columns in file with multiple whitespaces</h2>
 <p>When dealing with tabular text files where columns are inconsistently separated by varying numbers of whitespaces, a quick solution comes through using the translate command <code>tr</code> and the <code>-s</code> squeeze repeats feature. By employing <code>tr</code> to convert multiple consecutive whitespaces into a single whitespace, you can seamlessly tidy 🧹 the data before applying <code>cut</code> for column extraction.</p>
 <p>For instance, to isolate the 3rd and 4th columns from a file:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="at">-s</span> <span class="st">' '</span> <span class="op">&lt;</span> file.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">' '</span> <span class="at">-f</span> 2,3</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ^^^                            ^^^^^^</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># squeeze repeats            get 2nd &amp; 3rd field</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tr</span> <span class="at">-s</span> <span class="st">' '</span> <span class="op">&lt;</span> file.txt <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span> <span class="st">' '</span> <span class="at">-f</span> 2,3</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  ^^^                            ^^^^^^</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">#   |                                |</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co"># squeeze repeats            get 2nd &amp; 3rd field</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="human-readable-file-and-directory-sizes" class="level2">
 <h2 class="anchored" data-anchor-id="human-readable-file-and-directory-sizes">Human-readable file and directory sizes</h2>
 <p>Want human readable file sizes in your ls commands? Simply add <code>- ld</code></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Size in bytes</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Human readable sizes</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-h</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Size in bytes</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Human readable sizes</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-h</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Same principle applies to directory sizes with the <code>du</code> disk usage command</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List directory sizes 1 level deep</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hd1</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List the total size of the current directory</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># List directory sizes 1 level deep</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hd1</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># List the total size of the current directory</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">du</span> <span class="at">-hs</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="quickly-search-your-bash-history-for-a-previous-command" class="level2">
 <h2 class="anchored" data-anchor-id="quickly-search-your-bash-history-for-a-previous-command">Quickly search your bash history for a previous command</h2>
-<p>Say goodbye to pressing <kbd>▲</kbd> endlessly in bash to get back to a previously used command. Instead your can press <kbd>Ctrl</kbd> + <kbd>R</kbd> and search for any matching text in your previous command history. Keep pressing <kbd>Ctrl</kbd> + <kbd>R</kbd> to cycle through more matches.</p>
-<p>💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment <code>#</code> that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append <code>#cmd for later</code> after the command. That way, you have a unique <kbd>Ctrl</kbd> + <kbd>R</kbd> search phrase for quicker retrieval.</p>
+<p>Say goodbye to pressing <kbd aria-hidden="true">▲</kbd><span class="visually-hidden">▲</span> endlessly in bash to get back to a previously used command. Instead your can press <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> and search for any matching text in your previous command history. Keep pressing <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> to cycle through more matches.</p>
+<p>💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment <code>#</code> that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append <code>#cmd for later</code> after the command. That way, you have a unique <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> search phrase for quicker retrieval.</p>
 
 
 </section>
@@ -454,10 +514,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -467,8 +526,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -481,6 +549,120 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -524,6 +706,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -549,6 +732,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -611,20 +820,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></div>   
+    <div class="nav-footer-left">
+<p>© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+</div>   
     <div class="nav-footer-center">
-      <div class="footer-contents"><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"></a>
-</div>  
-    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
+<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter" aria-label="twitter"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 

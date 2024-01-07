@@ -12,6 +12,75 @@ toc: true
 
 ![](images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg)
 
+## Working with Tar and Gz Files 🗜️
+
+Although in bioinformatics we like our data, the more the merrier. System admins and our cloud computing bills often hold a different view. Consquently more often then not in bioinformatics you will encounter files that have the .gz extension. These have been compressed by the popular [Gzip](https://en.wikipedia.org/wiki/Gzip) algorithm to save disk space.
+
+Uncompressing and recompressing such files, is straighforwards and even viewing their contents, is akin to using the cat command:
+
+``` bash
+# Uncompress a .gz file
+gunzip sample01.vcf.gz
+
+# Compress a file
+gzip sample01.vcf
+
+# View contents of a .gz file
+zcat sample01.vcf.gz
+```
+
+::: callout-tip
+You can use `zcat` to pipe the uncompressed contents of a .gz file into other bash commands like `sed`, `grep`, `awk` etc, without writing the uncompressed file to disk.
+:::
+
+Another prevalent file type you may come across is one with a .tar.gz extension. These files are Tar archives that have undergone compression with the Gzip algorithm. Essentially, they are a collection of files or directories bundled into an archive. They find common usage in backups, software distribution, or as a convenient way to store related files.
+
+When extracting content from compressed tar files, the tar command is your go-to:
+
+``` bash
+tar -xvf archive.tar.gz
+```
+
+`-x` is the extract option, `-f` specifies that the filename to extract will follow after, while `-v` is optional, it will print the names of the files being extracted from the archive to the terminal.
+
+You can also extract just specific files from the archive, provided you know their names 🔮
+
+``` bash
+tar -xf archive.tar.gz file1 file2
+```
+
+However, if the specific file names elude you (we are only human), you can list the contents of the archive with:
+
+``` bash
+tar -tf archive.tar.gz
+```
+
+If you get a bit of variety in your bioinformatic journey and stumble upon a .`tar.bz2` file, no fear it has just been compressed with the [bzip2](https://en.wikipedia.org/wiki/Bzip2) algorithm. Just treat it the same as the `.tar.gz` file, and `tar` will do all the hard work.
+
+``` bash
+tar -xvf archive.tar.bz2
+```
+
+## Monitoring process times ⏱️
+
+An often overlooked tool that significantly aids in optimizing processes is the 'time' command in Unix-based systems. This powerful tool not only executes a given command but also provides valuable information about how much time the command took to run.
+
+To quantify the duration of a process, simply append the `time` command at the beginning:
+
+``` bash
+time bcftools filter -O z -o filtered.vcf.gz -i '%QUAL>50' in.vcf.gz
+```
+
+The output of the time command will typically have three components:
+
+**Real time (real):** This is the actual clock time elapsed during the execution of the command. 
+
+**User CPU time (user):** This represents the amount of CPU time spent in user-mode code (i.e., within the process). 
+
+**System CPU time (sys):** This denotes the CPU time spent in the kernel within the system calls made by the command. 
+
+In the world of bioinformatics where there is 101 ways to do the same time, it is often wise to do some benchmarking with the time command to ensure you are using the most efficient tool. 
+
 ## Using {tee} to log command outputs.
 
 When working in a Bash terminal and you want to log the output of a command for future reference, the tee command is a handy tool, especially in multi step analyses. Here's a quick tip on how to use it effectively:
@@ -139,3 +208,23 @@ du -hs
 Say goodbye to pressing {{< kbd ▲ >}} endlessly in bash to get back to a previously used command. Instead your can press {{< kbd Ctrl >}} + {{< kbd R >}} and search for any matching text in your previous command history. Keep pressing {{< kbd Ctrl >}} + {{< kbd R >}} to cycle through more matches.
 
 💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment `#` that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append `#cmd for later` after the command. That way, you have a unique {{< kbd Ctrl >}} + {{< kbd R >}} search phrase for quicker retrieval.
+
+On some systems the default bash history can be short which will limit how far your can search. To check your current bash history size run
+``` bash
+echo $HISTSIZE
+```
+
+If you want to increase your history size you need to edit your `~/.bashrc` and add (if not already present):
+``` bash
+HISTSIZE=50000 # or a different number
+```
+
+Also if you want to avoid some commands appearing in your history just append a whitespace for example
+``` bash
+echo 'this will appear in my bash history'
+
+ echo 'this will not appear in my bash history'
+```
+
+
+

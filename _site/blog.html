@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.536">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -56,7 +56,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -65,6 +71,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -120,6 +127,8 @@ cookieconsent.run({
   "notice_banner_reject_button_hide":false,
   "preferences_center_close_button_hide":false,
   "website_name":""
+  ,
+"language":"en"
   });
 });
 </script> 
@@ -128,26 +137,50 @@ cookieconsent.run({
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <meta property="og:title" content="Luke Pembleton -">
 <meta property="og:description" content="Exploring the world of genomics, R and cloud computing">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
-<meta property="og:site-name" content="Luke Pembleton">
+<meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton -">
 <meta name="twitter:description" content="Exploring the world of genomics, R and cloud computing">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
-<meta name="twitter:image-height" content="1657">
-<meta name="twitter:image-width" content="2890">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
     <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
     </a>
@@ -162,65 +195,65 @@ cookieconsent.run({
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">ABOUT</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" rel="" target="" aria-current="page">
- <span class="menu-text">BLOG</span></a>
+    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+<span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./ramblings.html" rel="" target="">
- <span class="menu-text">RAMBLINGS</span></a>
+    <a class="nav-link" href="./ramblings.html"> 
+<span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications/publications.html" rel="" target="">
- <span class="menu-text">PUBLICATIONS</span></a>
+    <a class="nav-link" href="./publications/publications.html"> 
+<span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/conferences.html" rel="" target="">
- <span class="menu-text">CONFERENCES</span></a>
+    <a class="nav-link" href="./pages/conferences.html"> 
+<span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/lpembleton" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/lpembleton"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/lwpembleton" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/lwpembleton"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://genomic.social/@lwpembleton" rel="" target=""><i class="bi bi-mastodon" role="img">
+    <a class="nav-link" href="https://genomic.social/@lwpembleton"> <i class="bi bi-mastodon" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social"> 
+<span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/" rel="" target="">
- <span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
+    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://linkedin.com/in/lpembleton" rel="" target=""><i class="bi bi-linkedin" role="img">
+    <a class="nav-link" href="https://linkedin.com/in/lpembleton"> <i class="bi bi-linkedin" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/" rel="" target="">
- <span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
+    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/"> 
+<span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -240,7 +273,7 @@ cookieconsent.run({
   </div>
     
   
-  <div class="quarto-title-meta">
+  <div class="quarto-title-meta column-page-left">
 
       
     
@@ -264,21 +297,22 @@ cookieconsent.run({
 
 
 
+
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="EC2,AWS,Bioinformatics,S3" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1703610350598" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11">
+<div class="quarto-post image-right" data-index="0" data-categories="EC2,AWS,Bioinformatics,S3" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1703610350598" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2055">
 <div class="thumbnail">
-<p><a href="./posts/ec2-tips-and-tricks/index.html"> <img src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
+<p><img src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/ec2-tips-and-tricks/index.html">
 <h3 class="no-anchor listing-title">
-EC2 Village
+<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">EC2 Village</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('EC2'); return false;">
 EC2
@@ -293,14 +327,12 @@ Bioinformatics
 S3
 </div>
 </div>
-<a href="./posts/ec2-tips-and-tricks/index.html">
 <div class="listing-description">
-<p>A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics</p>
+<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/ec2-tips-and-tricks/index.html">
+<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
 <div class="listing-date">
 Dec 14, 2023
 </div>
@@ -310,19 +342,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="EC2,AWS,Bioinformatics" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1700491518127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="1" data-categories="EC2,AWS,Bioinformatics" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1700491518127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1006">
 <div class="thumbnail">
-<p><a href="./posts/aws-ec2-pricing/index.html"> <img src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p><a href="./posts/aws-ec2-pricing/index.html" class="no-external">
+<p><img src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/aws-ec2-pricing/index.html">
 <h3 class="no-anchor listing-title">
-Navigating EC2 Pricing - The Better Way
+<a href="./posts/aws-ec2-pricing/index.html" class="no-external">Navigating EC2 Pricing - The Better Way</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('EC2'); return false;">
 EC2
@@ -334,14 +366,12 @@ AWS
 Bioinformatics
 </div>
 </div>
-<a href="./posts/aws-ec2-pricing/index.html">
 <div class="listing-description">
-<p>An interative visual analysis of EC2 instance prices for better informed selection</p>
+<a href="./posts/aws-ec2-pricing/index.html" class="no-external">An interative visual analysis of EC2 instance prices for better informed selection</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/aws-ec2-pricing/index.html">
+<a href="./posts/aws-ec2-pricing/index.html" class="no-external">
 <div class="listing-date">
 Nov 18, 2023
 </div>
@@ -351,19 +381,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="AWS,S3" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1696253958227" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="2" data-categories="AWS,S3" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1696253958227" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="666">
 <div class="thumbnail">
-<p><a href="./posts/aws-cli-s3/index.html"> <img src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p><a href="./posts/aws-cli-s3/index.html" class="no-external">
+<p><img src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/aws-cli-s3/index.html">
 <h3 class="no-anchor listing-title">
-Streamlining Your AWS CLI S3 File Operations
+<a href="./posts/aws-cli-s3/index.html" class="no-external">Streamlining Your AWS CLI S3 File Operations</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/aws-cli-s3/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
 AWS
@@ -372,14 +402,12 @@ AWS
 S3
 </div>
 </div>
-<a href="./posts/aws-cli-s3/index.html">
 <div class="listing-description">
-<p>A guide to using the AWS Command Line Interface to interact with S3</p>
+<a href="./posts/aws-cli-s3/index.html" class="no-external">A guide to using the AWS Command Line Interface to interact with S3</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/aws-cli-s3/index.html">
+<a href="./posts/aws-cli-s3/index.html" class="no-external">
 <div class="listing-date">
 Sep 25, 2023
 </div>
@@ -389,19 +417,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="Docker,AWS,ECR" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1695487697857" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="3" data-categories="Docker,AWS,ECR" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1695487697857" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
 <div class="thumbnail">
-<p><a href="./posts/push-docker-to-ecr/index.html"> <img src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p><a href="./posts/push-docker-to-ecr/index.html" class="no-external">
+<p><img src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/push-docker-to-ecr/index.html">
 <h3 class="no-anchor listing-title">
-Pushing Docker Images to AWS ECR
+<a href="./posts/push-docker-to-ecr/index.html" class="no-external">Pushing Docker Images to AWS ECR</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Docker'); return false;">
 Docker
@@ -413,14 +441,12 @@ AWS
 ECR
 </div>
 </div>
-<a href="./posts/push-docker-to-ecr/index.html">
 <div class="listing-description">
-<p>A guide to transfer your docker images to your private AWS container repository</p>
+<a href="./posts/push-docker-to-ecr/index.html" class="no-external">A guide to transfer your docker images to your private AWS container repository</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/push-docker-to-ecr/index.html">
+<a href="./posts/push-docker-to-ecr/index.html" class="no-external">
 <div class="listing-date">
 Sep 24, 2023
 </div>
@@ -430,19 +456,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="equations,quarto,annotate,LaTeX" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1693841921428" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="4" data-categories="equations,quarto,annotate,LaTeX" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1704644784912" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
 <div class="thumbnail">
-<p><a href="./posts/annotate-equations/index.html"> <img src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"> </a></p>
+<p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p><a href="./posts/annotate-equations/index.html" class="no-external">
+<p><img src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/annotate-equations/index.html">
 <h3 class="no-anchor listing-title">
-Annotate equations
+<a href="./posts/annotate-equations/index.html" class="no-external">Annotate equations</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/annotate-equations/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('equations'); return false;">
 equations
@@ -457,14 +483,12 @@ annotate
 LaTeX
 </div>
 </div>
-<a href="./posts/annotate-equations/index.html">
 <div class="listing-description">
-<p>A guide to annotating equations in quarto documents</p>
+<a href="./posts/annotate-equations/index.html" class="no-external">A guide to annotating equations in quarto documents</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/annotate-equations/index.html">
+<a href="./posts/annotate-equations/index.html" class="no-external">
 <div class="listing-date">
 Sep 3, 2023
 </div>
@@ -474,19 +498,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Smarthome,Blue Iris,Security,Chromecast" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1693328940466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6">
+<div class="quarto-post image-right" data-index="5" data-categories="Smarthome,Blue Iris,Security,Chromecast" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1693328940466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
 <div class="thumbnail">
-<p><a href="./posts/cast-bi-ui3/index.html"> <img src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p><a href="./posts/cast-bi-ui3/index.html" class="no-external">
+<p><img src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/cast-bi-ui3/index.html">
 <h3 class="no-anchor listing-title">
-How to Cast Blue Iris UI3
+<a href="./posts/cast-bi-ui3/index.html" class="no-external">How to Cast Blue Iris UI3</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/cast-bi-ui3/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Smarthome'); return false;">
 Smarthome
@@ -501,14 +525,12 @@ Security
 Chromecast
 </div>
 </div>
-<a href="./posts/cast-bi-ui3/index.html">
 <div class="listing-description">
-<p>A guide to casting Blue Iris UI3 to a Chromecast device and monitor</p>
+<a href="./posts/cast-bi-ui3/index.html" class="no-external">A guide to casting Blue Iris UI3 to a Chromecast device and monitor</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/cast-bi-ui3/index.html">
+<a href="./posts/cast-bi-ui3/index.html" class="no-external">
 <div class="listing-date">
 Aug 28, 2023
 </div>
@@ -518,19 +540,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="github,git,ssh key,AWS,remote,cloud" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1694534480408" data-listing-date-modified-sort="1694534480000" data-listing-reading-time-sort="4">
+<div class="quarto-post image-right" data-index="6" data-categories="github,git,ssh key,AWS,remote,cloud" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1694534480408" data-listing-date-modified-sort="1694534480000" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
 <div class="thumbnail">
-<p><a href="./posts/github-deploy-keys/index.html"> <img src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p><a href="./posts/github-deploy-keys/index.html" class="no-external">
+<p><img src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/github-deploy-keys/index.html">
 <h3 class="no-anchor listing-title">
-GitHub Deploy Keys
+<a href="./posts/github-deploy-keys/index.html" class="no-external">GitHub Deploy Keys</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/github-deploy-keys/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('github'); return false;">
 github
@@ -551,14 +573,12 @@ remote
 cloud
 </div>
 </div>
-<a href="./posts/github-deploy-keys/index.html">
 <div class="listing-description">
-<p>A guide to using GitHub deploy keys to deploy private repos in remote compute sessions</p>
+<a href="./posts/github-deploy-keys/index.html" class="no-external">A guide to using GitHub deploy keys to deploy private repos in remote compute sessions</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/github-deploy-keys/index.html">
+<a href="./posts/github-deploy-keys/index.html" class="no-external">
 <div class="listing-date">
 Jul 3, 2023
 </div>
@@ -568,19 +588,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="Screen,AWS,Terminal" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1694749092928" data-listing-date-modified-sort="1694749092000" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="7" data-categories="Screen,AWS,Terminal" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1694749092928" data-listing-date-modified-sort="1694749092000" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
 <div class="thumbnail">
-<p><a href="./posts/screen/index.html"> <img src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/screen/index.html" class="no-external"></a></p><a href="./posts/screen/index.html" class="no-external">
+<p><img src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/screen/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/screen/index.html">
 <h3 class="no-anchor listing-title">
-Screen Utility and Terminal Multiplexing
+<a href="./posts/screen/index.html" class="no-external">Screen Utility and Terminal Multiplexing</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/screen/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Screen'); return false;">
 Screen
@@ -592,14 +612,12 @@ AWS
 Terminal
 </div>
 </div>
-<a href="./posts/screen/index.html">
 <div class="listing-description">
-<p>A guide to using the screen command in remote sessions</p>
+<a href="./posts/screen/index.html" class="no-external">A guide to using the screen command in remote sessions</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/screen/index.html">
+<a href="./posts/screen/index.html" class="no-external">
 <div class="listing-date">
 May 23, 2023
 </div>
@@ -609,19 +627,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="AWS,Endpoints,Gateway,Batch" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1684341132440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3">
+<div class="quarto-post image-right" data-index="8" data-categories="AWS,Endpoints,Gateway,Batch" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1684341132440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
 <div class="thumbnail">
-<p><a href="./posts/aws-endpoints/index.html"> <img src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p><a href="./posts/aws-endpoints/index.html" class="no-external">
+<p><img src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/aws-endpoints/index.html">
 <h3 class="no-anchor listing-title">
-Endpoints for AWS VPC
+<a href="./posts/aws-endpoints/index.html" class="no-external">Endpoints for AWS VPC</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/aws-endpoints/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
 AWS
@@ -636,14 +654,12 @@ Gateway
 Batch
 </div>
 </div>
-<a href="./posts/aws-endpoints/index.html">
 <div class="listing-description">
-<p>A guide to setting up endpoints for your AWS VPC</p>
+<a href="./posts/aws-endpoints/index.html" class="no-external">A guide to setting up endpoints for your AWS VPC</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/aws-endpoints/index.html">
+<a href="./posts/aws-endpoints/index.html" class="no-external">
 <div class="listing-date">
 May 18, 2023
 </div>
@@ -653,19 +669,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Nextflow,AWS,Batch,EBS" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1675353326732" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7">
+<div class="quarto-post image-right" data-index="9" data-categories="Nextflow,AWS,Batch,EBS" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1675353326732" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
 <div class="thumbnail">
-<p><a href="./posts/aws-batch-ebs-autoscale/index.html"> <img src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
+<p><img src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/aws-batch-ebs-autoscale/index.html">
 <h3 class="no-anchor listing-title">
-EBS Auto-scaling on AWS Batch
+<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">EBS Auto-scaling on AWS Batch</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
 Nextflow
@@ -680,14 +696,12 @@ Batch
 EBS
 </div>
 </div>
-<a href="./posts/aws-batch-ebs-autoscale/index.html">
 <div class="listing-description">
-<p>An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow</p>
+<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/aws-batch-ebs-autoscale/index.html">
+<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
 <div class="listing-date">
 Feb 3, 2023
 </div>
@@ -697,19 +711,19 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="Nextflow,AWS,Batch" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1675353290782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13">
+<div class="quarto-post image-right" data-index="10" data-categories="Nextflow,AWS,Batch" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1675353290782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2568">
 <div class="thumbnail">
-<p><a href="./posts/nextflow-on-aws-batch/index.html"> <img src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"> </a></p>
+<p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
+<p><img src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
-<a href="./posts/nextflow-on-aws-batch/index.html">
 <h3 class="no-anchor listing-title">
-Nextflow on AWS Batch
+<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">Nextflow on AWS Batch</a>
 </h3>
 <div class="listing-subtitle">
-
+<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a>
 </div>
-</a>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
 Nextflow
@@ -721,14 +735,12 @@ AWS
 Batch
 </div>
 </div>
-<a href="./posts/nextflow-on-aws-batch/index.html">
 <div class="listing-description">
-<p>An introductory guide to setting up Nextflow with AWS Batch</p>
+<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">An introductory guide to setting up Nextflow with AWS Batch</a>
 </div>
-</a>
 </div>
 <div class="metadata">
-<a href="./posts/nextflow-on-aws-batch/index.html">
+<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
 <div class="listing-date">
 Nov 25, 2022
 </div>
@@ -822,10 +834,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -835,8 +846,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -849,6 +869,120 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -892,6 +1026,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -917,6 +1052,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -979,20 +1140,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></div>   
+    <div class="nav-footer-left">
+<p>© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+</div>   
     <div class="nav-footer-center">
-      <div class="footer-contents"><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"></a>
-<a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"></a>
-</div>  
-    <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
+<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter" aria-label="twitter"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
