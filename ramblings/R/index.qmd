@@ -763,3 +763,23 @@ ggplot(data = mpg |>
 3.  Add a name/title to the distribution data legend
 
 Be a champion and help out your audience 👍
+
+## Extracting array indexes of the maximum value
+
+Quick one here, you might have become accustomed to the ability to return array indexes (row & col numbers) within the `which()` function by adding the `arr.ind = T` parameter. Turns out though this isn't available in the which.max() function. I will leave you to ponder the 'why' background behind that...🤔
+
+Simple solution, all you need to do is pass the index value returned from which.max() to the arrayInd() function. See below, with and without pipes depending on your style 👇
+
+```{r, echo = TRUE, eval = FALSE}
+mat <- matrix(rnorm(400), nrow = 20)
+
+# With pipes
+mat |> (\(.)arrayInd(which.max(.), .dim = dim(.)))()
+
+# Without pipes
+arrayInd(which.max(mat), .dim = dim(mat))
+```
+
+Happy days 🍹
+
+

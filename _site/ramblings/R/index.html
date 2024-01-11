@@ -251,6 +251,7 @@ cookieconsent.run({
   <li><a href="#highlight-points-of-interest-with-annotations" id="toc-highlight-points-of-interest-with-annotations" class="nav-link" data-scroll-target="#highlight-points-of-interest-with-annotations">Highlight points of interest with annotations</a></li>
   <li><a href="#order-a-boxplot-for-improved-across-axis-comparisions" id="toc-order-a-boxplot-for-improved-across-axis-comparisions" class="nav-link" data-scroll-target="#order-a-boxplot-for-improved-across-axis-comparisions">Order a boxplot for improved across axis comparisions</a></li>
   <li><a href="#labelling-legends" id="toc-labelling-legends" class="nav-link" data-scroll-target="#labelling-legends">Labelling Legends</a></li>
+  <li><a href="#extracting-array-indexes-of-the-maximum-value" id="toc-extracting-array-indexes-of-the-maximum-value" class="nav-link" data-scroll-target="#extracting-array-indexes-of-the-maximum-value">Extracting array indexes of the maximum value</a></li>
   </ul>
 </nav>
     </div>
@@ -285,7 +286,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 8, 2024</p>
+      <p class="date-modified">January 12, 2024</p>
     </div>
   </div>
     
@@ -840,6 +841,21 @@ Note
 </div>
 </div>
 <p>Be a champion and help out your audience 👍</p>
+</section>
+<section id="extracting-array-indexes-of-the-maximum-value" class="level2">
+<h2 class="anchored" data-anchor-id="extracting-array-indexes-of-the-maximum-value">Extracting array indexes of the maximum value</h2>
+<p>Quick one here, you might have become accustomed to the ability to return array indexes (row &amp; col numbers) within the <code>which()</code> function by adding the <code>arr.ind = T</code> parameter. Turns out though this isn’t available in the which.max() function. I will leave you to ponder the ‘why’ background behind that…🤔</p>
+<p>Simple solution, all you need to do is pass the index value returned from which.max() to the arrayInd() function. See below, with and without pipes depending on your style 👇</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">400</span>), <span class="at">nrow =</span> <span class="dv">20</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With pipes</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>mat <span class="sc">|&gt;</span> (\(.)<span class="fu">arrayInd</span>(<span class="fu">which.max</span>(.), <span class="at">.dim =</span> <span class="fu">dim</span>(.)))()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Without pipes</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">arrayInd</span>(<span class="fu">which.max</span>(mat), <span class="at">.dim =</span> <span class="fu">dim</span>(mat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Happy days 🍹</p>
 
 
 </section>

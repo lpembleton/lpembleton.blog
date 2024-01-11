@@ -143,11 +143,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - Bash">
 <meta property="og:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Bash">
 <meta name="twitter:description" content="A collection of short Bash commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -430,6 +430,14 @@ Note
 <h2 class="anchored" data-anchor-id="quickly-search-your-bash-history-for-a-previous-command">Quickly search your bash history for a previous command</h2>
 <p>Say goodbye to pressing <kbd aria-hidden="true">▲</kbd><span class="visually-hidden">▲</span> endlessly in bash to get back to a previously used command. Instead your can press <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> and search for any matching text in your previous command history. Keep pressing <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> to cycle through more matches.</p>
 <p>💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment <code>#</code> that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append <code>#cmd for later</code> after the command. That way, you have a unique <kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">R</kbd><span class="visually-hidden">R</span> search phrase for quicker retrieval.</p>
+<p>On some systems the default bash history can be short which will limit how far your can search. To check your current bash history size run</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="va">$HISTSIZE</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If you want to increase your history size you need to edit your <code>~/.bashrc</code> and add (if not already present):</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="va">HISTSIZE</span><span class="op">=</span>50000 <span class="co"># or a different number</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Also if you want to avoid some commands appearing in your history just append a whitespace for example</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'this will appear in my bash history'</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> <span class="st">'this will not appear in my bash history'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
