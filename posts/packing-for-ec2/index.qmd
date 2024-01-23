@@ -1,6 +1,6 @@
 ---
-title: "Packing for Batch EC2"
-description: "An guide for selecting resource allocations on AWS Batch"
+title: "Packing for AWS Batch EC2"
+description: "An guide for selecting resource allocations on AWS Batch EC2"
 author: "LW Pembleton"
 date: 23 01 2024
 categories: [Batch, EC2, AWS, Nextflow]
@@ -11,7 +11,7 @@ highlight-style: ayu
 
 ![](images/image-from-rawpixel-id-10184855-jpeg.jpg)
 
-## Packing for Batch EC2 💼
+## Packing for AWS Batch EC2 💼
 
 When it comes to optimizing AWS Batch EC2 resources, diving into the intricate technicalities might seem daunting. However, my experiences have led me to uncover some practical insights and considerations that can significantly impact both performance and costs. Here's a breakdown of 'packing for Batch EC2' strategies I've found useful:
 
