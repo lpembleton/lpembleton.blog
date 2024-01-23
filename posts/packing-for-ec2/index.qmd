@@ -4,7 +4,7 @@ description: "An guide for selecting resource allocations on AWS Batch"
 author: "LW Pembleton"
 date: 23 01 2024
 categories: [Batch, EC2, AWS, Nextflow]
-image: images/_eef757ad-f6df-412e-9690-3be5e1ebaeac.jpg
+image: images/image-from-rawpixel-id-10184855-jpeg.jpg
 draft: false
 highlight-style: ayu
 ---
