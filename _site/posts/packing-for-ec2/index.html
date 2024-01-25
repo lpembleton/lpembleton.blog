@@ -8,9 +8,9 @@
 
 <meta name="author" content="LW Pembleton">
 <meta name="dcterms.date" content="2024-01-23">
-<meta name="description" content="An guide for selecting resource allocations on AWS Batch">
+<meta name="description" content="An guide for selecting resource allocations on AWS Batch EC2">
 
-<title>Luke Pembleton - Packing for Batch EC2</title>
+<title>Luke Pembleton - Packing for AWS Batch EC2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -140,12 +140,12 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Luke Pembleton - Packing for Batch EC2">
-<meta property="og:description" content="An guide for selecting resource allocations on AWS Batch">
+<meta property="og:title" content="Luke Pembleton - Packing for AWS Batch EC2">
+<meta property="og:description" content="An guide for selecting resource allocations on AWS Batch EC2">
 <meta property="og:image" content="https://lpembleton.rbind.io/posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Packing for Batch EC2">
-<meta name="twitter:description" content="An guide for selecting resource allocations on AWS Batch">
+<meta name="twitter:title" content="Luke Pembleton - Packing for AWS Batch EC2">
+<meta name="twitter:description" content="An guide for selecting resource allocations on AWS Batch EC2">
 <meta name="twitter:image" content="https://lpembleton.rbind.io/posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,10 +238,10 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Packing for Batch EC2</h1>
+      <h1 class="title">Packing for AWS Batch EC2</h1>
                   <div>
         <div class="description">
-          An guide for selecting resource allocations on AWS Batch
+          An guide for selecting resource allocations on AWS Batch EC2
         </div>
       </div>
                           <div class="quarto-categories">
@@ -281,7 +281,7 @@ cookieconsent.run({
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#packing-for-batch-ec2" id="toc-packing-for-batch-ec2" class="nav-link active" data-scroll-target="#packing-for-batch-ec2">Packing for Batch EC2 💼</a>
+  <li><a href="#packing-for-aws-batch-ec2" id="toc-packing-for-aws-batch-ec2" class="nav-link active" data-scroll-target="#packing-for-aws-batch-ec2">Packing for AWS Batch EC2 💼</a>
   <ul class="collapse">
   <li><a href="#harnessing-appropriate-vcpu-sizes" id="toc-harnessing-appropriate-vcpu-sizes" class="nav-link" data-scroll-target="#harnessing-appropriate-vcpu-sizes">Harnessing appropriate vCPU Sizes 🧮</a></li>
   <li><a href="#sizing-memory-prudently" id="toc-sizing-memory-prudently" class="nav-link" data-scroll-target="#sizing-memory-prudently">Sizing Memory Prudently 📏</a></li>
@@ -303,8 +303,8 @@ cookieconsent.run({
 
 
 <p><img src="images/image-from-rawpixel-id-10184855-jpeg.jpg" class="img-fluid"></p>
-<section id="packing-for-batch-ec2" class="level2">
-<h2 class="anchored" data-anchor-id="packing-for-batch-ec2">Packing for Batch EC2 💼</h2>
+<section id="packing-for-aws-batch-ec2" class="level2">
+<h2 class="anchored" data-anchor-id="packing-for-aws-batch-ec2">Packing for AWS Batch EC2 💼</h2>
 <p>When it comes to optimizing AWS Batch EC2 resources, diving into the intricate technicalities might seem daunting. However, my experiences have led me to uncover some practical insights and considerations that can significantly impact both performance and costs. Here’s a breakdown of ‘packing for Batch EC2’ strategies I’ve found useful:</p>
 <p>When considering the following principles, you might find the <a href="https://github.com/aws/amazon-ec2-instance-selector">ec2-instance-selector</a> and/or my blog post on <a href="https://lpembleton.rbind.io/posts/aws-ec2-pricing/">visual EC2 instance selection</a> useful tools.</p>
 <p>These principles apply not only when using AWS Batch natively, but also via workflow managers such as <a href="https://www.nextflow.io/">Nextflow</a>.</p>
