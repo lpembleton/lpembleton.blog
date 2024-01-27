@@ -262,7 +262,7 @@ To install tidyverse via CRAN:
 install.packages("tidyverse")
 ```
 
-While using `remotes` to determine dependencies works most of the time there are still cases where the dependencies are unknown until your try and install it. In these scenarios you will need to resort back to the painstaking back and forth install deficiencies, retry R package installation, install next required dependency and so on. `BGLR` is one such example 👇
+While using `remotes` to determine dependencies works most of the time, there are still cases where the dependencies are 'unknown' until your try and install it. In these scenarios you will need to revert back to the painstaking 🧗 back and forth install dependencies, retry R package installation, install next required dependency and so on... `BGLR` is one such example 👇
 
 #### BLGR
 
