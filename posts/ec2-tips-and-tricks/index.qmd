@@ -3,6 +3,7 @@ title: "EC2 Village"
 description: "A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics"
 author: "LW Pembleton"
 date: 14 12 2023
+date-modified: last-modified
 categories: [EC2, AWS, Bioinformatics, S3]
 image: images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg
 draft: false
@@ -61,7 +62,7 @@ or to an existing instance by selecting the instance, clicking the 'Actions' dro
 
 ## Mount a secondary volume such as a Nitro NVME SSD
 
-If you launch a storage-optimised EC2 instance such as one from the [I4i family](https://aws.amazon.com/ec2/instance-types/i4i/) to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume\... Nothing to fear; it is there, it just hasn't been mounted yet.
+If you launch a storage-optimised EC2 instance such as one from the [I4i family](https://aws.amazon.com/ec2/instance-types/i4i/) to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume... Nothing to fear; it is there, it just hasn't been mounted yet.
 
 use the `lsblk` command to view your available disk devices and their mount points.
 
@@ -261,6 +262,8 @@ To install tidyverse via CRAN:
 install.packages("tidyverse")
 ```
 
+While using `remotes` to determine dependencies works most of the time there are still cases where the dependencies are unknown until your try and install it. In these scenarios you will need to resort back to the painstaking back and forth install deficiencies, retry R package installation, install next required dependency and so on. `BGLR` is one such example 👇
+
 #### BLGR
 
 The genomic selection package [BLGR](https://github.com/gdlc/BGLR-R) has a few additional dependencies.
@@ -274,6 +277,20 @@ To install BGLR via CRAN:
 ``` r
 install.packages("BGLR")
 ```
+
+#### Posit Package Manager
+
+*Shoutout to* [*Josiah*](https://twitter.com/JosiahParry) *for this tip.*
+
+If you frequently find yourself installing numerous or large packages, it's worth exploring the [Posit package manager](https://p3m.dev/client/#/). Among its various features, one stands out— the ability to serve precompiled binary packages tailored for different system environments. This feature proves particularly beneficial when dealing with sizable R packages like dplyr that traditionally require compilation.
+
+To integrate Posit into your workflow, visit the official website at <https://packagemanager.posit.co/client/#/repos/cran/setup>. Provide your system information, and under 'Environment,' choose 'some other R outside RStudio IDE.' Now, copy the command listed under 'Setup Instructions' and paste it into your R session. It should resemble something similar to the following:
+
+``` r
+options(repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
+```
+
+By executing this command, you redirect the install.packages() function to retrieve binaries from the Posit package manager, potentially saving valuable time during installations.
 
 #### Working with S3 objects within R
 

@@ -144,11 +144,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - EC2 Village">
 <meta property="og:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
+<meta property="og:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - EC2 Village">
 <meta name="twitter:description" content="A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
+<meta name="twitter:image" content="images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -272,6 +272,12 @@ cookieconsent.run({
       </div>
     </div>
     
+      <div>
+      <div class="quarto-title-meta-heading">Modified</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date-modified">January 28, 2024</p>
+      </div>
+    </div>
       
     </div>
     
@@ -351,7 +357,7 @@ Note
 </section>
 <section id="mount-a-secondary-volume-such-as-a-nitro-nvme-ssd" class="level2">
 <h2 class="anchored" data-anchor-id="mount-a-secondary-volume-such-as-a-nitro-nvme-ssd">Mount a secondary volume such as a Nitro NVME SSD</h2>
-<p>If you launch a storage-optimised EC2 instance such as one from the <a href="https://aws.amazon.com/ec2/instance-types/i4i/">I4i family</a> to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume... Nothing to fear; it is there, it just hasn’t been mounted yet.</p>
+<p>If you launch a storage-optimised EC2 instance such as one from the <a href="https://aws.amazon.com/ec2/instance-types/i4i/">I4i family</a> to take advantage of the super-fast local storage performance you might get a rude shock at first, where is the SSD 😕? All you initially have access to is the EBS boot volume… Nothing to fear; it is there, it just hasn’t been mounted yet.</p>
 <p>use the <code>lsblk</code> command to view your available disk devices and their mount points.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">NAME</span>         MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">loop0</span>          7:0    0  24.4M  1 loop /snap/amazon-ssm-agent/6312</span>
@@ -496,6 +502,7 @@ Tip
 <div class="sourceCode" id="cb20"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install libssl-dev libcurl4-openssl-dev unixodbc-dev libxml2-dev libmariadb-dev libfontconfig1-dev libharfbuzz-dev libfribidi-dev libfreetype6-dev libpng-dev libtiff5-dev libjpeg-dev zlib1g-dev libxml2-dev libfontconfig1-dev libfribidi-dev libharfbuzz-dev libicu-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To install tidyverse via CRAN:</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>While using <code>remotes</code> to determine dependencies works most of the time there are still cases where the dependencies are unknown until your try and install it. In these scenarios you will need to resort back to the painstaking back and forth install deficiencies, retry R package installation, install next required dependency and so on. <code>BGLR</code> is one such example 👇</p>
 </section>
 <section id="blgr" class="level4">
 <h4 class="anchored" data-anchor-id="blgr">BLGR</h4>
@@ -503,6 +510,14 @@ Tip
 <div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt-get install libblas-dev liblapack-dev gfortran</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To install BGLR via CRAN:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"BGLR"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="posit-package-manager" class="level4">
+<h4 class="anchored" data-anchor-id="posit-package-manager">Posit Package Manager</h4>
+<p><em>Shoutout to</em> <a href="https://twitter.com/JosiahParry"><em>Josiah</em></a> <em>for this tip.</em></p>
+<p>If you frequently find yourself installing numerous or large packages, it’s worth exploring the <a href="https://p3m.dev/client/#/">Posit package manager</a>. Among its various features, one stands out— the ability to serve precompiled binary packages tailored for different system environments. This feature proves particularly beneficial when dealing with sizable R packages like dplyr that traditionally require compilation.</p>
+<p>To integrate Posit into your workflow, visit the official website at <a href="https://packagemanager.posit.co/client/#/repos/cran/setup" class="uri">https://packagemanager.posit.co/client/#/repos/cran/setup</a>. Provide your system information, and under ‘Environment,’ choose ‘some other R outside RStudio IDE.’ Now, copy the command listed under ‘Setup Instructions’ and paste it into your R session. It should resemble something similar to the following:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">repos =</span> <span class="fu">c</span>(<span class="at">CRAN =</span> <span class="st">"https://packagemanager.posit.co/cran/__linux__/jammy/latest"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>By executing this command, you redirect the install.packages() function to retrieve binaries from the Posit package manager, potentially saving valuable time during installations.</p>
 </section>
 <section id="working-with-s3-objects-within-r" class="level4">
 <h4 class="anchored" data-anchor-id="working-with-s3-objects-within-r">Working with S3 objects within R</h4>
@@ -517,26 +532,26 @@ Tip
 <h4 class="anchored" data-anchor-id="plink2">PLINK2</h4>
 <p>Installing plink2 is as simple get grabbing the Linux-64bit Intel zipped binary from the <a href="https://www.cog-genomics.org/plink/2.0/#new">website</a> and unpacking it. Then just move the executable to your bin directory.</p>
 <p>For example:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20231011.zip</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> plink2_linux_x86_64_20231011.zip</span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv plink2 /bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://s3.amazonaws.com/plink2-assets/alpha5/plink2_linux_x86_64_20231011.zip</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">unzip</span> plink2_linux_x86_64_20231011.zip</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> mv plink2 /bin/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="vcftools" class="level4">
 <h4 class="anchored" data-anchor-id="vcftools">VCFtools</h4>
 <p>Grab the tarball from the GitHub <a href="https://github.com/vcftools/vcftools/releases">release page</a> and unpack it.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1.16.tar.gz</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> vcftools-0.1.16.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">wget</span> https://github.com/vcftools/vcftools/releases/download/v0.1.16/vcftools-0.1.16.tar.gz</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xvf</span> vcftools-0.1.16.tar.gz</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>The PERL5LIB environment variable needs to be set to include the vcf.pm module.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PERL5LIB</span><span class="op">=</span>/path/to/your/vcftools-directory/src/perl/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">PERL5LIB</span><span class="op">=</span>/path/to/your/vcftools-directory/src/perl/</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Before you can compile the program you need to install the following dependency</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install build-essential</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install pkg-config</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install zlib1g-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install build-essential</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install pkg-config</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> apt install zlib1g-dev</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>You can now compile the program.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> vcftools-0.1.16/</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> vcftools-0.1.16/</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="ex">./configure</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">make</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">sudo</span> make install</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>VCFtools will be automatically added to your user path so you should now be able to call it with <code>vcftools</code></p>
 </section>
 <section id="bcftools" class="level4">
