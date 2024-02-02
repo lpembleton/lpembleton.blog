@@ -67,6 +67,12 @@ Registration opens Feburary 2, 2024 \| Follow on [Twitter](https://twitter.com/n
 
 [Register](https://events.linuxfoundation.org/user/) \| Follow on [Twitter](https://twitter.com/_useRconf) \| Follow on [Mastodon](https://mastodon.social/@useR_conf)
 
+📌[**Cascadia R Conf**](https://cascadiarconf.com/) - July 21-22, 2024
+
+*The Pacific Northwest R Conference celebrating the work of R users in the region.*
+
+Registration not yet open \| Follow on [Twitter](https://twitter.com/cascadiarconf)
+
 📌**BioC2024: Bioconductor Conference** July 24-26, 2024.
 
 *Where software and biology connect. Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
