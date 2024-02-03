@@ -782,7 +782,6 @@ arrayInd(which.max(mat), .dim = dim(mat))
 
 Happy days 🍹
 
-
 ## Reversing continous colour gradients
 
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
@@ -799,9 +798,9 @@ ggplot(data = mpg |>
   ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
 ```
 
-Ever thought that colour scale in your ggplot would look better reverse 🤔 Its super simple 👇
+Ever thought that colour scale 👆 in your ggplot would look better reversed 🤔 Well its super simple 👇
 
-```{r, echo = TRUE}
+```{r, echo = TRUE, message = FALSE, warning = FALSE}
 ggplot(data = mpg |> 
          filter(cyl != 5) |>
          mutate(cyl = as.factor(cyl)),
@@ -816,4 +815,4 @@ ggplot(data = mpg |>
 
 1.  Add `trans = "reverse"`
 
-...well maybe not the right plot to reverse the colour scale, but you get the point. 
+...🚨 well maybe not the right plot to reverse the colour scale on, but you get the point.
