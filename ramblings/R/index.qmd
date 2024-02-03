@@ -783,3 +783,37 @@ arrayInd(which.max(mat), .dim = dim(mat))
 Happy days 🍹
 
 
+## Reversing continous colour gradients
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(ggridges)
+ggplot(data = mpg |> 
+         filter(cyl != 5) |>
+         mutate(cyl = as.factor(cyl)),
+       aes(x = hwy, y = cyl, fill = stat(x))) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis_c(name = "Miles per Gallon", option = "C") +
+  theme_bw() +
+  xlab("Highway Miles per Gallon") +
+  ylab("Cylinders") +
+  ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
+```
+
+Ever thought that colour scale in your ggplot would look better reverse 🤔 Its super simple 👇
+
+```{r, echo = TRUE}
+ggplot(data = mpg |> 
+         filter(cyl != 5) |>
+         mutate(cyl = as.factor(cyl)),
+       aes(x = hwy, y = cyl, fill = stat(x))) +
+  geom_density_ridges_gradient() +
+  scale_fill_viridis_c(name = "Miles per Gallon", option = "C", trans = "reverse") +  # <1>
+  theme_bw() +
+  xlab("Highway Miles per Gallon") +
+  ylab("Cylinders") +
+  ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
+```
+
+1.  Add `trans = "reverse"`
+
+...well maybe not the right plot to reverse the colour scale, but you get the point. 

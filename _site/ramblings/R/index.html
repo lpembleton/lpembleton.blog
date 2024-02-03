@@ -141,11 +141,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta name="twitter:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -252,6 +252,7 @@ cookieconsent.run({
   <li><a href="#order-a-boxplot-for-improved-across-axis-comparisions" id="toc-order-a-boxplot-for-improved-across-axis-comparisions" class="nav-link" data-scroll-target="#order-a-boxplot-for-improved-across-axis-comparisions">Order a boxplot for improved across axis comparisions</a></li>
   <li><a href="#labelling-legends" id="toc-labelling-legends" class="nav-link" data-scroll-target="#labelling-legends">Labelling Legends</a></li>
   <li><a href="#extracting-array-indexes-of-the-maximum-value" id="toc-extracting-array-indexes-of-the-maximum-value" class="nav-link" data-scroll-target="#extracting-array-indexes-of-the-maximum-value">Extracting array indexes of the maximum value</a></li>
+  <li><a href="#reversing-continous-colour-gradients" id="toc-reversing-continous-colour-gradients" class="nav-link" data-scroll-target="#reversing-continous-colour-gradients">Reversing continous colour gradients</a></li>
   </ul>
 </nav>
     </div>
@@ -286,7 +287,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 12, 2024</p>
+      <p class="date-modified">February 3, 2024</p>
     </div>
   </div>
     
@@ -859,6 +860,50 @@ Note
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">arrayInd</span>(<span class="fu">which.max</span>(mat), <span class="at">.dim =</span> <span class="fu">dim</span>(mat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Happy days 🍹</p>
+</section>
+<section id="reversing-continous-colour-gradients" class="level2">
+<h2 class="anchored" data-anchor-id="reversing-continous-colour-gradients">Reversing continous colour gradients</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Ever thought that colour scale in your ggplot would look better reverse 🤔 Its super simple 👇</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-16"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-16-1"><a href="#annotated-cell-16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg <span class="sc">|&gt;</span> </span>
+<span id="annotated-cell-16-2"><a href="#annotated-cell-16-2" aria-hidden="true" tabindex="-1"></a>         <span class="fu">filter</span>(cyl <span class="sc">!=</span> <span class="dv">5</span>) <span class="sc">|&gt;</span></span>
+<span id="annotated-cell-16-3"><a href="#annotated-cell-16-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">mutate</span>(<span class="at">cyl =</span> <span class="fu">as.factor</span>(cyl)),</span>
+<span id="annotated-cell-16-4"><a href="#annotated-cell-16-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> hwy, <span class="at">y =</span> cyl, <span class="at">fill =</span> <span class="fu">stat</span>(x))) <span class="sc">+</span></span>
+<span id="annotated-cell-16-5"><a href="#annotated-cell-16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density_ridges_gradient</span>() <span class="sc">+</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-16" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-16-6" class="code-annotation-target"><a href="#annotated-cell-16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>(<span class="at">name =</span> <span class="st">"Miles per Gallon"</span>, <span class="at">option =</span> <span class="st">"C"</span>, <span class="at">trans =</span> <span class="st">"reverse"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-16-7"><a href="#annotated-cell-16-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="annotated-cell-16-8"><a href="#annotated-cell-16-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">"Highway Miles per Gallon"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-16-9"><a href="#annotated-cell-16-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">"Cylinders"</span>) <span class="sc">+</span></span>
+<span id="annotated-cell-16-10"><a href="#annotated-cell-16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"Fuel economy for 38 popular car models from 1999 to 2008"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-16" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-16" data-code-lines="6" data-code-annotation="1">Add <code>trans = "reverse"</code></span>
+</dd>
+</dl>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Picking joint bandwidth of 1.21</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…well maybe not the right plot to reverse the colour scale, but you get the point.</p>
 
 
 </section>
