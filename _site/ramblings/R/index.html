@@ -565,7 +565,7 @@ Note
 <span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">reduce</span>(<span class="fu">list</span>(dt1, dt2, dt3), left_join, <span class="at">by =</span> <span class="st">'character'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 x 4
+<pre><code># A tibble: 3 × 4
   character house      wand                    gender
   &lt;chr&gt;     &lt;chr&gt;      &lt;chr&gt;                   &lt;chr&gt; 
 1 Harry     Gryffindor Holly-phonenix-feather  Male  
@@ -602,7 +602,7 @@ Note
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>             )</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>weather</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 16 x 3
+<pre><code># A tibble: 16 × 3
        Date Measurement Value
       &lt;int&gt; &lt;chr&gt;       &lt;dbl&gt;
  1 20100101 T.Max_oC     31.2
@@ -627,7 +627,7 @@ Note
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">names_prefix =</span> <span class="st">"UQGatton_"</span>,</span>
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> Value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 x 5
+<pre><code># A tibble: 4 × 5
       Date UQGatton_T.Max_oC UQGatton_T.Min_oC UQGatton_Rain_mm UQGatton_Evap_mm
      &lt;int&gt;             &lt;dbl&gt;             &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;
 1 20100101              31.2              21.3              0.6              4.1
@@ -648,8 +648,8 @@ Note
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>empty_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 x 3
-# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 0 × 3
+# ℹ 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
 </div>
 </div>
 <p><code>map_dfc()</code> has now been superseded 🏗 by <code>map()</code> and I have also updated the code to be more explicate and inline with {purrr} recommendations. Thanks <a href="https://jimgar.github.io/">Jim Gardner</a> for the <a href="https://fosstodon.org/@jimgar/111409203326035011">suggestions and edits</a>.</p>
@@ -662,8 +662,8 @@ Note
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>empty_tibble</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 0 x 3
-# i 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
+<pre><code># A tibble: 0 × 3
+# ℹ 3 variables: Wizard &lt;chr&gt;, House &lt;chr&gt;, Wand &lt;chr&gt;</code></pre>
 </div>
 </div>
 </section>
@@ -782,9 +782,6 @@ Note
 <p>Legend titles and value labels in visual representations by default often lack clarity and may appear disorganized. This happens as they’re directly derived from data and column headings, typically designed to be concise and format-free in programming. Consequently, they might seem puzzling or cluttered. Consider the plot below: if you’re acquainted with the <code>mpg</code> dataset, you’d recognise <code>drv</code> as denoting drive train type—where <code>4</code> stands for 4-wheel drive, <code>f</code> for front-wheel drive, and <code>r</code> for rear-wheel drive, while <code>cyl</code> indicates the number of cylinders.</p>
 <p>However, if you do not know of the <code>mpg</code> dataset, which lets be honest is the likely scenario of your target audience, then you might just leave them as puzzled as a possum 😕</p>
 <div class="cell">
-<div class="cell-output cell-output-stderr">
-<pre><code>Warning: package 'ggdist' was built under R version 4.1.3</code></pre>
-</div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -851,13 +848,13 @@ Note
 <p>Quick one here, you might have become accustomed to the ability to return array indexes (row &amp; col numbers) within the <code>which()</code> function by adding the <code>arr.ind = T</code> parameter. Turns out though this isn’t available in the which.max() function. I will leave you to ponder the ‘why’ background behind that…🤔</p>
 <p>Simple solution, all you need to do is pass the index value returned from which.max() to the arrayInd() function. See below, with and without pipes depending on your style 👇</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">400</span>), <span class="at">nrow =</span> <span class="dv">20</span>)</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With pipes</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>mat <span class="sc">|&gt;</span> (\(.)<span class="fu">arrayInd</span>(<span class="fu">which.max</span>(.), <span class="at">.dim =</span> <span class="fu">dim</span>(.)))()</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Without pipes</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">arrayInd</span>(<span class="fu">which.max</span>(mat), <span class="at">.dim =</span> <span class="fu">dim</span>(mat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>mat <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="fu">rnorm</span>(<span class="dv">400</span>), <span class="at">nrow =</span> <span class="dv">20</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># With pipes</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>mat <span class="sc">|&gt;</span> (\(.)<span class="fu">arrayInd</span>(<span class="fu">which.max</span>(.), <span class="at">.dim =</span> <span class="fu">dim</span>(.)))()</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Without pipes</span></span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">arrayInd</span>(<span class="fu">which.max</span>(mat), <span class="at">.dim =</span> <span class="fu">dim</span>(mat))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Happy days 🍹</p>
 </section>

@@ -43,7 +43,6 @@ My expertise lies predominantly in the realm of 🧬 **Genomics**, with a specia
 
 My skill set extends to crafting robust **cloud computing** ☁️ {{< fa brands aws >}} environments tailored for both research and production pipelines. I take pleasure in orchestrating these systems with the precision of the **Nextflow** 🔂 workflow manager, and proudly serve as a **Nextflow Ambassador**. Through my technical endeavours, I am dedicated to advancing genomic research and breeding practices for a sustainable future.
 
-
 <h2>[Experience]{.highlight}</h2>
 
 ![](images/Barenbrug.svg){width="36"} **Genomic Breeding Scientist \| Global Strategic Science Manager**
