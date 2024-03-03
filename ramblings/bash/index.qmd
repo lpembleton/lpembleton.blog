@@ -73,13 +73,13 @@ time bcftools filter -O z -o filtered.vcf.gz -i '%QUAL>50' in.vcf.gz
 
 The output of the time command will typically have three components:
 
-**Real time (real):** This is the actual clock time elapsed during the execution of the command. 
+**Real time (real):** This is the actual clock time elapsed during the execution of the command.
 
-**User CPU time (user):** This represents the amount of CPU time spent in user-mode code (i.e., within the process). 
+**User CPU time (user):** This represents the amount of CPU time spent in user-mode code (i.e., within the process).
 
-**System CPU time (sys):** This denotes the CPU time spent in the kernel within the system calls made by the command. 
+**System CPU time (sys):** This denotes the CPU time spent in the kernel within the system calls made by the command.
 
-In the world of bioinformatics where there is 101 ways to do the same time, it is often wise to do some benchmarking with the time command to ensure you are using the most efficient tool. 
+In the world of bioinformatics where there is 101 ways to do the same time, it is often wise to do some benchmarking with the time command to ensure you are using the most efficient tool.
 
 ## Using {tee} to log command outputs.
 
@@ -131,7 +131,7 @@ basename file.txt .txt
 
 Which in this example will return `file`
 
-## Streamling File Transfer via a Bastion Host
+## Streamlining File Transfer via a Bastion Host
 
 ![](images/bastion.png)
 
@@ -210,21 +210,21 @@ Say goodbye to pressing {{< kbd ▲ >}} endlessly in bash to get back to a previ
 💡 Think ahead and if there is a command you will likely need to run again, tag it with a comment `#` that your can then easily search for. For instance say you have a specific command you know you will want to run again later, append `#cmd for later` after the command. That way, you have a unique {{< kbd Ctrl >}} + {{< kbd R >}} search phrase for quicker retrieval.
 
 On some systems the default bash history can be short which will limit how far your can search. To check your current bash history size run
+
 ``` bash
 echo $HISTSIZE
 ```
 
 If you want to increase your history size you need to edit your `~/.bashrc` and add (if not already present):
+
 ``` bash
 HISTSIZE=50000 # or a different number
 ```
 
 Also if you want to avoid some commands appearing in your history just append a whitespace for example
+
 ``` bash
 echo 'this will appear in my bash history'
 
  echo 'this will not appear in my bash history'
 ```
-
-
-
