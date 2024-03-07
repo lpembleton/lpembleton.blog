@@ -252,7 +252,7 @@ cookieconsent.run({
   <li><a href="#monitoring-process-times" id="toc-monitoring-process-times" class="nav-link" data-scroll-target="#monitoring-process-times">Monitoring process times ⏱️</a></li>
   <li><a href="#using-tee-to-log-command-outputs." id="toc-using-tee-to-log-command-outputs." class="nav-link" data-scroll-target="#using-tee-to-log-command-outputs.">Using {tee} to log command outputs.</a></li>
   <li><a href="#using-basename-in-bash-for-file-name-extraction" id="toc-using-basename-in-bash-for-file-name-extraction" class="nav-link" data-scroll-target="#using-basename-in-bash-for-file-name-extraction">Using {basename} in Bash for File Name Extraction</a></li>
-  <li><a href="#streamling-file-transfer-via-a-bastion-host" id="toc-streamling-file-transfer-via-a-bastion-host" class="nav-link" data-scroll-target="#streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</a></li>
+  <li><a href="#streamlining-file-transfer-via-a-bastion-host" id="toc-streamlining-file-transfer-via-a-bastion-host" class="nav-link" data-scroll-target="#streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</a></li>
   <li><a href="#extract-data-lines-from-a-vcf-file" id="toc-extract-data-lines-from-a-vcf-file" class="nav-link" data-scroll-target="#extract-data-lines-from-a-vcf-file">Extract Data Lines From a VCF File</a></li>
   <li><a href="#separate-columns-in-file-with-multiple-whitespaces" id="toc-separate-columns-in-file-with-multiple-whitespaces" class="nav-link" data-scroll-target="#separate-columns-in-file-with-multiple-whitespaces">Separate columns in file with multiple whitespaces</a></li>
   <li><a href="#human-readable-file-and-directory-sizes" id="toc-human-readable-file-and-directory-sizes" class="nav-link" data-scroll-target="#human-readable-file-and-directory-sizes">Human-readable file and directory sizes</a></li>
@@ -291,7 +291,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">January 8, 2024</p>
+      <p class="date-modified">March 3, 2024</p>
     </div>
   </div>
     
@@ -373,8 +373,8 @@ Tip
 <div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">basename</span> file.txt .txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Which in this example will return <code>file</code></p>
 </section>
-<section id="streamling-file-transfer-via-a-bastion-host" class="level2">
-<h2 class="anchored" data-anchor-id="streamling-file-transfer-via-a-bastion-host">Streamling File Transfer via a Bastion Host</h2>
+<section id="streamlining-file-transfer-via-a-bastion-host" class="level2">
+<h2 class="anchored" data-anchor-id="streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</h2>
 <p><img src="images/bastion.png" class="img-fluid"></p>
 <p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
