@@ -11,6 +11,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/mulled-biocontainers/index.html",
       "/posts/packing-for-ec2/index.html",
       "/posts/ec2-tips-and-tricks/index.html",
       "/posts/aws-ec2-pricing/index.html",
