@@ -77,7 +77,7 @@ Although this will report up-to-date container names and tags, it does not list 
 
 So there appears to be no perfect solution (👋 shoutout if you have suggests), instead there are two paths to choose.
 
-1.  Follow the described git repo search method and maybe settle for an older container, but one you know the tool versions for. ℹ️ Hey, if the latest GATK debacle taught us anything, it's sometimes older versions of software are better - updates are not always for the best.
+1.  Follow the described git repo search method and maybe settle for an older container, but one you know the tool versions for. ℹ️ Hey, if the [latest GATK debacle](https://github.com/lpembleton/gatk4-when-did-dot-leave) taught us anything, it's sometimes older versions of software are better - updates are not always for the best.
 
 2.  Use the `mulled-search` command to find the latest container version, pull the container down locally, run it in interactive mode and then query 🔍 the versions of the individual tools to see if they suit your needs. For example:
 
