@@ -345,7 +345,7 @@ multi-package-containers/combinations/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a
 <p>Although this will report up-to-date container names and tags, it does not list the individual tool versions, something the previous git repo search method did.</p>
 <p>So there appears to be no perfect solution (👋 shoutout if you have suggests), instead there are two paths to choose.</p>
 <ol type="1">
-<li><p>Follow the described git repo search method and maybe settle for an older container, but one you know the tool versions for. ℹ️ Hey, if the latest GATK debacle taught us anything, it’s sometimes older versions of software are better - updates are not always for the best.</p></li>
+<li><p>Follow the described git repo search method and maybe settle for an older container, but one you know the tool versions for. ℹ️ Hey, if the <a href="https://github.com/lpembleton/gatk4-when-did-dot-leave">latest GATK debacle</a> taught us anything, it’s sometimes older versions of software are better - updates are not always for the best.</p></li>
 <li><p>Use the <code>mulled-search</code> command to find the latest container version, pull the container down locally, run it in interactive mode and then query 🔍 the versions of the individual tools to see if they suit your needs. For example:</p></li>
 </ol>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> pull quay.io/biocontainers/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a79f73e40:219b6c272b25e7e642ae3ff0bf0c5c81a5135ab4-0</span>

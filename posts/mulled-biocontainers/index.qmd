@@ -90,3 +90,11 @@ samtools --version
 bwa
 # 0.7.17-r1188
 ```
+
+## Update - 3rd alternative method
+
+Thanks to [Moriz E. Beber](https://github.com/Midnighter) there is a somewhat simpler method to get the container name if you know the tool versions you require. Presenting 📢 the [**Multi-Package BioContainers Image Name Generator**](https://midnighter.github.io/mulled) **🥳** This website essentially generates the hashid (mulled container name) that would exist based on the tools that you define.
+
+If you enter the name of the packages/tools and versions (optional), it will display a hashid and if the container image is known to exist a ✅ will be displayed, if the container does not exist on quay.io it will display a ❌ - its as simple that.
+
+Now technically you don't need to know the version number of the packages/tools you require, however, the resulting hashid gives you no indication of what version of the tools it contains (unless you go digging via some of the previously discussed methods), which is a risky path to travel, so I would recommend entering the desired version/s.
