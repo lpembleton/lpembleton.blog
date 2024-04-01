@@ -228,3 +228,32 @@ echo 'this will appear in my bash history'
 
  echo 'this will not appear in my bash history'
 ```
+
+## Make a demo set of FASTQ files containing reads that belong to a subset of chromosomes or regions
+
+*Useful when making demo datasets to test development code and pipelines.*
+
+First map all your reads to the full genome reference. Then use [samtools](https://www.htslib.org/) to pull out those reads that mapped to specific regions within a bed file, for example, this could be a couple of full-length chromosomes.
+
+``` bash
+samtools view -b -h -L regions.bed alignments.bam > alignments_in_regions.bam
+```
+
+Now you will want to discard any reads that are not mapped with their respective pair.
+
+``` bash
+samtools view -f 0x2 -b -h alignments_in_regions.bam > alignments_in_regions_paired.bam
+```
+
+And now you convert you bam back to paired fastq files.
+
+``` bash
+samtools fastq -1 read1.fastq -2 read2.fastq alignments_in_regions_paired.bam
+```
+
+Depending on whether your bams were sorted or not you may need to sort the resulting FASTQ files to prevent any downstream errors and subsequent programs.
+
+``` bash
+cat read1.fastq | paste - - - - | sort -k1,1 -t " " | tr "\t" "\n" > read1_sorted.fastq
+cat read2.fastq | paste - - - - | sort -k1,1 -t " " | tr "\t" "\n" > read2_sorted.fastq
+```

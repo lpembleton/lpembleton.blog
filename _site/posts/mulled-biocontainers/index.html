@@ -288,6 +288,7 @@ cookieconsent.run({
   <li><a href="#finding-the-right-mulled-biocontainer" id="toc-finding-the-right-mulled-biocontainer" class="nav-link active" data-scroll-target="#finding-the-right-mulled-biocontainer">Finding the right mulled biocontainer</a></li>
   <li><a href="#the-steps" id="toc-the-steps" class="nav-link" data-scroll-target="#the-steps">The steps</a></li>
   <li><a href="#caveats" id="toc-caveats" class="nav-link" data-scroll-target="#caveats">Caveats</a></li>
+  <li><a href="#update---3rd-alternative-method" id="toc-update---3rd-alternative-method" class="nav-link" data-scroll-target="#update---3rd-alternative-method">Update - 3rd alternative method</a></li>
   </ul>
 </nav>
 </nav>
@@ -355,6 +356,12 @@ multi-package-containers/combinations/mulled-v2-fe8faa35dbf6dc65a0f7f5d4ea12e31a
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># samtools 1.16.1</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="ex">bwa</span></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 0.7.17-r1188</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="update---3rd-alternative-method" class="level2">
+<h2 class="anchored" data-anchor-id="update---3rd-alternative-method">Update - 3rd alternative method</h2>
+<p>Thanks to <a href="https://github.com/Midnighter">Moriz E. Beber</a> there is a somewhat simpler method to get the container name if you know the tool versions you require. Presenting 📢 the <a href="https://midnighter.github.io/mulled"><strong>Multi-Package BioContainers Image Name Generator</strong></a> <strong>🥳</strong> This website essentially generates the hashid (mulled container name) that would exist based on the tools that you define.</p>
+<p>If you enter the name of the packages/tools and versions (optional), it will display a hashid and if the container image is known to exist a ✅ will be displayed, if the container does not exist on quay.io it will display a ❌ - its as simple that.</p>
+<p>Now technically you don’t need to know the version number of the packages/tools you require, however, the resulting hashid gives you no indication of what version of the tools it contains (unless you go digging via some of the previously discussed methods), which is a risky path to travel, so I would recommend entering the desired version/s.</p>
 
 
 </section>
