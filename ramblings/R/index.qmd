@@ -816,3 +816,37 @@ ggplot(data = mpg |>
 1.  Add `trans = "reverse"`
 
 ...🚨 well maybe not the right plot to reverse the colour scale on, but you get the point.
+
+
+## Reference a column name with a variable in dplyr
+
+It not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some [dplyr](https://dplyr.tidyverse.org/) functions, such as `select()`, by surrounding it in double braces `{{ var }}`. However this doesn't play out for other functions such as `filter()`
+
+There a few different method I have collated (thanks to the awesome rstats mastodon community) that seem to work well ✅
+
+```{r, echo = TRUE, eval = FALSE}
+library(dplyr)
+data(mtcars)
+
+#filter mtcars for entries with 4 cyclinders
+
+var_name <- "cyl"
+
+#option 1: sym 
+mtcars |> filter(!!sym(var_name) == 4)
+
+#option 2: as.symbol
+mtcars |> filter(!!sym(var_name) == 4)
+
+#option 3: .data[[]]
+mtcars |> filter(.data[[var_name]] == 4)]
+
+#option 4: get()
+mtcars |> filter(get(var_name) == 4)
+
+#option 5: eval(parse())
+mtcars |> filter(eval(parse(text = var_name)) == 4)
+```
+
+Now, I'm not sure which method is technically the 'proper method', and like most things in R there is usually multiple correct ways to do the same thing. A couple of notes though 📝 Option 1 uses `sym()` from dplyr which according to the documentation is 'no longer for normal usage, but are still exported from dplyr for backward compatibility'. Option 2 uses `as.symbol()` which is from base R so that is a safe bet. Option 3 appears to be what is indicated in some of the tidyverse documentation. Option 5: seems a bit drawn out. Final comment, choose your own path champions 👍
+

@@ -257,6 +257,7 @@ cookieconsent.run({
   <li><a href="#separate-columns-in-file-with-multiple-whitespaces" id="toc-separate-columns-in-file-with-multiple-whitespaces" class="nav-link" data-scroll-target="#separate-columns-in-file-with-multiple-whitespaces">Separate columns in file with multiple whitespaces</a></li>
   <li><a href="#human-readable-file-and-directory-sizes" id="toc-human-readable-file-and-directory-sizes" class="nav-link" data-scroll-target="#human-readable-file-and-directory-sizes">Human-readable file and directory sizes</a></li>
   <li><a href="#quickly-search-your-bash-history-for-a-previous-command" id="toc-quickly-search-your-bash-history-for-a-previous-command" class="nav-link" data-scroll-target="#quickly-search-your-bash-history-for-a-previous-command">Quickly search your bash history for a previous command</a></li>
+  <li><a href="#make-a-demo-set-of-fastq-files-containing-reads-that-belong-to-a-subset-of-chromosomes-or-regions" id="toc-make-a-demo-set-of-fastq-files-containing-reads-that-belong-to-a-subset-of-chromosomes-or-regions" class="nav-link" data-scroll-target="#make-a-demo-set-of-fastq-files-containing-reads-that-belong-to-a-subset-of-chromosomes-or-regions">Make a demo set of FASTQ files containing reads that belong to a subset of chromosomes or regions</a></li>
   </ul>
 </nav>
     </div>
@@ -291,7 +292,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Modified</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">March 3, 2024</p>
+      <p class="date-modified">April 2, 2024</p>
     </div>
   </div>
     
@@ -442,6 +443,19 @@ Note
 <div class="sourceCode" id="cb21"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">'this will appear in my bash history'</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> <span class="bu">echo</span> <span class="st">'this will not appear in my bash history'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="make-a-demo-set-of-fastq-files-containing-reads-that-belong-to-a-subset-of-chromosomes-or-regions" class="level2">
+<h2 class="anchored" data-anchor-id="make-a-demo-set-of-fastq-files-containing-reads-that-belong-to-a-subset-of-chromosomes-or-regions">Make a demo set of FASTQ files containing reads that belong to a subset of chromosomes or regions</h2>
+<p><em>Useful when making demo datasets to test development code and pipelines.</em></p>
+<p>First map all your reads to the full genome reference. Then use <a href="https://www.htslib.org/">samtools</a> to pull out those reads that mapped to specific regions within a bed file, for example, this could be a couple of full-length chromosomes.</p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view <span class="at">-b</span> <span class="at">-h</span> <span class="at">-L</span> regions.bed alignments.bam <span class="op">&gt;</span> alignments_in_regions.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now you will want to discard any reads that are not mapped with their respective pair.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> view <span class="at">-f</span> 0x2 <span class="at">-b</span> <span class="at">-h</span> alignments_in_regions.bam <span class="op">&gt;</span> alignments_in_regions_paired.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>And now you convert you bam back to paired fastq files.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="ex">samtools</span> fastq <span class="at">-1</span> read1.fastq <span class="at">-2</span> read2.fastq alignments_in_regions_paired.bam</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Depending on whether your bams were sorted or not you may need to sort the resulting FASTQ files to prevent any downstream errors and subsequent programs.</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> read1.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k1,1</span> <span class="at">-t</span> <span class="st">" "</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\t"</span> <span class="st">"\n"</span> <span class="op">&gt;</span> read1_sorted.fastq</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> read2.fastq <span class="kw">|</span> <span class="fu">paste</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="at">-</span> <span class="kw">|</span> <span class="fu">sort</span> <span class="at">-k1,1</span> <span class="at">-t</span> <span class="st">" "</span> <span class="kw">|</span> <span class="fu">tr</span> <span class="st">"\t"</span> <span class="st">"\n"</span> <span class="op">&gt;</span> read2_sorted.fastq</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>
