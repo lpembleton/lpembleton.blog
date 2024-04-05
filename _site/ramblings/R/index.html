@@ -906,8 +906,8 @@ Note
 </section>
 <section id="reference-a-column-name-with-a-variable-in-dplyr" class="level2">
 <h2 class="anchored" data-anchor-id="reference-a-column-name-with-a-variable-in-dplyr">Reference a column name with a variable in dplyr</h2>
-<p>It not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some <a href="https://dplyr.tidyverse.org/">dplyr</a> functions, such as <code>select()</code>, by surrounding it in double braces <code>{ var }</code>. However this doesn’t play out for other functions such as <code>filter()</code></p>
-<p>There a few different method I have collated (thanks to the awesome rstats mastodon community) that seem to work well ✅</p>
+<p>Its not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some <a href="https://dplyr.tidyverse.org/">dplyr</a> functions, such as <code>select()</code>, by surrounding it in double braces <code>{ var }</code>. However this doesn’t play out for other functions such as <code>filter()</code></p>
+<p>There a few different methods I have collated (thanks to the awesome rstats mastodon community) that seem to work well ✅</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(mtcars)</span>

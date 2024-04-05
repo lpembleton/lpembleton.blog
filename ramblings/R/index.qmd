@@ -820,9 +820,9 @@ ggplot(data = mpg |>
 
 ## Reference a column name with a variable in dplyr
 
-It not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some [dplyr](https://dplyr.tidyverse.org/) functions, such as `select()`, by surrounding it in double braces `{{ var }}`. However this doesn't play out for other functions such as `filter()`
+Its not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some [dplyr](https://dplyr.tidyverse.org/) functions, such as `select()`, by surrounding it in double braces `{{ var }}`. However this doesn't play out for other functions such as `filter()`
 
-There a few different method I have collated (thanks to the awesome rstats mastodon community) that seem to work well ✅
+There a few different methods I have collated (thanks to the awesome rstats mastodon community) that seem to work well ✅
 
 ```{r, echo = TRUE, eval = FALSE}
 library(dplyr)
