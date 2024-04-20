@@ -836,7 +836,7 @@ var_name <- "cyl"
 mtcars |> filter(!!sym(var_name) == 4)
 
 #option 2: as.symbol
-mtcars |> filter(!!sym(var_name) == 4)
+mtcars |> filter(!!as.symbol(var_name) == 4)
 
 #option 3: .data[[]]
 mtcars |> filter(.data[[var_name]] == 4)]
