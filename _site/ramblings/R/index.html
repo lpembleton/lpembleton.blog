@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
+<meta name="dcterms.date" content="2024-05-01">
 <meta name="description" content="A worthy collection of short R commands and tricks">
 
 <title>Luke Pembleton - R</title>
@@ -141,11 +142,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - R">
 <meta property="og:description" content="A worthy collection of short R commands and tricks">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta property="og:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - R">
 <meta name="twitter:description" content="A worthy collection of short R commands and tricks">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
+<meta name="twitter:image" content="images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -258,6 +259,7 @@ cookieconsent.run({
   <li><a href="#extracting-array-indexes-of-the-maximum-value" id="toc-extracting-array-indexes-of-the-maximum-value" class="nav-link" data-scroll-target="#extracting-array-indexes-of-the-maximum-value">Extracting array indexes of the maximum value</a></li>
   <li><a href="#reversing-continous-colour-gradients" id="toc-reversing-continous-colour-gradients" class="nav-link" data-scroll-target="#reversing-continous-colour-gradients">Reversing continous colour gradients</a></li>
   <li><a href="#reference-a-column-name-with-a-variable-in-dplyr" id="toc-reference-a-column-name-with-a-variable-in-dplyr" class="nav-link" data-scroll-target="#reference-a-column-name-with-a-variable-in-dplyr">Reference a column name with a variable in dplyr</a></li>
+  <li><a href="#leveraging-additional-factors-in-column-names-when-pivoting-longer" id="toc-leveraging-additional-factors-in-column-names-when-pivoting-longer" class="nav-link" data-scroll-target="#leveraging-additional-factors-in-column-names-when-pivoting-longer">Leveraging additional factors in column names when pivoting longer</a></li>
   </ul>
 </nav>
     </div>
@@ -288,13 +290,13 @@ cookieconsent.run({
           </div>
   </div>
     
-  
     <div>
-    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date-modified">April 5, 2024</p>
+      <p class="date">May 1, 2024</p>
     </div>
   </div>
+  
     
   </div>
   
@@ -920,7 +922,7 @@ Note
 <span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!!</span><span class="fu">sym</span>(var_name) <span class="sc">==</span> <span class="dv">4</span>)</span>
 <span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a><span class="co">#option 2: as.symbol</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!!</span><span class="fu">sym</span>(var_name) <span class="sc">==</span> <span class="dv">4</span>)</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="sc">!!</span><span class="fu">as.symbol</span>(var_name) <span class="sc">==</span> <span class="dv">4</span>)</span>
 <span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="co">#option 3: .data[[]]</span></span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">filter</span>(.data[[var_name]] <span class="sc">==</span> <span class="dv">4</span>)]</span>
@@ -932,11 +934,63 @@ Note
 <span id="cb20-21"><a href="#cb20-21" aria-hidden="true" tabindex="-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="fu">eval</span>(<span class="fu">parse</span>(<span class="at">text =</span> var_name)) <span class="sc">==</span> <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, I’m not sure which method is technically the ‘proper method’, and like most things in R there is usually multiple correct ways to do the same thing. A couple of notes though 📝 Option 1 uses <code>sym()</code> from dplyr which according to the documentation is ‘no longer for normal usage, but are still exported from dplyr for backward compatibility’. Option 2 uses <code>as.symbol()</code> which is from base R so that is a safe bet. Option 3 appears to be what is indicated in some of the tidyverse documentation. Option 5: seems a bit drawn out. Final comment, choose your own path champions 👍</p>
+</section>
+<section id="leveraging-additional-factors-in-column-names-when-pivoting-longer" class="level2">
+<h2 class="anchored" data-anchor-id="leveraging-additional-factors-in-column-names-when-pivoting-longer">Leveraging additional factors in column names when pivoting longer</h2>
+<p>When dealing with extensive datasets featuring multiple measurements, there’s often valuable supplementary information embedded within column names. This additional data, such as intervals ⌛or measurement types 📏, can significantly enrich your analysis. Fortunately, leveraging this information when pivoting longer is straightforward, particularly if your column names adhere to a consistent structure.</p>
+<p>By employing a consistent field separator in your column names, you can seamlessly extract secondary factors during the pivot process. The <code>pivot_longer</code> function, equipped with the <code>names_sep</code> parameter, enables you to split the data efficiently into meaningful segments using <code>names_to</code>.</p>
+<p>Check out this example 👇</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Sample wide data with interval and measurement type info stored within column names</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>data_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sample =</span> <span class="fu">c</span>(<span class="st">"ST001"</span>, <span class="st">"ST002"</span>, <span class="st">"ST003"</span>),</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day1_weight =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">12</span>, <span class="dv">7</span>),</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day1_count =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day5_weight =</span> <span class="fu">c</span>(<span class="dv">14</span>, <span class="dv">20</span>, <span class="dv">15</span>),</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day5_count =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">5</span>),</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day9_weight =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">23</span>, <span class="dv">19</span>),</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>                   <span class="at">day9_count =</span> <span class="fu">c</span>(<span class="dv">8</span>, <span class="dv">8</span>, <span class="dv">7</span>))</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot longer, capturing the day interval as an additional factor along with measurement type</span></span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>data_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(data_tbl, <span class="at">col =</span> <span class="sc">!</span>sample,</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>                          <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"day"</span>, <span class="st">"measurement"</span>),</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>                          <span class="at">names_sep =</span> <span class="st">"_"</span>,</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>                          <span class="at">values_to =</span> <span class="st">"value"</span>)</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_long,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> day, <span class="at">y =</span> value, <span class="at">fill =</span> sample)) <span class="sc">+</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#219ebc"</span>, <span class="st">"#023047"</span>, <span class="st">"#ffb703"</span>), <span class="at">name =</span> <span class="st">"Sample"</span>) <span class="sc">+</span></span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>) <span class="sc">+</span></span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>measurement)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-26-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
 
-</main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pembleton2024,
+  author = {Pembleton, LW},
+  title = {R {Ramblings,} {A} Worthy Collection of Short {R} Commands
+    and Tricks},
+  date = {2024-05-01},
+  url = {https://lpembleton.rbind.io/ramblings/R/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pembleton2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Pembleton, LW. 2024. <span>“R Ramblings, A Worthy Collection of Short R
+Commands and Tricks.”</span> May 1, 2024. <a href="https://lpembleton.rbind.io/ramblings/R/">https://lpembleton.rbind.io/ramblings/R/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

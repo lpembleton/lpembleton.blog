@@ -2,12 +2,15 @@
 title: "R"
 description: "A worthy collection of short R commands and tricks"
 author: "LW Pembleton"
-date-modified: last-modified
+date: last-modified
 categories: [R]
 image: images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg
 draft: false
 highlight-style: ayu
 toc: true
+citation:
+  title: "R Ramblings, A worthy collection of short R commands and tricks"
+  url: https://lpembleton.rbind.io/ramblings/R/
 ---
 
 ![~Photo by Daria Nepriakhina on Unsplash~](images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg)
@@ -817,7 +820,6 @@ ggplot(data = mpg |>
 
 ...🚨 well maybe not the right plot to reverse the colour scale on, but you get the point.
 
-
 ## Reference a column name with a variable in dplyr
 
 Its not uncommon to need to reference a column name in a data frame using a variable. You might have found that you can do this in the some [dplyr](https://dplyr.tidyverse.org/) functions, such as `select()`, by surrounding it in double braces `{{ var }}`. However this doesn't play out for other functions such as `filter()`
@@ -850,3 +852,41 @@ mtcars |> filter(eval(parse(text = var_name)) == 4)
 
 Now, I'm not sure which method is technically the 'proper method', and like most things in R there is usually multiple correct ways to do the same thing. A couple of notes though 📝 Option 1 uses `sym()` from dplyr which according to the documentation is 'no longer for normal usage, but are still exported from dplyr for backward compatibility'. Option 2 uses `as.symbol()` which is from base R so that is a safe bet. Option 3 appears to be what is indicated in some of the tidyverse documentation. Option 5: seems a bit drawn out. Final comment, choose your own path champions 👍
 
+## Leveraging additional factors in column names when pivoting longer
+
+When dealing with extensive datasets featuring multiple measurements, there's often valuable supplementary information embedded within column names. This additional data, such as intervals ⌛or measurement types 📏, can significantly enrich your analysis. Fortunately, leveraging this information when pivoting longer is straightforward, particularly if your column names adhere to a consistent structure.
+
+By employing a consistent field separator in your column names, you can seamlessly extract secondary factors during the pivot process. The `pivot_longer` function, equipped with the `names_sep` parameter, enables you to split the data efficiently into meaningful segments using `names_to`.
+
+Check out this example 👇
+
+```{r, echo = TRUE}
+library(tidyr)
+library(ggplot2)
+
+
+# Sample wide data with interval and measurement type info stored within column names
+data_tbl <- tibble(sample = c("ST001", "ST002", "ST003"),
+                   day1_weight = c(10, 12, 7),
+                   day1_count = c(2, 3, 2),
+                   day5_weight = c(14, 20, 15),
+                   day5_count = c(4, 7, 5),
+                   day9_weight = c(18, 23, 19),
+                   day9_count = c(8, 8, 7))
+
+# Pivot longer, capturing the day interval as an additional factor along with measurement type
+data_long <- pivot_longer(data_tbl, col = !sample,
+                          names_to = c("day", "measurement"),
+                          names_sep = "_",
+                          values_to = "value")
+
+ggplot(data = data_long,
+       aes(x = day, y = value, fill = sample)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  scale_fill_manual(values = c("#219ebc", "#023047", "#ffb703"), name = "Sample") +
+  theme_bw() +
+  theme(legend.position = "top") +
+  facet_wrap(~measurement)
+
+
+```
