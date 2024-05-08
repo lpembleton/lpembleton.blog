@@ -1,0 +1,70 @@
+---
+title: "AWS"
+description: "A collection of short AWS & cloud related commands and tricks that individually are too short for a blog post"
+author: "LW Pembleton"
+date: last-modified
+categories: [AWS]
+image: images/image-from-rawpixel-id-429642-jpeg.jpg
+draft: false
+highlight-style: ayu
+toc: true
+citation:
+  title: "AWS Ramblings, A worthy collection of short AWS & cloud commands and tricks"
+  url: https://lpembleton.rbind.io/ramblings/AWS/
+---
+
+![](images/image-from-rawpixel-id-429642-jpeg.jpg)
+
+## Streamlining File Transfer via a Bastion Host
+
+![](images/bastion.png)
+
+Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn't have to be a complex process. With a straightforward command utilising **`scp`** and the **`ProxyJump`** feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here's how to automate the transfer to the endpoint private server via the public-facing bastion host.
+
+``` bash
+scp -J <user-name>@<Public-IPv4-DNS> \
+    <file-to-transfer> \
+    <user-name>@<IP-address>:/path/for/remote/file
+```
+
+For systems where **`ProxyJump`** isn't available, you can opt for the **`ProxyCommand`** method instead.
+
+``` bash
+scp -o 'ProxyCommand ssh <user-name>@<Public-IPv4-DNS> -W %h:%p' \
+  <file-to-transfer> \
+  <user-name>@<IP-address>:/path/for/remote/file
+```
+
+::: callout-note
+It's worth noting that while both methods facilitate the transfer, **`ProxyJump`** is recommended over **`ProxyCommand`** as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.
+:::
+
+## Update IP restriction in AWS security groups from the command line
+
+If you are using IP restrictions to secure your AWS EC2 SSH connections and have a dynamic local IP, then you might be sick of constantly having to update your IP via the AWS console. Fortunately there is a easier pathway for this; you can update your IP restrictions using the AWS CLI from your local computer 👇
+
+``` bash
+
+#Input parameters
+group_id=<YOUR SECURITY GROUP ID>
+rule_id=<THE SECURITY GROUP RULE ID YOU WANT TO EDIT>
+rule_description="ssh from local"
+port=22
+
+# Get current local IP
+ip=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
+
+# Update secruity group rule with new local IP
+aws ec2 modify-security-group-rules \
+    --group-id $group_id \
+    --security-group-rules SecurityGroupRuleId=$rule_id,SecurityGroupRule="{Description=$rule_description,IpProtocol=tcp,FromPort=$port,ToPort=$port,CidrIpv4=${ip}/32}"
+
+```
+
+The above code first collects your current local IP address and then utilises the `aws ec2 modify-security-group-rules` command to update the security group and rule that you have defined in the parameter.
+
+Take it a step further and make it an executable bash script or wrap it in code that checks for when your IP address changes and then have it as a cron job.
+
+::: callout-note
+This assumes the AWS CLI is configured on your local machine.
+:::

@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
+<meta name="author" content="LW Pembleton">
+<meta name="dcterms.date" content="2024-05-08">
+<meta name="description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
 
-<title>Luke Pembleton -</title>
+<title>Luke Pembleton - AWS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,35 +23,67 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,35 +111,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NQ96R1Y33J"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -134,42 +139,14 @@ cookieconsent.run({
 </script> 
   
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Luke Pembleton -">
-<meta property="og:description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
+<meta property="og:title" content="Luke Pembleton - AWS">
+<meta property="og:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
+<meta property="og:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton -">
-<meta name="twitter:description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
-<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
+<meta name="twitter:title" content="Luke Pembleton - AWS">
+<meta name="twitter:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
+<meta name="twitter:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -177,14 +154,14 @@ window.Quarto = {
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+  <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
   </div>
@@ -195,27 +172,27 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./ramblings.html" aria-current="page"> 
+    <a class="nav-link" href="../../ramblings.html"> 
 <span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications/publications.html"> 
+    <a class="nav-link" href="../../publications/publications.html"> 
 <span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/conferences.html"> 
+    <a class="nav-link" href="../../pages/conferences.html"> 
 <span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/vivarium.html"> 
+    <a class="nav-link" href="../../pages/vivarium.html"> 
 <span class="menu-text">VIVARIUM</span></a>
   </li>  
   <li class="nav-item compact">
@@ -262,209 +239,135 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
-  <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title"></h1><h1><br>
-<span class="highlight">Ramblings</span><br>
-</h1>
-                  <div>
-        <div class="description">
-          A collections of ramblings about Bioinformatics, Bash, R etc.
-        </div>
-      </div>
-                </div>
-  </div>
-    
-  
-  <div class="quarto-title-meta column-page-left">
-
-      
-    
-      
-    </div>
-    
-  
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Bash">Bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Colours">Colours <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#streamlining-file-transfer-via-a-bastion-host" id="toc-streamlining-file-transfer-via-a-bastion-host" class="nav-link active" data-scroll-target="#streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</a></li>
+  <li><a href="#update-ip-restriction-in-aws-security-groups-from-the-command-line" id="toc-update-ip-restriction-in-aws-security-groups-from-the-command-line" class="nav-link" data-scroll-target="#update-ip-restriction-in-aws-security-groups-from-the-command-line">Update IP restriction in AWS security groups from the command line</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">AWS</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">AWS</div>
+  </div>
+  </div>
+
+<div>
+  <div class="description">
+    A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post
+  </div>
+</div>
 
 
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>LW Pembleton </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 8, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
 
 
+</header>
 
 
+<p><img src="images/image-from-rawpixel-id-429642-jpeg.jpg" class="img-fluid"></p>
+<section id="streamlining-file-transfer-via-a-bastion-host" class="level2">
+<h2 class="anchored" data-anchor-id="streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</h2>
+<p><img src="images/bastion.png" class="img-fluid"></p>
+<p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For systems where <strong><code>ProxyJump</code></strong> isn’t available, you can opt for the <strong><code>ProxyCommand</code></strong> method instead.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-o</span> <span class="st">'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p'</span> <span class="dt">\</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>It’s worth noting that while both methods facilitate the transfer, <strong><code>ProxyJump</code></strong> is recommended over <strong><code>ProxyCommand</code></strong> as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.</p>
+</div>
+</div>
+</section>
+<section id="update-ip-restriction-in-aws-security-groups-from-the-command-line" class="level2">
+<h2 class="anchored" data-anchor-id="update-ip-restriction-in-aws-security-groups-from-the-command-line">Update IP restriction in AWS security groups from the command line</h2>
+<p>If you are using IP restrictions to secure your AWS EC2 SSH connections and have a dynamic local IP, then you might be sick of constantly having to update your IP via the AWS console. Fortunately there is a easier pathway for this; you can update your IP restrictions using the AWS CLI from your local computer 👇</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Input parameters</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">group_id</span><span class="op">=&lt;</span>YOUR <span class="ex">SECURITY</span> GROUP ID<span class="op">&gt;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">rule_id</span><span class="op">=&lt;</span>THE <span class="ex">SECURITY</span> GROUP RULE ID YOU WANT TO EDIT<span class="op">&gt;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="va">rule_description</span><span class="op">=</span><span class="st">"ssh from local"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">port</span><span class="op">=</span>22</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get current local IP</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">ip</span><span class="op">=</span><span class="va">$(</span><span class="ex">/sbin/ip</span> <span class="at">-o</span> <span class="at">-4</span> addr list eth0 <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $4}'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span>/ <span class="at">-f1</span><span class="va">)</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Update secruity group rule with new local IP</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ec2 modify-security-group-rules <span class="dt">\</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">--group-id</span> <span class="va">$group_id</span> <span class="dt">\</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">--security-group-rules</span> SecurityGroupRuleId=<span class="va">$rule_id</span>,SecurityGroupRule=<span class="st">"{Description=</span><span class="va">$rule_description</span><span class="st">,IpProtocol=tcp,FromPort=</span><span class="va">$port</span><span class="st">,ToPort=</span><span class="va">$port</span><span class="st">,CidrIpv4=</span><span class="va">${ip}</span><span class="st">/32}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The above code first collects your current local IP address and then utilises the <code>aws ec2 modify-security-group-rules</code> command to update the security group and rule that you have defined in the parameter.</p>
+<p>Take it a step further and make it an executable bash script or wrap it in code that checks for when your IP address changes and then have it as a cron job.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This assumes the AWS CLI is configured on your local machine.</p>
+</div>
+</div>
 
 
+</section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Bash" data-listing-file-modified-sort="1711984328074" data-listing-reading-time-sort="9" data-listing-word-count-sort="1659">
-<div class="thumbnail">
-<p><a href="./ramblings/bash/index.html" class="no-external"></a></p><a href="./ramblings/bash/index.html" class="no-external">
-<p><img src="./ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/bash/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/bash/index.html" class="no-external">Bash</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/bash/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Bash'); return false;">
-Bash
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/bash/index.html" class="no-external">A collection of short Bash commands and tricks that individually are too short for a blog post</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./ramblings/bash/index.html" class="no-external"></a></p><a href="./ramblings/bash/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Colours" data-listing-file-modified-sort="1703608960814" data-listing-reading-time-sort="2" data-listing-word-count-sort="278">
-<div class="thumbnail">
-<p><a href="./ramblings/Colours/index.html" class="no-external"></a></p><a href="./ramblings/Colours/index.html" class="no-external">
-<p><img src="./ramblings/Colours/images/patternpad.png" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/Colours/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/Colours/index.html" class="no-external">Colours</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/Colours/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Colours'); return false;">
-Colours
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/Colours/index.html" class="no-external">A collection colour palettes and reference panels with copy paste hex codes</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./ramblings/Colours/index.html" class="no-external"></a></p><a href="./ramblings/Colours/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Quarto" data-listing-file-modified-sort="1701344680968" data-listing-reading-time-sort="1" data-listing-word-count-sort="135">
-<div class="thumbnail">
-<p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p><a href="./ramblings/Quarto/index.html" class="no-external">
-<p><img src="./ramblings/Quarto/images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/Quarto/index.html" class="no-external">Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/Quarto/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
-Quarto
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/Quarto/index.html" class="no-external">A collection of short Quarto code snippets and tricks that individually are too short for a blog post</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p><a href="./ramblings/Quarto/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="AWS" data-listing-date-sort="1715130488000" data-listing-file-modified-sort="1715130488894" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="331">
-<div class="thumbnail">
-<p><a href="./ramblings/AWS/index.html" class="no-external"></a></p><a href="./ramblings/AWS/index.html" class="no-external">
-<p><img src="./ramblings/AWS/images/image-from-rawpixel-id-429642-jpeg.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/AWS/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/AWS/index.html" class="no-external">AWS</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/AWS/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
-AWS
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/AWS/index.html" class="no-external">A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./ramblings/AWS/index.html" class="no-external">
-<div class="listing-date">
-May 8, 2024
-</div>
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="R" data-listing-date-sort="1714498526000" data-listing-file-modified-sort="1714498526963" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="61" data-listing-word-count-sort="12119">
-<div class="thumbnail">
-<p><a href="./ramblings/R/index.html" class="no-external"></a></p><a href="./ramblings/R/index.html" class="no-external">
-<p><img src="./ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/R/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/R/index.html" class="no-external">R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/R/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/R/index.html" class="no-external">A worthy collection of short R commands and tricks</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./ramblings/R/index.html" class="no-external">
-<div class="listing-date">
-May 1, 2024
-</div>
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pembleton2024,
+  author = {Pembleton, LW},
+  title = {AWS {Ramblings,} {A} Worthy Collection of Short {AWS} \&amp;
+    Cloud Commands and Tricks},
+  date = {2024-05-08},
+  url = {https://lpembleton.rbind.io/ramblings/AWS/},
+  langid = {en}
+}
+</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pembleton2024" class="csl-entry quarto-appendix-citeas" role="listitem">
+Pembleton, LW. 2024. <span>“AWS Ramblings, A Worthy Collection of Short
+AWS &amp; Cloud Commands and Tricks.”</span> May 8, 2024. <a href="https://lpembleton.rbind.io/ramblings/AWS/">https://lpembleton.rbind.io/ramblings/AWS/</a>.
+</div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
