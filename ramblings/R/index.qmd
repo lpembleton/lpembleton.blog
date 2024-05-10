@@ -890,3 +890,49 @@ ggplot(data = data_long,
 
 
 ```
+
+## Saving high quality figures the easy way
+
+There was a time where I would export my R plots as pdfs and then convert them to .tiff .png or .jpeg with GIMP to get achieve that high quality finish 🖼️ That was until I came across [camcorder](https://github.com/thebioengineer/camcorder). camcorder simplifies the whole process of exporting and saving R plots and they come out looking fantastic 👌
+
+```{r, eval=FALSE}
+library(tidyverse)
+library(ggdist)
+library(ggplot2)
+library(camcorder)
+
+#Start recording plot images
+gg_record(
+  dir = "plot_images", # where to save the recording
+  device = "png", # device to use to save images
+  width = 8,      # width of saved image
+  height = 6,     # height of saved image
+  units = "in",   # units for width and height
+  dpi = 300       # dpi to use when saving image
+)
+
+ggplot(data = mpg |> 
+         filter(cyl != 5) |>
+         mutate(cyl = as.factor(cyl)),
+       aes(x = hwy, y = cyl, fill = cyl)) +
+  stat_halfeye(
+    point_color = NA, .width = 0, height = 0.5,
+    position = position_nudge(y = 0.2),
+    alpha = 0.7,
+    slab_colour = "black"
+  ) +
+  geom_point(position = position_jitter(width = 0.2, height = 0.15, seed = 1),
+             alpha = 0.8,
+             size = 3,
+             aes(colour = drv)) +
+  scale_colour_manual(values = c("#fe7f2d", "#619b8a", "#233d4d")) +
+  scale_fill_manual(values = c("#90e0ef", "#0077b6", "#03045e")) +
+  theme_bw() +
+  ylab("Cylinders") +
+  xlab("Highway Miles per Gallon") +
+  ggtitle("Fuel economy for 38 popular car models from 1999 to 2008")
+
+gg_stop_recording() #stop exporting every plot
+```
+Which exports  a .png that looks like 👇
+![](images/2024_05_11_02_12_25.079715.png)
