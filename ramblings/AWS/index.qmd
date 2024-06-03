@@ -58,7 +58,6 @@ ip=$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)
 aws ec2 modify-security-group-rules \
     --group-id $group_id \
     --security-group-rules SecurityGroupRuleId=$rule_id,SecurityGroupRule="{Description=$rule_description,IpProtocol=tcp,FromPort=$port,ToPort=$port,CidrIpv4=${ip}/32}"
-
 ```
 
 The above code first collects your current local IP address and then utilises the `aws ec2 modify-security-group-rules` command to update the security group and rule that you have defined in the parameter.

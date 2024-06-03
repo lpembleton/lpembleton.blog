@@ -8,9 +8,9 @@
 
 <meta name="author" content="LW Pembleton">
 <meta name="dcterms.date" content="2024-06-02">
-<meta name="description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
+<meta name="description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
 
-<title>Luke Pembleton - AWS</title>
+<title>Luke Pembleton - Remote IDE behind a jump server</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -140,21 +140,21 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Luke Pembleton - AWS">
-<meta property="og:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
+<meta property="og:title" content="Luke Pembleton - Remote IDE behind a jump server">
+<meta property="og:description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
+<meta property="og:image" content="images/image-from-rawpixel-id-328263-jpeg.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - AWS">
-<meta name="twitter:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
+<meta name="twitter:title" content="Luke Pembleton - Remote IDE behind a jump server">
+<meta name="twitter:description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
+<meta name="twitter:image" content="images/image-from-rawpixel-id-328263-jpeg.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -239,73 +239,72 @@ cookieconsent.run({
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Remote IDE behind a jump server</h1>
+                  <div>
+        <div class="description">
+          A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Cloud</div>
+                <div class="quarto-category">AWS</div>
+                <div class="quarto-category">VSCode</div>
+                <div class="quarto-category">WinSCP</div>
+                <div class="quarto-category">IDE</div>
+                <div class="quarto-category">Remote</div>
+                <div class="quarto-category">Jump host</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>LW Pembleton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">June 2, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-<!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#streamlining-file-transfer-via-a-bastion-host" id="toc-streamlining-file-transfer-via-a-bastion-host" class="nav-link active" data-scroll-target="#streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</a></li>
-  <li><a href="#update-ip-restriction-in-aws-security-groups-from-the-command-line" id="toc-update-ip-restriction-in-aws-security-groups-from-the-command-line" class="nav-link" data-scroll-target="#update-ip-restriction-in-aws-security-groups-from-the-command-line">Update IP restriction in AWS security groups from the command line</a></li>
+  <li><a href="#vscode" id="toc-vscode" class="nav-link active" data-scroll-target="#vscode">VSCode</a></li>
+  <li><a href="#winscp" id="toc-winscp" class="nav-link" data-scroll-target="#winscp">WinSCP</a></li>
   </ul>
 </nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">AWS</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">AWS</div>
-  </div>
-  </div>
-
-<div>
-  <div class="description">
-    A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post
-  </div>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
-<div class="quarto-title-meta">
-
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>LW Pembleton </p>
-          </div>
-  </div>
-    
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">June 2, 2024</p>
-    </div>
-  </div>
-  
-    
-  </div>
-  
 
 
-</header>
 
-
-<p><img src="images/image-from-rawpixel-id-429642-jpeg.jpg" class="img-fluid"></p>
-<section id="streamlining-file-transfer-via-a-bastion-host" class="level2">
-<h2 class="anchored" data-anchor-id="streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</h2>
-<p><img src="images/bastion.png" class="img-fluid"></p>
-<p>Accessing private servers through a bastion host, like AWS private cloud, and transferring local files doesn’t have to be a complex process. With a straightforward command utilising <strong><code>scp</code></strong> and the <strong><code>ProxyJump</code></strong> feature, you can seamlessly accomplish this task. Assuming your SSH keys are configured correctly on your local machine, here’s how to automate the transfer to the endpoint private server via the public-facing bastion host.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-J</span> <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>Public-IPv4-DNS<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>For systems where <strong><code>ProxyJump</code></strong> isn’t available, you can opt for the <strong><code>ProxyCommand</code></strong> method instead.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">scp</span> <span class="at">-o</span> <span class="st">'ProxyCommand ssh &lt;user-name&gt;@&lt;Public-IPv4-DNS&gt; -W %h:%p'</span> <span class="dt">\</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>file-to-transfer<span class="op">&gt;</span> <span class="dt">\</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="op">&lt;</span>user-name<span class="op">&gt;</span>@<span class="op">&lt;</span>IP-address<span class="op">&gt;</span>:/path/for/remote/file</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><img src="images/image-from-rawpixel-id-328263-jpeg.jpg" class="img-fluid"></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -316,29 +315,28 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>It’s worth noting that while both methods facilitate the transfer, <strong><code>ProxyJump</code></strong> is recommended over <strong><code>ProxyCommand</code></strong> as it adds an extra layer of encryption to the traffic, enhancing security during file transfers.</p>
+<p>The following assumes you have some level of familiarity with VSCode and WinSCP.</p>
 </div>
 </div>
-</section>
-<section id="update-ip-restriction-in-aws-security-groups-from-the-command-line" class="level2">
-<h2 class="anchored" data-anchor-id="update-ip-restriction-in-aws-security-groups-from-the-command-line">Update IP restriction in AWS security groups from the command line</h2>
-<p>If you are using IP restrictions to secure your AWS EC2 SSH connections and have a dynamic local IP, then you might be sick of constantly having to update your IP via the AWS console. Fortunately there is a easier pathway for this; you can update your IP restrictions using the AWS CLI from your local computer 👇</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Input parameters</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">group_id</span><span class="op">=&lt;</span>YOUR <span class="ex">SECURITY</span> GROUP ID<span class="op">&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">rule_id</span><span class="op">=&lt;</span>THE <span class="ex">SECURITY</span> GROUP RULE ID YOU WANT TO EDIT<span class="op">&gt;</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="va">rule_description</span><span class="op">=</span><span class="st">"ssh from local"</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="va">port</span><span class="op">=</span>22</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get current local IP</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="va">ip</span><span class="op">=</span><span class="va">$(</span><span class="ex">/sbin/ip</span> <span class="at">-o</span> <span class="at">-4</span> addr list eth0 <span class="kw">|</span> <span class="fu">awk</span> <span class="st">'{print $4}'</span> <span class="kw">|</span> <span class="fu">cut</span> <span class="at">-d</span>/ <span class="at">-f1</span><span class="va">)</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Update secruity group rule with new local IP</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">aws</span> ec2 modify-security-group-rules <span class="dt">\</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">--group-id</span> <span class="va">$group_id</span> <span class="dt">\</span></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">--security-group-rules</span> SecurityGroupRuleId=<span class="va">$rule_id</span>,SecurityGroupRule=<span class="st">"{Description=</span><span class="va">$rule_description</span><span class="st">,IpProtocol=tcp,FromPort=</span><span class="va">$port</span><span class="st">,ToPort=</span><span class="va">$port</span><span class="st">,CidrIpv4=</span><span class="va">${ip}</span><span class="st">/32}"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The above code first collects your current local IP address and then utilises the <code>aws ec2 modify-security-group-rules</code> command to update the security group and rule that you have defined in the parameter.</p>
-<p>Take it a step further and make it an executable bash script or wrap it in code that checks for when your IP address changes and then have it as a cron job.</p>
+<section id="vscode" class="level2">
+<h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
+<p>Ever thought setting up a <a href="https://code.visualstudio.com/">VSCode</a> development environment on a remote server that sits behind a jump server or bastion host wasn’t possible? 🤔 You wouldn’t be alone, but in fact, you can, and it’s super simple. ✅</p>
+<p>VSCode has a <a href="https://code.visualstudio.com/docs/remote/ssh">feature</a> to connect to remote servers via SSH. This allows you to open a remote folder on the remote machine, integrate the terminal, and take advantage of the full VSCode suite of features, essentially giving you that local interactive development feel. Although VSCode typically expects a direct SSH connection, all you need to do is add the jump server details to the SSH config file.</p>
+<p>So, let’s go do that. 👍 Firstly, locate your SSH config file 📄. On Windows, this is usually <code>C:\Users\&lt;user-name&gt;\.ssh\config</code>.</p>
+<p>Now you need to add ✌️ two things:</p>
+<p>1️⃣ Your jump/bastion server:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> jump_server</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> <span class="op">&lt;</span>public ip address<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ForwardX11</span> yes</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ForwardX11Trusted</span> yes</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> <span class="op">&lt;</span>path to your ssh key, eg. eg. <span class="st">"~/.ssh/remote_key.pem"</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and 2️⃣ Your destination server:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> destination_server_name</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> <span class="op">&lt;</span>private ip address<span class="op">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> <span class="op">&lt;</span>path to your ssh key, eg. <span class="st">"~/.ssh/remote_key.pem"</span><span class="op">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyCommand</span> ssh <span class="at">-W</span> %h:%p awsjump_server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -349,25 +347,59 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This assumes the AWS CLI is configured on your local machine.</p>
+<p>The host names can be anything you want 🔮. Just make sure what you call your ‘jump server’ is the same as what you use in the ProxyCommand for the destination server.</p>
 </div>
 </div>
+<p>Great, now save and close that config file. ✅</p>
+<p>Open VSCode and click 🖱️ the bottom left corner ‘<strong>Open a Remote Window</strong>’</p>
+<p><img src="images/corner.png" class="img-fluid"></p>
+<p>and select <strong>‘Connect to Host… (Remote-SSH)’</strong> from the dropdown.</p>
+<p><img src="images/connect.png" class="img-fluid"></p>
+<p>You will then be presented with a list of host names. Ignore the jump host and click on the final destination server you want.</p>
+<p>You will likely get a few options as it makes the connection, such as accepting security certificates, etc. Proceed through all that, and you will (hopefully 🤞) finally end up connected to your remote private server.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This assumes all other security settings, such as connecting IP range restrictions, have been set up accordingly. If you can already SSH into your jump server and private server via the command line, then you should be good to go.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>VSCode does use a chunk of resources, so if you try to run this on a remote instance with limited RAM, it will likely eat itself and come to a crumbling halt.</p>
+<p><img src="images/8skb32.jpg" class="img-fluid"></p>
+</div>
+</div>
+</section>
+<section id="winscp" class="level2">
+<h2 class="anchored" data-anchor-id="winscp">WinSCP</h2>
+<p>If you are coming from a Windows environment, a likely scenario is you will also want to use WinSCP for file transfers to and from your remote private server. Again, this can be set up to tunnel through your jump/bastion host.</p>
+<p>Open WinSCP and add a <strong>new site</strong>. Keep the file protocol as <strong>SFTP</strong>. In <strong>Host name</strong>, enter the final destination IP address (💬 yes, I know the final destination is likely a meaningless local IP address, but trust me, it’s all good; the jump host will sort all that out). Add your <strong>User name</strong>. The password can typically be left blank as you will be using an SSH key.</p>
+<p>Now click <strong>Advanced</strong>, and under <strong>Connection</strong>, click <strong>Tunnel</strong>, and tick <strong>Connect through SSH tunnel</strong>.</p>
+<p><img src="images/winscp_tunnel.png" class="img-fluid"></p>
+<p>Here is where you add your jump host’s public IP address under <strong>Host name</strong>, again along with your <strong>User name</strong>. Now, under <strong>Private key file</strong>, you need to add your SSH key, but like most things, this isn’t straightforward. You first need to convert it to PuTTY .ppk format. Rather than reinventing the wheel, here is a good walkthrough on how to do this 👉 <a href="https://www.puttygen.com/convert-pem-to-ppk">Convert PEM to PPK</a>.</p>
+<p>Once you have added your .ppk key and saved the new site, you should be good to go.</p>
+<p>Please shout out if you notice anything different when setting this up yourself. I wrote this guide after having mine set up for some time, so I may have missed some bits.</p>
+<p><img src="images/8sgmfz.jpg" class="img-fluid"></p>
 
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-citation"><h2 class="anchored quarto-appendix-heading">Citation</h2><div><div class="quarto-appendix-secondary-label">BibTeX citation:</div><pre class="sourceCode code-with-copy quarto-appendix-bibtex"><code class="sourceCode bibtex">@online{pembleton2024,
-  author = {Pembleton, LW},
-  title = {AWS {Ramblings,} {A} Worthy Collection of Short {AWS} \&amp;
-    Cloud Commands and Tricks},
-  date = {2024-06-02},
-  url = {https://lpembleton.rbind.io/ramblings/AWS/},
-  langid = {en}
-}
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pembleton2024" class="csl-entry quarto-appendix-citeas" role="listitem">
-Pembleton, LW. 2024. <span>“AWS Ramblings, A Worthy Collection of Short
-AWS &amp; Cloud Commands and Tricks.”</span> June 2, 2024. <a href="https://lpembleton.rbind.io/ramblings/AWS/">https://lpembleton.rbind.io/ramblings/AWS/</a>.
-</div></div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -750,6 +782,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="lpembleton/lpembleton.blog" data-repo-id="R_kgDOIfz78A" data-category="Announcements" data-category-id="DIC_kwDOIfz78M4CZhkM" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
