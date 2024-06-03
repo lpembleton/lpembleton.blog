@@ -320,7 +320,7 @@ Note
 </div>
 <section id="vscode" class="level2">
 <h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
-<p>Ever thought setting up a <a href="https://code.visualstudio.com/">VSCode</a> development environment on a remote server that sits behind a jump server or bastion host wasn’t possible? 🤔 You wouldn’t be alone, but in fact, you can, and it’s super simple. ✅</p>
+<p>Ever thought setting up a <a href="https://code.visualstudio.com/">VSCode</a> development environment on a remote server that sits behind a jump server or bastion host wasn’t possible (such as an EC2 instance within a private AWS VPC)? 🤔 You wouldn’t be alone, but in fact, you can, and it’s super simple. ✅</p>
 <p>VSCode has a <a href="https://code.visualstudio.com/docs/remote/ssh">feature</a> to connect to remote servers via SSH. This allows you to open a remote folder on the remote machine, integrate the terminal, and take advantage of the full VSCode suite of features, essentially giving you that local interactive development feel. Although VSCode typically expects a direct SSH connection, all you need to do is add the jump server details to the SSH config file.</p>
 <p>So, let’s go do that. 👍 Firstly, locate your SSH config file 📄. On Windows, this is usually <code>C:\Users\&lt;user-name&gt;\.ssh\config</code>.</p>
 <p>Now you need to add ✌️ two things:</p>
@@ -355,8 +355,8 @@ Note
 <p><img src="images/corner.png" class="img-fluid"></p>
 <p>and select <strong>‘Connect to Host… (Remote-SSH)’</strong> from the dropdown.</p>
 <p><img src="images/connect.png" class="img-fluid"></p>
-<p>You will then be presented with a list of host names. Ignore the jump host and click on the final destination server you want.</p>
-<p>You will likely get a few options as it makes the connection, such as accepting security certificates, etc. Proceed through all that, and you will (hopefully 🤞) finally end up connected to your remote private server.</p>
+<p>You will then be presented with a list of host names configured in your SSH config file. Ignore the jump host and click on the final destination server you want.</p>
+<p>VSCode will then prompt you to select the platform of the remote server (Linux, Windows, or macOS). Choose the appropriate option. You will likely get a few options as it makes the connection, such as accepting security certificates, etc. Proceed through all that, and you will (hopefully 🤞) finally end up connected to your remote private server.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">

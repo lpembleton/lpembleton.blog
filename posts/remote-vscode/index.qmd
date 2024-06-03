@@ -17,7 +17,7 @@ The following assumes you have some level of familiarity with VSCode and WinSCP.
 
 ## VSCode
 
-Ever thought setting up a [VSCode](https://code.visualstudio.com/) development environment on a remote server that sits behind a jump server or bastion host wasn't possible? 🤔 You wouldn't be alone, but in fact, you can, and it's super simple. ✅
+Ever thought setting up a [VSCode](https://code.visualstudio.com/) development environment on a remote server that sits behind a jump server or bastion host wasn't possible (such as an EC2 instance within a private AWS VPC)? 🤔 You wouldn't be alone, but in fact, you can, and it's super simple. ✅
 
 VSCode has a [feature](https://code.visualstudio.com/docs/remote/ssh) to connect to remote servers via SSH. This allows you to open a remote folder on the remote machine, integrate the terminal, and take advantage of the full VSCode suite of features, essentially giving you that local interactive development feel. Although VSCode typically expects a direct SSH connection, all you need to do is add the jump server details to the SSH config file.
 
