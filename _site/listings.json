@@ -12,6 +12,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/ggplot-limits/index.html",
       "/posts/remote-vscode/index.html",
       "/posts/mulled-biocontainers/index.html",
       "/posts/packing-for-ec2/index.html",

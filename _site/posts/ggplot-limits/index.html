@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2024-06-02">
-<meta name="description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
+<meta name="dcterms.date" content="2024-06-10">
+<meta name="description" content="A brief walkthrough the consequences of different limits functions in ggplot2">
 
-<title>Luke Pembleton - Remote IDE behind a jump server</title>
+<title>Luke Pembleton - Know your limits</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -140,13 +140,13 @@ cookieconsent.run({
   
 
 
-<meta property="og:title" content="Luke Pembleton - Remote IDE behind a jump server">
-<meta property="og:description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg">
+<meta property="og:title" content="Luke Pembleton - Know your limits">
+<meta property="og:description" content="A brief walkthrough the consequences of different limits functions in ggplot2">
+<meta property="og:image" content="images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton - Remote IDE behind a jump server">
-<meta name="twitter:description" content="A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg">
+<meta name="twitter:title" content="Luke Pembleton - Know your limits">
+<meta name="twitter:description" content="A brief walkthrough the consequences of different limits functions in ggplot2">
+<meta name="twitter:image" content="images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -242,20 +242,16 @@ cookieconsent.run({
 <header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Remote IDE behind a jump server</h1>
+      <h1 class="title">Know your limits</h1>
                   <div>
         <div class="description">
-          A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host
+          A brief walkthrough the consequences of different limits functions in ggplot2
         </div>
       </div>
                           <div class="quarto-categories">
-                <div class="quarto-category">Cloud</div>
-                <div class="quarto-category">AWS</div>
-                <div class="quarto-category">VSCode</div>
-                <div class="quarto-category">WinSCP</div>
-                <div class="quarto-category">IDE</div>
-                <div class="quarto-category">Remote</div>
-                <div class="quarto-category">Jump host</div>
+                <div class="quarto-category">R</div>
+                <div class="quarto-category">Visualisation</div>
+                <div class="quarto-category">ggplot2</div>
               </div>
                   </div>
   </div>
@@ -273,7 +269,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">June 2, 2024</p>
+        <p class="date">June 10, 2024</p>
       </div>
     </div>
     
@@ -284,14 +280,7 @@ cookieconsent.run({
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#vscode" id="toc-vscode" class="nav-link active" data-scroll-target="#vscode">VSCode</a></li>
-  <li><a href="#winscp" id="toc-winscp" class="nav-link" data-scroll-target="#winscp">WinSCP</a></li>
-  </ul>
-</nav>
+    
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -304,100 +293,174 @@ cookieconsent.run({
 
 
 
-<p><img src="images/image-from-rawpixel-id-328263-jpeg.jpg" class="img-fluid"></p>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@jruscello">Jessica&nbsp;Ruscello</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
+</figure>
 </div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>The following assumes you have some level of familiarity with VSCode and WinSCP.</p>
-</div>
-</div>
-<section id="vscode" class="level2">
-<h2 class="anchored" data-anchor-id="vscode">VSCode</h2>
-<p>Ever thought setting up a <a href="https://code.visualstudio.com/">VSCode</a> development environment on a remote server that sits behind a jump server or bastion host wasn’t possible (such as an EC2 instance within a private AWS VPC)? 🤔 You wouldn’t be alone, but in fact, you can, and it’s super simple. ✅</p>
-<p>VSCode has a <a href="https://code.visualstudio.com/docs/remote/ssh">feature</a> to connect to remote servers via SSH. This allows you to open a remote folder on the remote machine, integrate the terminal, and take advantage of the full VSCode suite of features, essentially giving you that local interactive development feel. Although VSCode typically expects a direct SSH connection, all you need to do is add the jump server details to the SSH config file.</p>
-<p>So, let’s go do that. 👍 Firstly, locate your SSH config file 📄. On Windows, this is usually <code>C:\Users\&lt;user-name&gt;\.ssh\config</code>.</p>
-<p>Now you need to add ✌️ two things:</p>
-<p>1️⃣ Your jump/bastion server:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> jump_server</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> <span class="op">&lt;</span>public ip address<span class="op">&gt;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ForwardX11</span> yes</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ForwardX11Trusted</span> yes</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> <span class="op">&lt;</span>path to your ssh key, eg. eg. <span class="st">"~/.ssh/remote_key.pem"</span><span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>and 2️⃣ Your destination server:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">Host</span> destination_server_name</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="ex">HostName</span> <span class="op">&lt;</span>private ip address<span class="op">&gt;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="ex">User</span> <span class="op">&lt;</span>username<span class="op">&gt;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="ex">IdentityFile</span> <span class="op">&lt;</span>path to your ssh key, eg. <span class="st">"~/.ssh/remote_key.pem"</span><span class="op">&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="ex">ProxyCommand</span> ssh <span class="at">-W</span> %h:%p awsjump_server</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
+<p>I recently went down a bit of an educational rabbit 🐇 hole with ggplot is setting axis limits. So I thought I would share some insights I gathered along the way.</p>
+<p>It all started with a simple barplot 📊 using ggplot2. Typically, I prefer to filterthe data before plotting, avoiding axis limits. However, on this occasion, I wanted to focus in on the differences between values that were relatively small compared to the overall bars. Queue example data 👇</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>data_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">sample =</span> <span class="fu">c</span>(<span class="st">"SampleA"</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"SampleB"</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"SampleC"</span>, </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"SampleD"</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>                              <span class="st">"SampleE"</span>),</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">20</span>, </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">20.5</span>, </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">22</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                             <span class="fl">19.8</span>,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>                             <span class="dv">21</span>))</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>The host names can be anything you want 🔮. Just make sure what you call your ‘jump server’ is the same as what you use in the ProxyCommand for the destination server.</p>
+</div>
+<p>Naturally I went for the generically name ylim() ggplot2 function to try and focus in more on the “tops” of the bars.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">15</span>, <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<p>Great, now save and close that config file. ✅</p>
-<p>Open VSCode and click 🖱️ the bottom left corner ‘<strong>Open a Remote Window</strong>’</p>
-<p><img src="images/corner.png" class="img-fluid"></p>
-<p>and select <strong>‘Connect to Host… (Remote-SSH)’</strong> from the dropdown.</p>
-<p><img src="images/connect.png" class="img-fluid"></p>
-<p>You will then be presented with a list of host names configured in your SSH config file. Ignore the jump host and click on the final destination server you want.</p>
-<p>VSCode will then prompt you to select the platform of the remote server (Linux, Windows, or macOS). Choose the appropriate option. You will likely get a few options as it makes the connection, such as accepting security certificates, etc. Proceed through all that, and you will (hopefully 🤞) finally end up connected to your remote private server.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This assumes all other security settings, such as connecting IP range restrictions, have been set up accordingly. If you can already SSH into your jump server and private server via the command line, then you should be good to go.</p>
+<p>And boom! 💥 Everything disappeared. Initially, I was puzzled 🤔 Where did my bars go? After some digging, I realised that ylim() was not the function I was looking for.</p>
+<p><img src="images/8t4viq.jpg" class="img-fluid"></p>
+<p>The ylim() function removes 🧹 any data outside the specified range. Since I chose a barplot, the bars extend from 0 on the y-axis to the sample value, resulting in them being removed. If I had used geom_point, everything would have been fine:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">15</span>, <span class="dv">25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<div class="callout callout-style-default callout-warning callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Warning
+<p>So, how do I achieve the desired outcome with geom_bar? The answer is to zoom rather than limit the data, and that’s where coord_cartesian() comes in:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-<div class="callout-body-container callout-body">
-<p>VSCode does use a chunk of resources, so if you try to run this on a remote instance with limited RAM, it will likely eat itself and come to a crumbling halt.</p>
-<p><img src="images/8skb32.jpg" class="img-fluid"></p>
+</div>
+<p>Using coord_cartesian, all the underlying data is retained, but the plot is zoomed in as if using a magnifying glass. 🔍 ✅</p>
+<p>Now, you might think this is only relevant for bar plots. However, let’s explore why it’s important even for scatter plots with geom_point.</p>
+<p>Consider data with a strong linear correlation. What happens when we limit the x-axis? Instead of just showing a zoomed-in focus, the linear regression is recalculated with only the data in view, resulting in a misleading correlation:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(penguins)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
 </div>
 </div>
-</section>
-<section id="winscp" class="level2">
-<h2 class="anchored" data-anchor-id="winscp">WinSCP</h2>
-<p>If you are coming from a Windows environment, a likely scenario is you will also want to use WinSCP for file transfers to and from your remote private server. Again, this can be set up to tunnel through your jump/bastion host.</p>
-<p>Open WinSCP and add a <strong>new site</strong>. Keep the file protocol as <strong>SFTP</strong>. In <strong>Host name</strong>, enter the final destination IP address (💬 yes, I know the final destination is likely a meaningless local IP address, but trust me, it’s all good; the jump host will sort all that out). Add your <strong>User name</strong>. The password can typically be left blank as you will be using an SSH key.</p>
-<p>Now click <strong>Advanced</strong>, and under <strong>Connection</strong>, click <strong>Tunnel</strong>, and tick <strong>Connect through SSH tunnel</strong>.</p>
-<p><img src="images/winscp_tunnel.png" class="img-fluid"></p>
-<p>Here is where you add your jump host’s public IP address under <strong>Host name</strong>, again along with your <strong>User name</strong>. Now, under <strong>Private key file</strong>, you need to add your SSH key, but like most things, this isn’t straightforward. You first need to convert it to PuTTY .ppk format. Rather than reinventing the wheel, here is a good walkthrough on how to do this 👉 <a href="https://www.puttygen.com/convert-pem-to-ppk">Convert PEM to PPK</a>.</p>
-<p>Once you have added your .ppk key and saved the new site, you should be good to go.</p>
-<p>Please shout out if you notice anything different when setting this up yourself. I wrote this guide after having mine set up for some time, so I may have missed some bits.</p>
-<p><img src="images/8sgmfz.jpg" class="img-fluid"></p>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> penguins, <span class="fu">aes</span>(<span class="at">x =</span> flipper_length_mm, <span class="at">y =</span> body_mass_g)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"gray50"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">170</span>, <span class="dv">200</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-5-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>You can see that depending on the context this approach could be problematic.</p>
+<p>Or, let’s say you’re inspecting time series data, such as growth over time:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>growth_tbl <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">days =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>, <span class="dv">11</span>, <span class="dv">12</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="dv">40</span>, <span class="dv">50</span>),</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">weight =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="dv">10</span>, <span class="dv">13</span>, <span class="dv">17</span>, <span class="dv">17</span>, <span class="dv">15</span>, <span class="dv">13</span>, <span class="dv">20</span>, <span class="dv">25</span>, <span class="dv">45</span>, <span class="dv">90</span>, <span class="dv">200</span>, <span class="dv">500</span>, <span class="dv">2000</span>))</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> growth_tbl, <span class="fu">aes</span>(<span class="at">x =</span> days, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And you wanted to focus in on early growth. If you used <code>xlim()</code> instead of <code>coor_cartesian()</code>, you will notice below that the last piece of informative data, that the growth recovers and continues to increase, is lost.</p>
+<p><strong>xlim()</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> growth_tbl, <span class="fu">aes</span>(<span class="at">x =</span> days, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>,<span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">20</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>coor_cartesian()</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> growth_tbl, <span class="fu">aes</span>(<span class="at">x =</span> days, <span class="at">y =</span> weight)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">10</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">20</span>)) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>While most statistics are computed before plotting, and therefore this may not drastically change data interpretation, using <code>coord_cartesian()</code> ensures you’re zooming in rather than trimming data.</p>
+<p>Maybe you have already been through this journey and understanding all the axis limiting methods. If not hopefully though this post helps someone else.</p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -790,7 +853,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2023 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+<p>© 2024 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
 <p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter" aria-label="twitter"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
