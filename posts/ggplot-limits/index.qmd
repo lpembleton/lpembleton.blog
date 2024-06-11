@@ -138,4 +138,4 @@ ggplot(data = growth_tbl, aes(x = days, y = weight)) +
 
 While most statistics are computed before plotting, and therefore this may not drastically change data interpretation, using `coord_cartesian()` ensures you're zooming in rather than trimming data.
 
-Maybe you have already been through this journey and understanding all the axis limiting methods. If not hopefully though this post helps someone else.
+Maybe you have already been through this journey and are an axis limiting champion. Hopefully though this post helps someone.
