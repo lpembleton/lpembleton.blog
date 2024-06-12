@@ -13,6 +13,8 @@ highlight-style: ayu
 
 I recently went down a bit of an educational rabbit 🐇 hole with ggplot is setting axis limits. So I thought I would share some insights I gathered along the way.
 
+### ylim
+
 It all started with a simple barplot 📊 using ggplot2. Typically, I prefer to filterthe data before plotting, avoiding axis limits. However, on this occasion, I wanted to focus in on the differences between values that were relatively small compared to the overall bars. Queue example data 👇
 
 ```{r, warning = FALSE, message = FALSE}
@@ -59,6 +61,8 @@ ggplot(data = data_tbl, aes(x = sample, y = value)) +
 
 ```
 
+### coord_cartesian()
+
 So, how do I achieve the desired outcome with geom_bar? The answer is to zoom rather than limit the data, and that's where coord_cartesian() comes in:
 
 ```{r, warning = FALSE}
@@ -69,6 +73,7 @@ ggplot(data = data_tbl, aes(x = sample, y = value)) +
   coord_cartesian(ylim=c(15,25))
 
 ```
+
 Using coord_cartesian, all the underlying data is retained, but the plot is zoomed in as if using a magnifying glass. 🔍 ✅
 
 Now, you might think this is only relevant for bar plots. However, let's explore why it's important even for scatter plots with geom_point.
@@ -138,4 +143,23 @@ ggplot(data = growth_tbl, aes(x = days, y = weight)) +
 
 While most statistics are computed before plotting, and therefore this may not drastically change data interpretation, using `coord_cartesian()` ensures you're zooming in rather than trimming data.
 
-Maybe you have already been through this journey and are an axis limiting champion. Hopefully though this post helps someone.
+### scales
+
+📢 Shoutout to [June Choe](https://yjunechoe.github.io/) for highlighting this, even `coord_cartesian()` might not be the function you want.
+
+![](images/8tmrgm.jpg)
+
+Instead, consider defining your x or y limits within the `scale_*()` functions and using the [scales](https://scales.r-lib.org/index.html) package to handle [out-of-bounds (OOB) values](https://scales.r-lib.org/reference/oob.html). This approach makes your logic clearer to others using your code, or even to yourself when revisiting your script months later. June has a [video](https://www.youtube.com/watch?v=EvKchS3X6cg&t=716s) explaining this a little more 🎥
+
+Let's revisit our barplot example. By specifying the y-axis limits to be between 15 and 25 and using `scales::oob_keep()`, we maintain values outside these limits for the background dataset and other statistical calculations. This effectively zooms into the data within our specified limits without removing out-of-bounds values.
+
+```{r, warning = FALSE}
+
+ggplot(data = data_tbl, aes(x = sample, y = value)) +
+  geom_bar(stat = "identity") +
+  theme_bw() +
+  scale_y_continuous(limits = c(15,25), oob = scales::oob_keep)
+
+```
+
+Maybe you have already been through this journey and are an axis limiting champion. Hopefully though this post helps someone. If you have any suggestions or additions, please share them!

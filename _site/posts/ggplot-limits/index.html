@@ -280,7 +280,15 @@ cookieconsent.run({
   </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#ylim" id="toc-ylim" class="nav-link active" data-scroll-target="#ylim">ylim</a></li>
+  <li><a href="#coord_cartesian" id="toc-coord_cartesian" class="nav-link" data-scroll-target="#coord_cartesian">coord_cartesian()</a></li>
+  <li><a href="#scales" id="toc-scales" class="nav-link" data-scroll-target="#scales">scales</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -300,6 +308,8 @@ cookieconsent.run({
 </figure>
 </div>
 <p>I recently went down a bit of an educational rabbit 🐇 hole with ggplot is setting axis limits. So I thought I would share some insights I gathered along the way.</p>
+<section id="ylim" class="level3">
+<h3 class="anchored" data-anchor-id="ylim">ylim</h3>
 <p>It all started with a simple barplot 📊 using ggplot2. Typically, I prefer to filterthe data before plotting, avoiding axis limits. However, on this occasion, I wanted to focus in on the differences between values that were relatively small compared to the overall bars. Queue example data 👇</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -356,6 +366,9 @@ cookieconsent.run({
 </div>
 </div>
 </div>
+</section>
+<section id="coord_cartesian" class="level3">
+<h3 class="anchored" data-anchor-id="coord_cartesian">coord_cartesian()</h3>
 <p>So, how do I achieve the desired outcome with geom_bar? The answer is to zoom rather than limit the data, and that’s where coord_cartesian() comes in:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
@@ -458,9 +471,30 @@ cookieconsent.run({
 </div>
 </div>
 <p>While most statistics are computed before plotting, and therefore this may not drastically change data interpretation, using <code>coord_cartesian()</code> ensures you’re zooming in rather than trimming data.</p>
-<p>Maybe you have already been through this journey and are an axis limiting champion. Hopefully though this post helps someone.</p>
+</section>
+<section id="scales" class="level3">
+<h3 class="anchored" data-anchor-id="scales">scales</h3>
+<p>📢 Shoutout to <a href="https://yjunechoe.github.io/">June Choe</a> for highlighting this, even <code>coord_cartesian()</code> might not be the function you want.</p>
+<p><img src="images/8tmrgm.jpg" class="img-fluid"></p>
+<p>Instead, consider defining your x or y limits within the <code>scale_*()</code> functions and using the <a href="https://scales.r-lib.org/index.html">scales</a> package to handle <a href="https://scales.r-lib.org/reference/oob.html">out-of-bounds (OOB) values</a>. This approach makes your logic clearer to others using your code, or even to yourself when revisiting your script months later. June has a <a href="https://www.youtube.com/watch?v=EvKchS3X6cg&amp;t=716s">video</a> explaining this a little more 🎥</p>
+<p>Let’s revisit our barplot example. By specifying the y-axis limits to be between 15 and 25 and using <code>scales::oob_keep()</code>, we maintain values outside these limits for the background dataset and other statistical calculations. This effectively zooms into the data within our specified limits without removing out-of-bounds values.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> data_tbl, <span class="fu">aes</span>(<span class="at">x =</span> sample, <span class="at">y =</span> value)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">15</span>,<span class="dv">25</span>), <span class="at">oob =</span> scales<span class="sc">::</span>oob_keep)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Maybe you have already been through this journey and are an axis limiting champion. Hopefully though this post helps someone. If you have any suggestions or additions, please share them!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
