@@ -33,36 +33,6 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 #### *2024*
 
-📌[**ShinyConf2024**](https://www.shinyconf.com/) - April 17-19, 2024
-
-*The third edition of the largest virtual R Shiny conference.*
-
-[Register](https://www.shinyconf.com/)
-
-📌[**SatRdays London**](https://satrday-london-2024.jumpingrivers.com/#about) - April 27, 2024
-
-*SatRdays events are for everyone with an interest in R, whether you're a seasoned pro or just getting started.*
-
-[Register](https://satrday-london-2024.jumpingrivers.com/#registration)
-
-📌[**nf-core Hackathon**](https://nf-co.re/events/2024/hackathon-march-2024) - March 18-21 , 2024
-
-*A virtual hackathon with local sites to develop nf-core together*
-
-[Register](https://nf-co.re/events/2024/hackathon-march-2024) \| Follow on [Twitter](https://twitter.com/nf_core) \| Follow on [Mastodon](https://mstdn.science/@nf_core)
-
-📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Boston** - May 14-17, 2024
-
-*A showcase of the latest developments and innovations from the Nextflow world held in Boston and typically streamed online.*
-
-[Subscribe for updates](https://summit.nextflow.io/subscribe-2024/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
-
-📌[**NYR10 New York R Conference**](https://rstats.ai/nyr) - May 16-17, 2024
-
-*The 10th anniversary of the New York R Conference. Get ready for two days packed with cutting-edge talks, workshops (15th May) & a celebration of all things R and friends!*
-
-[Register](https://rstats.ai/nyr) \| Follow on [Twitter](https://twitter.com/rstatsai)
-
 📌[**useR! 2024**](https://events.linuxfoundation.org/user/) - July 8-11, 2024
 
 *useR! is the main meeting of the R user and developer community, its program consists of both invited and user-contributed presentations.*
@@ -73,7 +43,7 @@ Talking about news in the Nextflow ecosytem and speaking with pioneers in the fi
 
 *The Pacific Northwest R Conference celebrating the work of R users in the region.*
 
-Registration not yet open \| Follow on [Twitter](https://twitter.com/cascadiarconf)
+[Register](https://www.eventbrite.com/e/cascadia-r-conf-2024-tickets-851137203287) \| Follow on [Twitter](https://twitter.com/cascadiarconf)
 
 📌[**BioC2024: Bioconductor Conference**](https://www.bioc2024.bioconductor.org/) July 24-26, 2024.
 
@@ -85,42 +55,85 @@ Registration not yet open \| Follow on [Twitter](https://twitter.com/cascadiarco
 
 *Two days of workshops, two days of conference keynotes and talks, and endless opportunities to connect our data science community. Experience it in person or virtually.*
 
-[In person registration open](https://posit.co/conference/)
+[Register](https://posit.co/conference/)
 
 📌[**EuroBioC2024: European Bioconductor Conference**](https://eurobioc2024.bioconductor.org/) September 4-6, 2024.
 
 *Where software and biology connect. Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
 
-[Website](https://bioc2024.bioconductor.org/) \| [Mastodon](https://genomic.social/@bioconductor)
+[Register](https://eurobioc2024.bioconductor.org/registration/) \| [Mastodon](https://genomic.social/@bioconductor)
 
-📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Barcelona** - October 21-25, 2024
+📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Barcelona** - October 28 - November 1, 2024
 
 *A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and typically streamed online.*
 
-[Subscribe for updates](https://summit.nextflow.io/subscribe-2024/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
+[Register](https://summit.nextflow.io/2024/barcelona/) \| Follow on [Twitter](https://twitter.com/SeqeraLabs)
+
+📌[**GitHub Universe**](https://githubuniverse.com/) - October 29-30, 2024.
+
+*The annual developer event is back for its 10th anniversary.*
+
+[Register](https://githubuniverse.com/#tickets)
+
+#### *2025*
+
+📌[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Boston & Barcelona** - 2025
+
+*A showcase of the latest developments and innovations from the Nextflow world held in Boston and Barcelona with virtual online stream options.*
+
+[Subscribe for updates](https://summit.nextflow.io/preregister-2025/)
 
 ------------------------------------------------------------------------
 
 ### Past Events 🗄️
 
-✅[**ShinyConf2023**](https://shinyconf.appsilon.com/) - 15-17 March, 2023
+✅[**NYR10 New York R Conference**](https://rstats.ai/nyr) - May 16-17, 2024
 
-*ShinyConf is a virtual event hosted by Appsilon with support from Posit. This year's Shiny conference Showcases recent advancements in R Shiny technology such as open source packages, Shiny interoperability, and commercial applications*
+*The 10th anniversary of the New York R Conference. Get ready for two days packed with cutting-edge talks, workshops (15th May) & a celebration of all things R and friends!*
 
-[Conference recordings](https://www.youtube.com/playlist?list=PLexAKolMzPcriOdeLwoMxQOyHRnMguEv4)\
+[Conference recordings](https://rstats.ai/videos)
 
-✅[**New York R Conference**](https://rstats.ai/nyr.html) - July 11-12, 2023.
+✅[**Nextflow SUMMIT**](https://summit.nextflow.io/subscribe-2024/) **\| Boston** - May 14-17, 2024
 
-*The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.*
+*A showcase of the latest developments and innovations from the Nextflow world held in Boston and typically streamed online.*
 
-[Conference recordings.](https://www.landeranalytics.com/post/nyr-2023-recap)\
-\
+[Conference recordings](https://www.youtube.com/watch?v=mvhMnNl9lsQ&list=PLPZ8WHdZGxmXuWK4X5yJyFDqNzc3GhVBz)
 
-✅[**Bioconductor Conference**](https://bioc2023.bioconductor.org/), August 2-4, 2023.
+✅[**SatRdays London**](https://satrday-london-2024.jumpingrivers.com/#about) - April 27, 2024
 
-*Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
+*SatRdays events are for everyone with an interest in R, whether you're a seasoned pro or just getting started.*
 
-[Conference recordings.](https://www.youtube.com/watch?v=sTq6skZGgoI&list=PLdl4u5ZRDMQRVvXBi29h7MDtRn-AQGlXS)
+Conference recordings pending
+
+✅[**ShinyConf2024**](https://www.shinyconf.com/) - April 17-19, 2024
+
+*The third edition of the largest virtual R Shiny conference.*
+
+Conference recordings pending
+
+✅[**nf-core Hackathon**](https://nf-co.re/events/2024/hackathon-march-2024) - March 18-21 , 2024
+
+*A virtual hackathon with local sites to develop nf-core together*
+
+Follow on [Twitter](https://twitter.com/nf_core) \| Follow on [Mastodon](https://mstdn.science/@nf_core)
+
+✅[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
+
+*The annual developer event is back, better, and bigger than ever at San Francisco's Yerba Buena Center for the Arts and online.*
+
+[Conference recordings.](https://www.youtube.com/watch?v=NrQkdDVupQE&list=PL0lo9MOBetEGF_pCQVCc_3z36ihKSolLC)
+
+✅[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023 \| November 28-30, 2023
+
+*A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.*
+
+Conference recordings - [Barcelona](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmUotnP-tWRVNtuNWpN7xbpL)\| [Boston](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmVeXGTg6aFNlaeTEMTs3GOt)
+
+✅[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
+
+*DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
+
+[Conference recordings.](https://www.youtube.com/watch?v=2RKDu-K0qzU&list=PLkA60AVN3hh_t73mQG7RIvvMRTpm1ompt)
 
 ✅[**Posit::conf(2023)**](https://posit.co/conference/) - September 17-20, 2023*.*
 
@@ -128,20 +141,20 @@ Registration not yet open \| Follow on [Twitter](https://twitter.com/cascadiarco
 
 [Conference recordings.](https://www.youtube.com/watch?v=sYliwvml9Es&list=PL9HYL-VRX0oRFZslRGHwHuwea7SvAATHp)
 
-✅[**dockercon 2023**](https://www.dockercon.com/) - October 4-5, 2023.
+✅[**Bioconductor Conference**](https://bioc2023.bioconductor.org/), August 2-4, 2023.
 
-*DockerCon returns in-person in Los Angeles and online from anywhere in the world this October. Meet and learn from thousands of developers and industry leaders to power up your technical knowledge.*
+*Bioconductor conference highlights current developments within and beyond the Bioconductor project.*
 
-[Conference recordings.](https://www.youtube.com/watch?v=2RKDu-K0qzU&list=PLkA60AVN3hh_t73mQG7RIvvMRTpm1ompt)\
+[Conference recordings.](https://www.youtube.com/watch?v=sTq6skZGgoI&list=PLdl4u5ZRDMQRVvXBi29h7MDtRn-AQGlXS)
 
-✅[**Nextflow SUMMIT**](https://summit.nextflow.io/) - October 16-20, 2023 \| November 28-30, 2023
+✅[**New York R Conference**](https://rstats.ai/nyr.html) - July 11-12, 2023.
 
-*A showcase of the latest developments and innovations from the Nextflow world held in Barcelona and streamed online. Also includes a virtual nf-core Hackathon.*
+*The R Conference hosts one of the most elite gatherings of data scientists and data professionals who come together to explore, share, and inspire ideas, and to promote the growth of open source ideals.*
 
-Conference recordings - [Barcelona](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmUotnP-tWRVNtuNWpN7xbpL)\| [Boston](https://www.youtube.com/playlist?list=PLPZ8WHdZGxmVeXGTg6aFNlaeTEMTs3GOt)\
+[Conference recordings.](https://www.landeranalytics.com/post/nyr-2023-recap)
 
-✅[**GitHub Universe**](https://githubuniverse.com/) - November 8-9, 2023.
+✅[**ShinyConf2023**](https://shinyconf.appsilon.com/) - 15-17 March, 2023
 
-*The annual developer event is back, better, and bigger than ever at San Francisco's Yerba Buena Center for the Arts and online.*
+*ShinyConf is a virtual event hosted by Appsilon with support from Posit. This year's Shiny conference Showcases recent advancements in R Shiny technology such as open source packages, Shiny interoperability, and commercial applications*
 
-[Conference recordings.](https://www.youtube.com/watch?v=NrQkdDVupQE&list=PL0lo9MOBetEGF_pCQVCc_3z36ihKSolLC)
+[Conference recordings](https://www.youtube.com/playlist?list=PLexAKolMzPcriOdeLwoMxQOyHRnMguEv4)\
