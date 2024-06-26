@@ -67,3 +67,39 @@ Take it a step further and make it an executable bash script or wrap it in code 
 ::: callout-note
 This assumes the AWS CLI is configured on your local machine.
 :::
+
+## Enable Mouse Scrolling in tmux
+
+Like many others you might find yourself using [tmux](https://github.com/tmux/tmux/wiki) to maintain active terminal sessions and long-running processes on remote servers in the event of a voluntary or involuntary disconnect. One thing you will soon notice though is by default you cannot scroll the terminal with your mouse 🖱️ Instead, you need to resort to some keyboard shortcuts ninja moves 🥷
+
+{{< kbd Ctrl >}} + {{< kbd b >}} then <kbd>\[</kbd> followed by the arrow keys <kbd>↑</kbd> + <kbd>↓</kbd> to scroll up and down. Once finished press <kbd>q</kbd>
+
+If that isn't (understandably) your cup of tea you can enable mouse scrolling.
+
+![](images/8uz36t.jpg)
+
+If you don't already have a tmux conf file in your home dir, create one
+
+``` bash
+touch ~/.tmux.conf
+```
+
+and add the following line and save
+
+``` bash
+set-option -g mouse on
+```
+
+After this your may need to reload tmux with the conf file
+
+``` bash
+tmux source-file ~/.tmux.conf
+```
+
+Now just hold those horses, you aren't finished set yet.
+
+![](images/8uz475.jpg)
+
+One last thing to note, because you have enabled mouse scrolling, click based copy/paste doesn't work the same as before. Instead now you need to hold down {{< kbd Shift >}} when selecting the relevant text to copy and hold {{< kbd Shift >}} when you click to paste.
+
+Please reach out if you have any additional conf settings or suggestion on this topic.

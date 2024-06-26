@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2024-06-02">
+<meta name="dcterms.date" content="2024-06-26">
 <meta name="description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
 
 <title>Luke Pembleton - AWS</title>
@@ -83,6 +83,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/kbd/kbd.js"></script>
+<link href="../../site_libs/quarto-contrib/kbd/kbd.css" rel="stylesheet">
 <script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
@@ -142,11 +144,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - AWS">
 <meta property="og:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
-<meta property="og:image" content="https://lpembleton.rbind.io/ramblings/AWS/images/image-from-rawpixel-id-429642-jpeg.jpg">
+<meta property="og:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - AWS">
 <meta name="twitter:description" content="A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/ramblings/AWS/images/image-from-rawpixel-id-429642-jpeg.jpg">
+<meta name="twitter:image" content="images/image-from-rawpixel-id-429642-jpeg.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -249,6 +251,7 @@ cookieconsent.run({
   <ul>
   <li><a href="#streamlining-file-transfer-via-a-bastion-host" id="toc-streamlining-file-transfer-via-a-bastion-host" class="nav-link active" data-scroll-target="#streamlining-file-transfer-via-a-bastion-host">Streamlining File Transfer via a Bastion Host</a></li>
   <li><a href="#update-ip-restriction-in-aws-security-groups-from-the-command-line" id="toc-update-ip-restriction-in-aws-security-groups-from-the-command-line" class="nav-link" data-scroll-target="#update-ip-restriction-in-aws-security-groups-from-the-command-line">Update IP restriction in AWS security groups from the command line</a></li>
+  <li><a href="#enable-mouse-scrolling-in-tmux" id="toc-enable-mouse-scrolling-in-tmux" class="nav-link" data-scroll-target="#enable-mouse-scrolling-in-tmux">Enable Mouse Scrolling in tmux</a></li>
   </ul>
 </nav>
     </div>
@@ -282,7 +285,7 @@ cookieconsent.run({
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">June 2, 2024</p>
+      <p class="date">June 26, 2024</p>
     </div>
   </div>
   
@@ -352,6 +355,23 @@ Note
 <p>This assumes the AWS CLI is configured on your local machine.</p>
 </div>
 </div>
+</section>
+<section id="enable-mouse-scrolling-in-tmux" class="level2">
+<h2 class="anchored" data-anchor-id="enable-mouse-scrolling-in-tmux">Enable Mouse Scrolling in tmux</h2>
+<p>Like many others you might find yourself using <a href="https://github.com/tmux/tmux/wiki">tmux</a> to maintain active terminal sessions and long-running processes on remote servers in the event of a voluntary or involuntary disconnect. One thing you will soon notice though is by default you cannot scroll the terminal with your mouse 🖱️ Instead, you need to resort to some keyboard shortcuts ninja moves 🥷</p>
+<p><kbd aria-hidden="true">Ctrl</kbd><span class="visually-hidden">Ctrl</span> + <kbd aria-hidden="true">b</kbd><span class="visually-hidden">b</span> then <kbd>[</kbd> followed by the arrow keys <kbd>↑</kbd> + <kbd>↓</kbd> to scroll up and down. Once finished press <kbd>q</kbd></p>
+<p>If that isn’t (understandably) your cup of tea you can enable mouse scrolling.</p>
+<p><img src="images/8uz36t.jpg" class="img-fluid"></p>
+<p>If you don’t already have a tmux conf file in your home dir, create one</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">touch</span> ~/.tmux.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>and add the following line and save</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">set-option</span> <span class="at">-g</span> mouse on</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After this your may need to reload tmux with the conf file</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tmux</span> source-file ~/.tmux.conf</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Now just hold those horses, you aren’t finished set yet.</p>
+<p><img src="images/8uz475.jpg" class="img-fluid"></p>
+<p>One last thing to note, because you have enabled mouse scrolling, click based copy/paste doesn’t work the same as before. Instead now you need to hold down <kbd aria-hidden="true">Shift</kbd><span class="visually-hidden">Shift</span> when selecting the relevant text to copy and hold <kbd aria-hidden="true">Shift</kbd><span class="visually-hidden">Shift</span> when you click to paste.</p>
+<p>Please reach out if you have any additional conf settings or suggestion on this topic.</p>
 
 
 </section>
@@ -360,13 +380,13 @@ Note
   author = {Pembleton, LW},
   title = {AWS {Ramblings,} {A} Worthy Collection of Short {AWS} \&amp;
     Cloud Commands and Tricks},
-  date = {2024-06-02},
+  date = {2024-06-26},
   url = {https://lpembleton.rbind.io/ramblings/AWS/},
   langid = {en}
 }
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre><div class="quarto-appendix-secondary-label">For attribution, please cite this work as:</div><div id="ref-pembleton2024" class="csl-entry quarto-appendix-citeas" role="listitem">
 Pembleton, LW. 2024. <span>“AWS Ramblings, A Worthy Collection of Short
-AWS &amp; Cloud Commands and Tricks.”</span> June 2, 2024. <a href="https://lpembleton.rbind.io/ramblings/AWS/">https://lpembleton.rbind.io/ramblings/AWS/</a>.
+AWS &amp; Cloud Commands and Tricks.”</span> June 26, 2024. <a href="https://lpembleton.rbind.io/ramblings/AWS/">https://lpembleton.rbind.io/ramblings/AWS/</a>.
 </div></div></section></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
