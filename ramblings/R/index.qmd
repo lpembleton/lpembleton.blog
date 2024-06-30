@@ -934,5 +934,49 @@ ggplot(data = mpg |>
 
 gg_stop_recording() #stop exporting every plot
 ```
-Which exports  a .png that looks like 👇
-![](images/2024_05_11_02_12_25.079715.png)
+
+Which exports a .png that looks like 👇 ![](images/2024_05_11_02_12_25.079715.png)
+
+## Simulated multiple correlated normal distributions
+
+Ever needed to generate multiple vectors with a complex set of correlations. This is R so of course there is a package for that. Queue [faux](https://debruine.github.io/faux/) and the [rnorm_multi()](https://debruine.github.io/faux/reference/rnorm_multi.htmlhttps://debruine.github.io/faux/reference/rnorm_multi.html) function. With this function you can define the number of values, means and standard deviation of each vector of variables generated, and of course the correlation among the variables. Check out the example below 👇
+
+```{r, message = FALSE, warning = FALSE}
+library(faux)
+library(GGally)
+
+set.seed(404)
+mnorm_ndata <- rnorm_multi(n = 100, 
+                         vars = 3, 
+                         mu = 0, 
+                         sd = 1, 
+                         r = c(1, 0.6, -0.2,
+                               0.6, 1, 0.6,
+                               -0.2, 0.6, 1))
+
+cor(mnorm_ndata)
+cor_ndata <- cor(mnorm_ndata)
+
+ggpairs(mnorm_ndata)
+```
+
+## Highlight specific datapoints by adding shapes around them
+
+Sometimes you might want to direct your audience to specific datapoints in our plots. You could do this by adding an annotation arrow and text as described in an [earlier ramblings](https://lpembleton.rbind.io/ramblings/R/#highlight-points-of-interest-with-annotations), however if it is a cohort a data this might not be suitable. Instead a better approach might be to circle the relevant datapoints with shapes like circles ⭕ You can achieve in ggplot by essentially adding additional points with `geom_point()` but on a filtered subset of the data. Here is an example 👇
+
+```{r, warning = FALSE, message = FALSE}
+data(mtcars)
+
+ggplot(data = mtcars,
+       aes(x = disp, y = mpg, colour = as.factor(cyl))) +
+  geom_point() +
+  scale_color_manual(values = c("#FF8C00","#9932CC","#008B8B"),
+                     name = "Cylinders") +
+  geom_point(data = mtcars |> filter(hp < 80),
+             pch = 21,
+             size = 4,
+             colour = "black") +
+  theme_bw() +
+  labs(title = "Relationship between car displacement and miles per gallon",
+       subtitle = "Vehicles with less than 80 gross horse power circled")
+```
