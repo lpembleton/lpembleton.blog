@@ -280,10 +280,11 @@ ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linet
 
 ```
 
-The label_number_si() function from the [{scales}](https://scales.r-lib.org/) package will conveniently convert your unclear labels to a more appropriate format. Lets apply it to our example from above. 🥳🎉
+The cut_short_scale() function from the [{scales}](https://scales.r-lib.org/) package will conveniently convert your unclear labels to a more appropriate format. Lets apply it to our example from above. 🥳🎉
 
 ```{r, warning = FALSE, message = FALSE, echo = FALSE}
 library(ggplot2) # For plotting
+library(scales)
 library(ggtext) # For HTML rendering of text to support colour
                 # Also for Markdown rendering of text
 
@@ -341,7 +342,7 @@ data <- data |> mutate(Month = factor(Month, levels = c("July", "August", "Septe
 ggplot(data = data, aes(x = Month, y = Production_Litres, colour = Region, linetype = Year, group = interaction(Region, Year))) +
   geom_smooth(se=FALSE) +
   scale_color_manual(values = c("#000000","#428bca","#b5b682")) +
-  scale_y_continuous(labels = scales::label_number_si(), breaks=seq(0,900000000,100000000)) +
+  scale_y_continuous(labels = label_number(scale_cut = cut_short_scale()), breaks=seq(0,900000000,100000000)) +
   labs(title = "Australian Dairy Milk Production",
        subtitle = "<span style='color:#000000;'>**National Production**</span> and key dairy states 
          <span style='color:#b5b682;'>**Victoria**</span> and 
@@ -980,3 +981,168 @@ ggplot(data = mtcars,
   labs(title = "Relationship between car displacement and miles per gallon",
        subtitle = "Vehicles with less than 80 gross horse power circled")
 ```
+
+## Adding point annotations to density plots
+
+Have you ever had a density plot and wanted to annotate to your audience where specific data points sit along that density function? It might not seem immediately straightforward to do, but if you take a step back, you already have the x-axis values to place your annotation, all you need to determine what the corresponding y-axis value is and then use the [ggrepel](https://cran.r-project.org/web/packages/ggrepel/vignettes/ggrepel.html) package to add text labels. You can pull y-axis values out from the `density()` function however you will need to do a little trickery to find the closest matching x-axis value from the density function to match to your data.
+
+Let's take a closer look. Using the `precip` dataset containing 'Annual Precipitation in US Cities'. If you plot it as density function, you get 👇
+
+```{r, warning = FALSE, message = FALSE}
+
+library(dplyr)
+library(purrr)
+library(tibble)
+library(ggplot2)
+library(ggrepel)
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+
+ggplot(data = precip_tbl, aes(x = precipitation)) +
+  geom_density(colour = "#023047", fill = "#8ecae6") +
+  ylab("Density") +
+  xlab("Precipitation") +
+  ggtitle("Annual Precipitation in US Cities") +
+  theme_classic()
+
+```
+
+Now you can get x and y values for this density distribution by just using the `density()` function. Here it is 👇
+
+```{r, warning = FALSE, message = FALSE}
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+
+tibble(x = density(precip_tbl$precipitation)$x, y = density(precip_tbl$precipitation)$y)
+
+```
+
+However, the x values will not directly match up to the x values in your original data (i.e. the precipitation data points for each city). So what we need to do is find the closest match. The simplest way (that I know of) is to subtract the density x values away from the city precipitation data points, convert them to an absolute value and find the smallest number (i.e. the smallest difference, the closest match). For example for the city of Chicago let's find the y value 👇
+
+```{r, warning = FALSE, message = FALSE}
+
+library(dplyr)
+library(purrr)
+library(tibble)
+library(ggplot2)
+library(ggrepel)
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+
+# Chicago precipitation
+precip_tbl$precipitation[precip_tbl$city == "Chicago"]
+
+# Find the closest match
+idx <- which.min(abs(precip_tbl$precipitation[precip_tbl$city == "Chicago"] - density(precip_tbl$precipitation)$x))
+
+# What is the y value
+density(precip_tbl$precipitation)$y[idx]
+
+```
+
+So how does this match up on the density plot. Chicago's precipitation was 34.4, the derived y value of 0.03156667 looks pretty good 👍
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+
+library(dplyr)
+library(purrr)
+library(tibble)
+library(ggplot2)
+library(ggrepel)
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+
+ggplot(data = precip_tbl, aes(x = precipitation)) +
+  geom_density(colour = "#023047", fill = "#8ecae6") +
+  geom_vline(xintercept = 34.4, colour = "red", size = 1.5) +
+  ylab("Density") +
+  xlab("Precipitation") +
+  ggtitle("Annual Precipitation in US Cities") +
+  theme_classic()
+
+```
+
+Ok, thats the background workings looking good, now lets wrap it up in some more concise code and label all cities 👇
+
+```{r, warning = FALSE, message = FALSE}
+
+library(dplyr)
+library(purrr)
+library(tibble)
+library(ggplot2)
+library(ggrepel)
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+precip_tbl <- precip_tbl |> mutate(yval = map_dbl(precipitation, function (x) {
+  density(precip_tbl$precipitation)$y[which.min(abs(x - density(precip_tbl$precipitation)$x))]
+  }))
+
+# Label all cities
+ggplot(data = precip_tbl, aes(x = precipitation)) +
+  geom_density(colour = "#023047", fill = "#8ecae6") +
+  geom_text_repel(mapping=aes(x = precipitation, y = yval, label = city), size=3, max.overlaps = 30) +
+  ylab("Density") +
+  xlab("Precipitation") +
+  ggtitle("Annual Precipitation in US Cities") +
+  theme_classic()
+
+
+
+```
+
+Want to make it clear where the specific point is, just add `geom_point()` as well
+
+```{r, warning = FALSE, message = FALSE}
+
+data(precip)
+
+precip_tbl <- tibble(city = names(precip), precipitation = precip)
+precip_tbl <- precip_tbl |> mutate(yval = map_dbl(precipitation, function (x) {
+  density(precip_tbl$precipitation)$y[which.min(abs(x - density(precip_tbl$precipitation)$x))]
+  }))
+
+# Label all cities
+ggplot(data = precip_tbl, aes(x = precipitation)) +
+  geom_density(colour = "#023047", fill = "#8ecae6") +
+  geom_point(mapping = aes(x = precipitation, y = yval), colour = "red") +
+  geom_text_repel(mapping = aes(x = precipitation, y = yval, label = city), size = 3, max.overlaps = Inf) +
+  ylab("Density") +
+  xlab("Precipitation") +
+  ggtitle("Annual Precipitation in US Cities") +
+  theme_classic()
+
+
+```
+
+Maybe you don't want to label all cities and instead want to focus on Chicago and Memphis, just throw in a `filter()` and you are set👇
+
+```{r, warning = FALSE, message = FALSE}
+
+# Label only Chicago & Memphis
+ggplot(data = precip_tbl, aes(x = precipitation)) +
+  geom_density(colour = "#023047", 
+               fill = "#8ecae6") +
+  geom_text_repel(data = precip_tbl |> 
+                    filter(city %in% c("Chicago", "Memphis")), 
+                           mapping=aes(x = precipitation, 
+                                       y = yval, 
+                                       label = city), 
+                           size=3, max.overlaps = Inf) +
+  ylab("Density") +
+  xlab("Precipitation") +
+  ggtitle("Annual Precipitation in US Cities") +
+  theme_classic()
+
+```
+
+Now maybe there is a different way to achieve this, but this has been the method I have used for a number of years now and it hasn't failed me. Shoutout if you have suggestions.
