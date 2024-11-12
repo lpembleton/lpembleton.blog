@@ -12,6 +12,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/build-with-resume/index.html",
       "/posts/ggplot-limits/index.html",
       "/posts/remote-vscode/index.html",
       "/posts/mulled-biocontainers/index.html",

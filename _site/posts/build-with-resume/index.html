@@ -6,9 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
+<meta name="author" content="LW Pembleton">
+<meta name="dcterms.date" content="2024-11-13">
+<meta name="description" content="A guide to using the resume function in Nextflow to modularly build pipelines">
 
-<title>Luke Pembleton -</title>
+<title>Luke Pembleton - Building With Resume</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,32 +26,30 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/cookie-consent/cookie-consent.js"></script>
-<link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
-<link href="site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
-<script src="site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,35 +77,6 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
-
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
-
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NQ96R1Y33J"></script>
 
 <script type="text/plain" cookie-consent="tracking">
@@ -134,59 +105,29 @@ cookieconsent.run({
 </script> 
   
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Luke Pembleton -">
-<meta property="og:description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
+<meta property="og:title" content="Luke Pembleton - Building With Resume">
+<meta property="og:description" content="A guide to using the resume function in Nextflow to modularly build pipelines">
+<meta property="og:image" content="images/james-wainscoat-hjmED1qivmc-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton -">
-<meta name="twitter:description" content="A collections of ramblings about Bioinformatics, Bash, R etc.">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/assets/lpembleton/img/tcard.png">
+<meta name="twitter:title" content="Luke Pembleton - Building With Resume">
+<meta name="twitter:description" content="A guide to using the resume function in Nextflow to modularly build pipelines">
+<meta name="twitter:image" content="images/james-wainscoat-hjmED1qivmc-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
-<meta name="twitter:image-height" content="1657">
-<meta name="twitter:image-width" content="2890">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Luke Pembleton</span>
     </a>
   </div>
@@ -197,27 +138,27 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">ABOUT</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">BLOG</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./ramblings.html" aria-current="page"> 
+    <a class="nav-link" href="../../ramblings.html"> 
 <span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications/publications.html"> 
+    <a class="nav-link" href="../../publications/publications.html"> 
 <span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/conferences.html"> 
+    <a class="nav-link" href="../../pages/conferences.html"> 
 <span class="menu-text">CONFERENCES</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/vivarium.html"> 
+    <a class="nav-link" href="../../pages/vivarium.html"> 
 <span class="menu-text">VIVARIUM</span></a>
   </li>  
   <li class="nav-item compact">
@@ -264,209 +205,344 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
-    <div class="quarto-title column-page-left">
-      <h1 class="title"></h1><h1><br>
-<span class="highlight">Ramblings</span><br>
-</h1>
+    <div class="quarto-title column-body">
+      <h1 class="title">Building With Resume</h1>
                   <div>
         <div class="description">
-          A collections of ramblings about Bioinformatics, Bash, R etc.
+          A guide to using the resume function in Nextflow to modularly build pipelines
         </div>
       </div>
-                </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Nextflow</div>
+                <div class="quarto-category">Bioinformatics</div>
+              </div>
+                  </div>
   </div>
     
   
-  <div class="quarto-title-meta column-page-left">
+  <div class="quarto-title-meta">
 
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>LW Pembleton </p>
+            </div>
+    </div>
       
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">November 13, 2024</p>
+      </div>
+    </div>
     
       
     </div>
     
   
-  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#build-with-resume" id="toc-build-with-resume" class="nav-link active" data-scroll-target="#build-with-resume">Build With Resume</a>
+  <ul class="collapse">
+  <li><a href="#step-1-read-in-input-files" id="toc-step-1-read-in-input-files" class="nav-link" data-scroll-target="#step-1-read-in-input-files">Step 1: Read in Input Files</a></li>
+  <li><a href="#step-2-add-the-first-process" id="toc-step-2-add-the-first-process" class="nav-link" data-scroll-target="#step-2-add-the-first-process">Step 2: Add the First Process</a></li>
+  <li><a href="#step-3-map-reads-to-reference" id="toc-step-3-map-reads-to-reference" class="nav-link" data-scroll-target="#step-3-map-reads-to-reference">Step 3: Map Reads to Reference</a></li>
+  <li><a href="#step-4-call-variants" id="toc-step-4-call-variants" class="nav-link" data-scroll-target="#step-4-call-variants">Step 4: Call Variants</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Bash">Bash <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Colours">Colours <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Quarto">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div></div></div>
+    </div>
 <!-- main -->
-<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/james-wainscoat-hjmED1qivmc-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption>~Photo by <a href="https://unsplash.com/@tumbao1949">James Wainscoat</a> on Unsplash~</figcaption>
+</figure>
+</div>
+<section id="build-with-resume" class="level2">
+<h2 class="anchored" data-anchor-id="build-with-resume">Build With Resume</h2>
+<p>The <a href="https://www.nextflow.io/docs/latest/cache-and-resume.html">resume</a> feature has to be one of the most powerful tools in <a href="https://www.nextflow.io">Nextflow</a>. It not only lets you recover an interrupted pipeline without redoing the whole thing, but it’s also super handy for writing and testing pipelines. “Build with resume” is my go-to approach for developing pipelines. I build them one process at a time, check channel outputs and published files, then add the next process and run it again using the -resume flag. This way, I can pick up from the last process instead of starting from scratch every time, and progressively add 🏗️ and check ✅ each process.</p>
+<p>So, I thought I’d share a step-by-step example for anyone interested. You can find all the files in my <a href="https://github.com/lpembleton/build-with-resume">GitHub repository</a>.</p>
+<p>Rather than using some irrelevant “Hello World” 👋 example, I’m going with a trimmed-down read mapping 🧬 and variant-calling pipeline. Hopefully, this feels a bit more meaningful!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This example assumes you already have Docker and Nextflow set up on your system.</p>
+</div>
+</div>
+<p>Assuming you have downloaded the GitHub repo you will have the relevant process modules and associated config file. What we are going to therefore focus on is the workflow. So lets get going 🛫</p>
+<section id="step-1-read-in-input-files" class="level3">
+<h3 class="anchored" data-anchor-id="step-1-read-in-input-files">Step 1: Read in Input Files</h3>
+<p>We’ll start by reading a CSV samplesheet to define our input. When I first starting learning Nextflow I really struggled with the fact that all examples would just scan directories for FASTQ files. It just didn’t compute for me — I have always use samplesheets or lists as my input. Seriously, how often are all your samples in one folder, and don’t we usually want some metadata with each sample? So, for those out there like me let’s go with a CSV samplesheet format (just like most mature Nextflow pipelines out there). We’ll use the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv">splitCsv</a> operator and <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map">map</a> to split each row into a tuple containing the sample ID and read file paths, then set that as a channel called <code>input_reads</code>.</p>
+<p>Here’s what it looks like 👇</p>
+<pre><code>// Check mandatory parameters
+if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
+
+def reference =  file(params.reference)
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL MODULES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { FASTP } from './modules/local/fastp'
+include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
+include { BWA_INDEX } from './modules/local/bwa_index'
+include { BWA_MEM } from './modules/local/bwa_mem'
+include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
 
 
+workflow {
+
+    // Read in samplesheet and convert into input sample channel
+    Channel.fromPath(params.input) \
+        | splitCsv(header:true) \
+        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
+        | set {input_reads}
+
+}</code></pre>
+<p>Now, we could run this first step, but we wouldn’t see any output. Let’s spice it up and add a view() statement to check out 👀 our new input_reads channel:</p>
+<pre><code>// Check mandatory parameters
+if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
+
+def reference =  file(params.reference)
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL MODULES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { FASTP } from './modules/local/fastp'
+include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
+include { BWA_INDEX } from './modules/local/bwa_index'
+include { BWA_MEM } from './modules/local/bwa_mem'
+include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Bash" data-listing-file-modified-sort="1711984328074" data-listing-reading-time-sort="9" data-listing-word-count-sort="1659">
-<div class="thumbnail">
-<p><a href="./ramblings/bash/index.html" class="no-external"></a></p><a href="./ramblings/bash/index.html" class="no-external">
-<p><img src="./ramblings/bash/images/_a7965f42-c1c9-4377-9b76-8c681ffa6bf5.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/bash/index.html" class="no-external"></a></p>
+workflow {
+
+    // Read in samplesheet and convert into input sample channel
+    Channel.fromPath(params.input) \
+        | splitCsv(header:true) \
+        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
+        | set {input_reads}
+  
+  input_reads.view()
+
+}</code></pre>
+<p>Let’s run it with the included samplesheet and example files 👇</p>
+<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna</code></pre>
+<p>Assuming everything worked, you should see your <code>input_reads</code> channel printed to the console—along with the <a href="https://seqera.io/blog/nextflow-colored-logs/">colourful nextflow console output</a> (thanks, Phil! 🥳).</p>
+</section>
+<section id="step-2-add-the-first-process" class="level3">
+<h3 class="anchored" data-anchor-id="step-2-add-the-first-process">Step 2: Add the First Process</h3>
+<p>Now, let’s add our first process: quality control (QC) with <a href="https://github.com/OpenGene/fastp">fastp</a> to preprocess the reads.</p>
+<pre><code>// Check mandatory parameters
+if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
+
+def reference =  file(params.reference)
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL MODULES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { FASTP } from './modules/local/fastp'
+include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
+include { BWA_INDEX } from './modules/local/bwa_index'
+include { BWA_MEM } from './modules/local/bwa_mem'
+include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
+
+
+workflow {
+
+    // Read in samplesheet and convert into input sample channel
+    Channel.fromPath(params.input) \
+        | splitCsv(header:true) \
+        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
+        | set {input_reads}
+  
+  //input_reads.view()
+  
+  // QC preprocessing of reads
+    FASTP(input_reads)
+    FASTP.out.reads.view()
+
+}</code></pre>
+<p>Alright and now lets get into the magic 🪄 of resume. Instead of re-running everything (admittedly it was only a small channel factory process) lets resume from where we left off.</p>
+<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume</code></pre>
+<p>Success the fastp process has been added to our pipeline 🥳</p>
+</section>
+<section id="step-3-map-reads-to-reference" class="level3">
+<h3 class="anchored" data-anchor-id="step-3-map-reads-to-reference">Step 3: Map Reads to Reference</h3>
+<p>Next, let’s map the reads to the reference sequence with <a href="https://github.com/lh3/bwa">bwa-mem</a>, but we’ll need to index the reference first. We’ll add the BWA_INDEX and BWA_MEM processes for this.</p>
+<pre><code>// Check mandatory parameters
+if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
+
+def reference =  file(params.reference)
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL MODULES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { FASTP } from './modules/local/fastp'
+include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
+include { BWA_INDEX } from './modules/local/bwa_index'
+include { BWA_MEM } from './modules/local/bwa_mem'
+include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
+
+
+workflow {
+
+    // Read in samplesheet and convert into input sample channel
+    Channel.fromPath(params.input) \
+        | splitCsv(header:true) \
+        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
+        | set {input_reads}
+  
+  //input_reads.view()
+  
+  // QC preprocessing of reads
+    FASTP(input_reads)
+    //FASTP.out.reads.view()
+    
+    // Create reference index for BWA
+    BWA_INDEX(reference)
+
+    // Map reads to reference
+    BWA_MEM(FASTP.out.reads, BWA_INDEX.out.index)
+    BWA_MEM.out.bam.view()
+
+
+}</code></pre>
+<p>Run the pipeline again with the <code>-resume</code> statement 👇</p>
+<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume</code></pre>
+<p>In the console output you should see that it lists the previous FASTP process as cached.</p>
+</section>
+<section id="step-4-call-variants" class="level3">
+<h3 class="anchored" data-anchor-id="step-4-call-variants">Step 4: Call Variants</h3>
+<p>Time for variant calling! We’ll use a <a href="https://samtools.github.io/bcftools/">bcftools</a> process and index our reference again with <a href="https://www.htslib.org">samtools</a>.</p>
+<p>Home stretch now, time to call variants! For this we will use a bcftools process, but we will also need to index our reference again, this time with samtools.</p>
+<pre><code>// Check mandatory parameters
+if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
+if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
+
+def reference =  file(params.reference)
+
+/*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    IMPORT LOCAL MODULES
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*/
+
+include { FASTP } from './modules/local/fastp'
+include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
+include { BWA_INDEX } from './modules/local/bwa_index'
+include { BWA_MEM } from './modules/local/bwa_mem'
+include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
+
+
+workflow {
+
+    // Read in samplesheet and convert into input sample channel
+    Channel.fromPath(params.input) \
+        | splitCsv(header:true) \
+        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
+        | set {input_reads}
+  
+  //input_reads.view()
+  
+  // QC preprocessing of reads
+    FASTP(input_reads)
+    //FASTP.out.reads.view()
+    
+    // Create reference index for BWA
+    BWA_INDEX(reference)
+
+    // Map reads to reference
+    BWA_MEM(FASTP.out.reads, BWA_INDEX.out.index)
+    //BWA_MEM.out.bam.view()
+
+  // Create reference index for bcftools
+    SAMTOOLS_FAIDX(reference)
+    
+
+    //BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect().view()
+    // Call variants
+    BCFTOOLS_CALL(BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect(), BWA_MEM.out.bai.map { tuple -&gt; tuple[1] }.collect(), reference, SAMTOOLS_FAIDX.out.fai)
+
+
+}</code></pre>
+<p>Curious 🤔 about the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map">map</a> operator here? It gathers the relevant BAM and BAI components from the output tuples of multiple samples into input channels for BCFTOOLS_CALL. You can uncomment <code>BWA_MEM.out.bam.view()</code> and <code>BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect().view()</code> to compare the outputs.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/bash/index.html" class="no-external">Bash</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/bash/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Bash'); return false;">
-Bash
+<div class="callout-title-container flex-fill">
+Tip
 </div>
 </div>
-<div class="listing-description">
-<a href="./ramblings/bash/index.html" class="no-external">A collection of short Bash commands and tricks that individually are too short for a blog post</a>
+<div class="callout-body-container callout-body">
+<p>If you ever accidentally run your pipeline without the -resume flag and get that dreaded feeling that you have just lost all the progress on previous processes. No need to worry you can run it again with the -resume flag and and the session ID of the previous run you want to resume from.</p>
+<p>e.g.&nbsp;<code>nextflow run main.nf -resume &lt;session-id&gt;</code></p>
+<p>Don’t know what the session ID is, just run <code>nextflow log</code></p>
 </div>
 </div>
-<div class="metadata">
-<p><a href="./ramblings/bash/index.html" class="no-external"></a></p><a href="./ramblings/bash/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
+<p>Hopefully, this example of modularly building a Nextflow pipeline and using the -resume feature has been helpful! It’s a game-changer for big pipelines or when testing with larger datasets where processes take longer.</p>
+<p>Alright Nextflow champions, Happy developing, coding, hacking, or whatever you like to call it!</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Colours" data-listing-file-modified-sort="1703608960814" data-listing-reading-time-sort="2" data-listing-word-count-sort="278">
-<div class="thumbnail">
-<p><a href="./ramblings/Colours/index.html" class="no-external"></a></p><a href="./ramblings/Colours/index.html" class="no-external">
-<p><img src="./ramblings/Colours/images/patternpad.png" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/Colours/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/Colours/index.html" class="no-external">Colours</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/Colours/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Colours'); return false;">
-Colours
+<div class="callout-title-container flex-fill">
+Note
 </div>
 </div>
-<div class="listing-description">
-<a href="./ramblings/Colours/index.html" class="no-external">A collection colour palettes and reference panels with copy paste hex codes</a>
+<div class="callout-body-container callout-body">
+<p>The example sequencing data found in the related repository and used in this example is from Spinacia oleracea NCBI bioproject [PRJNA724923](<a href="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA724923" class="uri">https://www.ncbi.nlm.nih.gov/bioproject/PRJNA724923</a>). To keep it small I pre-aligned the samples to chromosome 1 &amp; 2 and then subsetted the mapped reads to form the example fastq files and example genome reference.</p>
 </div>
 </div>
-<div class="metadata">
-<p><a href="./ramblings/Colours/index.html" class="no-external"></a></p><a href="./ramblings/Colours/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="Quarto" data-listing-file-modified-sort="1701344680968" data-listing-reading-time-sort="1" data-listing-word-count-sort="135">
-<div class="thumbnail">
-<p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p><a href="./ramblings/Quarto/index.html" class="no-external">
-<p><img src="./ramblings/Quarto/images/solstice-hannan-hf4AWfNbh4o-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/Quarto/index.html" class="no-external">Quarto</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/Quarto/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Quarto'); return false;">
-Quarto
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/Quarto/index.html" class="no-external">A collection of short Quarto code snippets and tricks that individually are too short for a blog post</a>
-</div>
-</div>
-<div class="metadata">
-<p><a href="./ramblings/Quarto/index.html" class="no-external"></a></p><a href="./ramblings/Quarto/index.html" class="no-external">
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="R" data-listing-date-sort="1720890667000" data-listing-file-modified-sort="1720890667707" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="70" data-listing-word-count-sort="13848">
-<div class="thumbnail">
-<p><a href="./ramblings/R/index.html" class="no-external"></a></p><a href="./ramblings/R/index.html" class="no-external">
-<p><img src="./ramblings/R/images/daria-nepriakhina-kXDHR_bXIZo-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/R/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/R/index.html" class="no-external">R</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/R/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
-R
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/R/index.html" class="no-external">A worthy collection of short R commands and tricks</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./ramblings/R/index.html" class="no-external">
-<div class="listing-date">
-Jul 14, 2024
-</div>
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="AWS" data-listing-date-sort="1719375746000" data-listing-file-modified-sort="1719375746026" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="545">
-<div class="thumbnail">
-<p><a href="./ramblings/AWS/index.html" class="no-external"></a></p><a href="./ramblings/AWS/index.html" class="no-external">
-<p><img src="./ramblings/AWS/images/image-from-rawpixel-id-429642-jpeg.jpg" class="thumbnail-image"></p>
-</a><p><a href="./ramblings/AWS/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./ramblings/AWS/index.html" class="no-external">AWS</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./ramblings/AWS/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
-AWS
-</div>
-</div>
-<div class="listing-description">
-<a href="./ramblings/AWS/index.html" class="no-external">A collection of short AWS &amp; cloud related commands and tricks that individually are too short for a blog post</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./ramblings/AWS/index.html" class="no-external">
-<div class="listing-date">
-Jun 26, 2024
-</div>
-<div class="listing-author">
-LW Pembleton
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -849,6 +925,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="lpembleton/lpembleton.blog" data-repo-id="R_kgDOIfz78A" data-category="Announcements" data-category-id="DIC_kwDOIfz78M4CZhkM" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
