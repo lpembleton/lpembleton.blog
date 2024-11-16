@@ -23,6 +23,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -297,215 +331,240 @@ Note
 <p>Assuming you have downloaded the GitHub repo you will have the relevant process modules and associated config file. What we are going to therefore focus on is the workflow. So lets get going 🛫</p>
 <section id="step-1-read-in-input-files" class="level3">
 <h3 class="anchored" data-anchor-id="step-1-read-in-input-files">Step 1: Read in Input Files</h3>
-<p>We’ll start by reading a CSV samplesheet to define our input. When I first starting learning Nextflow I really struggled with the fact that all examples would just scan directories for FASTQ files. It just didn’t compute for me — I have always use samplesheets or lists as my input. Seriously, how often are all your samples in one folder, and don’t we usually want some metadata with each sample? So, for those out there like me let’s go with a CSV samplesheet format (just like most mature Nextflow pipelines out there). We’ll use the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv">splitCsv</a> operator and <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map">map</a> to split each row into a tuple containing the sample ID and read file paths, then set that as a channel called <code>input_reads</code>.</p>
+<p>We’ll start by reading a CSV samplesheet to define our input. When I first starting learning Nextflow I really struggled with the fact that all examples would just scan directories for FASTQ files. It just didn’t compute 🤔 for me — I have always use samplesheets or lists as my input. Seriously, how often are all your samples in one folder, and don’t we usually want some metadata with each sample? So, for those out there like me let’s go with a CSV samplesheet format (just like most mature Nextflow pipelines out there). We’ll use the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#splitcsv">splitCsv</a> operator and <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map">map</a> to split each row into a tuple containing the sample ID and read file paths, then set that as a channel called <code>input_reads</code>.</p>
 <p>Here’s what it looks like 👇</p>
-<pre><code>// Check mandatory parameters
-if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
-
-def reference =  file(params.reference)
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { FASTP } from './modules/local/fastp'
-include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
-include { BWA_INDEX } from './modules/local/bwa_index'
-include { BWA_MEM } from './modules/local/bwa_mem'
-include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
-
-
-workflow {
-
-    // Read in samplesheet and convert into input sample channel
-    Channel.fromPath(params.input) \
-        | splitCsv(header:true) \
-        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
-        | set {input_reads}
-
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check mandatory parameters</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">{</span> csv_file <span class="op">=</span> <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> exit <span class="dv">1</span><span class="op">,</span> <span class="st">'Input samplesheet not specified!'</span> <span class="op">}</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>reference <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> error <span class="st">"Please specify a reference genome fasta file with --reference"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">def</span> reference <span class="op">=</span>  <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>reference<span class="op">)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="st">/*</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">    IMPORT LOCAL MODULES</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="st">*/</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> FASTP <span class="op">}</span> from <span class="st">'./modules/local/fastp'</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> SAMTOOLS_FAIDX <span class="op">}</span> from <span class="st">'./modules/local/samtools_faidx'</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_INDEX <span class="op">}</span> from <span class="st">'./modules/local/bwa_index'</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_MEM <span class="op">}</span> from <span class="st">'./modules/local/bwa_mem'</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BCFTOOLS_CALL <span class="op">}</span> from <span class="st">'./modules/local/bcftools_call'</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read in samplesheet and convert into input sample channel</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> \</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> <span class="fu">splitCsv</span><span class="op">(</span>header<span class="op">:</span><span class="kw">true</span><span class="op">)</span> \</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> map <span class="op">{</span> row<span class="op">-&gt;</span> <span class="fu">tuple</span><span class="op">(</span>row<span class="op">.</span>sample_id<span class="op">,</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_1<span class="op">),</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_2<span class="op">))</span> <span class="op">}</span> \</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> set <span class="op">{</span>input_reads<span class="op">}</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Now, we could run this first step, but we wouldn’t see any output. Let’s spice it up and add a view() statement to check out 👀 our new input_reads channel:</p>
-<pre><code>// Check mandatory parameters
-if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
-
-def reference =  file(params.reference)
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { FASTP } from './modules/local/fastp'
-include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
-include { BWA_INDEX } from './modules/local/bwa_index'
-include { BWA_MEM } from './modules/local/bwa_mem'
-include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
-
-
-workflow {
-
-    // Read in samplesheet and convert into input sample channel
-    Channel.fromPath(params.input) \
-        | splitCsv(header:true) \
-        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
-        | set {input_reads}
-  
-  input_reads.view()
-
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check mandatory parameters</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">{</span> csv_file <span class="op">=</span> <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> exit <span class="dv">1</span><span class="op">,</span> <span class="st">'Input samplesheet not specified!'</span> <span class="op">}</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>reference <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> error <span class="st">"Please specify a reference genome fasta file with --reference"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="dt">def</span> reference <span class="op">=</span>  <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>reference<span class="op">)</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">/*</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">    IMPORT LOCAL MODULES</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">*/</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> FASTP <span class="op">}</span> from <span class="st">'./modules/local/fastp'</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> SAMTOOLS_FAIDX <span class="op">}</span> from <span class="st">'./modules/local/samtools_faidx'</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_INDEX <span class="op">}</span> from <span class="st">'./modules/local/bwa_index'</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_MEM <span class="op">}</span> from <span class="st">'./modules/local/bwa_mem'</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BCFTOOLS_CALL <span class="op">}</span> from <span class="st">'./modules/local/bcftools_call'</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read in samplesheet and convert into input sample channel</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> \</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> <span class="fu">splitCsv</span><span class="op">(</span>header<span class="op">:</span><span class="kw">true</span><span class="op">)</span> \</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> map <span class="op">{</span> row<span class="op">-&gt;</span> <span class="fu">tuple</span><span class="op">(</span>row<span class="op">.</span>sample_id<span class="op">,</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_1<span class="op">),</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_2<span class="op">))</span> <span class="op">}</span> \</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> set <span class="op">{</span>input_reads<span class="op">}</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  input_reads<span class="op">.</span><span class="fu">view</span><span class="op">()</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Let’s run it with the included samplesheet and example files 👇</p>
-<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> docs/example_data/samplesheet.csv <span class="at">--reference</span> ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Assuming everything worked, you should see your <code>input_reads</code> channel printed to the console—along with the <a href="https://seqera.io/blog/nextflow-colored-logs/">colourful nextflow console output</a> (thanks, Phil! 🥳).</p>
 </section>
 <section id="step-2-add-the-first-process" class="level3">
 <h3 class="anchored" data-anchor-id="step-2-add-the-first-process">Step 2: Add the First Process</h3>
 <p>Now, let’s add our first process: quality control (QC) with <a href="https://github.com/OpenGene/fastp">fastp</a> to preprocess the reads.</p>
-<pre><code>// Check mandatory parameters
-if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
-
-def reference =  file(params.reference)
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { FASTP } from './modules/local/fastp'
-include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
-include { BWA_INDEX } from './modules/local/bwa_index'
-include { BWA_MEM } from './modules/local/bwa_mem'
-include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
-
-
-workflow {
-
-    // Read in samplesheet and convert into input sample channel
-    Channel.fromPath(params.input) \
-        | splitCsv(header:true) \
-        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
-        | set {input_reads}
-  
-  //input_reads.view()
-  
-  // QC preprocessing of reads
-    FASTP(input_reads)
-    FASTP.out.reads.view()
-
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check mandatory parameters</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">{</span> csv_file <span class="op">=</span> <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> exit <span class="dv">1</span><span class="op">,</span> <span class="st">'Input samplesheet not specified!'</span> <span class="op">}</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>reference <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> error <span class="st">"Please specify a reference genome fasta file with --reference"</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">def</span> reference <span class="op">=</span>  <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>reference<span class="op">)</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">/*</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">    IMPORT LOCAL MODULES</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">*/</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> FASTP <span class="op">}</span> from <span class="st">'./modules/local/fastp'</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> SAMTOOLS_FAIDX <span class="op">}</span> from <span class="st">'./modules/local/samtools_faidx'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_INDEX <span class="op">}</span> from <span class="st">'./modules/local/bwa_index'</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_MEM <span class="op">}</span> from <span class="st">'./modules/local/bwa_mem'</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BCFTOOLS_CALL <span class="op">}</span> from <span class="st">'./modules/local/bcftools_call'</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read in samplesheet and convert into input sample channel</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> \</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> <span class="fu">splitCsv</span><span class="op">(</span>header<span class="op">:</span><span class="kw">true</span><span class="op">)</span> \</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> map <span class="op">{</span> row<span class="op">-&gt;</span> <span class="fu">tuple</span><span class="op">(</span>row<span class="op">.</span>sample_id<span class="op">,</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_1<span class="op">),</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_2<span class="op">))</span> <span class="op">}</span> \</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> set <span class="op">{</span>input_reads<span class="op">}</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">//input_reads.view()</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// QC preprocessing of reads</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">FASTP</span><span class="op">(</span>input_reads<span class="op">)</span></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>    FASTP<span class="op">.</span>out<span class="op">.</span>reads<span class="op">.</span><span class="fu">view</span><span class="op">()</span></span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Alright and now lets get into the magic 🪄 of resume. Instead of re-running everything (admittedly it was only a small channel factory process) lets resume from where we left off.</p>
-<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> docs/example_data/samplesheet.csv <span class="at">--reference</span> ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna <span class="at">-resume</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Success the fastp process has been added to our pipeline 🥳</p>
 </section>
 <section id="step-3-map-reads-to-reference" class="level3">
 <h3 class="anchored" data-anchor-id="step-3-map-reads-to-reference">Step 3: Map Reads to Reference</h3>
 <p>Next, let’s map the reads to the reference sequence with <a href="https://github.com/lh3/bwa">bwa-mem</a>, but we’ll need to index the reference first. We’ll add the BWA_INDEX and BWA_MEM processes for this.</p>
-<pre><code>// Check mandatory parameters
-if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
-
-def reference =  file(params.reference)
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { FASTP } from './modules/local/fastp'
-include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
-include { BWA_INDEX } from './modules/local/bwa_index'
-include { BWA_MEM } from './modules/local/bwa_mem'
-include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
-
-
-workflow {
-
-    // Read in samplesheet and convert into input sample channel
-    Channel.fromPath(params.input) \
-        | splitCsv(header:true) \
-        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
-        | set {input_reads}
-  
-  //input_reads.view()
-  
-  // QC preprocessing of reads
-    FASTP(input_reads)
-    //FASTP.out.reads.view()
-    
-    // Create reference index for BWA
-    BWA_INDEX(reference)
-
-    // Map reads to reference
-    BWA_MEM(FASTP.out.reads, BWA_INDEX.out.index)
-    BWA_MEM.out.bam.view()
-
-
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check mandatory parameters</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">{</span> csv_file <span class="op">=</span> <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> exit <span class="dv">1</span><span class="op">,</span> <span class="st">'Input samplesheet not specified!'</span> <span class="op">}</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>reference <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> error <span class="st">"Please specify a reference genome fasta file with --reference"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="dt">def</span> reference <span class="op">=</span>  <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>reference<span class="op">)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">/*</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    IMPORT LOCAL MODULES</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">*/</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> FASTP <span class="op">}</span> from <span class="st">'./modules/local/fastp'</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> SAMTOOLS_FAIDX <span class="op">}</span> from <span class="st">'./modules/local/samtools_faidx'</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_INDEX <span class="op">}</span> from <span class="st">'./modules/local/bwa_index'</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_MEM <span class="op">}</span> from <span class="st">'./modules/local/bwa_mem'</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BCFTOOLS_CALL <span class="op">}</span> from <span class="st">'./modules/local/bcftools_call'</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read in samplesheet and convert into input sample channel</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> \</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> <span class="fu">splitCsv</span><span class="op">(</span>header<span class="op">:</span><span class="kw">true</span><span class="op">)</span> \</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> map <span class="op">{</span> row<span class="op">-&gt;</span> <span class="fu">tuple</span><span class="op">(</span>row<span class="op">.</span>sample_id<span class="op">,</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_1<span class="op">),</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_2<span class="op">))</span> <span class="op">}</span> \</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> set <span class="op">{</span>input_reads<span class="op">}</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">//input_reads.view()</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// QC preprocessing of reads</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">FASTP</span><span class="op">(</span>input_reads<span class="op">)</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">//FASTP.out.reads.view()</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create reference index for BWA</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BWA_INDEX</span><span class="op">(</span>reference<span class="op">)</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Map reads to reference</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BWA_MEM</span><span class="op">(</span>FASTP<span class="op">.</span>out<span class="op">.</span>reads<span class="op">,</span> BWA_INDEX<span class="op">.</span>out<span class="op">.</span>index<span class="op">)</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>    BWA_MEM<span class="op">.</span>out<span class="op">.</span>bam<span class="op">.</span><span class="fu">view</span><span class="op">()</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Run the pipeline again with the <code>-resume</code> statement 👇</p>
-<pre><code>nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">--input</span> docs/example_data/samplesheet.csv <span class="at">--reference</span> ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna <span class="at">-resume</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the console output you should see that it lists the previous FASTP process as cached.</p>
 </section>
 <section id="step-4-call-variants" class="level3">
 <h3 class="anchored" data-anchor-id="step-4-call-variants">Step 4: Call Variants</h3>
 <p>Time for variant calling! We’ll use a <a href="https://samtools.github.io/bcftools/">bcftools</a> process and index our reference again with <a href="https://www.htslib.org">samtools</a>.</p>
 <p>Home stretch now, time to call variants! For this we will use a bcftools process, but we will also need to index our reference again, this time with samtools.</p>
-<pre><code>// Check mandatory parameters
-if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
-if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
-
-def reference =  file(params.reference)
-
-/*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    IMPORT LOCAL MODULES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-*/
-
-include { FASTP } from './modules/local/fastp'
-include { SAMTOOLS_FAIDX } from './modules/local/samtools_faidx'
-include { BWA_INDEX } from './modules/local/bwa_index'
-include { BWA_MEM } from './modules/local/bwa_mem'
-include { BCFTOOLS_CALL } from './modules/local/bcftools_call'
-
-
-workflow {
-
-    // Read in samplesheet and convert into input sample channel
-    Channel.fromPath(params.input) \
-        | splitCsv(header:true) \
-        | map { row-&gt; tuple(row.sample_id, file(row.fastq_1), file(row.fastq_2)) } \
-        | set {input_reads}
-  
-  //input_reads.view()
-  
-  // QC preprocessing of reads
-    FASTP(input_reads)
-    //FASTP.out.reads.view()
-    
-    // Create reference index for BWA
-    BWA_INDEX(reference)
-
-    // Map reads to reference
-    BWA_MEM(FASTP.out.reads, BWA_INDEX.out.index)
-    //BWA_MEM.out.bam.view()
-
-  // Create reference index for bcftools
-    SAMTOOLS_FAIDX(reference)
-    
-
-    //BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect().view()
-    // Call variants
-    BCFTOOLS_CALL(BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect(), BWA_MEM.out.bai.map { tuple -&gt; tuple[1] }.collect(), reference, SAMTOOLS_FAIDX.out.fai)
-
-
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb8" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check mandatory parameters</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">{</span> csv_file <span class="op">=</span> <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span> exit <span class="dv">1</span><span class="op">,</span> <span class="st">'Input samplesheet not specified!'</span> <span class="op">}</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="op">(</span>params<span class="op">.</span>reference <span class="op">==</span> <span class="kw">null</span><span class="op">)</span> error <span class="st">"Please specify a reference genome fasta file with --reference"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">def</span> reference <span class="op">=</span>  <span class="fu">file</span><span class="op">(</span>params<span class="op">.</span>reference<span class="op">)</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">/*</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">    IMPORT LOCAL MODULES</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">*/</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> FASTP <span class="op">}</span> from <span class="st">'./modules/local/fastp'</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> SAMTOOLS_FAIDX <span class="op">}</span> from <span class="st">'./modules/local/samtools_faidx'</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_INDEX <span class="op">}</span> from <span class="st">'./modules/local/bwa_index'</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BWA_MEM <span class="op">}</span> from <span class="st">'./modules/local/bwa_mem'</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>include <span class="op">{</span> BCFTOOLS_CALL <span class="op">}</span> from <span class="st">'./modules/local/bcftools_call'</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read in samplesheet and convert into input sample channel</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span><span class="op">.</span><span class="fu">fromPath</span><span class="op">(</span>params<span class="op">.</span>input<span class="op">)</span> \</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> <span class="fu">splitCsv</span><span class="op">(</span>header<span class="op">:</span><span class="kw">true</span><span class="op">)</span> \</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> map <span class="op">{</span> row<span class="op">-&gt;</span> <span class="fu">tuple</span><span class="op">(</span>row<span class="op">.</span>sample_id<span class="op">,</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_1<span class="op">),</span> <span class="fu">file</span><span class="op">(</span>row<span class="op">.</span>fastq_2<span class="op">))</span> <span class="op">}</span> \</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">|</span> set <span class="op">{</span>input_reads<span class="op">}</span></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="co">//input_reads.view()</span></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co">// QC preprocessing of reads</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>    <span class="fu">FASTP</span><span class="op">(</span>input_reads<span class="op">)</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>    <span class="co">//FASTP.out.reads.view()</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Create reference index for BWA</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BWA_INDEX</span><span class="op">(</span>reference<span class="op">)</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Map reads to reference</span></span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BWA_MEM</span><span class="op">(</span>FASTP<span class="op">.</span>out<span class="op">.</span>reads<span class="op">,</span> BWA_INDEX<span class="op">.</span>out<span class="op">.</span>index<span class="op">)</span></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>    <span class="co">//BWA_MEM.out.bam.view()</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Create reference index for bcftools</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>    <span class="fu">SAMTOOLS_FAIDX</span><span class="op">(</span>reference<span class="op">)</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>    <span class="co">//BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect().view()</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Call variants</span></span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>    <span class="fu">BCFTOOLS_CALL</span><span class="op">(</span>BWA_MEM<span class="op">.</span>out<span class="op">.</span>bam<span class="op">.</span><span class="fu">map</span> <span class="op">{</span> tuple <span class="op">-&gt;</span> tuple<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">}.</span><span class="fu">collect</span><span class="op">(),</span> BWA_MEM<span class="op">.</span>out<span class="op">.</span>bai<span class="op">.</span><span class="fu">map</span> <span class="op">{</span> tuple <span class="op">-&gt;</span> tuple<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">}.</span><span class="fu">collect</span><span class="op">(),</span> reference<span class="op">,</span> SAMTOOLS_FAIDX<span class="op">.</span>out<span class="op">.</span>fai<span class="op">)</span></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Curious 🤔 about the <a href="https://www.nextflow.io/docs/latest/reference/operator.html#map">map</a> operator here? It gathers the relevant BAM and BAI components from the output tuples of multiple samples into input channels for BCFTOOLS_CALL. You can uncomment <code>BWA_MEM.out.bam.view()</code> and <code>BWA_MEM.out.bam.map { tuple -&gt; tuple[1] }.collect().view()</code> to compare the outputs.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">

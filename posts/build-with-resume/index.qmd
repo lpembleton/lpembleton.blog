@@ -31,7 +31,7 @@ We’ll start by reading a CSV samplesheet to define our input. When I first sta
 
 Here’s what it looks like 👇
 
-```         
+```{.groovy filename="main.nf"}
 // Check mandatory parameters
 if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
@@ -64,7 +64,7 @@ workflow {
 
 Now, we could run this first step, but we wouldn’t see any output. Let’s spice it up and add a view() statement to check out 👀 our new input_reads channel:
 
-```         
+```{.groovy filename="main.nf"}       
 // Check mandatory parameters
 if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
@@ -99,7 +99,7 @@ workflow {
 
 Let's run it with the included samplesheet and example files 👇
 
-```         
+```bash         
 nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna
 ```
 
@@ -109,7 +109,7 @@ Assuming everything worked, you should see your `input_reads` channel printed to
 
 Now, let’s add our first process: quality control (QC) with [fastp](https://github.com/OpenGene/fastp) to preprocess the reads.
 
-```         
+```{.groovy filename="main.nf"}       
 // Check mandatory parameters
 if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
@@ -148,7 +148,7 @@ workflow {
 
 Alright and now lets get into the magic 🪄 of resume. Instead of re-running everything (admittedly it was only a small channel factory process) lets resume from where we left off.
 
-```         
+```bash         
 nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume
 ```
 
@@ -158,7 +158,7 @@ Success the fastp process has been added to our pipeline 🥳
 
 Next, let’s map the reads to the reference sequence with [bwa-mem](https://github.com/lh3/bwa), but we’ll need to index the reference first. We’ll add the BWA_INDEX and BWA_MEM processes for this.
 
-```         
+```{.groovy filename="main.nf"}     
 // Check mandatory parameters
 if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.reference == null) error "Please specify a reference genome fasta file with --reference"
@@ -205,7 +205,7 @@ workflow {
 
 Run the pipeline again with the `-resume` statement 👇
 
-```         
+```bash         
 nextflow run main.nf --input docs/example_data/samplesheet.csv --reference ./docs/example_data/GCF_020520425.1_BTI_SOV_V1_chr1-2_genomic_50Mb_trimmed.fna -resume
 ```
 
@@ -217,7 +217,7 @@ Time for variant calling! We’ll use a [bcftools](https://samtools.github.io/bc
 
 Home stretch now, time to call variants! For this we will use a bcftools process, but we will also need to index our reference again, this time with samtools.
 
-```         
+```{.groovy filename="main.nf"}       
 // Check mandatory parameters
 if (params.input) { csv_file = file(params.input) } else { exit 1, 'Input samplesheet not specified!' }
 if (params.reference == null) error "Please specify a reference genome fasta file with --reference"

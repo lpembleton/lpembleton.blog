@@ -17,6 +17,7 @@ $black: #000000;
 $burnt-orange: #ad7237;
 $very-light-blue: #edf2fb;
 $very-light-purple: #edf2f4;
+$very-light-lime-green: #F1FDF2;
 $link-green: #1982c4;
 
 
@@ -36,8 +37,15 @@ $footer-fg: $dark-sage-green;
 $code-bg: $very-light-blue;
 $code-color: $burnt-orange; //$purple; 
 
+
 // Code blocks
-$code-block-bg: $very-light-blue;
+$code-block-bg:              white;
+//$code-block-border:          #ebebeb;
+
+// Code blocks
+//$code-block-bg: $very-light-blue;
+//$code-block-bg: $very-light-lime-green;
+//$code-block-border-left: $bright-green;
 
 /*-- scss:rules --*/
 

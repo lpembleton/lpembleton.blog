@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.536">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="LW Pembleton">
+<meta name="dcterms.date" content="2024-04-11">
+<meta name="description" content="Five (or maybe six) quick Nextflow tips and tricks">
+
+<title>Luke Pembleton - Five Nextflow Tips and Tricks</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NQ96R1Y33J"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NQ96R1Y33J', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+
+
+<meta property="og:title" content="Luke Pembleton - Five Nextflow Tips and Tricks">
+<meta property="og:description" content="Five (or maybe six) quick Nextflow tips and tricks">
+<meta property="og:image" content="images/tony-hand-P3uJUQ62uXE-unsplash.jpg">
+<meta property="og:site_name" content="Luke Pembleton">
+<meta name="twitter:title" content="Luke Pembleton - Five Nextflow Tips and Tricks">
+<meta name="twitter:description" content="Five (or maybe six) quick Nextflow tips and tricks">
+<meta name="twitter:image" content="images/tony-hand-P3uJUQ62uXE-unsplash.jpg">
+<meta name="twitter:site" content="@lwpembleton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Luke Pembleton</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">ABOUT</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">BLOG</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ramblings.html"> 
+<span class="menu-text">RAMBLINGS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/publications.html"> 
+<span class="menu-text">PUBLICATIONS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/conferences.html"> 
+<span class="menu-text">CONFERENCES</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/vivarium.html"> 
+<span class="menu-text">VIVARIUM</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lpembleton"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://twitter.com/lwpembleton"> <i class="bi bi-twitter" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://genomic.social/@lwpembleton"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social"> 
+<span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/lpembleton"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/"> 
+<span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Five Nextflow Tips and Tricks</h1>
+                  <div>
+        <div class="description">
+          Five (or maybe six) quick Nextflow tips and tricks
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Nextflow</div>
+                <div class="quarto-category">Bioinformatics</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>LW Pembleton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 11, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#five-nextflow-tips-and-tricks-you-might-not-know-plus-a-bonus" id="toc-five-nextflow-tips-and-tricks-you-might-not-know-plus-a-bonus" class="nav-link active" data-scroll-target="#five-nextflow-tips-and-tricks-you-might-not-know-plus-a-bonus">Five Nextflow Tips and Tricks You Might Not Know (Plus a Bonus!)</a>
+  <ul class="collapse">
+  <li><a href="#resuming-from-a-previous-run-with--resume" id="toc-resuming-from-a-previous-run-with--resume" class="nav-link" data-scroll-target="#resuming-from-a-previous-run-with--resume">1. Resuming from a previous run with -resume</a></li>
+  <li><a href="#using-retries-to-re-attempt-a-process-before-stopping-the-whole-pipeline" id="toc-using-retries-to-re-attempt-a-process-before-stopping-the-whole-pipeline" class="nav-link" data-scroll-target="#using-retries-to-re-attempt-a-process-before-stopping-the-whole-pipeline">2. Using retries to re-attempt a process before stopping the whole pipeline</a></li>
+  <li><a href="#adding-custom-labels-to-process-executions-with-tag" id="toc-adding-custom-labels-to-process-executions-with-tag" class="nav-link" data-scroll-target="#adding-custom-labels-to-process-executions-with-tag">3. Adding Custom Labels to Process Executions with tag</a></li>
+  <li><a href="#printing-parameters-to-the-console-at-execution" id="toc-printing-parameters-to-the-console-at-execution" class="nav-link" data-scroll-target="#printing-parameters-to-the-console-at-execution">4. Printing Parameters to the Console at Execution</a></li>
+  <li><a href="#listing-all-containers-used-in-your-pipeline" id="toc-listing-all-containers-used-in-your-pipeline" class="nav-link" data-scroll-target="#listing-all-containers-used-in-your-pipeline">5. Listing All Containers Used in Your Pipeline</a></li>
+  <li><a href="#bonus-using-a-terminal-multiplexer" id="toc-bonus-using-a-terminal-multiplexer" class="nav-link" data-scroll-target="#bonus-using-a-terminal-multiplexer">Bonus: Using a Terminal Multiplexer</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tony-hand-P3uJUQ62uXE-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption>~Photo by <a href="https://unsplash.com/@mr_t55">Tony Hand</a> on Unsplash~</figcaption>
+</figure>
+</div>
+<section id="five-nextflow-tips-and-tricks-you-might-not-know-plus-a-bonus" class="level2">
+<h2 class="anchored" data-anchor-id="five-nextflow-tips-and-tricks-you-might-not-know-plus-a-bonus">Five Nextflow Tips and Tricks You Might Not Know (Plus a Bonus!)</h2>
+<p>Here’s a quick list of five Nextflow tips and tricks – some of these might be old news if you’re a Nextflow veteran, but a few may have slipped under your radar.</p>
+<section id="resuming-from-a-previous-run-with--resume" class="level3">
+<h3 class="anchored" data-anchor-id="resuming-from-a-previous-run-with--resume">1. Resuming from a previous run with -resume</h3>
+<p>I’m not going to harp on about this one here as I just wrote a blog post about how I use Nextflow resume as part of my toolkit. Check it out of more info. But to put it simply if you are using Nextflow you need to to know about <a href="https://www.nextflow.io/docs/latest/cache-and-resume.html">resume</a>.</p>
+</section>
+<section id="using-retries-to-re-attempt-a-process-before-stopping-the-whole-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="using-retries-to-re-attempt-a-process-before-stopping-the-whole-pipeline">2. Using retries to re-attempt a process before stopping the whole pipeline</h3>
+<p>Ever had a process that sometimes needs way more memory for specific samples? Maybe you can’t predict which samples will be the excessive resource drainers on each run. You could go for a big memory allocation every time, but if you’re watching cloud budgets (or avoiding angry HPC admins), this isn’t the best strategy.</p>
+<p>Instead, you can use <a href="https://www.nextflow.io/docs/latest/cache-and-resume.html">retries</a> with an incremental bump to resources. Here’s an example 👇 if a process fails, Nextflow retries it with more memory, multiplied by the task’s attempt number (i.e 2GB, then 4GB, then 6GB or memory). Limiting retries to three (maxRetries 3) is usually enough to catch most flaky tasks without blowing the budget.</p>
+<pre class="nextflow"><code>process foo {
+    memory { 2.GB * task.attempt }
+    
+    errorStrategy 'retry'
+    maxRetries 3
+
+    script:
+    &lt;your job here&gt;
+}</code></pre>
+<p>This setup will attempt the process up to three times, increasing the resources each time. It’s a great way to balance flexibility and efficiency without risking runaway costs.</p>
+<p>If you have long running processes that take a long time to max out their memory, this might not be the best approach as in cloud based infastruture you will pay for the compute on each retry. However processes that reach peak memory usage reasonably quickly will be able to retry and adjust themselves reasonably efficiently with limited wasted compute time.</p>
+</section>
+<section id="adding-custom-labels-to-process-executions-with-tag" class="level3">
+<h3 class="anchored" data-anchor-id="adding-custom-labels-to-process-executions-with-tag">3. Adding Custom Labels to Process Executions with tag</h3>
+<p>Imagine you’re running an alignment process for 1000 samples – without labels, each of those 1000 processes shows up with just a random hash ID. That’s not very helpful when trying to see which samples are which.</p>
+<p>Here’s where the <a href="https://www.nextflow.io/docs/latest/reference/process.html#tag">tag</a> directive shines. Adding it to a process lets you tag each execution with metadata like sample names or other identifiers. Here’s a quick example:</p>
+<pre class="nextflow"><code>process ExampleProcess {
+    tag "$meta"
+  
+    input:
+    tuple val(meta), path(reads)
+
+    // your script here
+}</code></pre>
+<p>With this in place, each alignment will show the respective sample name in the logs, making it much easier to keep track of things.</p>
+</section>
+<section id="printing-parameters-to-the-console-at-execution" class="level3">
+<h3 class="anchored" data-anchor-id="printing-parameters-to-the-console-at-execution">4. Printing Parameters to the Console at Execution</h3>
+<p>When you start a pipeline, especially with multiple parameters, it’s easy to lose track of the exact settings you launched with. To keep everything transparent, you can print the pipeline parameters directly to the console at the start of your workflow.</p>
+<p>One simple way to do this is to use the params scope and print it at the beginning of your main script, like so:</p>
+<pre><code>println "Pipeline parameters: $params"</code></pre>
+<p>You could also take it a step further for format it nicely by rerferencing parts of params, for example:</p>
+<pre><code>log.info """\
+    =======================================================================
+    M Y   E X A M P L E   P I P E L I N E
+    ======================================================================
+    samplesheet: ${params.input}
+    reference: ${params.reference}
+    ======================================================================
+    """
+    .stripIndent()</code></pre>
+</section>
+<section id="listing-all-containers-used-in-your-pipeline" class="level3">
+<h3 class="anchored" data-anchor-id="listing-all-containers-used-in-your-pipeline">5. Listing All Containers Used in Your Pipeline</h3>
+<p>With Nextflow’s <a href="https://www.nextflow.io/docs/latest/reference/cli.html#inspect">inspect</a> command, you can easily get a list of all the containers your pipeline uses without running the entire pipeline. This command is a lifesaver when you’re managing multiple containers or want to double-check container versions before starting a run.</p>
+<p>To get your container list, use:</p>
+<pre><code>nextflow inspect main.nf</code></pre>
+</section>
+<section id="bonus-using-a-terminal-multiplexer" class="level3">
+<h3 class="anchored" data-anchor-id="bonus-using-a-terminal-multiplexer">Bonus: Using a Terminal Multiplexer</h3>
+<p>Alright, I know I said five tips, but here’s one more since I already covered -resume in a separate post.</p>
+<p>If you’re running Nextflow on a remote instance (e.g., cloud) or just want to keep your terminal available, consider using a terminal multiplexer like <a href="https://github.com/tmux/tmux/wiki">tmux</a> or <a href="https://linuxize.com/post/how-to-use-linux-screen/">screen</a>. This lets you detach from your session without affecting the pipeline’s progress and reattach later to check on things. It’s also a lifesaver if you face unexpected disconnects!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/airport-whoopsy.gif" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+<p>These tricks have saved me loads of time and helped me avoid unnecessary headaches (not all though). Try them out, and let me know if you have any other Nextflow tips to add!</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<script src="https://giscus.app/client.js" data-repo="lpembleton/lpembleton.blog" data-repo-id="R_kgDOIfz78A" data-category="Announcements" data-category-id="DIC_kwDOIfz78M4CZhkM" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2024 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter" aria-label="twitter"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
