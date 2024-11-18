@@ -319,7 +319,7 @@ cookieconsent.run({
 <p><img src="images/99sws0.jpg" class="img-fluid"></p>
 <p>To use Fusion, you’ll need to run your containers with Wave 🌊, another fantastic tool from Seqera Labs. Wave essentially adds the fusion layer to your containers, giving them get pseudo direct access to S3 storage as though it’s a local disk. All it takes is a config update and an additional IAM permission.</p>
 <p><em>Note:</em> Wave and Fusion, require Nextflow v22.10.0 or later. Update Nextflow if you haven’t already:</p>
-<pre class="nextflow"><code>nextflow self-update</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> self-update</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>I thought I would take this opportunity to refresh the whole setup guide, and also include a nice little test pipeline to check fusion is working.</p>
 <p>If you have already setup Nextflow on AWS following my original blog post, all you should need to do is:</p>
 <ul>
@@ -517,20 +517,25 @@ Note
 <section id="nextflow-config-launchpad" class="level2">
 <h2 class="anchored" data-anchor-id="nextflow-config-launchpad">Nextflow Config &amp; Launchpad 🚀</h2>
 <p>Now all you now need to do is set up your Nextflow config with the relevant details of your AWS setup. An example of an initial config file is:</p>
-<pre><code>//Select the awsbatch executor
-process.executor = 'awsbatch'
-
-//Name of the AWS Batch job queue that you just created
-process.queue = 'my-batch-queue'
-
-//region where we want to run this in
-aws.region = 'ap-southeast-2'
-
-//Path to the aws cli tool you installed in your AMI
-aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-
-//S3 working directory that you just created
-workDir = 's3://bucket_you_created/work/'</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>nextflow.config</strong></pre>
+</div>
+<div class="sourceCode" id="cb4" data-filename="nextflow.config"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Select the awsbatch executor</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>executor <span class="op">=</span> <span class="st">'awsbatch'</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">//Name of the AWS Batch job queue that you just created</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>queue <span class="op">=</span> <span class="st">'my-batch-queue'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">//region where we want to run this in</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>aws<span class="op">.</span>region <span class="op">=</span> <span class="st">'ap-southeast-2'</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">//Path to the aws cli tool you installed in your AMI</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>aws<span class="op">.</span>batch<span class="op">.</span>cliPath <span class="op">=</span> <span class="st">'/home/ec2-user/miniconda/bin/aws'</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">//S3 working directory that you just created</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>workDir <span class="op">=</span> <span class="st">'s3://bucket_you_created/work/'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>You will need to include this config with all the Nextflow pipelines you intend to run on your new AWS setup.</p>
 <p>The next step is to create, what I like you call your <strong>nf-launchpad</strong> - i.e.&nbsp;a EC2 instance that you submit/run your Nextflow pipelines from and that essentially runs all the communication with AWS Batch. You could do this locally, but this doesn’t provide you any protection against power or internet disconnects.</p>
 <p>Navigate to the <strong>Instances</strong> within the <strong>EC2</strong> console and click <strong>Launch instances</strong>.</p>
@@ -605,84 +610,95 @@ Warning
 <section id="fusion-storage" class="level2">
 <h2 class="anchored" data-anchor-id="fusion-storage">Fusion storage 💾</h2>
 <p>You finally made it 🥳 to the actual bit your probably opened this blog post for - how do I tell Nextflow to use the fusion file storage system so I no longer need to rely on EBS auto-scaling? Well its actually ridiculously simply add <code>fusion.enabled = true</code> and <code>wave.enabled = true</code> to you Nextflow config, for example 👇</p>
-<pre class="nextflow"><code>//Select the awsbatch executor
-process.executor = 'awsbatch'
-
-//Name of the AWS Batch job queue that you just created
-process.queue = 'my-batch-queue'
-
-//region where we want to run this in
-aws.region = 'ap-southeast-2'
-
-//Path to the aws cli tool you installed in your AMI
-aws.batch.cliPath = '/home/ec2-user/miniconda/bin/aws'
-
-//S3 working directory that you just created
-workDir = 's3://bucket_you_created/work/'
-
-//spot instance retries
-aws.batch.maxSpotAttempts = 3
-
-//fusion and wave configuration
-fusion.enabled = true
-wave.enabled = true
-
-//per process configurations
-
-process {
-    withName: 'GEN_FILE' {
-        container = 'public.ecr.aws/ubuntu/ubuntu:24.04_stable'
-        cpus = 1
-        memory = 4.GB
-    }
-}</code></pre>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>nextflow.config</strong></pre>
+</div>
+<div class="sourceCode" id="cb6" data-filename="nextflow.config"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">//Select the awsbatch executor</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>executor <span class="op">=</span> <span class="st">'awsbatch'</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">//Name of the AWS Batch job queue that you just created</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>process<span class="op">.</span>queue <span class="op">=</span> <span class="st">'my-batch-queue'</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">//region where we want to run this in</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>aws<span class="op">.</span>region <span class="op">=</span> <span class="st">'ap-southeast-2'</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">//Path to the aws cli tool you installed in your AMI</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>aws<span class="op">.</span>batch<span class="op">.</span>cliPath <span class="op">=</span> <span class="st">'/home/ec2-user/miniconda/bin/aws'</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">//S3 working directory that you just created</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>workDir <span class="op">=</span> <span class="st">'s3://bucket_you_created/work/'</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">//spot instance retries</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>aws<span class="op">.</span>batch<span class="op">.</span>maxSpotAttempts <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">//fusion and wave configuration</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>fusion<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>wave<span class="op">.</span>enabled <span class="op">=</span> <span class="kw">true</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">//per process configurations</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>process <span class="op">{</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    withName<span class="op">:</span> <span class="st">'GEN_FILE'</span> <span class="op">{</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        container <span class="op">=</span> <span class="st">'public.ecr.aws/ubuntu/ubuntu:24.04_stable'</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>        cpus <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>        memory <span class="op">=</span> <span class="fl">4.</span>GB</span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>There is no requirement to use <a href="https://seqera.io/containers/">Seqera containers</a>, you can continue to use <a href="https://gallery.ecr.aws/biocontainers/">biocontainers hosted on AWS ECR</a>, Wave just steps in to provision them with the Fusion layer attached. However, I would recommend checking out the free Seqera container service, the ability to seamlessly create multitooled containers and also ARM based containers is brilliant! Not to mention the interface is a lot better (IMO) 🤩 than any other container repository out there.</p>
-<p>Ok, lets test everything is working, take this demo pipeline that I have made below and run it firstly without fusion and wave enabled, it should eventually fail. Now enable fusion and wave in your config and run it again, and it should work, if everything has been setup correctly.</p>
-<pre class="nextflow"><code>#!/usr/bin/env nextflow
-
-
-// Define a list of file sizes in GiB (e.g., 1GiB, 20GiB, 50GiB)
-// params.file_sizes = [1, 20, 50]
-
-
-// Process to create files of specified sizes
-process GEN_FILE {
-    input:
-    val size 
-
-    output:
-    file("file_${size}G.dat") 
-
-    script:
-    """
-    dd if=/dev/zero of=file_${size}G.dat bs=1G count=${size}
-    """
-}
-
-workflow {
-
-    // Channel for file sizes
-    Channel
-        .from(params.file_sizes)
-        .set { file_size_ch }
-
-    GEN_FILE(file_size_ch)
-    GEN_FILE.out.view { file -&gt; "File: ${file}" }
-
-}</code></pre>
-<p>So what is happening in the pipeline 👆 you ask? Well it has just one process that runs 3 times in parallel, and within the process it will try to generate a file that is either, 1GiB, 20GiB or 50GiB in size. As the Nextflow AMI you generated only has 30GiB of storage attached the 50GiB file generation process should fail unless fusion is enabled in which case it can then use S3 as the local storage.</p>
+<p>Ok, lets test everything is working, take this demo pipeline that I have made below and run it firstly <strong>without</strong> fusion and wave enabled, it should eventually fail.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>main.nf</strong></pre>
+</div>
+<div class="sourceCode" id="cb7" data-filename="main.nf"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>#<span class="op">!</span><span class="st">/usr/</span>bin<span class="op">/</span>env nextflow</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Define a list of file sizes in GiB (e.g., 1GiB, 20GiB, 50GiB)</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">// params.file_sizes = [1, 20, 50]</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Process to create files of specified sizes</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>process GEN_FILE <span class="op">{</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    input<span class="op">:</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    val size </span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    output<span class="op">:</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">file</span><span class="op">(</span><span class="st">"file_</span><span class="ss">${</span>size<span class="ss">}</span><span class="st">G.dat"</span><span class="op">)</span> </span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    script<span class="op">:</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"""</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="st">    dd if=/dev/zero of=file_</span><span class="ss">${</span>size<span class="ss">}</span><span class="st">G.dat bs=1G count=</span><span class="ss">${</span>size<span class="ss">}</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>workflow <span class="op">{</span></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Channel for file sizes</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">Channel</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">from</span><span class="op">(</span>params<span class="op">.</span>file_sizes<span class="op">)</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>        <span class="op">.</span><span class="fu">set</span> <span class="op">{</span> file_size_ch <span class="op">}</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>    <span class="fu">GEN_FILE</span><span class="op">(</span>file_size_ch<span class="op">)</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>    GEN_FILE<span class="op">.</span>out<span class="op">.</span><span class="fu">view</span> <span class="op">{</span> file <span class="op">-&gt;</span> <span class="st">"File: </span><span class="ss">${</span>file<span class="ss">}</span><span class="st">"</span> <span class="op">}</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Example of failed run 👇</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/failed.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
+<p>Now <strong>enable</strong> Fusion and Wave in your config and run it again, and it should work, if everything has been setup correctly.</p>
 <p>Example of successful run (notice the fusion enabled label against the executor) 👇</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="images/worked.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
+<p>So what is happening in the pipeline 👆 you ask? Well it has just one process that runs 3 times in parallel, and within the process it will try to generate a file that is either, 1GiB, 20GiB or 50GiB in size. As the Nextflow AMI you generated only has 30GiB of storage attached the 50GiB file generation process should fail unless fusion is enabled in which case it can then use S3 as the local storage.</p>
 <p>Just a nice simple example to test everything is working before you dive into your bigger pipelines.</p>
 <p>Hopefully everything worked, if so time to party!</p>
 <div class="quarto-figure quarto-figure-center">
