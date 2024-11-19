@@ -10,15 +10,15 @@ draft: false
 
 ![~Photo by [Jason Leung](https://unsplash.com/@ninjason) on Unsplash~](images/jason-leung-IrQwXgk8Q88-unsplash.jpg)
 
-It’s been two years since my [original post](https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/) on setting up Nextflow with AWS Batch. While there have been many exciting developments in Nextflow, that old post has held up surprisingly well. But there’s been one big change that drove me to update my setup (and this post): the new [Fusion file storage system](https://seqera.io/blog/breakthrough-performance-and-cost-efficiency-with-the-new-fusion-file-system/) developed by Seqera Labs.
+It’s been two years since my [original post](https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/) on setting up Nextflow with AWS Batch. While there have been many exciting developments in Nextflow, that old post has held up surprisingly well. But there’s been one big change that drove me to update my setup (and this post): the new [Fusion file storage system](https://seqera.io/blog/breakthrough-performance-and-cost-efficiency-with-the-new-fusion-file-system/) developed by [Seqera](https://seqera.io).
 
-In my [previous setups](https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/), I used EBS autoscaling for storage in my containerised workflows. It worked well, but EBS is expensive, and AWS recently announced they’d no longer support EBS autoscaling. It still works, but for how long...? A little bit before this Seqera Labs (the people behind Nextflow) released Fusion, a system that lets your containers use S3 as though it’s local storage.
+In my [previous setups](https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/), I used EBS autoscaling for storage in my containerised workflows. It worked well, but EBS is expensive, and AWS recently announced they’d no longer support EBS autoscaling. It still works, but for how long...? A little bit before this Seqera (the people behind Nextflow) released Fusion, a system that lets your containers use S3 as though it’s local storage.
 
 I'm not going to go into the details here of how fusion works, you can check it out on their [website](https://www.nextflow.io/docs/latest/fusion.html) but essentially is it allows your containers to use S3 as the file storage system as if it was the local disk. In short, much cheaper storage associated compute costs and no more complex EBS autoscaling setups.
 
 ![](images/99sws0.jpg)
 
-To use Fusion, you’ll need to run your containers with Wave 🌊, another fantastic tool from Seqera Labs. Wave essentially adds the fusion layer to your containers, giving them get pseudo direct access to S3 storage as though it’s a local disk. All it takes is a config update and an additional IAM permission.
+To use Fusion, you’ll need to run your containers with Wave 🌊, another fantastic tool from Seqera. Wave essentially adds the fusion layer to your containers, giving them get pseudo direct access to S3 storage as though it’s a local disk. All it takes is a config update and an additional IAM permission.
 
 *Note:* Wave and Fusion, require Nextflow v22.10.0 or later. Update Nextflow if you haven’t already:
 
@@ -50,7 +50,7 @@ Although Gandalf 🧙 trims his beard more often than Amazon dramatically update
 
 ## IAM Setup 👤 {#iam-setup}
 
-Firstly, you need to create a new [IAM](https://aws.amazon.com/iam/getting-started/?nc=sn&loc=3) user with more appropriate permissions tailored to the requirements listed in [Nextflow documentation](https://www.nextflow.io/docs/latest/awscloud.html). It is strongly recommended that do not use your root account to run Nextflow pipelines ⚠️
+Firstly, you need to create a new [IAM](https://aws.amazon.com/iam/getting-started/?nc=sn&loc=3) user with more appropriate permissions tailored to the requirements listed in [Nextflow documentation](https://www.nextflow.io/docs/latest/aws.html). It is strongly recommended that do not use your root account to run Nextflow pipelines ⚠️
 
 1.  Open the IAM management console on AWS and under **Users** click **Create User**.
 
@@ -349,7 +349,7 @@ process {
 }
 ```
 
-There is no requirement to use [Seqera containers](https://seqera.io/containers/), you can continue to use [biocontainers hosted on AWS ECR](https://gallery.ecr.aws/biocontainers/), Wave just steps in to provision them with the Fusion layer attached. However, I would recommend checking out the free Seqera container service, the ability to seamlessly create multitooled containers and also ARM based containers is brilliant! Not to mention the interface is a lot better (IMO) 🤩 than any other container repository out there.
+There is no requirement to use [Seqera Containers](https://seqera.io/containers/), you can continue to use [biocontainers hosted on AWS ECR](https://gallery.ecr.aws/biocontainers/), Wave just steps in to provision them with the Fusion layer attached. However, I would recommend checking out the free Seqera container service, the ability to seamlessly create multitooled containers and also ARM based containers is brilliant! Not to mention the interface is a lot better (IMO) 🤩 than any other container repository out there.
 
 Ok, lets test everything is working, take this demo pipeline that I have made below and run it firstly **without** fusion and wave enabled (i.e. `fusion.enabled = false` & `wave.enabled = false`), it should eventually fail.
 

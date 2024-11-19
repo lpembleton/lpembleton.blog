@@ -12,6 +12,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/nextflow-on-aws-batch-the-update/index.html",
       "/posts/build-with-resume/index.html",
       "/posts/ggplot-limits/index.html",
       "/posts/remote-vscode/index.html",

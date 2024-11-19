@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="LW Pembleton">
-<meta name="dcterms.date" content="2024-11-10">
+<meta name="dcterms.date" content="2024-11-18">
 <meta name="description" content="An updated guide to setting up Nextflow on AWS Batch with fusion file storage">
 
 <title>Luke Pembleton - Nextflow on AWS Batch with Fusion</title>
@@ -142,11 +142,11 @@ cookieconsent.run({
 
 <meta property="og:title" content="Luke Pembleton - Nextflow on AWS Batch with Fusion">
 <meta property="og:description" content="An updated guide to setting up Nextflow on AWS Batch with fusion file storage">
-<meta property="og:image" content="images/jason-leung-IrQwXgk8Q88-unsplash.jpg">
+<meta property="og:image" content="https://lpembleton.rbind.io/posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="Luke Pembleton - Nextflow on AWS Batch with Fusion">
 <meta name="twitter:description" content="An updated guide to setting up Nextflow on AWS Batch with fusion file storage">
-<meta name="twitter:image" content="images/jason-leung-IrQwXgk8Q88-unsplash.jpg">
+<meta name="twitter:image" content="https://lpembleton.rbind.io/posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg">
 <meta name="twitter:site" content="@lwpembleton">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -271,7 +271,7 @@ cookieconsent.run({
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">November 10, 2024</p>
+        <p class="date">November 18, 2024</p>
       </div>
     </div>
     
@@ -290,7 +290,7 @@ cookieconsent.run({
   <li><a href="#custom-nextflow-ami" id="toc-custom-nextflow-ami" class="nav-link" data-scroll-target="#custom-nextflow-ami">Custom Nextflow AMI 📦</a></li>
   <li><a href="#batch-environment" id="toc-batch-environment" class="nav-link" data-scroll-target="#batch-environment">Batch Environment 🎛️</a></li>
   <li><a href="#nextflow-config-launchpad" id="toc-nextflow-config-launchpad" class="nav-link" data-scroll-target="#nextflow-config-launchpad">Nextflow Config &amp; Launchpad 🚀</a></li>
-  <li><a href="#additional-notes" id="toc-additional-notes" class="nav-link" data-scroll-target="#additional-notes">🗒️Additional Notes:</a></li>
+  <li><a href="#additional-notes" id="toc-additional-notes" class="nav-link" data-scroll-target="#additional-notes">Additional Notes 🗒️</a></li>
   <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   <li><a href="#fusion-storage" id="toc-fusion-storage" class="nav-link" data-scroll-target="#fusion-storage">Fusion storage 💾</a></li>
   </ul>
@@ -313,8 +313,8 @@ cookieconsent.run({
 <figcaption><sub>Photo&nbsp;by&nbsp;<a href="https://unsplash.com/@ninjason">Jason&nbsp;Leung</a>&nbsp;on&nbsp;Unsplash</sub></figcaption>
 </figure>
 </div>
-<p>It’s been two years since my original post on setting up Nextflow with AWS Batch. While there have been many exciting developments in Nextflow, that old post has held up surprisingly well. But there’s been one big change that drove me to update my setup (and this post): the new Fusion file storage system developed by Seqera Labs.</p>
-<p>In my previous setups, I used EBS autoscaling for storage in my containerised workflows. It worked well, but EBS is expensive, and AWS recently announced they’d no longer support EBS autoscaling. It still works, but for how long…? A little bit before this Seqera Labs (the people behind Nextflow) released Fusion, a system that lets your containers use S3 as though it’s local storage.</p>
+<p>It’s been two years since my <a href="https://lpembleton.rbind.io/posts/nextflow-on-aws-batch/">original post</a> on setting up Nextflow with AWS Batch. While there have been many exciting developments in Nextflow, that old post has held up surprisingly well. But there’s been one big change that drove me to update my setup (and this post): the new <a href="https://seqera.io/blog/breakthrough-performance-and-cost-efficiency-with-the-new-fusion-file-system/">Fusion file storage system</a> developed by Seqera Labs.</p>
+<p>In my <a href="https://lpembleton.rbind.io/posts/aws-batch-ebs-autoscale/">previous setups</a>, I used EBS autoscaling for storage in my containerised workflows. It worked well, but EBS is expensive, and AWS recently announced they’d no longer support EBS autoscaling. It still works, but for how long…? A little bit before this Seqera Labs (the people behind Nextflow) released Fusion, a system that lets your containers use S3 as though it’s local storage.</p>
 <p>I’m not going to go into the details here of how fusion works, you can check it out on their <a href="https://www.nextflow.io/docs/latest/fusion.html">website</a> but essentially is it allows your containers to use S3 as the file storage system as if it was the local disk. In short, much cheaper storage associated compute costs and no more complex EBS autoscaling setups.</p>
 <p><img src="images/99sws0.jpg" class="img-fluid"></p>
 <p>To use Fusion, you’ll need to run your containers with Wave 🌊, another fantastic tool from Seqera Labs. Wave essentially adds the fusion layer to your containers, giving them get pseudo direct access to S3 storage as though it’s a local disk. All it takes is a config update and an additional IAM permission.</p>
@@ -596,7 +596,7 @@ Warning
 </div>
 </section>
 <section id="additional-notes" class="level2">
-<h2 class="anchored" data-anchor-id="additional-notes">🗒️Additional Notes:</h2>
+<h2 class="anchored" data-anchor-id="additional-notes">Additional Notes 🗒️</h2>
 <ul>
 <li><p>AWS batch jobs can take a few minutes to spin up, be patient before assuming you have set something up wrong.</p></li>
 <li><p>If you are using spot instances and your maximum % on-demand price is set too low your jobs make take a long time to start or may not run at all.</p></li>
@@ -647,7 +647,7 @@ Warning
 <span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>There is no requirement to use <a href="https://seqera.io/containers/">Seqera containers</a>, you can continue to use <a href="https://gallery.ecr.aws/biocontainers/">biocontainers hosted on AWS ECR</a>, Wave just steps in to provision them with the Fusion layer attached. However, I would recommend checking out the free Seqera container service, the ability to seamlessly create multitooled containers and also ARM based containers is brilliant! Not to mention the interface is a lot better (IMO) 🤩 than any other container repository out there.</p>
-<p>Ok, lets test everything is working, take this demo pipeline that I have made below and run it firstly <strong>without</strong> fusion and wave enabled, it should eventually fail.</p>
+<p>Ok, lets test everything is working, take this demo pipeline that I have made below and run it firstly <strong>without</strong> fusion and wave enabled (i.e.&nbsp;<code>fusion.enabled = false</code> &amp; <code>wave.enabled = false</code>), it should eventually fail.</p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>main.nf</strong></pre>
@@ -656,7 +656,7 @@ Warning
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Define a list of file sizes in GiB (e.g., 1GiB, 20GiB, 50GiB)</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">// params.file_sizes = [1, 20, 50]</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>params<span class="op">.</span>file_sizes <span class="op">=</span> <span class="op">[</span><span class="dv">1</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="dv">50</span><span class="op">]</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Process to create files of specified sizes</span></span>
