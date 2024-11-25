@@ -2,10 +2,10 @@
 title: "Five Nextflow Tips and Tricks"
 description: "Five (or maybe six) quick Nextflow tips and tricks"
 author: "LW Pembleton"
-date: 17 11 2024
+date: 24 11 2024
 categories: [Nextflow, Bioinformatics]
 image: images/tony-hand-P3uJUQ62uXE-unsplash.jpg
-draft: true
+draft: false
 highlight-style: ayu
 ---
 
@@ -19,13 +19,13 @@ Here’s a quick list of five Nextflow tips and tricks – some of these might b
 
 I'm not going to harp on about this one here as I just wrote a blog post about how I use Nextflow resume as part of my toolkit. Check it out of more info. But to put it simply if you are using Nextflow you need to to know about [resume](https://www.nextflow.io/docs/latest/cache-and-resume.html).
 
-### 2. Using retries to re-attempt a process before stopping the whole pipeline
+### 2. Using retries to re-attempt a process before stopping the whole pipeline 🔂
 
-Ever had a process that sometimes needs way more memory for specific samples? Maybe you can’t predict which samples will be the excessive resource drainers on each run. You could go for a big memory allocation every time, but if you’re watching cloud budgets (or avoiding angry HPC admins), this isn’t the best strategy.
+Ever had a process that sometimes needs way more memory for specific samples? Maybe you can’t predict which samples will be the excessive resource drainers on each run. You could go for a big memory allocation every time, but if you’re watching cloud budgets 💸 (or avoiding angry 😡 HPC admins), this isn’t the best strategy.
 
 Instead, you can use [retries](https://www.nextflow.io/docs/latest/cache-and-resume.html) with an incremental bump to resources. Here’s an example 👇 if a process fails, Nextflow retries it with more memory, multiplied by the task’s attempt number (i.e 2GB, then 4GB, then 6GB or memory). Limiting retries to three (maxRetries 3) is usually enough to catch most flaky tasks without blowing the budget.
 
-```groovy
+``` groovy
 process foo {
     memory { 2.GB * task.attempt }
     
@@ -39,15 +39,15 @@ process foo {
 
 This setup will attempt the process up to three times, increasing the resources each time. It’s a great way to balance flexibility and efficiency without risking runaway costs.
 
-If you have long running processes that take a long time to max out their memory, this might not be the best approach as in cloud based infastruture you will pay for the compute on each retry. However processes that reach peak memory usage reasonably quickly will be able to retry and adjust themselves reasonably efficiently with limited wasted compute time.
+If you have long running processes that take a long time to max out their memory, this might not be the best approach as in cloud based infrastructure you will pay for the compute on each retry. However processes that reach peak memory usage reasonably quickly will be able to retry and adjust themselves reasonably efficiently with limited wasted compute time.
 
-### 3. Adding Custom Labels to Process Executions with tag
+### 3. Adding Custom Labels to Process Executions with tag 🏷️
 
-Imagine you’re running an alignment process for 1000 samples – without labels, each of those 1000 processes shows up with just a random hash ID. That’s not very helpful when trying to see which samples are which.
+Imagine you’re running an alignment process for 1000 samples – without labels, each of those 1000 processes shows up with just a random hash ID. That’s not very helpful when trying to see which samples are which 😕
 
 Here’s where the [tag](https://www.nextflow.io/docs/latest/reference/process.html#tag) directive shines. Adding it to a process lets you tag each execution with metadata like sample names or other identifiers. Here’s a quick example:
 
-```groovy
+``` groovy
 process ExampleProcess {
     tag "$meta"
   
@@ -60,19 +60,19 @@ process ExampleProcess {
 
 With this in place, each alignment will show the respective sample name in the logs, making it much easier to keep track of things.
 
-### 4. Printing Parameters to the Console at Execution
+### 4. Printing Parameters to the Console at Execution 🖨️
 
 When you start a pipeline, especially with multiple parameters, it’s easy to lose track of the exact settings you launched with. To keep everything transparent, you can print the pipeline parameters directly to the console at the start of your workflow.
 
 One simple way to do this is to use the params scope and print it at the beginning of your main script, like so:
 
-```groovy         
+``` groovy
 println "Pipeline parameters: $params"
 ```
 
-You could also take it a step further for format it nicely by rerferencing parts of params, for example:
+You could also take it a step further for format it nicely by referencing parts of params, for example:
 
-```groovy         
+``` groovy
 log.info """\
     =======================================================================
     M Y   E X A M P L E   P I P E L I N E
@@ -84,13 +84,13 @@ log.info """\
     .stripIndent()
 ```
 
-### 5. Listing All Containers Used in Your Pipeline
+### 5. Listing All Containers Used in Your Pipeline 📦
 
 With Nextflow’s [inspect](https://www.nextflow.io/docs/latest/reference/cli.html#inspect) command, you can easily get a list of all the containers your pipeline uses without running the entire pipeline. This command is a lifesaver when you’re managing multiple containers or want to double-check container versions before starting a run.
 
 To get your container list, use:
 
-```bash         
+``` bash
 nextflow inspect main.nf
 ```
 
@@ -98,8 +98,8 @@ nextflow inspect main.nf
 
 Alright, I know I said five tips, but here’s one more since I already covered -resume in a separate post.
 
-If you’re running Nextflow on a remote instance (e.g., cloud) or just want to keep your terminal available, consider using a terminal multiplexer like [tmux](https://github.com/tmux/tmux/wiki) or [screen](https://linuxize.com/post/how-to-use-linux-screen/). This lets you detach from your session without affecting the pipeline’s progress and reattach later to check on things. It’s also a lifesaver if you face unexpected disconnects!
+If you’re running Nextflow on a remote ☁️ instance (e.g., cloud) or just want to keep your terminal available, consider using a terminal multiplexer like [tmux](https://github.com/tmux/tmux/wiki) or [screen](https://linuxize.com/post/how-to-use-linux-screen/). This lets you detach from your session without affecting the pipeline’s progress and reattach later to check on things. It’s also a lifesaver if you face unexpected disconnects!
 
 ![](images/airport-whoopsy.gif){fig-align="center"}
 
-These tricks have saved me loads of time and helped me avoid unnecessary headaches (not all though). Try them out, and let me know if you have any other Nextflow tips to add!
+These tricks have saved me loads of time and helped me avoid unnecessary headaches 🤕 (not all though). Try them out, and I will hopefully be back with another 5 tips soon.
