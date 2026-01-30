@@ -2,9 +2,9 @@
   {
     "listing": "/ramblings.html",
     "items": [
-      "/ramblings/bash/index.html",
       "/ramblings/Colours/index.html",
       "/ramblings/Quarto/index.html",
+      "/ramblings/bash/index.html",
       "/ramblings/R/index.html",
       "/ramblings/AWS/index.html"
     ]
@@ -12,6 +12,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/five-nextflow-tips-and-tricks/index.html",
       "/posts/nextflow-on-aws-batch-the-update/index.html",
       "/posts/build-with-resume/index.html",
       "/posts/ggplot-limits/index.html",

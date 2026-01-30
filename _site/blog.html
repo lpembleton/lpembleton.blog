@@ -2,13 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.536">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="description" content="Exploring the world of genomics, R and cloud computing">
 
-<title>Luke Pembleton -</title>
+<title> Ponderings in Diagon Alley  – Luke Pembleton</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -41,10 +41,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-5e84ef41b499c983ca74cb49ad0e075d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
@@ -134,7 +134,7 @@ cookieconsent.run({
 </script> 
   
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -164,10 +164,11 @@ window.Quarto = {
 };
 </script>
 
-<meta property="og:title" content="Luke Pembleton -">
+<meta property="og:title" content="">
 <meta property="og:description" content="Exploring the world of genomics, R and cloud computing">
+<meta property="og:image" content="https://lpembleton.rbind.io/posts/five-nextflow-tips-and-tricks/images/tony-hand-P3uJUQ62uXE-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
-<meta name="twitter:title" content="Luke Pembleton -">
+<meta name="twitter:title" content="">
 <meta name="twitter:description" content="Exploring the world of genomics, R and cloud computing">
 <meta name="twitter:image" content="https://lpembleton.rbind.io/assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
@@ -191,7 +192,7 @@ window.Quarto = {
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -226,11 +227,6 @@ window.Quarto = {
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/lwpembleton"> <i class="bi bi-twitter" role="img">
-</i> 
-<span class="menu-text"></span></a>
-  </li>  
-  <li class="nav-item compact">
     <a class="nav-link" href="https://genomic.social/@lwpembleton"> <i class="bi bi-mastodon" role="img">
 </i> 
 <span class="menu-text"></span></a>
@@ -258,7 +254,7 @@ window.Quarto = {
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -292,7 +288,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(17)</span></div><div class="category" data-category="AWS">AWS <span class="quarto-category-count">(12)</span></div><div class="category" data-category="Batch">Batch <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Bioinformatics">Bioinformatics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Blue Iris">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Chromecast">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Cloud">Cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Containers">Containers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Docker">Docker <span class="quarto-category-count">(2)</span></div><div class="category" data-category="EBS">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="EC2">EC2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="ECR">ECR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Endpoints">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Fusion">Fusion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gateway">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="IDE">IDE <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Jump host">Jump host <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LaTeX">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Mulled">Mulled <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Nextflow">Nextflow <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Remote">Remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="S3">S3 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Screen">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Security">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Smarthome">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Terminal">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VSCode">VSCode <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Visualisation">Visualisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Wave">Wave <span class="quarto-category-count">(1)</span></div><div class="category" data-category="WinSCP">WinSCP <span class="quarto-category-count">(1)</span></div><div class="category" data-category="annotate">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cloud">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="equations">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ggplot2">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="git">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="github">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="quarto">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="remote">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ssh key">ssh key <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(18)</span></div><div class="category" data-category="QVdT">AWS <span class="quarto-category-count">(12)</span></div><div class="category" data-category="QmF0Y2g=">Batch <span class="quarto-category-count">(5)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Qmx1ZSUyMElyaXM=">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2hyb21lY2FzdA==">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xvdWQ=">Cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29udGFpbmVycw==">Containers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9ja2Vy">Docker <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RUJT">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RUMy">EC2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RUNS">ECR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RW5kcG9pbnRz">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RnVzaW9u">Fusion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2F0ZXdheQ==">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SURF">IDE <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SnVtcCUyMGhvc3Q=">Jump host <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TXVsbGVk">Mulled <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV4dGZsb3c=">Nextflow <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVtb3Rl">Remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UzM=">S3 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2NyZWVu">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VjdXJpdHk=">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U21hcnRob21l">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVybWluYWw=">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VlNDb2Rl">VSCode <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmlzdWFsaXNhdGlvbg==">Visualisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2F2ZQ==">Wave <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2luU0NQ">WinSCP <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YW5ub3RhdGU=">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xvdWQ=">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXF1YXRpb25z">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0aHVi">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVtb3Rl">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3NoJTIwa2V5">ssh key <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -306,10 +302,46 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Nextflow,AWS,Batch,Fusion,Wave" data-listing-date-sort="1731848400000" data-listing-file-modified-sort="1732014534933" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
+<div class="quarto-post image-right" data-index="0" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1732366800000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="784">
+<div class="thumbnail">
+<p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a></p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
+<p><img loading="lazy" src="./posts/five-nextflow-tips-and-tricks/images/tony-hand-P3uJUQ62uXE-unsplash.jpg" class="thumbnail-image"></p>
+</a><p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">Five Nextflow Tips and Tricks</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
+Nextflow
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
+Bioinformatics
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">Five (or maybe six) quick Nextflow tips and tricks</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
+<div class="listing-date">
+Nov 24, 2024
+</div>
+<div class="listing-author">
+LW Pembleton
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0Z1c2lvbiUyQ1dhdmU=" data-listing-date-sort="1731848400000" data-listing-file-modified-sort="1769784175255" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
 <div class="thumbnail">
 <p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a></p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">
-<p><img src="./posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -320,19 +352,19 @@ window.Quarto = {
 <a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
 Nextflow
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Batch'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
 Batch
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Fusion'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RnVzaW9u'); return false;">
 Fusion
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Wave'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('V2F2ZQ=='); return false;">
 Wave
 </div>
 </div>
@@ -351,10 +383,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="Nextflow,Bioinformatics" data-listing-date-sort="1731416400000" data-listing-file-modified-sort="1731771481269" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1622">
+<div class="quarto-post image-right" data-index="2" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1731416400000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1622">
 <div class="thumbnail">
 <p><a href="./posts/build-with-resume/index.html" class="no-external"></a></p><a href="./posts/build-with-resume/index.html" class="no-external">
-<p><img src="./posts/build-with-resume/images/james-wainscoat-hjmED1qivmc-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/build-with-resume/images/james-wainscoat-hjmED1qivmc-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/build-with-resume/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -365,10 +397,10 @@ LW Pembleton
 <a href="./posts/build-with-resume/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
 Nextflow
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Bioinformatics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
 Bioinformatics
 </div>
 </div>
@@ -387,10 +419,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="R,Visualisation,ggplot2" data-listing-date-sort="1717941600000" data-listing-file-modified-sort="1718208350578" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
+<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ1Zpc3VhbGlzYXRpb24lMkNnZ3Bsb3Qy" data-listing-date-sort="1717941600000" data-listing-file-modified-sort="1769784175137" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
 <div class="thumbnail">
 <p><a href="./posts/ggplot-limits/index.html" class="no-external"></a></p><a href="./posts/ggplot-limits/index.html" class="no-external">
-<p><img src="./posts/ggplot-limits/images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/ggplot-limits/images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/ggplot-limits/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -401,13 +433,13 @@ LW Pembleton
 <a href="./posts/ggplot-limits/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('R'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
 R
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Visualisation'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('VmlzdWFsaXNhdGlvbg=='); return false;">
 Visualisation
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('ggplot2'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">
 ggplot2
 </div>
 </div>
@@ -426,10 +458,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="Cloud,AWS,VSCode,WinSCP,IDE,Remote,Jump host" data-listing-date-sort="1717250400000" data-listing-file-modified-sort="1717430237438" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="684">
+<div class="quarto-post image-right" data-index="4" data-categories="Q2xvdWQlMkNBV1MlMkNWU0NvZGUlMkNXaW5TQ1AlMkNJREUlMkNSZW1vdGUlMkNKdW1wJTIwaG9zdA==" data-listing-date-sort="1717250400000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="684">
 <div class="thumbnail">
 <p><a href="./posts/remote-vscode/index.html" class="no-external"></a></p><a href="./posts/remote-vscode/index.html" class="no-external">
-<p><img src="./posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/remote-vscode/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -440,25 +472,25 @@ LW Pembleton
 <a href="./posts/remote-vscode/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Cloud'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Q2xvdWQ='); return false;">
 Cloud
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('VSCode'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('VlNDb2Rl'); return false;">
 VSCode
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('WinSCP'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('V2luU0NQ'); return false;">
 WinSCP
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('IDE'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('SURF'); return false;">
 IDE
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Remote'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('UmVtb3Rl'); return false;">
 Remote
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Jump host'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('SnVtcCUyMGhvc3Q='); return false;">
 Jump host
 </div>
 </div>
@@ -477,10 +509,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Mulled,Docker,Containers,Bioinformatics" data-listing-date-sort="1710594000000" data-listing-file-modified-sort="1711902113371" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="990">
+<div class="quarto-post image-right" data-index="5" data-categories="TXVsbGVkJTJDRG9ja2VyJTJDQ29udGFpbmVycyUyQ0Jpb2luZm9ybWF0aWNz" data-listing-date-sort="1710594000000" data-listing-file-modified-sort="1769784175235" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="990">
 <div class="thumbnail">
 <p><a href="./posts/mulled-biocontainers/index.html" class="no-external"></a></p><a href="./posts/mulled-biocontainers/index.html" class="no-external">
-<p><img src="./posts/mulled-biocontainers/images/pexels-leeloo-the-first-6176681.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/mulled-biocontainers/images/pexels-leeloo-the-first-6176681.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/mulled-biocontainers/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -491,16 +523,16 @@ LW Pembleton
 <a href="./posts/mulled-biocontainers/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Mulled'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TXVsbGVk'); return false;">
 Mulled
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Docker'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">
 Docker
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Containers'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Q29udGFpbmVycw=='); return false;">
 Containers
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Bioinformatics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
 Bioinformatics
 </div>
 </div>
@@ -519,10 +551,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="Batch,EC2,AWS,Nextflow" data-listing-date-sort="1705928400000" data-listing-file-modified-sort="1706003839146" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="1000">
+<div class="quarto-post image-right" data-index="6" data-categories="QmF0Y2glMkNFQzIlMkNBV1MlMkNOZXh0Zmxvdw==" data-listing-date-sort="1705928400000" data-listing-file-modified-sort="1769784175314" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="1000">
 <div class="thumbnail">
 <p><a href="./posts/packing-for-ec2/index.html" class="no-external"></a></p><a href="./posts/packing-for-ec2/index.html" class="no-external">
-<p><img src="./posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/packing-for-ec2/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -533,16 +565,16 @@ LW Pembleton
 <a href="./posts/packing-for-ec2/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Batch'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
 Batch
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('EC2'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
 EC2
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
 Nextflow
 </div>
 </div>
@@ -561,10 +593,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="EC2,AWS,Bioinformatics,S3" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1706374152854" data-listing-date-modified-sort="1706374152000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2250">
+<div class="quarto-post image-right" data-index="7" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3MlMkNTMw==" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2250">
 <div class="thumbnail">
 <p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
-<p><img src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -575,16 +607,16 @@ LW Pembleton
 <a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('EC2'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
 EC2
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Bioinformatics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
 Bioinformatics
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('S3'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">
 S3
 </div>
 </div>
@@ -603,10 +635,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="EC2,AWS,Bioinformatics" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1700491518127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1006">
+<div class="quarto-post image-right" data-index="8" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3M=" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1006">
 <div class="thumbnail">
 <p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p><a href="./posts/aws-ec2-pricing/index.html" class="no-external">
-<p><img src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -617,13 +649,13 @@ LW Pembleton
 <a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('EC2'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
 EC2
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Bioinformatics'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
 Bioinformatics
 </div>
 </div>
@@ -642,10 +674,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="AWS,S3" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1696253958227" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="666">
+<div class="quarto-post image-right" data-index="9" data-categories="QVdTJTJDUzM=" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="666">
 <div class="thumbnail">
 <p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p><a href="./posts/aws-cli-s3/index.html" class="no-external">
-<p><img src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -656,10 +688,10 @@ LW Pembleton
 <a href="./posts/aws-cli-s3/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('S3'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">
 S3
 </div>
 </div>
@@ -678,10 +710,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="Docker,AWS,ECR" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1695487697857" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
+<div class="quarto-post image-right" data-index="10" data-categories="RG9ja2VyJTJDQVdTJTJDRUNS" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
 <div class="thumbnail">
 <p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p><a href="./posts/push-docker-to-ecr/index.html" class="no-external">
-<p><img src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -692,13 +724,13 @@ LW Pembleton
 <a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Docker'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">
 Docker
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('ECR'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RUNS'); return false;">
 ECR
 </div>
 </div>
@@ -717,10 +749,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="equations,quarto,annotate,LaTeX" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1704644784912" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
+<div class="quarto-post image-right" data-index="11" data-categories="ZXF1YXRpb25zJTJDcXVhcnRvJTJDYW5ub3RhdGUlMkNMYVRlWA==" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1769784175107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
 <div class="thumbnail">
 <p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p><a href="./posts/annotate-equations/index.html" class="no-external">
-<p><img src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"></p>
 </a><p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -731,16 +763,16 @@ LW Pembleton
 <a href="./posts/annotate-equations/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('equations'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('ZXF1YXRpb25z'); return false;">
 equations
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('quarto'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">
 quarto
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('annotate'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('YW5ub3RhdGU='); return false;">
 annotate
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('LaTeX'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">
 LaTeX
 </div>
 </div>
@@ -759,10 +791,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="Smarthome,Blue Iris,Security,Chromecast" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1693328940466" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
+<div class="quarto-post image-right" data-index="12" data-categories="U21hcnRob21lJTJDQmx1ZSUyMElyaXMlMkNTZWN1cml0eSUyQ0Nocm9tZWNhc3Q=" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
 <div class="thumbnail">
 <p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p><a href="./posts/cast-bi-ui3/index.html" class="no-external">
-<p><img src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -773,16 +805,16 @@ LW Pembleton
 <a href="./posts/cast-bi-ui3/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Smarthome'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('U21hcnRob21l'); return false;">
 Smarthome
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Blue Iris'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Qmx1ZSUyMElyaXM='); return false;">
 Blue Iris
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Security'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('U2VjdXJpdHk='); return false;">
 Security
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Chromecast'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hyb21lY2FzdA=='); return false;">
 Chromecast
 </div>
 </div>
@@ -801,10 +833,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="github,git,ssh key,AWS,remote,cloud" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1694534480408" data-listing-date-modified-sort="1694534480000" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
+<div class="quarto-post image-right" data-index="13" data-categories="Z2l0aHViJTJDZ2l0JTJDc3NoJTIwa2V5JTJDQVdTJTJDcmVtb3RlJTJDY2xvdWQ=" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1769784175137" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
 <div class="thumbnail">
 <p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p><a href="./posts/github-deploy-keys/index.html" class="no-external">
-<p><img src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -815,22 +847,22 @@ LW Pembleton
 <a href="./posts/github-deploy-keys/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('github'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Z2l0aHVi'); return false;">
 github
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('git'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Z2l0'); return false;">
 git
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('ssh key'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('c3NoJTIwa2V5'); return false;">
 ssh key
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('remote'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('cmVtb3Rl'); return false;">
 remote
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('cloud'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('Y2xvdWQ='); return false;">
 cloud
 </div>
 </div>
@@ -849,10 +881,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="Screen,AWS,Terminal" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1694749092928" data-listing-date-modified-sort="1694749092000" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
+<div class="quarto-post image-right" data-index="14" data-categories="U2NyZWVuJTJDQVdTJTJDVGVybWluYWw=" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
 <div class="thumbnail">
 <p><a href="./posts/screen/index.html" class="no-external"></a></p><a href="./posts/screen/index.html" class="no-external">
-<p><img src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/screen/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -863,13 +895,13 @@ LW Pembleton
 <a href="./posts/screen/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Screen'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('U2NyZWVu'); return false;">
 Screen
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Terminal'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('VGVybWluYWw='); return false;">
 Terminal
 </div>
 </div>
@@ -888,10 +920,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="AWS,Endpoints,Gateway,Batch" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1684341132440" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
+<div class="quarto-post image-right" data-index="15" data-categories="QVdTJTJDRW5kcG9pbnRzJTJDR2F0ZXdheSUyQ0JhdGNo" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
 <div class="thumbnail">
 <p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p><a href="./posts/aws-endpoints/index.html" class="no-external">
-<p><img src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -902,16 +934,16 @@ LW Pembleton
 <a href="./posts/aws-endpoints/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Endpoints'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RW5kcG9pbnRz'); return false;">
 Endpoints
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Gateway'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('R2F0ZXdheQ=='); return false;">
 Gateway
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Batch'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
 Batch
 </div>
 </div>
@@ -930,10 +962,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="Nextflow,AWS,Batch,EBS" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1675353326732" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
+<div class="quarto-post image-right" data-index="16" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0VCUw==" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1769784175107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
 <div class="thumbnail">
 <p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
-<p><img src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -944,16 +976,16 @@ LW Pembleton
 <a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
 Nextflow
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Batch'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
 Batch
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('EBS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('RUJT'); return false;">
 EBS
 </div>
 </div>
@@ -972,10 +1004,10 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="Nextflow,AWS,Batch" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1675353290782" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2568">
+<div class="quarto-post image-right" data-index="17" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaA==" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1769784175265" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2568">
 <div class="thumbnail">
 <p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
-<p><img src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"></p>
+<p><img loading="lazy" src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"></p>
 </a><p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p>
 </div>
 <div class="body">
@@ -986,13 +1018,13 @@ LW Pembleton
 <a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a>
 </div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Nextflow'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
 Nextflow
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('AWS'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
 AWS
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Batch'); return false;">
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
 Batch
 </div>
 </div>
@@ -1051,18 +1083,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -1094,7 +1115,45 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lpembleton\.rbind\.io");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -1129,7 +1188,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -1177,7 +1240,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      return note.innerHTML;
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -1405,7 +1472,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <p>© 2024 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
-<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener"><i class="fa-brands fa-twitter" aria-label="twitter"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
+<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
 <div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
     <div class="nav-footer-right">
       &nbsp;
