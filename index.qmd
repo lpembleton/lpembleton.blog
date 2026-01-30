@@ -38,7 +38,7 @@ I am a Genomic Breeding Scientist and Global Science Manager at Barenbrug where 
 
 My expertise lies predominantly in the realm of 🧬 **Genomics**, with a specialised focus on **Genomic Selection** and **Genomic Breeding**, particularly in the context of plants 🌱. Proficient in **bioinformatics** 👨‍💻 {{< fa brands linux >}}, I am driven by a deep passion for the {{< fa brands r-project >}} programming language.
 
-My skill set extends to crafting robust **cloud computing** ☁️ {{< fa brands aws >}} environments tailored for both research and production pipelines. I take pleasure in orchestrating these systems with the precision of the **Nextflow** 🔂 workflow manager, and were I once proudly serve as a **Nextflow Ambassador**. Through my technical endeavours, I am dedicated to advancing genomic research and breeding practices for a sustainable future.
+My skill set extends to crafting robust **cloud computing** ☁️ {{< fa brands aws >}} environments tailored for both research and production pipelines. I take pleasure in orchestrating these systems with the precision of the **Nextflow** 🔂 workflow manager, and where I once proudly served as a **Nextflow Ambassador**. Through my technical endeavours, I am dedicated to advancing genomic research and breeding practices for a sustainable future.
 
 <h2>[Experience]{.highlight}</h2>
 
