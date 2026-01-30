@@ -29,7 +29,6 @@ Begin by establishing your base plot, which will serve as the canvas for your em
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
-library(mdthemes)
 data(mtcars)
 
 base_plot <- ggplot(mtcars, aes(hp, mpg)) +
@@ -37,7 +36,7 @@ base_plot <- ggplot(mtcars, aes(hp, mpg)) +
   geom_smooth(size = 1.5, se = F, colour = "#3a86ff") +
   labs(title = "Example of a plot **embedded** within another",
     subtitle = "Using the function *'annotation_custom()'*") +
-  md_theme_bw() +
+  theme_bw() +
   xlim(50, 200)
 ```
 
@@ -49,7 +48,7 @@ Your embedded plot doesn't have to be the same type as your base plot. Feel free
 embedded_plot <- ggplot(mtcars, aes(hp, mpg)) +
   geom_point(size = 4, alpha = 0.6, colour = "#22333b") +
   geom_smooth(size = 1.5, se = F, colour = "#3a86ff") +
-  md_theme_bw()
+  theme_bw()
 ```
 
 **Step 3:** Use `custom_annotate()` to embed the plot.
