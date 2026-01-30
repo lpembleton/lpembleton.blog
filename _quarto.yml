@@ -31,8 +31,6 @@ website:
         href: pages/vivarium.qmd
       - icon: github
         href: https://github.com/lpembleton
-      - icon: twitter
-        href: https://twitter.com/lwpembleton
       - icon: mastodon
         href: https://genomic.social/@lwpembleton
       - text: "{{< iconify arcticons bluesky-alt size=28px >}}"
@@ -51,7 +49,6 @@ website:
     center: |
       <a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener">{{< fa brands mastodon >}}</a>
       <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener">{{< fa brands github >}}</a>
-      <a class="link-dark me-1" href="https://twitter.com/lwpembleton" title="twitter" target="_blank" rel="noopener">{{< fa brands twitter >}}</a>
       <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en" title="Google Scholar" target="_blank"rel="noopener">{{< ai google-scholar >}}</a>
       <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener">{{< fa brands linkedin >}}</a>
 

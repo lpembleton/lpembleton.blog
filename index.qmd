@@ -1,14 +1,11 @@
 ---
 title: <centre-title><span class="highlight">Dr Luke Pembleton</span></centre-title>
 description:
-  Genomic Breeding Scientist and Global Strategic Science Manager at Barenbrug.
+  Genomic Breeding Scientist and Global Science Manager at Barenbrug.
 image: avatar.jpg
 about:
   template: jolla
   links:
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/lwpembleton
     - icon: mastodon
       text: mastodon
       href: https://genomic.social/@lwpembleton
@@ -35,19 +32,25 @@ about:
 
 <h2>[About Me]{.highlight}</h2>
 
-I am a Genomic Breeding Scientist and Strategic Science Manager at Barenbrug where I lead the development and implementation of commercial genomic breeding and associated 'omic' technologies.
+I am a Genomic Breeding Scientist and Global Science Manager at Barenbrug where I lead the development and implementation of commercial genomic breeding and associated 'omic' technologies.
 
 <h2>[Interest and Skills]{.highlight}</h2>
 
 My expertise lies predominantly in the realm of 🧬 **Genomics**, with a specialised focus on **Genomic Selection** and **Genomic Breeding**, particularly in the context of plants 🌱. Proficient in **bioinformatics** 👨‍💻 {{< fa brands linux >}}, I am driven by a deep passion for the {{< fa brands r-project >}} programming language.
 
-My skill set extends to crafting robust **cloud computing** ☁️ {{< fa brands aws >}} environments tailored for both research and production pipelines. I take pleasure in orchestrating these systems with the precision of the **Nextflow** 🔂 workflow manager, and proudly serve as a **Nextflow Ambassador**. Through my technical endeavours, I am dedicated to advancing genomic research and breeding practices for a sustainable future.
+My skill set extends to crafting robust **cloud computing** ☁️ {{< fa brands aws >}} environments tailored for both research and production pipelines. I take pleasure in orchestrating these systems with the precision of the **Nextflow** 🔂 workflow manager, and were I once proudly serve as a **Nextflow Ambassador**. Through my technical endeavours, I am dedicated to advancing genomic research and breeding practices for a sustainable future.
 
 <h2>[Experience]{.highlight}</h2>
 
-![](images/Barenbrug.svg){width="36"} **Genomic Breeding Scientist \| Global Strategic Science Manager**
+![](images/Barenbrug.svg){width="36"} **Global Science Manager**
 
-Barenbrug \| August 2021 - Current
+Barenbrug \| October 2025 - Current
+
+\~
+
+![](images/Barenbrug.svg){width="36"} **Genomic Breeding Scientist \| Strategic Science Manager**
+
+Barenbrug \| August 2021 - October 2025
 
 \~
 
