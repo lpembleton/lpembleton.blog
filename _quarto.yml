@@ -23,10 +23,10 @@ website:
         href: blog.qmd
       - text: RAMBLINGS
         href: ramblings.qmd
+      - text: SOFTWARE
+        href: pages/packages.qmd
       - text: PUBLICATIONS
         href: publications/publications.qmd
-      - text: CONFERENCES
-        href: pages/conferences.qmd
       - text: VIVARIUM
         href: pages/vivarium.qmd
       - icon: github
@@ -39,13 +39,15 @@ website:
         href: https://scholar.google.com/citations?user=r7RmM00AAAAJ&hl=en
       - text: "{{< iconify academicons publons-square size=24px >}}"
         href: https://publons.com/researcher/3450394/luke-pembleton/
+      - text: "{{< iconify academicons orcid-square size=24px >}}"
+        href: https://orcid.org/0000-0001-8131-8210
       - icon: linkedin
         href: https://linkedin.com/in/lpembleton
       - text: "{{< fa solid box-open >}}"
-        href: https://lpembleton.github.io/StAMPP/
+        href: pages/packages.qmd
         
   page-footer:  
-    left: "&#169; 2024 Luke Pembleton &#8729; Made with [Quarto](https://quarto.org)"
+    left: "&#169; 2026 Luke Pembleton &#8729; Made with [Quarto](https://quarto.org)"
     center: |
       <a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener">{{< fa brands mastodon >}}</a>
       <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener">{{< fa brands github >}}</a>

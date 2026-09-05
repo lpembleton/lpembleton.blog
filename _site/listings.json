@@ -1,17 +1,8 @@
 [
   {
-    "listing": "/ramblings.html",
-    "items": [
-      "/ramblings/Colours/index.html",
-      "/ramblings/Quarto/index.html",
-      "/ramblings/bash/index.html",
-      "/ramblings/R/index.html",
-      "/ramblings/AWS/index.html"
-    ]
-  },
-  {
     "listing": "/blog.html",
     "items": [
+      "/posts/the-2026-aws-nextflow-survival-guide/index.html",
       "/posts/five-nextflow-tips-and-tricks/index.html",
       "/posts/nextflow-on-aws-batch-the-update/index.html",
       "/posts/build-with-resume/index.html",
@@ -30,6 +21,16 @@
       "/posts/aws-endpoints/index.html",
       "/posts/aws-batch-ebs-autoscale/index.html",
       "/posts/nextflow-on-aws-batch/index.html"
+    ]
+  },
+  {
+    "listing": "/ramblings.html",
+    "items": [
+      "/ramblings/Quarto/index.html",
+      "/ramblings/bash/index.html",
+      "/ramblings/Colours/index.html",
+      "/ramblings/R/index.html",
+      "/ramblings/AWS/index.html"
     ]
   }
 ]

@@ -1,0 +1,70 @@
+---
+title: "R Packages"
+---
+
+A collection of R packages I developed, authored, or help maintain.
+
+<div class="package-grid">
+
+<article class="package-item">
+<img src="../assets/lpembleton/img/packages/stampp.png" alt="StAMPP hex sticker">
+
+### [StAMPP](https://github.com/lpembleton/StAMPP/)
+
+Statistical analysis of mixed ploidy populations. StAMPP calculates genetic distances, fixation indexes, and genomic relationship matrices from SNP genotype data across mixed and single ploidy populations.
+
+[GitHub](https://github.com/lpembleton/StAMPP/) · [CRAN](https://cran.r-project.org/package=StAMPP)
+</article>
+
+<article class="package-item">
+<img src="../assets/lpembleton/img/packages/corner.png" alt="corner hex sticker">
+
+### [corner](https://github.com/lpembleton/corner)
+
+A lightweight, console-width-aware toolkit for quickly inspecting the top-left corner of objects and recursively previewing lists without overwhelming your console.
+
+[GitHub](https://github.com/lpembleton/corner)
+</article>
+
+<article class="package-item">
+<img src="../assets/lpembleton/img/packages/resurface.png" alt="resurface hex sticker">
+
+### [resurface](https://github.com/lpembleton/resurface)
+
+Imputation of genotypic allele frequencies using the LD-kNNi algorithm.
+
+[GitHub](https://github.com/lpembleton/resurface)
+</article>
+
+</div>
+
+<style>
+.package-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.package-item {
+	text-align: center;
+}
+
+.package-item img {
+	display: block;
+	height: 180px;
+	width: 180px;
+	object-fit: contain;
+	margin: 0 auto 1.25rem;
+}
+
+.package-item h3 {
+	font-size: 1.5rem;
+	margin-bottom: 0.75rem;
+}
+
+.package-item p {
+	font-size: 1rem;
+	text-align: left;
+}
+</style>

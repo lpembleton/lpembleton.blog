@@ -1,0 +1,1336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="LW Pembleton">
+<meta name="dcterms.date" content="2026-08-28">
+<meta name="description" content="An updated guide to setting up Nextflow on AWS Batch in 2026 without fusion">
+
+<title>The 2026 AWS Nextflow Survival Guide – Luke Pembleton</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../assets/lpembleton/img/dna-logo.svg" rel="icon" type="image/svg+xml">
+<script src="../../site_libs/cookie-consent/cookie-consent.js"></script>
+<link href="../../site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-f7d074e30f9344b9dece2131cce479ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/academicons-1.9.2/size.css" rel="stylesheet">
+<script src="../../site_libs/quarto-contrib/iconify-1.0.7/iconify-icon.min.js"></script>
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-NQ96R1Y33J"></script>
+
+<script type="text/plain" cookie-consent="tracking">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-NQ96R1Y33J', { 'anonymize_ip': true});
+</script>
+
+<script type="text/javascript" charset="UTF-8">
+document.addEventListener('DOMContentLoaded', function () {
+cookieconsent.run({
+  "notice_banner_type":"simple",
+  "consent_type":"express",
+  "palette":"light",
+  "language":"en",
+  "page_load_consent_levels":["strictly-necessary"],
+  "notice_banner_reject_button_hide":false,
+  "preferences_center_close_button_hide":false,
+  "website_name":""
+  ,
+"language":"en"
+  });
+});
+</script> 
+  
+
+
+<meta property="og:title" content="The 2026 AWS Nextflow Survival Guide – Luke Pembleton">
+<meta property="og:description" content="An updated guide to setting up Nextflow on AWS Batch in 2026 without fusion">
+<meta property="og:image" content="images/dippyaman-nath-EegncyuEqEI-unsplash.jpg">
+<meta property="og:site_name" content="Luke Pembleton">
+<meta name="twitter:title" content="The 2026 AWS Nextflow Survival Guide – Luke Pembleton">
+<meta name="twitter:description" content="An updated guide to setting up Nextflow on AWS Batch in 2026 without fusion">
+<meta name="twitter:image" content="images/dippyaman-nath-EegncyuEqEI-unsplash.jpg">
+<meta name="twitter:site" content="@lwpembleton">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo light-content">
+    <img src="../../assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Luke Pembleton</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">ABOUT</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">BLOG</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../ramblings.html"> 
+<span class="menu-text">RAMBLINGS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/packages.html"> 
+<span class="menu-text">SOFTWARE</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../publications/publications.html"> 
+<span class="menu-text">PUBLICATIONS</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/vivarium.html"> 
+<span class="menu-text">VIVARIUM</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/lpembleton"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://genomic.social/@lwpembleton"> <i class="bi bi-mastodon" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://bsky.app/profile/lwpembleton.bsky.social"> 
+<span class="menu-text"><iconify-icon inline="" icon="arcticons:bluesky-alt" style="font-size: 28px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:google-scholar-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/0000-0001-8131-8210"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:orcid-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://linkedin.com/in/lpembleton"> <i class="bi bi-linkedin" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../../pages/packages.html"> 
+<span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default toc-left page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">The 2026 AWS Nextflow Survival Guide</h1>
+                  <div>
+        <div class="description">
+          An updated guide to setting up Nextflow on AWS Batch in 2026 without fusion
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Nextflow</div>
+                <div class="quarto-category">AWS</div>
+                <div class="quarto-category">Batch</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>LW Pembleton </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">August 28, 2026</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-we-are-building" id="toc-what-we-are-building" class="nav-link active" data-scroll-target="#what-we-are-building">What We Are Building</a></li>
+  <li><a href="#s3-bucket-setup" id="toc-s3-bucket-setup" class="nav-link" data-scroll-target="#s3-bucket-setup">1) S3 Bucket Setup 🪣</a></li>
+  <li><a href="#iam-roles" id="toc-iam-roles" class="nav-link" data-scroll-target="#iam-roles">2) IAM Roles 🛡️</a></li>
+  <li><a href="#launch-template-for-batch-compute" id="toc-launch-template-for-batch-compute" class="nav-link" data-scroll-target="#launch-template-for-batch-compute">3) Launch Template for Batch Compute 🚀</a></li>
+  <li><a href="#batch-compute-environments-and-queues" id="toc-batch-compute-environments-and-queues" class="nav-link" data-scroll-target="#batch-compute-environments-and-queues">4) Batch Compute Environments and Queues 🧮</a></li>
+  <li><a href="#nextflow-head-node" id="toc-nextflow-head-node" class="nav-link" data-scroll-target="#nextflow-head-node">5) Nextflow Head Node 🎛️</a></li>
+  <li><a href="#nextflow-config" id="toc-nextflow-config" class="nav-link" data-scroll-target="#nextflow-config">6) Nextflow Config</a></li>
+  <li><a href="#optional-mount-the-nextflow-bucket-on-the-head-node-for-debugging-in-vs-code" id="toc-optional-mount-the-nextflow-bucket-on-the-head-node-for-debugging-in-vs-code" class="nav-link" data-scroll-target="#optional-mount-the-nextflow-bucket-on-the-head-node-for-debugging-in-vs-code">7) Optional: Mount the Nextflow bucket on the head node (for debugging in VS Code)</a></li>
+  <li><a href="#test-with-nf-probe" id="toc-test-with-nf-probe" class="nav-link" data-scroll-target="#test-with-nf-probe">8) Test with nf-probe</a></li>
+  <li><a href="#additional-notes" id="toc-additional-notes" class="nav-link" data-scroll-target="#additional-notes">Additional Notes</a></li>
+  <li><a href="#final-thought" id="toc-final-thought" class="nav-link" data-scroll-target="#final-thought">Final Thought</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/dippyaman-nath-EegncyuEqEI-unsplash.jpg" class="img-fluid figure-img"></p>
+<figcaption>~Photo by <a href="https://unsplash.com/@createwithdippyaman">Dippyaman Nath</a> on Unsplash~</figcaption>
+</figure>
+</div>
+<p>It has been a while since my previous Nextflow + AWS Batch guides, and the setup pattern has shifted again.</p>
+<p>This post is for folks who want to run open-source Nextflow on AWS Batch without Seqera Platform. <a href="https://seqera.io/platform/">Seqera Platform</a> is excellent and absolutely worth it if it fits your org and budget. But if you are running solo, in a small R&amp;D team, or just need a lean setup, this is the “no paid platform” path.</p>
+<p>On the licensing side, I think most people doing this in smaller teams will find common ground here: the platform is great, but the bill still needs to make sense. If you are an academic institute, startup, or biopharma group with budget and scale, those features can absolutely pay for themselves. For everyone else, a simpler setup may be the better fit.</p>
+<p>The good news is that Nextflow remains actively maintained as an open-source project by Seqera, making this approach entirely viable. You can run serious production workloads on AWS Batch without the Seqera platform layer; you’ll simply need to take a more hands-on approach during the initial setup and infrastructure configuration.</p>
+<p>One notable change since my last write-up is the economics around Fusion. Fusion is now effectively a paid feature beyond the free tier. Well, apparently it was always a paid feature, but let’s just say they did not do the best job of making that clear.</p>
+<p>So this 2026 setup guide leans into local NVMe scratch on Batch instances instead of Fusion/EBS autoscaling gymnastics.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>There is still a minimal free-tier path for Fusion, but I would say if you are giving it access to your AWS infrastructure and you still want to sleep at night, you probably want MFA for logins, which is not a free-tier feature. That tradeoff was a big part of why I am running plain AWS + open-source Nextflow, and why I wrote this guide.</p>
+</div>
+</div>
+<section id="what-we-are-building" class="level2">
+<h2 class="anchored" data-anchor-id="what-we-are-building">What We Are Building</h2>
+<p>At a high level:</p>
+<ol type="1">
+<li>Create an S3 bucket for <code>workDir</code> + results.</li>
+<li>Create IAM roles for Batch tasks and the Nextflow head node.</li>
+<li>Create an EC2 launch template that mounts NVMe as <code>/scratch</code> and moves Docker storage there.</li>
+<li>Create Batch compute environments and queues (Spot + On-Demand).</li>
+<li>Launch a private head node to run Nextflow.</li>
+<li>Optionally mount the Nextflow S3 bucket on the head node for debugging in VS Code.</li>
+<li>Validate everything with <code>nf-probe</code>.</li>
+</ol>
+<p>Now historically AWS does not update their console UI too often 🐢, but I have noticed more frequent changes lately, so if some of the button names have changed since I wrote this, you may just need some detective 🕵️ work. The core concepts are still the same, but the UI may have shifted a bit.</p>
+</section>
+<section id="s3-bucket-setup" class="level2">
+<h2 class="anchored" data-anchor-id="s3-bucket-setup">1) S3 Bucket Setup 🪣</h2>
+<p>Create a new <em>private</em> S3 bucket in the same region as your Batch compute environment.</p>
+<p>I recommend:</p>
+<ul>
+<li>A dedicated bucket for Nextflow runs.</li>
+<li>Directories within it called <code>work/</code> and <code>results/</code>.</li>
+<li>A lifecycle rule to expire old files under <code>work/</code> (for example after 30 days).</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/s3-lifecycle.png" class="img-fluid figure-img" style="width:110.0%"></p>
+<figcaption>Lifecycle rule configuration</figcaption>
+</figure>
+</div>
+<p>Why lifecycle? Because <code>work/</code> can quietly become a cost monster if people forget to clean up old runs. Hoarding data can be a pastime for some of us, but I would say paying increasing S3 bills is not so much fun. So lifecycle rules are a good idea, especially in teams.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Bucket versioning is usually disabled by default for new S3 buckets. Keep it that way for this bucket. Versioning can increase storage costs dramatically and is not necessary for temporary work directories.</p>
+</div>
+</div>
+<p>ℹ️ Write down the ARN of your S3 bucket; you will need it when creating IAM roles and policies.</p>
+</section>
+<section id="iam-roles" class="level2">
+<h2 class="anchored" data-anchor-id="iam-roles">2) IAM Roles 🛡️</h2>
+<section id="nextflowtaskrole-assumed-by-batch-jobs" class="level4">
+<h4 class="anchored" data-anchor-id="nextflowtaskrole-assumed-by-batch-jobs">2.1 <code>NextflowTaskRole</code> (assumed by Batch jobs)</h4>
+<p>Head over to the IAM console and create a new role for Batch tasks called <code>NextflowTaskRole</code>.</p>
+<p>Attach:</p>
+<ul>
+<li>Managed policy: <code>AmazonECSTaskExecutionRolePolicy</code></li>
+<li>a custom inline policy</li>
+</ul>
+<p>To add a custom inline policy, click on <code>Add permissons</code> <img src="images/add-permissions2.png" class="img-fluid" style="width:70.0%" alt="add permissions"></p>
+<p>and select <code>create inline policy</code> from the drop down.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/specify-permissions.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>specify permissions</figcaption>
+</figure>
+</div>
+<p>and copy the following JSON policy into the editor.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Version"</span><span class="fu">:</span> <span class="st">"2012-10-17"</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Statement"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"S3WorkDirectory"</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:GetObject"</span><span class="ot">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:PutObject"</span><span class="ot">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:DeleteObject"</span><span class="ot">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:ListBucket"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;"</span><span class="ot">,</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;/*"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"S3DataBucketsReadOnly"</span><span class="fu">,</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:GetObject"</span><span class="ot">,</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:GetObjectVersion"</span><span class="ot">,</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:ListBucket"</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>                <span class="st">"arn:aws:s3:::*"</span><span class="ot">,</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>                <span class="st">"arn:aws:s3:::*/*"</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"ECRImagePull"</span><span class="fu">,</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ecr:GetAuthorizationToken"</span><span class="ot">,</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ecr:BatchGetImage"</span><span class="ot">,</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ecr:GetDownloadUrlForLayer"</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="st">"*"</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace the placeholders <code>&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;</code> with the ARN of the S3 bucket you created in step 1.</p>
+</div>
+</div>
+<p>Why these permissions?</p>
+<ul>
+<li><code>S3WorkDirectory</code> gives jobs write/delete access only to the designated Nextflow work/results bucket.</li>
+<li><code>S3DataBucketsReadOnly</code> lets tasks read input data broadly without giving them write access to raw/project data buckets.</li>
+<li><code>ECRImagePull</code> allows jobs to pull container images at runtime.</li>
+</ul>
+<p>The intent is least privilege with practical usability: write and delete where you must (S3 work dir), read where you need (e.g.&nbsp;input data/project buckets), and avoid broad destructive access.</p>
+</section>
+<section id="nextflowheadnoderole-assumed-by-the-ec2-head-node" class="level4">
+<h4 class="anchored" data-anchor-id="nextflowheadnoderole-assumed-by-the-ec2-head-node">2.2 <code>NextflowHeadNodeRole</code> (assumed by the EC2 head node)</h4>
+<p>Create another role for your head node instance profile and attach an inline policy like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode json code-with-copy"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Version"</span><span class="fu">:</span> <span class="st">"2012-10-17"</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">"Statement"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"BatchJobOrchestration"</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:CancelJob"</span><span class="ot">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:RegisterJobDefinition"</span><span class="ot">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:DescribeJobDefinitions"</span><span class="ot">,</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:DescribeJobQueues"</span><span class="ot">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:DescribeComputeEnvironments"</span><span class="ot">,</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:ListJobs"</span><span class="ot">,</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:DescribeJobs"</span><span class="ot">,</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:SubmitJob"</span><span class="ot">,</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:TerminateJob"</span><span class="ot">,</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>                <span class="st">"batch:TagResource"</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="st">"*"</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"PassRoleToJobs"</span><span class="fu">,</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="st">"iam:PassRole"</span><span class="fu">,</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="st">"&lt;NextflowTaskRole_ARN&gt;"</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"S3WorkDirectory"</span><span class="fu">,</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:GetObject"</span><span class="ot">,</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:PutObject"</span><span class="ot">,</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:DeleteObject"</span><span class="ot">,</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:ListBucket"</span><span class="ot">,</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:ListBucketVersions"</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>                <span class="st">"&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;"</span><span class="ot">,</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>                <span class="st">"&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;/*"</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"ReadOnlyAllS3"</span><span class="fu">,</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:Get*"</span><span class="ot">,</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>                <span class="st">"s3:List*"</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="st">"*"</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        <span class="fu">{</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Sid"</span><span class="fu">:</span> <span class="st">"EC2LaunchTemplates"</span><span class="fu">,</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Effect"</span><span class="fu">:</span> <span class="st">"Allow"</span><span class="fu">,</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Action"</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeLaunchTemplates"</span><span class="ot">,</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeLaunchTemplateVersions"</span><span class="ot">,</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeInstanceAttribute"</span><span class="ot">,</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeInstances"</span><span class="ot">,</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeInstanceStatus"</span><span class="ot">,</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ec2:DescribeInstanceTypes"</span><span class="ot">,</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ecs:DescribeContainerInstances"</span><span class="ot">,</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>                <span class="st">"ecs:DescribeTasks"</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>            <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>            <span class="dt">"Resource"</span><span class="fu">:</span> <span class="st">"*"</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="ot">]</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>This role is your control plane role for orchestration:</p>
+<ul>
+<li><code>BatchJobOrchestration</code> lets the head node register, submit, monitor, tag, and terminate jobs.</li>
+<li><code>PassRoleToJobs</code> is required so submitted jobs can assume <code>NextflowTaskRole</code>.</li>
+<li><code>S3WorkDirectory</code> supports read/write/delete in the dedicated work bucket.</li>
+<li><code>ReadOnlyAllS3</code> allows broad read/list across S3 for upstream input access patterns.</li>
+<li><code>EC2LaunchTemplates</code> also includes the EC2/ECS describe actions Nextflow commonly uses when orchestrating Batch jobs.</li>
+</ul>
+<p>So the split is deliberate: the head node can coordinate everything, while destructive data access stays constrained to your dedicated Nextflow bucket.</p>
+<p>Replace placeholders:</p>
+<ul>
+<li><code>&lt;NextflowTaskRole_ARN&gt;</code> with the ARN of the IAM role you created in step 2.1. (e.g.&nbsp;<code>arn:aws:iam::&lt;account-id&gt;:role/NextflowTaskRole</code>)</li>
+<li><code>&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;</code> with the ARN of the S3 bucket you created in step 1.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you connect to your head node via AWS Systems Manager Session Manager, i.e.&nbsp;SSO, also attach <code>AmazonSSMManagedInstanceCore</code> to the head node role.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="launch-template-for-batch-compute" class="level2">
+<h2 class="anchored" data-anchor-id="launch-template-for-batch-compute">3) Launch Template for Batch Compute 🚀</h2>
+<p>Ok this is probably the biggest update compared to my previous guides. We are going to use launch templates to automate all the NVMe scratch setup and Docker storage relocation. What this gives us is Batch compute instances that have local NVMe drives included with their compute (very cost effective), mounted as <code>/scratch</code> for temporary storage. We will also move Docker storage to that NVMe scratch so container pulls and writes are fast and do not hit EBS. This is the middle ground I have found between the old EBS autoscaling gymnastics and the new Fusion paid feature.</p>
+<section id="why-nvme-scratch-instead-of-fusion-or-ebs-autoscaling" class="level4">
+<h4 class="anchored" data-anchor-id="why-nvme-scratch-instead-of-fusion-or-ebs-autoscaling">Why NVMe scratch instead of Fusion or EBS autoscaling?</h4>
+<p>This is the core concept behind the setup, so it is worth spelling out clearly:</p>
+<ul>
+<li>Nextflow still uses S3 as the durable source of truth for <code>workDir</code> and outputs.</li>
+<li>Each Batch task stages what it needs onto fast local disk (<code>/scratch</code> on NVMe).</li>
+<li>The task runs on local disk (fast reads/writes, good random I/O, no EBS scaling logic).</li>
+<li>Results and task metadata are pushed back to S3 when tasks complete.</li>
+</ul>
+<p>Alright lets give it a crack.</p>
+<p>Head over to EC2 in the AWS console and create a new launch template.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/launch-template-create.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Create Launch Template</figcaption>
+</figure>
+</div>
+<p>Lets call it <code>NextflowBatchTemplate</code>. You can call it what you like, <code>dancing-pot-plant</code> if you like, just take note of what you name it as you will need it later when creating your Batch compute environments.</p>
+<p>Leave all the settings blank or default, including the AMI. In the Batch compute environment we will specify the use of Amazon Linux 2023 ECS-optimised AMI.</p>
+<p>Network settings and Storage volumes, leave blank, we will just use the default root volume that comes with the AMI, as we are going to mount the NVMe instance store as <code>/scratch</code> and move Docker storage there.</p>
+<p>Under resource tags, this is a good place to add a tag like <code>Name: Nextflow-Batch</code> so you can easily identify the instances in the EC2 console. That way you can easily see which instances belong to your Nextflow Batch setup, if you need to manually terminate them.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/resource-tags.png" class="img-fluid figure-img" style="width:100.0%"></p>
+<figcaption>Resource Tags</figcaption>
+</figure>
+</div>
+<p>Add in the following metadata options: - <code>V2 only (token required)</code> - hop limit <code>2</code></p>
+<p>You should be able to leave everything else blank as this is a launch template. Then paste this in the User Data section:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">MIME-Version:</span> 1.0</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> multipart/mixed<span class="kw">;</span> <span class="va">boundary</span><span class="op">=</span><span class="st">"==BOUNDARY=="</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">--==BOUNDARY==</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Content-Type:</span> text/x-shellscript<span class="kw">;</span> <span class="va">charset</span><span class="op">=</span><span class="st">"us-ascii"</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=== NVMe Setup Script Starting ==="</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Stop Docker and ECS completely (including socket activation)</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop ecs <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop docker <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> stop docker.socket <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Find NVMe instance store devices (not the EBS root volume)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="va">ROOT_DEVICE</span><span class="op">=</span><span class="va">$(</span><span class="ex">lsblk</span> <span class="at">-rno</span> PKNAME <span class="st">"</span><span class="va">$(</span><span class="ex">findmnt</span> <span class="at">-n</span> <span class="at">-o</span> SOURCE /<span class="va">)</span><span class="st">"</span> <span class="kw">|</span> <span class="fu">head</span> <span class="at">-1</span><span class="va">)</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Root device: </span><span class="va">$ROOT_DEVICE</span><span class="st">"</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="va">INSTANCE_DEVICES</span><span class="op">=</span><span class="st">""</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> dev <span class="kw">in</span> /dev/nvme<span class="pp">*</span>n1<span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="va">DEV_NAME</span><span class="op">=</span><span class="va">$(</span><span class="fu">basename</span> <span class="st">"</span><span class="va">$dev</span><span class="st">"</span><span class="va">)</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$DEV_NAME</span><span class="st">"</span> <span class="ot">=</span> <span class="st">"</span><span class="va">$ROOT_DEVICE</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="ex">lsblk</span> <span class="at">-rno</span> MOUNTPOINT <span class="st">"</span><span class="va">$dev</span><span class="st">"</span> <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">|</span> <span class="fu">grep</span> <span class="at">-q</span> .<span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">fi</span></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    <span class="va">INSTANCE_DEVICES</span><span class="op">=</span><span class="st">"</span><span class="va">$INSTANCE_DEVICES</span><span class="st"> </span><span class="va">$dev</span><span class="st">"</span></span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a><span class="va">INSTANCE_DEVICES</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$INSTANCE_DEVICES</span> <span class="kw">|</span> <span class="fu">xargs</span><span class="va">)</span></span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">-z</span> <span class="st">"</span><span class="va">$INSTANCE_DEVICES</span><span class="st">"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"No NVMe instance storage found — using EBS only"</span></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="ex">systemctl</span> start docker</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="ex">systemctl</span> start ecs</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">echo</span> <span class="st">"=== NVMe Setup Complete (EBS only) ==="</span></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">exit</span> 0</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Found NVMe instance store: </span><span class="va">$INSTANCE_DEVICES</span><span class="st">"</span></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a><span class="va">MOUNT_POINT</span><span class="op">=</span><span class="st">"/scratch"</span></span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$MOUNT_POINT</span></span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a><span class="va">DEVICE_COUNT</span><span class="op">=</span><span class="va">$(</span><span class="bu">echo</span> <span class="va">$INSTANCE_DEVICES</span> <span class="kw">|</span> <span class="fu">wc</span> <span class="at">-w</span><span class="va">)</span></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="st">"</span><span class="va">$DEVICE_COUNT</span><span class="st">"</span> <span class="ot">-gt</span> 1 <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="ex">yum</span> install <span class="at">-y</span> mdadm <span class="dv">2</span><span class="op">&gt;</span>/dev/null <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    <span class="ex">mdadm</span> <span class="at">--create</span> /dev/md0 <span class="at">--level</span><span class="op">=</span>0 <span class="at">--raid-devices</span><span class="op">=</span><span class="va">$DEVICE_COUNT</span> <span class="va">$INSTANCE_DEVICES</span> <span class="at">--force</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>    <span class="ex">mkfs.xfs</span> /dev/md0</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mount</span> /dev/md0 <span class="va">$MOUNT_POINT</span></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span></span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>    <span class="ex">mkfs.xfs</span> <span class="at">-f</span> <span class="va">$INSTANCE_DEVICES</span></span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mount</span> <span class="va">$INSTANCE_DEVICES</span> <span class="va">$MOUNT_POINT</span></span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="fu">chmod</span> 1777 <span class="va">$MOUNT_POINT</span></span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"NVMe mounted at </span><span class="va">$MOUNT_POINT</span><span class="st">"</span></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span> <span class="va">$MOUNT_POINT</span></span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a><span class="co"># Move Docker storage to NVMe</span></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> <span class="va">$MOUNT_POINT</span>/docker</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> <span class="op">&lt;&lt;EOF</span> <span class="op">&gt;</span> /etc/docker/daemon.json</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="st">{</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a><span class="st">    "data-root": "/scratch/docker"</span></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="st">}</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a><span class="op">EOF</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Docker data-root configured"</span></span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a><span class="co"># Ensure required tools are present</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ex">yum</span> install <span class="at">-y</span> curl tar gzip xz unzip <span class="kw">||</span> <span class="fu">true</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a><span class="co"># Install AWS CLI via Seqera miniconda bundle (isolated path)</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://nf-xpack.seqera.io/miniconda-awscli/miniconda-25.3.1-awscli-1.40.12.tar.gz <span class="dt">\</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">|</span> <span class="fu">tar</span> xz <span class="at">-C</span> /</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a><span class="co"># Validate binary exists at the path Nextflow will use</span></span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-x</span> /home/ec2-user/miniconda/bin/aws <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="st">"ERROR: aws binary not found at /home/ec2-user/miniconda/bin/aws"</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>  <span class="bu">exit</span> 1</span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a><span class="ex">/home/ec2-user/miniconda/bin/aws</span> <span class="at">--version</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="co"># Restart Docker and ECS</span></span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> start docker</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a><span class="ex">systemctl</span> enable <span class="at">--now</span> <span class="at">--no-block</span> ecs</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a><span class="co"># Kernel settings to reduce dirty-page bursts</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"1258291200"</span> <span class="op">&gt;</span> /proc/sys/vm/dirty_bytes</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"629145600"</span> <span class="op">&gt;</span> /proc/sys/vm/dirty_background_bytes</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"=== NVMe Setup Complete ==="</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a><span class="ex">--==BOUNDARY==--</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/launch-temp.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>User Data</figcaption>
+</figure>
+</div>
+<p>The user data script is going to do all the fancy trickery 🔮 of finding NVMe instance storage, mounting it as <code>/scratch</code>, moving Docker storage there, and installing the AWS CLI in a location that Nextflow will find it.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Leave instance type in the launch template blank as Batch overrides it. The compute environment will specify the instance types that have NVMe instance storage. The launch template is just for the user data and other settings.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="batch-compute-environments-and-queues" class="level2">
+<h2 class="anchored" data-anchor-id="batch-compute-environments-and-queues">4) Batch Compute Environments and Queues 🧮</h2>
+<p>Head over to the Batch console where we are going to create two new compute environments. I recommend:</p>
+<ul>
+<li><code>spot</code> (primary, cheaper - this should be your default queue in Nextflow config)</li>
+<li><code>ondemand</code> (for those longer running jobs where it doesn’t make financial sense to use Spot, and have them potentially terminated and restarted after potentially 12 hours of compute)</li>
+</ul>
+<p>We want these to be Amazon EC2 managed queues. Select the service role and instance role. Note if you have not created these roles before, Batch will offer to create them for you.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/compute-env.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>compute environment</figcaption>
+</figure>
+</div>
+<p>For the spot queue make sure you toggle on the ‘Use EC2 Spot Instances’ option. For the ondemand queue, leave this off.</p>
+<p>For the instance configuration page I recommend the following starting points:</p>
+<ul>
+<li>Keep <code>min vCPU = 0</code>.</li>
+<li>Keep <code>desired vCPU = 0</code>.</li>
+<li>Start with a conservative <code>max vCPU</code>. (e.g.&nbsp;400)</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Why conservative max vCPU? Because parallel mistakes are expensive mistakes 💸 A buggy pipeline or a sample-sheet typo, at 10000 vCPUs is a memorable life event.</p>
+</div>
+</div>
+<p>Allocation strategy: ‘Spot price capacity optimized’ for the spot queue, and ‘best fit’ for the ondemand queue.</p>
+<p>Under allowed instance types, this is where we want to restrict it to only those that come with NVMe instance storage included. Such as c5ad family, c5d family, c6id family, m5ad family, m5d family, m6id family, r5ad family, r5d family and r6id family.</p>
+<p>Under additional configuration make sure you choose Amazon Linux 2023 as the Image type (leave image ID override blank).</p>
+<p>Then under Launch templates, select the launch template you created in the previous step.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/compute-env-config.png" class="img-fluid figure-img" style="width:70.0%"></p>
+<figcaption>Compute Environment Config</figcaption>
+</figure>
+</div>
+<p>Click next through to the network configuration page. Select the VPC and private subnets that you want to use for your Batch compute environments.</p>
+<p>Now we need to create two new job queues, one for spot and one for ondemand.</p>
+<p>Head over to Job queues under AWS Batch and create a new EC2 queue for each compute environment. Nothing too fancy here in terms of settings, just give them a name and select the compute environment you created in the previous step.</p>
+<p>You can choose to get fancy 🎩 later with priority, but for now just keep it simple.</p>
+</section>
+<section id="nextflow-head-node" class="level2">
+<h2 class="anchored" data-anchor-id="nextflow-head-node">5) Nextflow Head Node 🎛️</h2>
+<p>Now we need an on-demand EC2 instance to run Nextflow itself. This is your head node / launchpad for orchestrating Batch jobs, or Yavin 4 😉</p>
+<p>Head over to EC2 in the AWS console and launch a new instance. I recommend:</p>
+<ul>
+<li>A Linux AMI (I use Ubuntu, but run your own race, there a jungle of flavours out there)</li>
+<li>Private subnet.</li>
+<li>Attach the <code>NextflowHeadNodeRole</code> instance profile.</li>
+<li>Small-to-medium instance type (e.g.&nbsp;t3.2xlarge) to start. Avoid anything too small because Nextflow can be memory hungry with large pipelines.</li>
+<li></li>
+</ul>
+<p>Follow the <a href="https://docs.seqera.io/nextflow/install">latest guide</a> from Seqera for installing Nextflow on your head node:</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you do not use SSO/SSM, I would suggest you put the head node behind a bastion/jump host and keep direct internet exposure to a minimum.</p>
+</div>
+</div>
+</section>
+<section id="nextflow-config" class="level2">
+<h2 class="anchored" data-anchor-id="nextflow-config">6) Nextflow Config</h2>
+<p>Use a profile similar to this or adjust to fit your config layouts:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    awsbatch <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        process<span class="op">.</span>executor <span class="op">=</span> <span class="st">'awsbatch'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        process<span class="op">.</span>queue <span class="op">=</span> <span class="st">'spot'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        aws<span class="op">.</span>region <span class="op">=</span> <span class="st">'ap-southeast-2'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        aws<span class="op">.</span>batch<span class="op">.</span>cliPath <span class="op">=</span> <span class="st">'/home/ec2-user/miniconda/bin/aws'</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>        aws<span class="op">.</span>batch<span class="op">.</span>maxSpotAttempts <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        workDir <span class="op">=</span> <span class="st">'s3://NEXTFLOW_WORKDIR_BUCKET_ARN/work/'</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        params<span class="op">.</span>outdir <span class="op">=</span> <span class="st">'s3://NEXTFLOW_WORKDIR_BUCKET_ARN/results/'</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Make sure you add <code>aws.batch.maxSpotAttempts = 3</code> so that your nextflow will resubmit failed spot jobs automatically. You can adjust this number based on your tolerance for spot interruptions.</p>
+</div>
+</div>
+<p>You can override <code>process.queue</code> per process if you want specific jobs to hit <code>ondemand</code>. For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode groovy code-with-copy"><code class="sourceCode groovy"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>process <span class="op">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    withName<span class="op">:</span> <span class="st">'LONG_JOB'</span> <span class="op">{</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        queue <span class="op">=</span> <span class="st">'ondemand'</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        container <span class="op">=</span> <span class="st">'community.wave.seqera.io/library/bcftools:1.21--4335bec1d7b44d11'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        cpus <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        memory <span class="op">=</span> <span class="fl">16.</span>GB</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="op">}</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="optional-mount-the-nextflow-bucket-on-the-head-node-for-debugging-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="optional-mount-the-nextflow-bucket-on-the-head-node-for-debugging-in-vs-code">7) Optional: Mount the Nextflow bucket on the head node (for debugging in VS Code)</h2>
+<p>This part is optional, but honestly very useful when you are troubleshooting weird task behaviour.</p>
+<p>The idea is to mount your Nextflow S3 bucket on the head node using Mountpoint for Amazon S3, so in VS Code you can browse the <code>work/</code> and <code>results/</code> paths like a normal directory tree.</p>
+<p>It is not as polished as the data browsing experience in Seqera Platform, but as a practical compromise for this DIY setup, it works well 👍</p>
+<p>Follow the official Mountpoint for Amazon S3 install instructions for your distro:</p>
+<ul>
+<li>https://docs.aws.amazon.com/AmazonS3/latest/userguide/mountpoint-usage.html</li>
+</ul>
+<p>Once installed on the head node, the way to mount the nextflow bucket is:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">mount-s3</span> <span class="op">&lt;</span>s3://YOUR_NEXTFLOW_BUCKET<span class="op">&gt;</span> ~/s3-nextflow</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Now it shows up in your file explorer panel in VS Code, and you can browse the <code>work/</code> and <code>results/</code> directories like a normal filesystem and inspect files.</p>
+<p>If you want this mount to persist across reboots, set it up as a systemd service on the head node after you validate the manual mount.</p>
+</section>
+<section id="test-with-nf-probe" class="level2">
+<h2 class="anchored" data-anchor-id="test-with-nf-probe">8) Test with nf-probe</h2>
+<p>Time to test the whole stack before launching your actual pipeline 📋</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/nf-probe.png" class="img-fluid figure-img" style="width:40.0%"></p>
+<figcaption>nf-probe</figcaption>
+</figure>
+</div>
+<p>I’ve developed a simple Nextflow pipeline called <code>nf-probe</code> for this exact purpose, of testing and validating new AWS Batch setups.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/lpembleton/nf-probe.git</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> nf-probe</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Edit params JSON with your region, queue, and S3 paths</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="ex">nextflow</span> run main.nf <span class="at">-profile</span> awsbatch <span class="at">-params-file</span> params.json</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>What you are validating with this test:</p>
+<ul>
+<li>Batch submission works.</li>
+<li>Containers pull correctly.</li>
+<li>Read/write to S3 works.</li>
+<li>NVMe scratch is mounted and usable.</li>
+</ul>
+</section>
+<section id="additional-notes" class="level2">
+<h2 class="anchored" data-anchor-id="additional-notes">Additional Notes</h2>
+<ul>
+<li>Batch startup is not instant. A few minutes of queuing is normal.</li>
+<li>Spot queues are cheaper but can delay or interrupt jobs.</li>
+<li>Start small, validate, then scale out, no one likes an expensive hero.</li>
+</ul>
+</section>
+<section id="final-thought" class="level2">
+<h2 class="anchored" data-anchor-id="final-thought">Final Thought</h2>
+<p>If you can afford Seqera Platform, it will make your life easier. If you cannot, this setup is a solid way to run serious Nextflow workloads on AWS in 2026 without selling your kidney (AWS already has your first 😉).</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
+<script>
+  function loadGiscus() {
+    // Function to get the theme based on body class
+    const getTheme = () => {
+      let baseTheme = document.getElementById('giscus-base-theme').value;
+      let altTheme = document.getElementById('giscus-alt-theme').value;
+      return document.body.classList.contains('quarto-dark') ? altTheme : baseTheme;
+    };
+    const script = document.createElement("script");
+    script.src = "https://giscus.app/client.js";
+    script.async = true;
+    script.dataset.repo = "lpembleton/lpembleton.blog";
+    script.dataset.repoId = "R_kgDOIfz78A";
+    script.dataset.category = "Announcements";
+    script.dataset.categoryId = "DIC_kwDOIfz78M4CZhkM";
+    script.dataset.mapping = "title";
+    script.dataset.reactionsEnabled = "1";
+    script.dataset.emitMetadata = "0";
+    script.dataset.inputPosition = "top";
+    script.dataset.theme = getTheme();
+    script.dataset.lang = "en";
+    script.crossOrigin = "anonymous";
+    // Append the script to the desired div instead of at the end of the body
+    document.getElementById("quarto-content").appendChild(script);
+  }
+  loadGiscus();
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>© 2026 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+</div>   
+    <div class="nav-footer-center">
+<p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>
+<div class="cookie-consent-footer"><a href="#" id="open_preferences_center">Cookie Preferences 🍪</a></div></div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

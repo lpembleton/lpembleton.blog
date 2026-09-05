@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,10 +10,16 @@
 
 <title> Ponderings in Diagon Alley  – Luke Pembleton</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -36,15 +42,16 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/cookie-consent/cookie-consent.js"></script>
 <link href="site_libs/cookie-consent/cookie-consent.css" rel="stylesheet">
-<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-5e84ef41b499c983ca74cb49ad0e075d.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-f7d074e30f9344b9dece2131cce479ac.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <link href="site_libs/quarto-contrib/academicons-1.9.2/all.css" rel="stylesheet">
@@ -135,7 +142,7 @@ cookieconsent.run({
   
 
   <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 const typesetMath = (el) => {
@@ -148,7 +155,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -166,18 +173,16 @@ window.Quarto = {
 
 <meta property="og:title" content="">
 <meta property="og:description" content="Exploring the world of genomics, R and cloud computing">
-<meta property="og:image" content="https://lpembleton.rbind.io/posts/five-nextflow-tips-and-tricks/images/tony-hand-P3uJUQ62uXE-unsplash.jpg">
+<meta property="og:image" content="./posts/the-2026-aws-nextflow-survival-guide/images/dippyaman-nath-EegncyuEqEI-unsplash.jpg">
 <meta property="og:site_name" content="Luke Pembleton">
 <meta name="twitter:title" content="">
 <meta name="twitter:description" content="Exploring the world of genomics, R and cloud computing">
-<meta name="twitter:image" content="https://lpembleton.rbind.io/assets/lpembleton/img/tcard.png">
+<meta name="twitter:image" content="assets/lpembleton/img/tcard.png">
 <meta name="twitter:site" content="@lwpembleton">
-<meta name="twitter:image-height" content="1657">
-<meta name="twitter:image-width" content="2890">
 <meta name="twitter:card" content="summary_large_image">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top quarto-banner">
@@ -185,7 +190,8 @@ window.Quarto = {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a href="./index.html" class="navbar-brand navbar-brand-logo">
-    <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo">
+    <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo light-content">
+    <img src="./assets/lpembleton/img/dna-logo.svg" alt="" class="navbar-logo dark-content">
     </a>
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Luke Pembleton</span>
@@ -210,12 +216,12 @@ window.Quarto = {
 <span class="menu-text">RAMBLINGS</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications/publications.html"> 
-<span class="menu-text">PUBLICATIONS</span></a>
+    <a class="nav-link" href="./pages/packages.html"> 
+<span class="menu-text">SOFTWARE</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./pages/conferences.html"> 
-<span class="menu-text">CONFERENCES</span></a>
+    <a class="nav-link" href="./publications/publications.html"> 
+<span class="menu-text">PUBLICATIONS</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./pages/vivarium.html"> 
@@ -243,13 +249,17 @@ window.Quarto = {
     <a class="nav-link" href="https://publons.com/researcher/3450394/luke-pembleton/"> 
 <span class="menu-text"><iconify-icon inline="" icon="academicons:publons-square" style="font-size: 24px;"></iconify-icon></span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="https://orcid.org/0000-0001-8131-8210"> 
+<span class="menu-text"><iconify-icon inline="" icon="academicons:orcid-square" style="font-size: 24px;"></iconify-icon></span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://linkedin.com/in/lpembleton"> <i class="bi bi-linkedin" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="https://lpembleton.github.io/StAMPP/"> 
+    <a class="nav-link" href="./pages/packages.html"> 
 <span class="menu-text"><i class="fa-solid fa-box-open" aria-label="box-open"></i></span></a>
   </li>  
 </ul>
@@ -288,7 +298,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(18)</span></div><div class="category" data-category="QVdT">AWS <span class="quarto-category-count">(12)</span></div><div class="category" data-category="QmF0Y2g=">Batch <span class="quarto-category-count">(5)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Qmx1ZSUyMElyaXM=">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2hyb21lY2FzdA==">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xvdWQ=">Cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29udGFpbmVycw==">Containers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9ja2Vy">Docker <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RUJT">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RUMy">EC2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RUNS">ECR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RW5kcG9pbnRz">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RnVzaW9u">Fusion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2F0ZXdheQ==">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SURF">IDE <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SnVtcCUyMGhvc3Q=">Jump host <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TXVsbGVk">Mulled <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV4dGZsb3c=">Nextflow <span class="quarto-category-count">(6)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVtb3Rl">Remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UzM=">S3 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2NyZWVu">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VjdXJpdHk=">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U21hcnRob21l">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVybWluYWw=">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VlNDb2Rl">VSCode <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmlzdWFsaXNhdGlvbg==">Visualisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2F2ZQ==">Wave <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2luU0NQ">WinSCP <span class="quarto-category-count">(1)</span></div><div class="category" data-category="YW5ub3RhdGU=">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xvdWQ=">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXF1YXRpb25z">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0aHVi">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVtb3Rl">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3NoJTIwa2V5">ssh key <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="YW5ub3RhdGU=">annotate <span class="quarto-category-count">(1)</span></div><div class="category" data-category="QVdT">AWS <span class="quarto-category-count">(13)</span></div><div class="category" data-category="QmF0Y2g=">Batch <span class="quarto-category-count">(6)</span></div><div class="category" data-category="QmlvaW5mb3JtYXRpY3M=">Bioinformatics <span class="quarto-category-count">(5)</span></div><div class="category" data-category="Qmx1ZSUyMElyaXM=">Blue Iris <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2hyb21lY2FzdA==">Chromecast <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2xvdWQ=">Cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Y2xvdWQ=">cloud <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29udGFpbmVycw==">Containers <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RG9ja2Vy">Docker <span class="quarto-category-count">(2)</span></div><div class="category" data-category="RUJT">EBS <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RUMy">EC2 <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RUNS">ECR <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RW5kcG9pbnRz">Endpoints <span class="quarto-category-count">(1)</span></div><div class="category" data-category="ZXF1YXRpb25z">equations <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RnVzaW9u">Fusion <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2F0ZXdheQ==">Gateway <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2dwbG90Mg==">ggplot2 <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0">git <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Z2l0aHVi">github <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SURF">IDE <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SnVtcCUyMGhvc3Q=">Jump host <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TGFUZVg=">LaTeX <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TXVsbGVk">Mulled <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TmV4dGZsb3c=">Nextflow <span class="quarto-category-count">(7)</span></div><div class="category" data-category="cXVhcnRv">quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Ug==">R <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmVtb3Rl">Remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="cmVtb3Rl">remote <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UzM=">S3 <span class="quarto-category-count">(2)</span></div><div class="category" data-category="U2NyZWVu">Screen <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U2VjdXJpdHk=">Security <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U21hcnRob21l">Smarthome <span class="quarto-category-count">(1)</span></div><div class="category" data-category="c3NoJTIwa2V5">ssh key <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGVybWluYWw=">Terminal <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VmlzdWFsaXNhdGlvbg==">Visualisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VlNDb2Rl">VSCode <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2F2ZQ==">Wave <span class="quarto-category-count">(1)</span></div><div class="category" data-category="V2luU0NQ">WinSCP <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -302,30 +312,60 @@ window.Quarto = {
 
 <div class="quarto-listing quarto-listing-container-default" id="listing-listing">
 <div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1732366800000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="784">
-<div class="thumbnail">
-<p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a></p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/five-nextflow-tips-and-tricks/images/tony-hand-P3uJUQ62uXE-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a></p>
+<div class="quarto-post image-right" data-index="0" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaA==" data-listing-date-sort="1787839200000" data-listing-file-modified-sort="1788620718787" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="21" data-listing-word-count-sort="4048">
+<div class="thumbnail"><a href="./posts/the-2026-aws-nextflow-survival-guide/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/the-2026-aws-nextflow-survival-guide/images/dippyaman-nath-EegncyuEqEI-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/the-2026-aws-nextflow-survival-guide/index.html" class="no-external">The 2026 AWS Nextflow Survival Guide</a>
+</h3>
+<div class="listing-categories">
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
 </div>
+<div class="delink listing-description"><a href="./posts/the-2026-aws-nextflow-survival-guide/index.html" class="no-external">
+<p>An updated guide to setting up Nextflow on AWS Batch in 2026 without fusion</p>
+</a></div>
+</div>
+<div class="metadata">
+<a href="./posts/the-2026-aws-nextflow-survival-guide/index.html" class="no-external">
+<div class="listing-date">
+Aug 28, 2026
+</div>
+<div class="listing-author">
+LW Pembleton
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1732366800000" data-listing-file-modified-sort="1787066307487" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="784">
+<div class="thumbnail"><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/five-nextflow-tips-and-tricks/images/tony-hand-P3uJUQ62uXE-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">Five Nextflow Tips and Tricks</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">Bioinformatics</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
-Bioinformatics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">Five (or maybe six) quick Nextflow tips and tricks</a>
-</div>
+<div class="delink listing-description"><a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
+<p>Five (or maybe six) quick Nextflow tips and tricks</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/five-nextflow-tips-and-tricks/index.html" class="no-external">
@@ -338,39 +378,32 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="1" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0Z1c2lvbiUyQ1dhdmU=" data-listing-date-sort="1731848400000" data-listing-file-modified-sort="1769784175255" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
-<div class="thumbnail">
-<p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a></p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="2" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0Z1c2lvbiUyQ1dhdmU=" data-listing-date-sort="1731848400000" data-listing-file-modified-sort="1787066307567" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="19" data-listing-word-count-sort="3734">
+<div class="thumbnail"><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/nextflow-on-aws-batch-the-update/images/jason-leung-IrQwXgk8Q88-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">Nextflow on AWS Batch with Fusion</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RnVzaW9u'); return false;">Fusion</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('V2F2ZQ=='); return false;">Wave</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
-Batch
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RnVzaW9u'); return false;">
-Fusion
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('V2F2ZQ=='); return false;">
-Wave
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">An updated guide to setting up Nextflow on AWS Batch with fusion file storage</a>
-</div>
+<div class="delink listing-description"><a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">
+<p>An updated guide to setting up Nextflow on AWS Batch with fusion file storage</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/nextflow-on-aws-batch-the-update/index.html" class="no-external">
@@ -383,30 +416,26 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="2" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1731416400000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1622">
-<div class="thumbnail">
-<p><a href="./posts/build-with-resume/index.html" class="no-external"></a></p><a href="./posts/build-with-resume/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/build-with-resume/images/james-wainscoat-hjmED1qivmc-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/build-with-resume/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="3" data-categories="TmV4dGZsb3clMkNCaW9pbmZvcm1hdGljcw==" data-listing-date-sort="1731416400000" data-listing-file-modified-sort="1787066307479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1622">
+<div class="thumbnail"><a href="./posts/build-with-resume/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/build-with-resume/images/james-wainscoat-hjmED1qivmc-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/build-with-resume/index.html" class="no-external">Building With Resume</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/build-with-resume/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">Bioinformatics</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
-Bioinformatics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/build-with-resume/index.html" class="no-external">A guide to using the resume function in Nextflow to modularly build pipelines</a>
-</div>
+<div class="delink listing-description"><a href="./posts/build-with-resume/index.html" class="no-external">
+<p>A guide to using the resume function in Nextflow to modularly build pipelines</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/build-with-resume/index.html" class="no-external">
@@ -419,33 +448,28 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="3" data-categories="UiUyQ1Zpc3VhbGlzYXRpb24lMkNnZ3Bsb3Qy" data-listing-date-sort="1717941600000" data-listing-file-modified-sort="1769784175137" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
-<div class="thumbnail">
-<p><a href="./posts/ggplot-limits/index.html" class="no-external"></a></p><a href="./posts/ggplot-limits/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/ggplot-limits/images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/ggplot-limits/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="4" data-categories="UiUyQ1Zpc3VhbGlzYXRpb24lMkNnZ3Bsb3Qy" data-listing-date-sort="1717941600000" data-listing-file-modified-sort="1787066307495" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1074">
+<div class="thumbnail"><a href="./posts/ggplot-limits/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/ggplot-limits/images/jessica-ruscello--GUyf8ZCTHM-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/ggplot-limits/index.html" class="no-external">Know your limits</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/ggplot-limits/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">
-R
+
+<div class="listing-category" onclick="window.quartoListingCategory('Ug=='); return false;">R</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VmlzdWFsaXNhdGlvbg=='); return false;">Visualisation</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">ggplot2</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('VmlzdWFsaXNhdGlvbg=='); return false;">
-Visualisation
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2dwbG90Mg=='); return false;">
-ggplot2
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/ggplot-limits/index.html" class="no-external">A brief walkthrough the consequences of different limits functions in ggplot2</a>
-</div>
+<div class="delink listing-description"><a href="./posts/ggplot-limits/index.html" class="no-external">
+<p>A brief walkthrough the consequences of different limits functions in ggplot2</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/ggplot-limits/index.html" class="no-external">
@@ -458,45 +482,36 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="4" data-categories="Q2xvdWQlMkNBV1MlMkNWU0NvZGUlMkNXaW5TQ1AlMkNJREUlMkNSZW1vdGUlMkNKdW1wJTIwaG9zdA==" data-listing-date-sort="1717250400000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="684">
-<div class="thumbnail">
-<p><a href="./posts/remote-vscode/index.html" class="no-external"></a></p><a href="./posts/remote-vscode/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/remote-vscode/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="5" data-categories="Q2xvdWQlMkNBV1MlMkNWU0NvZGUlMkNXaW5TQ1AlMkNJREUlMkNSZW1vdGUlMkNKdW1wJTIwaG9zdA==" data-listing-date-sort="1717250400000" data-listing-file-modified-sort="1787066307643" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="684">
+<div class="thumbnail"><a href="./posts/remote-vscode/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/remote-vscode/images/image-from-rawpixel-id-328263-jpeg.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/remote-vscode/index.html" class="no-external">Remote IDE behind a jump server</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/remote-vscode/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Q2xvdWQ='); return false;">
-Cloud
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2xvdWQ='); return false;">Cloud</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VlNDb2Rl'); return false;">VSCode</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('V2luU0NQ'); return false;">WinSCP</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('SURF'); return false;">IDE</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UmVtb3Rl'); return false;">Remote</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('SnVtcCUyMGhvc3Q='); return false;">Jump host</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('VlNDb2Rl'); return false;">
-VSCode
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('V2luU0NQ'); return false;">
-WinSCP
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('SURF'); return false;">
-IDE
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UmVtb3Rl'); return false;">
-Remote
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('SnVtcCUyMGhvc3Q='); return false;">
-Jump host
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/remote-vscode/index.html" class="no-external">A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host</a>
-</div>
+<div class="delink listing-description"><a href="./posts/remote-vscode/index.html" class="no-external">
+<p>A guide to setting up a VSCode development environment along with WinSCP for a remote server behind a jump host</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/remote-vscode/index.html" class="no-external">
@@ -509,36 +524,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="5" data-categories="TXVsbGVkJTJDRG9ja2VyJTJDQ29udGFpbmVycyUyQ0Jpb2luZm9ybWF0aWNz" data-listing-date-sort="1710594000000" data-listing-file-modified-sort="1769784175235" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="990">
-<div class="thumbnail">
-<p><a href="./posts/mulled-biocontainers/index.html" class="no-external"></a></p><a href="./posts/mulled-biocontainers/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/mulled-biocontainers/images/pexels-leeloo-the-first-6176681.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/mulled-biocontainers/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="6" data-categories="TXVsbGVkJTJDRG9ja2VyJTJDQ29udGFpbmVycyUyQ0Jpb2luZm9ybWF0aWNz" data-listing-date-sort="1710594000000" data-listing-file-modified-sort="1787066307551" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="990">
+<div class="thumbnail"><a href="./posts/mulled-biocontainers/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/mulled-biocontainers/images/pexels-leeloo-the-first-6176681.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/mulled-biocontainers/index.html" class="no-external">Finding the right mulled biocontainer</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/mulled-biocontainers/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TXVsbGVk'); return false;">
-Mulled
+
+<div class="listing-category" onclick="window.quartoListingCategory('TXVsbGVk'); return false;">Mulled</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">Docker</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q29udGFpbmVycw=='); return false;">Containers</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">Bioinformatics</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">
-Docker
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Q29udGFpbmVycw=='); return false;">
-Containers
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
-Bioinformatics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/mulled-biocontainers/index.html" class="no-external">A guide to finding mulled biocontaienrs for your desired tool chain</a>
-</div>
+<div class="delink listing-description"><a href="./posts/mulled-biocontainers/index.html" class="no-external">
+<p>A guide to finding mulled biocontaienrs for your desired tool chain</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/mulled-biocontainers/index.html" class="no-external">
@@ -551,36 +560,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="6" data-categories="QmF0Y2glMkNFQzIlMkNBV1MlMkNOZXh0Zmxvdw==" data-listing-date-sort="1705928400000" data-listing-file-modified-sort="1769784175314" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="1000">
-<div class="thumbnail">
-<p><a href="./posts/packing-for-ec2/index.html" class="no-external"></a></p><a href="./posts/packing-for-ec2/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/packing-for-ec2/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="7" data-categories="QmF0Y2glMkNFQzIlMkNBV1MlMkNOZXh0Zmxvdw==" data-listing-date-sort="1705928400000" data-listing-file-modified-sort="1787066307631" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="1000">
+<div class="thumbnail"><a href="./posts/packing-for-ec2/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/packing-for-ec2/images/image-from-rawpixel-id-10184855-jpeg.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/packing-for-ec2/index.html" class="no-external">Packing for AWS Batch EC2</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/packing-for-ec2/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
-Batch
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">EC2</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
-EC2
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/packing-for-ec2/index.html" class="no-external">An guide for selecting resource allocations on AWS Batch EC2</a>
-</div>
+<div class="delink listing-description"><a href="./posts/packing-for-ec2/index.html" class="no-external">
+<p>An guide for selecting resource allocations on AWS Batch EC2</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/packing-for-ec2/index.html" class="no-external">
@@ -593,36 +596,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="7" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3MlMkNTMw==" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2250">
-<div class="thumbnail">
-<p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="8" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3MlMkNTMw==" data-listing-date-sort="1702472400000" data-listing-file-modified-sort="1787066307483" data-listing-date-modified-sort="1787066307000" data-listing-reading-time-sort="12" data-listing-word-count-sort="2250">
+<div class="thumbnail"><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/ec2-tips-and-tricks/images/karl-pawlowicz-QUHuwyNgSA0-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">EC2 Village</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
-EC2
+
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">EC2</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">Bioinformatics</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">S3</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
-Bioinformatics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">
-S3
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics</a>
-</div>
+<div class="delink listing-description"><a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
+<p>A collection of mini guides, tips and tricks to using EC2 instances focused on bioinformatics</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/ec2-tips-and-tricks/index.html" class="no-external">
@@ -635,33 +632,28 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="8" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3M=" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1006">
-<div class="thumbnail">
-<p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p><a href="./posts/aws-ec2-pricing/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="9" data-categories="RUMyJTJDQVdTJTJDQmlvaW5mb3JtYXRpY3M=" data-listing-date-sort="1700226000000" data-listing-file-modified-sort="1787066307471" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1006">
+<div class="thumbnail"><a href="./posts/aws-ec2-pricing/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/aws-ec2-pricing/images/growtika-TKAg3WignSw-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/aws-ec2-pricing/index.html" class="no-external">Navigating EC2 Pricing - The Better Way</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/aws-ec2-pricing/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">
-EC2
+
+<div class="listing-category" onclick="window.quartoListingCategory('RUMy'); return false;">EC2</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">Bioinformatics</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmlvaW5mb3JtYXRpY3M='); return false;">
-Bioinformatics
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/aws-ec2-pricing/index.html" class="no-external">An interative visual analysis of EC2 instance prices for better informed selection</a>
-</div>
+<div class="delink listing-description"><a href="./posts/aws-ec2-pricing/index.html" class="no-external">
+<p>An interative visual analysis of EC2 instance prices for better informed selection</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/aws-ec2-pricing/index.html" class="no-external">
@@ -674,30 +666,26 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="9" data-categories="QVdTJTJDUzM=" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="666">
-<div class="thumbnail">
-<p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p><a href="./posts/aws-cli-s3/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/aws-cli-s3/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="10" data-categories="QVdTJTJDUzM=" data-listing-date-sort="1695564000000" data-listing-file-modified-sort="1787066307467" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="666">
+<div class="thumbnail"><a href="./posts/aws-cli-s3/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/aws-cli-s3/images/jesse-vermeulen-LbjcsNneKCY-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/aws-cli-s3/index.html" class="no-external">Streamlining Your AWS CLI S3 File Operations</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/aws-cli-s3/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">S3</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('UzM='); return false;">
-S3
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/aws-cli-s3/index.html" class="no-external">A guide to using the AWS Command Line Interface to interact with S3</a>
-</div>
+<div class="delink listing-description"><a href="./posts/aws-cli-s3/index.html" class="no-external">
+<p>A guide to using the AWS Command Line Interface to interact with S3</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/aws-cli-s3/index.html" class="no-external">
@@ -710,33 +698,28 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="10" data-categories="RG9ja2VyJTJDQVdTJTJDRUNS" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
-<div class="thumbnail">
-<p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p><a href="./posts/push-docker-to-ecr/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="11" data-categories="RG9ja2VyJTJDQVdTJTJDRUNS" data-listing-date-sort="1695477600000" data-listing-file-modified-sort="1787066307635" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="729">
+<div class="thumbnail"><a href="./posts/push-docker-to-ecr/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/push-docker-to-ecr/images/barrett-ward-5WQJ_ejZ7y8-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/push-docker-to-ecr/index.html" class="no-external">Pushing Docker Images to AWS ECR</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/push-docker-to-ecr/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">
-Docker
+
+<div class="listing-category" onclick="window.quartoListingCategory('RG9ja2Vy'); return false;">Docker</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RUNS'); return false;">ECR</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RUNS'); return false;">
-ECR
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/push-docker-to-ecr/index.html" class="no-external">A guide to transfer your docker images to your private AWS container repository</a>
-</div>
+<div class="delink listing-description"><a href="./posts/push-docker-to-ecr/index.html" class="no-external">
+<p>A guide to transfer your docker images to your private AWS container repository</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/push-docker-to-ecr/index.html" class="no-external">
@@ -749,36 +732,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="11" data-categories="ZXF1YXRpb25zJTJDcXVhcnRvJTJDYW5ub3RhdGUlMkNMYVRlWA==" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1769784175107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
-<div class="thumbnail">
-<p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p><a href="./posts/annotate-equations/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image"></p>
-</a><p><a href="./posts/annotate-equations/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="12" data-categories="ZXF1YXRpb25zJTJDcXVhcnRvJTJDYW5ub3RhdGUlMkNMYVRlWA==" data-listing-date-sort="1693663200000" data-listing-file-modified-sort="1787066307459" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="449">
+<div class="thumbnail"><a href="./posts/annotate-equations/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/annotate-equations/images/eq_header.png" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/annotate-equations/index.html" class="no-external">Annotate equations</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/annotate-equations/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('ZXF1YXRpb25z'); return false;">
-equations
+
+<div class="listing-category" onclick="window.quartoListingCategory('ZXF1YXRpb25z'); return false;">equations</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">quarto</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('YW5ub3RhdGU='); return false;">annotate</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">LaTeX</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('cXVhcnRv'); return false;">
-quarto
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('YW5ub3RhdGU='); return false;">
-annotate
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('TGFUZVg='); return false;">
-LaTeX
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/annotate-equations/index.html" class="no-external">A guide to annotating equations in quarto documents</a>
-</div>
+<div class="delink listing-description"><a href="./posts/annotate-equations/index.html" class="no-external">
+<p>A guide to annotating equations in quarto documents</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/annotate-equations/index.html" class="no-external">
@@ -791,36 +768,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="12" data-categories="U21hcnRob21lJTJDQmx1ZSUyMElyaXMlMkNTZWN1cml0eSUyQ0Nocm9tZWNhc3Q=" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1769784175127" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
-<div class="thumbnail">
-<p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p><a href="./posts/cast-bi-ui3/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/cast-bi-ui3/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="13" data-categories="U21hcnRob21lJTJDQmx1ZSUyMElyaXMlMkNTZWN1cml0eSUyQ0Nocm9tZWNhc3Q=" data-listing-date-sort="1693144800000" data-listing-file-modified-sort="1787066307479" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1059">
+<div class="thumbnail"><a href="./posts/cast-bi-ui3/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/cast-bi-ui3/images/bookcase.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/cast-bi-ui3/index.html" class="no-external">How to Cast Blue Iris UI3</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/cast-bi-ui3/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('U21hcnRob21l'); return false;">
-Smarthome
+
+<div class="listing-category" onclick="window.quartoListingCategory('U21hcnRob21l'); return false;">Smarthome</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Qmx1ZSUyMElyaXM='); return false;">Blue Iris</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2VjdXJpdHk='); return false;">Security</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Q2hyb21lY2FzdA=='); return false;">Chromecast</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Qmx1ZSUyMElyaXM='); return false;">
-Blue Iris
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('U2VjdXJpdHk='); return false;">
-Security
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Q2hyb21lY2FzdA=='); return false;">
-Chromecast
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/cast-bi-ui3/index.html" class="no-external">A guide to casting Blue Iris UI3 to a Chromecast device and monitor</a>
-</div>
+<div class="delink listing-description"><a href="./posts/cast-bi-ui3/index.html" class="no-external">
+<p>A guide to casting Blue Iris UI3 to a Chromecast device and monitor</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/cast-bi-ui3/index.html" class="no-external">
@@ -833,42 +804,34 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="13" data-categories="Z2l0aHViJTJDZ2l0JTJDc3NoJTIwa2V5JTJDQVdTJTJDcmVtb3RlJTJDY2xvdWQ=" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1769784175137" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
-<div class="thumbnail">
-<p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p><a href="./posts/github-deploy-keys/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/github-deploy-keys/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="14" data-categories="Z2l0aHViJTJDZ2l0JTJDc3NoJTIwa2V5JTJDQVdTJTJDcmVtb3RlJTJDY2xvdWQ=" data-listing-date-sort="1688306400000" data-listing-file-modified-sort="1787066307499" data-listing-date-modified-sort="1787066307000" data-listing-reading-time-sort="4" data-listing-word-count-sort="791">
+<div class="thumbnail"><a href="./posts/github-deploy-keys/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/github-deploy-keys/images/chunli-ju-8fs1X0JFgFE-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/github-deploy-keys/index.html" class="no-external">GitHub Deploy Keys</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/github-deploy-keys/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Z2l0aHVi'); return false;">
-github
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z2l0aHVi'); return false;">github</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Z2l0'); return false;">git</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('c3NoJTIwa2V5'); return false;">ssh key</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('cmVtb3Rl'); return false;">remote</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('Y2xvdWQ='); return false;">cloud</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('Z2l0'); return false;">
-git
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('c3NoJTIwa2V5'); return false;">
-ssh key
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('cmVtb3Rl'); return false;">
-remote
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Y2xvdWQ='); return false;">
-cloud
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/github-deploy-keys/index.html" class="no-external">A guide to using GitHub deploy keys to deploy private repos in remote compute sessions</a>
-</div>
+<div class="delink listing-description"><a href="./posts/github-deploy-keys/index.html" class="no-external">
+<p>A guide to using GitHub deploy keys to deploy private repos in remote compute sessions</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/github-deploy-keys/index.html" class="no-external">
@@ -881,33 +844,28 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="14" data-categories="U2NyZWVuJTJDQVdTJTJDVGVybWluYWw=" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1769784175324" data-listing-date-modified-sort="1769784175000" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
-<div class="thumbnail">
-<p><a href="./posts/screen/index.html" class="no-external"></a></p><a href="./posts/screen/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/screen/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="15" data-categories="U2NyZWVuJTJDQVdTJTJDVGVybWluYWw=" data-listing-date-sort="1684764000000" data-listing-file-modified-sort="1787066307647" data-listing-date-modified-sort="1787066307000" data-listing-reading-time-sort="3" data-listing-word-count-sort="550">
+<div class="thumbnail"><a href="./posts/screen/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/screen/images/leif-christoph-gottwald-iM8dxccK1sY-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/screen/index.html" class="no-external">Screen Utility and Terminal Multiplexing</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/screen/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('U2NyZWVu'); return false;">
-Screen
+
+<div class="listing-category" onclick="window.quartoListingCategory('U2NyZWVu'); return false;">Screen</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('VGVybWluYWw='); return false;">Terminal</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('VGVybWluYWw='); return false;">
-Terminal
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/screen/index.html" class="no-external">A guide to using the screen command in remote sessions</a>
-</div>
+<div class="delink listing-description"><a href="./posts/screen/index.html" class="no-external">
+<p>A guide to using the screen command in remote sessions</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/screen/index.html" class="no-external">
@@ -920,36 +878,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="15" data-categories="QVdTJTJDRW5kcG9pbnRzJTJDR2F0ZXdheSUyQ0JhdGNo" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1769784175117" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
-<div class="thumbnail">
-<p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p><a href="./posts/aws-endpoints/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/aws-endpoints/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="16" data-categories="QVdTJTJDRW5kcG9pbnRzJTJDR2F0ZXdheSUyQ0JhdGNo" data-listing-date-sort="1684332000000" data-listing-file-modified-sort="1787066307475" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="522">
+<div class="thumbnail"><a href="./posts/aws-endpoints/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/aws-endpoints/images/varun-yadav-QhYTCG3CTeI-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/aws-endpoints/index.html" class="no-external">Endpoints for AWS VPC</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/aws-endpoints/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RW5kcG9pbnRz'); return false;">Endpoints</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('R2F0ZXdheQ=='); return false;">Gateway</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('RW5kcG9pbnRz'); return false;">
-Endpoints
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('R2F0ZXdheQ=='); return false;">
-Gateway
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
-Batch
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/aws-endpoints/index.html" class="no-external">A guide to setting up endpoints for your AWS VPC</a>
-</div>
+<div class="delink listing-description"><a href="./posts/aws-endpoints/index.html" class="no-external">
+<p>A guide to setting up endpoints for your AWS VPC</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/aws-endpoints/index.html" class="no-external">
@@ -962,36 +914,30 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="16" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0VCUw==" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1769784175107" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
-<div class="thumbnail">
-<p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="17" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaCUyQ0VCUw==" data-listing-date-sort="1675342800000" data-listing-file-modified-sort="1787066307463" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1394">
+<div class="thumbnail"><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/aws-batch-ebs-autoscale/images/simon-goetz-feeredToXK4-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">EBS Auto-scaling on AWS Batch</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('RUJT'); return false;">EBS</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
-Batch
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('RUJT'); return false;">
-EBS
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow</a>
-</div>
+<div class="delink listing-description"><a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
+<p>An introductory guide to setting up EBS auto-scaling on AWS Batch for use in Nextflow</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/aws-batch-ebs-autoscale/index.html" class="no-external">
@@ -1004,33 +950,28 @@ LW Pembleton
 </a>
 </div>
 </div>
-<div class="quarto-post image-right" data-index="17" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaA==" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1769784175265" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2568">
-<div class="thumbnail">
-<p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
-<p><img loading="lazy" src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image"></p>
-</a><p><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a></p>
-</div>
+<div class="quarto-post image-right" data-index="18" data-categories="TmV4dGZsb3clMkNBV1MlMkNCYXRjaA==" data-listing-date-sort="1669294800000" data-listing-file-modified-sort="1787066307571" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="13" data-listing-word-count-sort="2568">
+<div class="thumbnail"><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
+
+<img loading="lazy" src="./posts/nextflow-on-aws-batch/images/jenessaa-lu-gTKFunYTVds-unsplash.jpg" class="thumbnail-image">
+
+</a></div>
 <div class="body">
 <h3 class="no-anchor listing-title">
 <a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">Nextflow on AWS Batch</a>
 </h3>
-<div class="listing-subtitle">
-<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external"></a>
-</div>
 <div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">
-Nextflow
+
+<div class="listing-category" onclick="window.quartoListingCategory('TmV4dGZsb3c='); return false;">Nextflow</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">AWS</div>
+
+<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">Batch</div>
+
 </div>
-<div class="listing-category" onclick="window.quartoListingCategory('QVdT'); return false;">
-AWS
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('QmF0Y2g='); return false;">
-Batch
-</div>
-</div>
-<div class="listing-description">
-<a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">An introductory guide to setting up Nextflow with AWS Batch</a>
-</div>
+<div class="delink listing-description"><a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
+<p>An introductory guide to setting up Nextflow with AWS Batch</p>
+</a></div>
 </div>
 <div class="metadata">
 <a href="./posts/nextflow-on-aws-batch/index.html" class="no-external">
@@ -1044,241 +985,246 @@ LW Pembleton
 </div>
 </div>
 </div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
+<div class="listing-no-matching d-none">No matching items</div>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();  
-  const icon = "";
-  const anchorJS = new window.AnchorJS();
-  anchorJS.options = {
-    placement: 'right',
-    icon: icon
-  };
-  anchorJS.add('.anchored');
-  const isCodeAnnotation = (el) => {
-    for (const clz of el.classList) {
-      if (clz.startsWith('code-annotation-')) {                     
-        return true;
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
       }
+      return false;
     }
-    return false;
-  }
-  const onCopySuccess = function(e) {
-    // button target
-    const button = e.trigger;
-    // don't keep focus
-    button.blur();
-    // flash "checked"
-    button.classList.add('code-copy-button-checked');
-    var currentTitle = button.getAttribute("title");
-    button.setAttribute("title", "Copied!");
-    let tooltip;
-    if (window.bootstrap) {
-      button.setAttribute("data-bs-toggle", "tooltip");
-      button.setAttribute("data-bs-placement", "left");
-      button.setAttribute("data-bs-title", "Copied!");
-      tooltip = new bootstrap.Tooltip(button, 
-        { trigger: "manual", 
-          customClass: "code-copy-button-tooltip",
-          offset: [0, -8]});
-      tooltip.show();    
-    }
-    setTimeout(function() {
-      if (tooltip) {
-        tooltip.hide();
-        button.removeAttribute("data-bs-title");
-        button.removeAttribute("data-bs-toggle");
-        button.removeAttribute("data-bs-placement");
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
       }
-      button.setAttribute("title", currentTitle);
-      button.classList.remove('code-copy-button-checked');
-    }, 1000);
-    // clear code selection
-    e.clearSelection();
-  }
-  const getTextToCopy = function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
       for (const childEl of codeEl.children) {
         if (isCodeAnnotation(childEl)) {
           childEl.remove();
         }
       }
       return codeEl.innerText;
-  }
-  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-    text: getTextToCopy
-  });
-  clipboard.on('success', onCopySuccess);
-  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-      text: getTextToCopy,
-      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
     });
-    clipboardModal.on('success', onCopySuccess);
-  }
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/lpembleton\.rbind\.io");
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
     }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'quarto',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config); 
-  }
-  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
-  for (var i=0; i<noterefs.length; i++) {
-    const ref = noterefs[i];
-    tippyHover(ref, function() {
-      // use id or data attribute instead here
-      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
-      try { href = new URL(href).hash; } catch {}
-      const id = href.replace(/^#\/?/, "");
-      const note = window.document.getElementById(id);
-      if (note) {
-        return note.innerHTML;
-      } else {
-        return "";
-      }
-    });
-  }
-  const xrefs = window.document.querySelectorAll('a.quarto-xref');
-  const processXRef = (id, note) => {
-    // Strip column container classes
-    const stripColumnClz = (el) => {
-      el.classList.remove("page-full", "page-columns");
-      if (el.children) {
-        for (const child of el.children) {
-          stripColumnClz(child);
-        }
-      }
-    }
-    stripColumnClz(note)
-    if (id === null || id.startsWith('sec-')) {
-      // Special case sections, only their first couple elements
-      const container = document.createElement("div");
-      if (note.children && note.children.length > 2) {
-        container.appendChild(note.children[0].cloneNode(true));
-        for (let i = 1; i < note.children.length; i++) {
-          const child = note.children[i];
-          if (child.tagName === "P" && child.innerText === "") {
-            continue;
-          } else {
-            container.appendChild(child.cloneNode(true));
-            break;
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
           }
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
         }
-        return container.innerHTML
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
       } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
         if (window.Quarto?.typesetMath) {
           window.Quarto.typesetMath(note);
         }
-        return note.innerHTML;
-      }
-    } else {
-      // Remove any anchor links if they are present
-      const anchorLink = note.querySelector('a.anchorjs-link');
-      if (anchorLink) {
-        anchorLink.remove();
-      }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
-      if (note.classList.contains("callout")) {
-        return note.outerHTML;
-      } else {
-        return note.innerHTML;
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
       }
     }
-  }
-  for (var i=0; i<xrefs.length; i++) {
-    const xref = xrefs[i];
-    tippyHover(xref, undefined, function(instance) {
-      instance.disable();
-      let url = xref.getAttribute('href');
-      let hash = undefined; 
-      if (url.startsWith('#')) {
-        hash = url;
-      } else {
-        try { hash = new URL(url).hash; } catch {}
-      }
-      if (hash) {
-        const id = hash.replace(/^#\/?/, "");
-        const note = window.document.getElementById(id);
-        if (note !== null) {
-          try {
-            const html = processXRef(id, note.cloneNode(true));
-            instance.setContent(html);
-          } finally {
-            instance.enable();
-            instance.show();
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
           }
         } else {
-          // See if we can fetch this
-          fetch(url.split('#')[0])
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
           .then(res => res.text())
           .then(html => {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, "text/html");
-            const note = htmlDoc.getElementById(id);
+            const note = htmlDoc.querySelector('main.content');
             if (note !== null) {
-              const html = processXRef(id, note);
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
               instance.setContent(html);
             } 
           }).finally(() => {
@@ -1286,190 +1232,166 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
-      } else {
-        // See if we can fetch a full url (with no hash to target)
-        // This is a special case and we should probably do some content thinning / targeting
-        fetch(url)
-        .then(res => res.text())
-        .then(html => {
-          const parser = new DOMParser();
-          const htmlDoc = parser.parseFromString(html, "text/html");
-          const note = htmlDoc.querySelector('main.content');
-          if (note !== null) {
-            // This should only happen for chapter cross references
-            // (since there is no id in the URL)
-            // remove the first header
-            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
-              note.children[0].remove();
-            }
-            const html = processXRef(null, note);
-            instance.setContent(html);
-          } 
-        }).finally(() => {
-          instance.enable();
-          instance.show();
-        });
-      }
-    }, function(instance) {
-    });
-  }
-      let selectedAnnoteEl;
-      const selectorForAnnotation = ( cell, annotation) => {
-        let cellAttr = 'data-code-cell="' + cell + '"';
-        let lineAttr = 'data-code-annotation="' +  annotation + '"';
-        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
-        return selector;
-      }
-      const selectCodeLines = (annoteEl) => {
-        const doc = window.document;
-        const targetCell = annoteEl.getAttribute("data-target-cell");
-        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
-        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
-        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
-        const lineIds = lines.map((line) => {
-          return targetCell + "-" + line;
-        })
-        let top = null;
-        let height = null;
-        let parent = null;
-        if (lineIds.length > 0) {
-            //compute the position of the single el (top and bottom and make a div)
-            const el = window.document.getElementById(lineIds[0]);
-            top = el.offsetTop;
-            height = el.offsetHeight;
-            parent = el.parentElement.parentElement;
-          if (lineIds.length > 1) {
-            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-            height = bottom - top;
-          }
-          if (top !== null && height !== null && parent !== null) {
-            // cook up a div (if necessary) and position it 
-            let div = window.document.getElementById("code-annotation-line-highlight");
-            if (div === null) {
-              div = window.document.createElement("div");
-              div.setAttribute("id", "code-annotation-line-highlight");
-              div.style.position = 'absolute';
-              parent.appendChild(div);
-            }
-            div.style.top = top - 2 + "px";
-            div.style.height = height + 4 + "px";
-            div.style.left = 0;
-            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-            if (gutterDiv === null) {
-              gutterDiv = window.document.createElement("div");
-              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-              gutterDiv.style.position = 'absolute';
-              const codeCell = window.document.getElementById(targetCell);
-              const gutter = codeCell.querySelector('.code-annotation-gutter');
-              gutter.appendChild(gutterDiv);
-            }
-            gutterDiv.style.top = top - 2 + "px";
-            gutterDiv.style.height = height + 4 + "px";
-          }
-          selectedAnnoteEl = annoteEl;
-        }
-      };
-      const unselectCodeLines = () => {
-        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
-        elementsIds.forEach((elId) => {
-          const div = window.document.getElementById(elId);
-          if (div) {
-            div.remove();
-          }
-        });
-        selectedAnnoteEl = undefined;
-      };
-        // Handle positioning of the toggle
-    window.addEventListener(
-      "resize",
-      throttle(() => {
-        elRect = undefined;
-        if (selectedAnnoteEl) {
-          selectCodeLines(selectedAnnoteEl);
-        }
-      }, 10)
-    );
-    function throttle(fn, ms) {
-    let throttle = false;
-    let timer;
-      return (...args) => {
-        if(!throttle) { // first call gets through
-            fn.apply(this, args);
-            throttle = true;
-        } else { // all the others get throttled
-            if(timer) clearTimeout(timer); // cancel #2
-            timer = setTimeout(() => {
-              fn.apply(this, args);
-              timer = throttle = false;
-            }, ms);
-        }
-      };
-    }
-      // Attach click handler to the DT
-      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
-      for (const annoteDlNode of annoteDls) {
-        annoteDlNode.addEventListener('click', (event) => {
-          const clickedEl = event.target;
-          if (clickedEl !== selectedAnnoteEl) {
-            unselectCodeLines();
-            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
-            if (activeEl) {
-              activeEl.classList.remove('code-annotation-active');
-            }
-            selectCodeLines(clickedEl);
-            clickedEl.classList.add('code-annotation-active');
-          } else {
-            // Unselect the line
-            unselectCodeLines();
-            clickedEl.classList.remove('code-annotation-active');
-          }
-        });
-      }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
+      }, function(instance) {
       });
     }
-  }
-});
-</script>
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p>© 2024 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
+<p>© 2026 Luke Pembleton ∙ Made with <a href="https://quarto.org">Quarto</a></p>
 </div>   
     <div class="nav-footer-center">
 <p><a class="link-dark me-1" href="https://genomic.social/@lwpembleton" title="mastodon" target="_blank" rel="noopener"><i class="fa-brands fa-mastodon" aria-label="mastodon"></i></a> <a class="link-dark me-1" href="https://github.com/lpembleton" title="github" target="_blank" rel="noopener"><i class="fa-brands fa-github" aria-label="github"></i></a> <a class="link-dark me-1" href="https://scholar.google.com/citations?user=r7RmM00AAAAJ&amp;hl=en" title="Google Scholar" target="_blank" rel="noopener"><i class="ai  ai-google-scholar" title="" style="color:"></i></a> <a class="link-dark me-1" href="https://linkedin.com/in/lpembleton" title="LinkedIn" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin" aria-label="linkedin"></i></a></p>

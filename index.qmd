@@ -2,7 +2,7 @@
 title: <centre-title><span class="highlight">Dr Luke Pembleton</span></centre-title>
 description:
   Genomic Breeding Scientist and Global Science Manager at Barenbrug.
-image: avatar.jpg
+image: avatar.png
 about:
   template: jolla
   links:
