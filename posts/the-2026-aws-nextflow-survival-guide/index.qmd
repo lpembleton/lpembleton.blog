@@ -220,10 +220,11 @@ This role is your control plane role for orchestration:
 
 So the split is deliberate: the head node can coordinate everything, while destructive data access stays constrained to your dedicated Nextflow bucket.
 
+::: callout-important
 Replace placeholders:
-
 - `<NextflowTaskRole_ARN>` with the ARN of the IAM role you created in step 2.1. (e.g. `arn:aws:iam::<account-id>:role/NextflowTaskRole`)
 - `<NEXTFLOW_WORKDIR_BUCKET_ARN>` with the ARN of the S3 bucket you created in step 1.
+:::
 
 ::: callout-note
 If you connect to your head node via AWS Systems Manager Session Manager, i.e. SSO, also attach `AmazonSSMManagedInstanceCore` to the head node role.
@@ -494,7 +495,7 @@ Time to test the whole stack before launching your actual pipeline 📋
 
 ![nf-probe](images/nf-probe.png){width="40%"}
 
-I've developed a simple Nextflow pipeline called `nf-probe` for this exact purpose, of testing and validating new AWS Batch setups.
+I've developed a simple Nextflow pipeline called [nf-probe](https://github.com/lpembleton/nf-probe) for this exact purpose, of testing and validating new AWS Batch setups.
 
 ``` bash
 git clone https://github.com/lpembleton/nf-probe.git
@@ -519,4 +520,4 @@ What you are validating with this test:
 
 ## Final Thought
 
-If you can afford Seqera Platform, it will make your life easier. If you cannot, this setup is a solid way to run serious Nextflow workloads on AWS in 2026 without selling your kidney (AWS already has your first 😉).
+If you can afford Seqera Platform, it will make your life easier. If you cannot, this setup is a solid way to run serious Nextflow workloads on AWS in 2026 without selling your last kidney (AWS already has your first 😉).

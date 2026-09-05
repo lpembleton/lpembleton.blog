@@ -548,11 +548,19 @@ Important
 <li><code>EC2LaunchTemplates</code> also includes the EC2/ECS describe actions Nextflow commonly uses when orchestrating Batch jobs.</li>
 </ul>
 <p>So the split is deliberate: the head node can coordinate everything, while destructive data access stays constrained to your dedicated Nextflow bucket.</p>
-<p>Replace placeholders:</p>
-<ul>
-<li><code>&lt;NextflowTaskRole_ARN&gt;</code> with the ARN of the IAM role you created in step 2.1. (e.g.&nbsp;<code>arn:aws:iam::&lt;account-id&gt;:role/NextflowTaskRole</code>)</li>
-<li><code>&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;</code> with the ARN of the S3 bucket you created in step 1.</li>
-</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Replace placeholders: - <code>&lt;NextflowTaskRole_ARN&gt;</code> with the ARN of the IAM role you created in step 2.1. (e.g.&nbsp;<code>arn:aws:iam::&lt;account-id&gt;:role/NextflowTaskRole</code>) - <code>&lt;NEXTFLOW_WORKDIR_BUCKET_ARN&gt;</code> with the ARN of the S3 bucket you created in step 1.</p>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -856,7 +864,7 @@ Tip
 <figcaption>nf-probe</figcaption>
 </figure>
 </div>
-<p>I’ve developed a simple Nextflow pipeline called <code>nf-probe</code> for this exact purpose, of testing and validating new AWS Batch setups.</p>
+<p>I’ve developed a simple Nextflow pipeline called <a href="https://github.com/lpembleton/nf-probe">nf-probe</a> for this exact purpose, of testing and validating new AWS Batch setups.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/lpembleton/nf-probe.git</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> nf-probe</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -880,7 +888,7 @@ Tip
 </section>
 <section id="final-thought" class="level2">
 <h2 class="anchored" data-anchor-id="final-thought">Final Thought</h2>
-<p>If you can afford Seqera Platform, it will make your life easier. If you cannot, this setup is a solid way to run serious Nextflow workloads on AWS in 2026 without selling your kidney (AWS already has your first 😉).</p>
+<p>If you can afford Seqera Platform, it will make your life easier. If you cannot, this setup is a solid way to run serious Nextflow workloads on AWS in 2026 without selling your last kidney (AWS already has your first 😉).</p>
 
 
 </section>
